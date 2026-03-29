@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker & Palette Generator — Free Online Tool | DeskTools</title>
+    <meta name="description" content="Free online color picker with HEX, RGB, and HSL conversion. Generate complementary, analogous, and shade palettes instantly.">
+    <meta name="keywords" content="color picker, hex to rgb, rgb to hsl, color palette generator, color converter, complementary colors">
+    <meta property="og:title" content="Color Picker & Palette Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/color-picker">
+    <link rel="canonical" href="https://desktools.dev/color-picker">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav><a href="/" class="logo">desk<span>tools</span></a><ul class="nav-links"><li><a href="/">Tools</a></li><li><a href="https://github.com/desktools" target="_blank">GitHub</a></li></ul></nav>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h2>Color Picker + Palette</h2>
+        <p class="desc">Pick colors, convert formats, generate harmonious palettes.</p>
+    </div>
+    <div class="workspace">
+        <div class="color-workspace">
+            <div class="color-main">
+                <div class="color-preview" id="color-preview" style="background:#00d4aa"></div>
+                <div class="color-inputs">
+                    <div class="color-input-row"><label>Pick</label><input type="color" id="color-picker" value="#00d4aa" oninput="updateFromPicker(this.value)"></div>
+                    <div class="color-input-row"><label>HEX</label><input type="text" id="hex-input" value="#00d4aa" oninput="updateFromHex(this.value)"><button class="copy-btn" onclick="copyText(document.getElementById('hex-input').value)">Copy</button></div>
+                    <div class="color-input-row"><label>RGB</label><input type="text" id="rgb-input" value="rgb(0, 212, 170)" readonly><button class="copy-btn" onclick="copyText(document.getElementById('rgb-input').value)">Copy</button></div>
+                    <div class="color-input-row"><label>HSL</label><input type="text" id="hsl-input" value="hsl(168, 100%, 42%)" readonly><button class="copy-btn" onclick="copyText(document.getElementById('hsl-input').value)">Copy</button></div>
+                </div>
+            </div>
+            <div class="palette-section"><h4>Shades</h4><div class="palette-row" id="palette-shades"></div></div>
+            <div class="palette-section"><h4>Harmonies</h4><div class="palette-row" id="palette-complements"></div></div>
+        </div>
+    </div>
+</div>
+<div class="toast" id="toast">Copied!</div>
+<footer><p>DeskTools — built for people who ship. <a href="https://desktools.dev">desktools.dev</a></p></footer>
+<script src="shared.js"></script>
+<script>
+    function hexToRgb(hex){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');return{r:parseInt(hex.substr(0,2),16),g:parseInt(hex.substr(2,2),16),b:parseInt(hex.substr(4,2),16)};}
+    function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+    function hslToHex(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=n=>{const k=(n+h/30)%12;const color=l-a*Math.max(Math.min(k-3,9-k,1),-1);return Math.round(255*color).toString(16).padStart(2,'0');};return`#${f(0)}${f(8)}${f(4)}`;}
+    function updateColor(hex){hex=hex.charAt(0)==='#'?hex:'#'+hex;const rgb=hexToRgb(hex);const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);document.getElementById('color-preview').style.background=hex;document.getElementById('color-picker').value=hex;document.getElementById('hex-input').value=hex;document.getElementById('rgb-input').value=`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;document.getElementById('hsl-input').value=`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;generatePalette(hsl);}
+    function updateFromPicker(val){updateColor(val);}
+    function updateFromHex(val){if(/^#?[0-9a-fA-F]{6}$/.test(val.replace('#','')))updateColor(val);}
+    function generatePalette(hsl){const sc=document.getElementById('palette-shades');const cc=document.getElementById('palette-complements');sc.innerHTML='';for(let i=10;i<=90;i+=10){const hex=hslToHex(hsl.h,hsl.s,i);const s=document.createElement('div');s.className='palette-swatch';s.style.background=hex;s.dataset.hex=hex;s.onclick=()=>{updateColor(hex);copyText(hex);};sc.appendChild(s);}cc.innerHTML='';[0,30,60,120,180,210,270,330].forEach(offset=>{const h=(hsl.h+offset)%360;const hex=hslToHex(h,hsl.s,hsl.l);const s=document.createElement('div');s.className='palette-swatch';s.style.background=hex;s.dataset.hex=hex;s.onclick=()=>{updateColor(hex);copyText(hex);};cc.appendChild(s);});}
+    updateColor('#00d4aa');
+</script>
+</body>
+</html>
