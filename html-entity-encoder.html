@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Entity Encoder & Decoder — Free Online Tool | DeskTools</title>
+    <meta name="description" content="Free online HTML entity encoder and decoder. Convert special characters to HTML entities or decode entities back to readable text. Supports named and numeric entities.">
+    <meta name="keywords" content="HTML entity encoder, HTML entity decoder, HTML encode, HTML decode, special characters, HTML entities converter">
+    <meta property="og:title" content="HTML Entity Encoder & Decoder — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/html-entity-encoder">
+    <link rel="canonical" href="https://desktools.dev/html-entity-encoder">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav><a href="/" class="logo">desk<span>tools</span></a><ul class="nav-links"><li><a href="/">Tools</a></li><li><a href="#" onclick="event.preventDefault();document.getElementById('request-modal').style.display='flex'" style="background:var(--accent);color:var(--bg-deep);padding:6px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;">Request a Tool</a></li></ul></nav>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h2>HTML Entity Encoder / Decoder</h2>
+        <p class="desc">Convert special characters to HTML entities or decode them back.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="he-encode-btn" onclick="doHtmlEntity('encode')">Encode →</button>
+                <button id="he-decode-btn" onclick="doHtmlEntity('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="he-all" style="accent-color:var(--accent);"> Encode all characters</label>
+                <button onclick="copyOutput('he-output')">Copy</button>
+                <button onclick="swapHe()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="he-input" placeholder='<div class="hello">Tom & Jerry © 2026</div>'></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="he-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);">
+        <span>Common entities: </span>
+        <span style="color:var(--text-secondary);">&amp;amp; → &amp; &nbsp; &amp;lt; → &lt; &nbsp; &amp;gt; → &gt; &nbsp; &amp;quot; → " &nbsp; &amp;apos; → ' &nbsp; &amp;nbsp; → (space) &nbsp; &amp;copy; → © &nbsp; &amp;mdash; → —</span>
+    </div>
+</div>
+<div class="toast" id="toast">Copied!</div>
+<footer><p>DeskTools — built for people who ship. <a href="https://desktools.dev">desktools.dev</a></p></footer>
+<script src="shared.js"></script>
+<script>
+    function doHtmlEntity(mode) {
+        const input = document.getElementById('he-input').value;
+        const output = document.getElementById('he-output');
+        const encodeAll = document.getElementById('he-all').checked;
+        if (mode === 'encode') {
+            if (encodeAll) {
+                output.value = Array.from(input).map(c => '&#' + c.charCodeAt(0) + ';').join('');
+            } else {
+                output.value = input
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+            document.getElementById('he-encode-btn').classList.add('primary');
+            document.getElementById('he-decode-btn').classList.remove('primary');
+        } else {
+            const el = document.createElement('textarea');
+            el.innerHTML = input;
+            output.value = el.value;
+            document.getElementById('he-decode-btn').classList.add('primary');
+            document.getElementById('he-encode-btn').classList.remove('primary');
+        }
+    }
+    function swapHe() {
+        const i = document.getElementById('he-input');
+        const o = document.getElementById('he-output');
+        const t = i.value; i.value = o.value; o.value = t;
+    }
+</script>
+</body>
+</html>
