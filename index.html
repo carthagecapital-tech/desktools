@@ -157,22 +157,32 @@
         const detail = document.getElementById('req-detail').value;
         const email = document.getElementById('req-email').value;
         
-        // Save locally
-        const requests = JSON.parse(localStorage.getItem('dt-requests') || '[]');
-        requests.push({ tool, detail, email, date: new Date().toISOString() });
-        localStorage.setItem('dt-requests', JSON.stringify(requests));
-        
-        // Show success
-        document.getElementById('request-form').style.display = 'none';
-        document.getElementById('request-success').style.display = 'block';
-        
-        // Reset after 3 seconds
-        setTimeout(() => {
-            document.getElementById('request-modal').style.display = 'none';
-            document.getElementById('request-form').style.display = 'block';
-            document.getElementById('request-success').style.display = 'none';
-            document.getElementById('request-form').reset();
-        }, 3000);
+        // Send to Web3Forms
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                access_key: '07e32825-a0a6-4e25-850a-693ee7512388',
+                subject: 'DeskTools — New Tool Request: ' + tool,
+                from_name: 'DeskTools Request',
+                tool_requested: tool,
+                details: detail || '(none)',
+                email: email || '(not provided)'
+            })
+        }).then(r => r.json()).then(data => {
+            if (data.success) {
+                document.getElementById('request-form').style.display = 'none';
+                document.getElementById('request-success').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('request-modal').style.display = 'none';
+                    document.getElementById('request-form').style.display = 'block';
+                    document.getElementById('request-success').style.display = 'none';
+                    document.getElementById('request-form').reset();
+                }, 3000);
+            }
+        }).catch(() => {
+            alert('Something went wrong. Please try again.');
+        });
     }
 </script>
 
