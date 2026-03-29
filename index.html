@@ -30,7 +30,7 @@
     <p>Browser-based utilities for developers and power users. No installs, no signups, no tracking.</p>
     <div class="hero-stats">
         <div class="stat">
-            <div class="stat-number">20</div>
+            <div class="stat-number">21</div>
             <div class="stat-label">Tools</div>
         </div>
         <div class="stat">
@@ -54,6 +54,9 @@
             <button class="filter-pill" onclick="filterTools('design')">Design</button>
             <button class="filter-pill" onclick="filterTools('security')">Security</button>
         </div>
+    </div>
+    <div style="margin-bottom:24px;">
+        <input type="text" id="tool-search" placeholder="Search tools..." oninput="searchTools()" style="width:100%;padding:14px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:0.95rem;transition:border-color 0.2s;">
     </div>
     <div class="tools-grid">
         <a class="tool-card" data-category="dev" href="/json-formatter">
@@ -176,6 +179,12 @@
             <p>Convert between binary, decimal, hexadecimal, and octal. Live conversion as you type.</p>
             <div class="tool-tags"><span class="tool-tag free">Free</span><span class="tool-tag">Dev</span></div>
         </a>
+        <a class="tool-card" data-category="dev" href="/image-to-base64">
+            <div class="tool-icon">🖼</div>
+            <h3>Image to Base64</h3>
+            <p>Upload an image, get Base64 string, HTML img tag, and CSS background — all client-side.</p>
+            <div class="tool-tags"><span class="tool-tag free">Free</span><span class="tool-tag">Dev</span></div>
+        </a>
     </div>
 </section>
 
@@ -207,10 +216,26 @@
     function filterTools(cat) {
         document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
         event.target.classList.add('active');
+        document.getElementById('tool-search').value = '';
         document.querySelectorAll('.tool-card').forEach(card => {
             card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'block' : 'none';
         });
     }
+
+    function searchTools() {
+        const query = document.getElementById('tool-search').value.toLowerCase().trim();
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        if (!query) document.querySelector('.filter-pill').classList.add('active');
+        document.querySelectorAll('.tool-card').forEach(card => {
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            const desc = card.querySelector('p').textContent.toLowerCase();
+            const tags = card.querySelector('.tool-tags').textContent.toLowerCase();
+            card.style.display = (!query || name.includes(query) || desc.includes(query) || tags.includes(query)) ? 'block' : 'none';
+        });
+    }
+
+    document.getElementById('tool-search').addEventListener('focus', function() { this.style.borderColor = 'var(--accent)'; });
+    document.getElementById('tool-search').addEventListener('blur', function() { this.style.borderColor = 'var(--border)'; });
 
     function submitRequest(e) {
         e.preventDefault();
