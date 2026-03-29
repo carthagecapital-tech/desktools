@@ -20,7 +20,7 @@
     <a href="/" class="logo">desk<span>tools</span></a>
     <ul class="nav-links">
         <li><a href="/">Tools</a></li>
-        <li><a href="https://github.com/desktools" target="_blank">GitHub</a></li>
+        <li><a href="#" onclick="event.preventDefault();document.getElementById('request-modal').style.display='flex'" style="background:var(--accent);color:var(--bg-deep);padding:6px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;transition:background 0.2s;">Request a Tool</a></li>
     </ul>
 </nav>
 
@@ -110,11 +110,6 @@
             <p>Generate placeholder text by paragraphs, sentences, or words. Copy with one click.</p>
             <div class="tool-tags"><span class="tool-tag free">Free</span><span class="tool-tag">Text</span></div>
         </a>
-        <div class="tool-card" style="border-style:dashed;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:180px;" onclick="document.getElementById('request-modal').style.display='flex'">
-            <div class="tool-icon" style="background:transparent;font-size:1.8rem;color:var(--text-muted);">+</div>
-            <h3 style="color:var(--text-secondary);">Request a Tool</h3>
-            <p style="font-size:0.8rem;">Missing something? Tell us what to build next.</p>
-        </div>
     </div>
 </section>
 
