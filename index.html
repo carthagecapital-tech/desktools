@@ -660,7 +660,7 @@
         <p>Browser-based utilities for developers and power users. No installs, no signups, no tracking.</p>
         <div class="hero-stats">
             <div class="stat">
-                <div class="stat-number" id="tool-count">6</div>
+                <div class="stat-number" id="tool-count">9</div>
                 <div class="stat-label">Tools</div>
             </div>
             <div class="stat">
@@ -738,6 +738,33 @@
                 <div class="tool-tags">
                     <span class="tool-tag free">Free</span>
                     <span class="tool-tag">Dev</span>
+                </div>
+            </a>
+            <a class="tool-card" data-category="dev" onclick="showTool('markdown')">
+                <div class="tool-icon">M↓</div>
+                <h3>Markdown Preview</h3>
+                <p>Write markdown on the left, see it rendered live on the right. Supports headings, lists, code, tables, and more.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag free">Free</span>
+                    <span class="tool-tag">Dev</span>
+                </div>
+            </a>
+            <a class="tool-card" data-category="dev" onclick="showTool('url')">
+                <div class="tool-icon">%</div>
+                <h3>URL Encoder / Decoder</h3>
+                <p>Encode special characters for URLs or decode percent-encoded strings back to readable text.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag free">Free</span>
+                    <span class="tool-tag">Dev</span>
+                </div>
+            </a>
+            <a class="tool-card" data-category="text" onclick="showTool('lorem')">
+                <div class="tool-icon">¶</div>
+                <h3>Lorem Ipsum Generator</h3>
+                <p>Generate placeholder text by paragraphs, sentences, or words. Copy with one click.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag free">Free</span>
+                    <span class="tool-tag">Text</span>
                 </div>
             </a>
         </div>
@@ -993,6 +1020,111 @@ IPs: 192.168.1.1, 10.0.0.1, 255.255.255.0</textarea>
     <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);display:flex;gap:24px;">
         <span>Input: <span id="b64-input-size">0</span> bytes</span>
         <span>Output: <span id="b64-output-size">0</span> bytes</span>
+    </div>
+</div>
+
+<!-- MARKDOWN PREVIEW -->
+<div id="tool-markdown" class="tool-page">
+    <div class="tool-page-header">
+        <a href="#" class="back-link" onclick="showHome()">← Back to tools</a>
+        <h2>Markdown Preview</h2>
+        <p class="desc">Write markdown and see it rendered live — no libraries, pure browser parsing.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button onclick="copyOutput('md-input')">Copy Markdown</button>
+                <button onclick="copyMdHtml()">Copy HTML</button>
+            </div>
+            <div class="toolbar-group">
+                <button onclick="document.getElementById('md-input').value='# Heading 1\n## Heading 2\n### Heading 3\n\nA paragraph with **bold**, *italic*, and `inline code`.\n\n- List item one\n- List item two\n- List item three\n\n1. Numbered one\n2. Numbered two\n3. Numbered three\n\n> A blockquote looks like this.\n> It can span multiple lines.\n\n```\nconst x = 42;\nconsole.log(x);\n```\n\n[Link text](https://desktools.dev)\n\n| Header | Header 2 |\n|--------|----------|\n| Cell 1 | Cell 2   |\n| Cell 3 | Cell 4   |\n\n---\n\nThat is a horizontal rule above.';renderMarkdown()">Load Example</button>
+                <button onclick="document.getElementById('md-input').value='';renderMarkdown()">Clear</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div>
+                <span class="pane-label">Markdown</span>
+                <textarea class="tool-input" id="md-input" placeholder="# Write your markdown here..." oninput="renderMarkdown()"></textarea>
+            </div>
+            <div>
+                <span class="pane-label">Preview</span>
+                <div id="md-output" style="padding:20px;min-height:300px;overflow:auto;line-height:1.7;font-size:0.9rem;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- URL ENCODER/DECODER -->
+<div id="tool-url" class="tool-page">
+    <div class="tool-page-header">
+        <a href="#" class="back-link" onclick="showHome()">← Back to tools</a>
+        <h2>URL Encoder / Decoder</h2>
+        <p class="desc">Encode special characters for URLs or decode percent-encoded strings.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="url-encode-btn" onclick="doUrl('encode')">Encode →</button>
+                <button id="url-decode-btn" onclick="doUrl('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;">
+                    <input type="checkbox" id="url-component" checked style="accent-color:var(--accent);"> Component mode
+                </label>
+                <button onclick="copyOutput('url-output')">Copy</button>
+                <button onclick="swapUrl()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div>
+                <span class="pane-label">Input</span>
+                <textarea class="tool-input" id="url-input" placeholder="Enter URL or text to encode/decode..."></textarea>
+            </div>
+            <div>
+                <span class="pane-label">Output</span>
+                <textarea class="tool-input" id="url-output" readonly style="color:var(--accent);background:transparent;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);display:flex;gap:20px;flex-wrap:wrap;">
+        <span>Quick test: </span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='https://desktools.dev/search?q=hello world&lang=en&special=a+b=c';doUrl('encode')">URL with spaces & params</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='https%3A%2F%2Fdesktools.dev%2Fsearch%3Fq%3Dhello%20world%26lang%3Den';doUrl('decode')">Encoded URL</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='name=John Doe&city=New York&emoji=😀';doUrl('encode')">Query string</span>
+    </div>
+</div>
+
+<!-- LOREM IPSUM GENERATOR -->
+<div id="tool-lorem" class="tool-page">
+    <div class="tool-page-header">
+        <a href="#" class="back-link" onclick="showHome()">← Back to tools</a>
+        <h2>Lorem Ipsum Generator</h2>
+        <p class="desc">Generate placeholder text — paragraphs, sentences, or words.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" onclick="generateLorem()">Generate</button>
+                <button onclick="copyOutput('lorem-output')">Copy</button>
+            </div>
+            <div class="toolbar-group" style="gap:12px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Count:</label>
+                    <input type="number" id="lorem-count" value="3" min="1" max="50" style="width:56px;padding:6px 8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;">
+                </div>
+                <div class="toolbar-group transform-buttons">
+                    <button class="active" id="lorem-para" onclick="setLoremMode('paragraphs',this)">Paragraphs</button>
+                    <button id="lorem-sent" onclick="setLoremMode('sentences',this)">Sentences</button>
+                    <button id="lorem-word" onclick="setLoremMode('words',this)">Words</button>
+                </div>
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;">
+                    <input type="checkbox" id="lorem-start" checked style="accent-color:var(--accent);"> Start with "Lorem ipsum..."
+                </label>
+            </div>
+        </div>
+        <div style="padding:0;">
+            <textarea class="tool-input" id="lorem-output" readonly style="min-height:400px;line-height:1.8;color:var(--text-primary);"></textarea>
+        </div>
     </div>
 </div>
 
@@ -1379,6 +1511,151 @@ IPs: 192.168.1.1, 10.0.0.1, 255.255.255.0</textarea>
         input.value = output.value;
         output.value = tmp;
     }
+
+    // Markdown Preview
+    function renderMarkdown() {
+        const input = document.getElementById('md-input').value;
+        const output = document.getElementById('md-output');
+        let html = input;
+        // Code blocks
+        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre style="background:var(--bg-surface);padding:16px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;margin:12px 0;"><code>$2</code></pre>');
+        // Tables
+        html = html.replace(/^(\|.+\|)\n(\|[-:\s|]+\|)\n((?:\|.+\|\n?)*)/gm, (match, header, sep, body) => {
+            const ths = header.split('|').filter(c=>c.trim()).map(c=>'<th style="padding:8px 12px;border:1px solid var(--border);background:var(--bg-surface);">'+c.trim()+'</th>').join('');
+            const rows = body.trim().split('\n').map(r => {
+                const tds = r.split('|').filter(c=>c.trim()).map(c=>'<td style="padding:8px 12px;border:1px solid var(--border);">'+c.trim()+'</td>').join('');
+                return '<tr>'+tds+'</tr>';
+            }).join('');
+            return '<table style="border-collapse:collapse;width:100%;margin:12px 0;"><thead><tr>'+ths+'</tr></thead><tbody>'+rows+'</tbody></table>';
+        });
+        // Headings
+        html = html.replace(/^### (.+)$/gm, '<h3 style="font-size:1.1rem;margin:16px 0 8px;color:var(--text-primary);">$1</h3>');
+        html = html.replace(/^## (.+)$/gm, '<h2 style="font-size:1.3rem;margin:20px 0 10px;color:var(--text-primary);">$1</h2>');
+        html = html.replace(/^# (.+)$/gm, '<h1 style="font-size:1.6rem;margin:24px 0 12px;color:var(--text-primary);">$1</h1>');
+        // Horizontal rule
+        html = html.replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
+        // Blockquotes
+        html = html.replace(/^> (.+)$/gm, '<blockquote style="border-left:3px solid var(--accent);padding:8px 16px;margin:12px 0;color:var(--text-secondary);background:var(--accent-dim);border-radius:0 6px 6px 0;">$1</blockquote>');
+        // Bold & Italic
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--text-primary);">$1</strong>');
+        html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        // Inline code
+        html = html.replace(/`([^`]+)`/g, '<code style="background:var(--bg-surface);padding:2px 6px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:0.8rem;color:var(--accent);">$1</code>');
+        // Links
+        html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" style="color:var(--accent);text-decoration:underline;">$1</a>');
+        // Unordered lists
+        html = html.replace(/^- (.+)$/gm, '<li style="margin:4px 0;margin-left:20px;">$1</li>');
+        // Ordered lists
+        html = html.replace(/^\d+\. (.+)$/gm, '<li style="margin:4px 0;margin-left:20px;list-style:decimal;">$1</li>');
+        // Paragraphs (double newline)
+        html = html.replace(/\n\n/g, '</p><p style="margin:10px 0;">');
+        // Single newlines to br
+        html = html.replace(/\n/g, '<br>');
+        output.innerHTML = '<div style="color:var(--text-secondary);">' + html + '</div>';
+    }
+
+    function copyMdHtml() {
+        const html = document.getElementById('md-output').innerHTML;
+        navigator.clipboard.writeText(html);
+        showToast('HTML copied');
+    }
+
+    // URL Encoder/Decoder
+    function doUrl(mode) {
+        const input = document.getElementById('url-input').value;
+        const output = document.getElementById('url-output');
+        const component = document.getElementById('url-component').checked;
+        try {
+            let result;
+            if (mode === 'encode') {
+                result = component ? encodeURIComponent(input) : encodeURI(input);
+                document.getElementById('url-encode-btn').classList.add('primary');
+                document.getElementById('url-decode-btn').classList.remove('primary');
+            } else {
+                result = component ? decodeURIComponent(input) : decodeURI(input);
+                document.getElementById('url-decode-btn').classList.add('primary');
+                document.getElementById('url-encode-btn').classList.remove('primary');
+            }
+            output.value = result;
+        } catch (e) {
+            output.value = 'Error: ' + e.message;
+        }
+    }
+
+    function swapUrl() {
+        const input = document.getElementById('url-input');
+        const output = document.getElementById('url-output');
+        const tmp = input.value;
+        input.value = output.value;
+        output.value = tmp;
+    }
+
+    // Lorem Ipsum Generator
+    const LOREM_WORDS = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem'.split(' ');
+
+    let loremMode = 'paragraphs';
+
+    function setLoremMode(mode, btn) {
+        loremMode = mode;
+        document.querySelectorAll('#lorem-para,#lorem-sent,#lorem-word').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function getLoremSentence(startWithLorem, idx) {
+        const len = 8 + Math.floor(Math.random() * 12);
+        let words = [];
+        for (let i = 0; i < len; i++) {
+            words.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
+        }
+        if (startWithLorem && idx === 0) {
+            words[0] = 'lorem';
+            words[1] = 'ipsum';
+            words[2] = 'dolor';
+            words[3] = 'sit';
+            words[4] = 'amet';
+        }
+        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+        return words.join(' ') + '.';
+    }
+
+    function getLoremParagraph(startWithLorem, idx) {
+        const count = 4 + Math.floor(Math.random() * 4);
+        let sentences = [];
+        for (let i = 0; i < count; i++) {
+            sentences.push(getLoremSentence(startWithLorem && idx === 0, i));
+        }
+        return sentences.join(' ');
+    }
+
+    function generateLorem() {
+        const count = parseInt(document.getElementById('lorem-count').value) || 3;
+        const startWith = document.getElementById('lorem-start').checked;
+        const output = document.getElementById('lorem-output');
+        let result = '';
+
+        if (loremMode === 'paragraphs') {
+            let paras = [];
+            for (let i = 0; i < count; i++) paras.push(getLoremParagraph(startWith, i));
+            result = paras.join('\n\n');
+        } else if (loremMode === 'sentences') {
+            let sents = [];
+            for (let i = 0; i < count; i++) sents.push(getLoremSentence(startWith, i));
+            result = sents.join(' ');
+        } else {
+            let words = [];
+            if (startWith) {
+                words.push('Lorem', 'ipsum', 'dolor', 'sit', 'amet');
+            }
+            while (words.length < count) {
+                words.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
+            }
+            result = words.slice(0, count).join(' ');
+            result = result.charAt(0).toUpperCase() + result.slice(1);
+        }
+        output.value = result;
+    }
+
+    generateLorem();
 </script>
 
 </body>
