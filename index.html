@@ -59,7 +59,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
   border-radius:12px;
   padding:.5rem;
   min-width:230px;
-  opacity:0;pointer-events:none;
+  opacity:0;;
   transform:translateY(-8px) scale(.98);
   transform-origin:top right;
   transition:opacity .18s,transform .18s;
@@ -103,7 +103,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
 
 /* HERO */
 .hero{text-align:center;padding:5rem 2rem 4rem;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:320px;background:radial-gradient(ellipse at center,rgba(0,212,170,0.07) 0%,transparent 70%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:320px;background:radial-gradient(ellipse at center,rgba(0,212,170,0.07) 0%,transparent 70%);}
 .hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);color:var(--accent);font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;margin-bottom:1.5rem}
 .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
 .hero h1 em{font-style:normal;color:var(--accent)}
@@ -138,7 +138,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
 .tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
 .tool-card:hover{border-color:var(--border-hover);transform:translateY(-2px);background:#13131c}
 .tool-card:hover::before{opacity:1}
-.tool-card.coming-soon{opacity:.55;cursor:default;pointer-events:none}
+.tool-card.coming-soon{opacity:.55;cursor:default;}
 .tool-icon{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.3rem .55rem;border-radius:6px;width:fit-content}
 .tool-name{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.3}
 .tool-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1}
@@ -264,7 +264,7 @@ footer a{color:var(--accent);text-decoration:none}
 <a class="tool-card" href="/image-to-base64" data-name="image base64 convert upload css html"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Upload an image, get Base64 string, HTML img tag, and CSS background — all client-side.</div><span class="tool-tag">Dev</span></a>
 <a class="tool-card" href="/text-transformer" data-name="text case convert word count encode decode"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Convert text between cases, count words, remove duplicates, sort lines, and more.</div><span class="tool-tag">Text</span></a>
 <a class="tool-card" href="/html-entity-encoder" data-name="html entity encode decode special characters"><span class="tool-icon">&amp;</span><div class="tool-name">HTML Entity Encoder</div><div class="tool-desc">Convert special characters to HTML entities or decode entities back to readable text.</div><span class="tool-tag">Dev</span></a>
-<a class="tool-card coming-soon" href="/gradient-generator" data-name="gradient css generator linear radial design"><span class="tool-icon">&#9679;&#9675;</span><div class="tool-name">Gradient Generator</div><div class="tool-desc">Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients.</div><span class="tag-soon">Coming soon</span></a>
+<a class="tool-card" href="/gradient-generator" data-name="gradient css generator linear radial design"><span class="tool-icon">&#9679;&#9675;</span><div class="tool-name">Gradient Generator</div><div class="tool-desc">Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients.</div></a>
 </div>
 </div><div class="audience-section">
   <div class="section-header">
@@ -280,9 +280,9 @@ footer a{color:var(--accent);text-decoration:none}
 <a class="tool-card" href="/markdown-preview" data-name="markdown preview render documentation"><span class="tool-icon">M&#x2193;</span><div class="tool-name">Markdown Preview</div><div class="tool-desc">Write documentation and notes in markdown, preview rendered output instantly.</div><span class="tool-tag">Dev</span></a>
 <a class="tool-card" href="/json-to-table" data-name="json table api data clients"><span class="tool-icon">&#9638;</span><div class="tool-name">JSON to Table</div><div class="tool-desc">Turn raw JSON data into a clean readable table. Perfect for sharing API results with clients.</div><span class="tool-tag">Dev</span></a>
 <a class="tool-card" href="/text-transformer" data-name="text case convert clean format"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Format, clean, and transform text in seconds — case conversion, deduplication, sorting.</div><span class="tool-tag">Text</span></a>
-<a class="tool-card coming-soon" href="/invoice-calculator" data-name="invoice calculator tax discount total freelance"><span class="tool-icon">&#8373;</span><div class="tool-name">Invoice Calculator</div><div class="tool-desc">Calculate totals, taxes, and discounts for quick invoicing. Copy a clean breakdown instantly.</div><span class="tag-soon">Coming soon</span></a>
-<a class="tool-card coming-soon" href="/pomodoro-timer" data-name="pomodoro timer focus productivity work break"><span class="tool-icon">&#9201;</span><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">A clean focus timer with work and break intervals. Boost productivity without distractions.</div><span class="tag-soon">Coming soon</span></a>
-<a class="tool-card coming-soon" href="/email-subject-tester" data-name="email subject line tester score open rate"><span class="tool-icon">&#9993;</span><div class="tool-name">Email Subject Tester</div><div class="tool-desc">Score your email subject lines for open rate potential. Get tips to improve clarity and impact.</div><span class="tag-soon">Coming soon</span></a>
+<a class="tool-card" href="/invoice-calculator" data-name="invoice calculator tax discount total freelance"><span class="tool-icon">&#8373;</span><div class="tool-name">Invoice Calculator</div><div class="tool-desc">Calculate totals, taxes, and discounts for quick invoicing. Copy a clean breakdown instantly.</div></a>
+<a class="tool-card" href="/pomodoro-timer" data-name="pomodoro timer focus productivity work break"><span class="tool-icon">&#9201;</span><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">A clean focus timer with work and break intervals. Boost productivity without distractions.</div></a>
+<a class="tool-card" href="/email-subject-tester" data-name="email subject line tester score open rate"><span class="tool-icon">&#9993;</span><div class="tool-name">Email Subject Tester</div><div class="tool-desc">Score your email subject lines for open rate potential. Get tips to improve clarity and impact.</div></a>
 </div>
 </div><div class="audience-section">
   <div class="section-header">
@@ -295,10 +295,10 @@ footer a{color:var(--accent);text-decoration:none}
   <div class="tool-grid">
 <a class="tool-card" href="/password-generator" data-name="password generate strong random secure"><span class="tool-icon">&#9919;</span><div class="tool-name">Password Generator</div><div class="tool-desc">Generate strong, random passwords with custom length, character sets, and bulk generation.</div><span class="tool-tag">Security</span></a>
 <a class="tool-card" href="/hash-generator" data-name="hash md5 sha256 sha512 generate"><span class="tool-icon">#</span><div class="tool-name">Hash Generator</div><div class="tool-desc">Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text. Real-time as you type.</div><span class="tool-tag">Security</span></a>
-<a class="tool-card coming-soon" href="/jwt-decoder" data-name="jwt decoder json web token header payload"><span class="tool-icon">JWT</span><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend.</div><span class="tag-soon">Coming soon</span></a>
-<a class="tool-card coming-soon" href="/password-strength" data-name="password strength checker entropy analysis security"><span class="tool-icon">&#128274;</span><div class="tool-name">Password Strength Checker</div><div class="tool-desc">Test the strength of any password. Get instant feedback on entropy, patterns, and weaknesses.</div><span class="tag-soon">Coming soon</span></a>
-<a class="tool-card coming-soon" href="/bcrypt-generator" data-name="bcrypt hash generator password cost factor client-side"><span class="tool-icon">&#128272;</span><div class="tool-name">Bcrypt Hash Generator</div><div class="tool-desc">Hash passwords with bcrypt right in your browser. Choose cost factor. 100% client-side.</div><span class="tag-soon">Coming soon</span></a>
-<a class="tool-card coming-soon" href="/cors-tester" data-name="cors header tester url origin method allowed"><span class="tool-icon">&#60;/&#62;</span><div class="tool-name">CORS Header Tester</div><div class="tool-desc">Paste a URL and check its CORS headers. Understand what origins and methods are allowed.</div><span class="tag-soon">Coming soon</span></a>
+<a class="tool-card" href="/jwt-decoder" data-name="jwt decoder json web token header payload"><span class="tool-icon">JWT</span><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend.</div></a>
+<a class="tool-card" href="/password-strength" data-name="password strength checker entropy analysis security"><span class="tool-icon">&#128274;</span><div class="tool-name">Password Strength Checker</div><div class="tool-desc">Test the strength of any password. Get instant feedback on entropy, patterns, and weaknesses.</div></a>
+<a class="tool-card" href="/bcrypt-generator" data-name="bcrypt hash generator password cost factor client-side"><span class="tool-icon">&#128272;</span><div class="tool-name">Bcrypt Hash Generator</div><div class="tool-desc">Hash passwords with bcrypt right in your browser. Choose cost factor. 100% client-side.</div></a>
+<a class="tool-card" href="/cors-tester" data-name="cors header tester url origin method allowed"><span class="tool-icon">&#60;/&#62;</span><div class="tool-name">CORS Header Tester</div><div class="tool-desc">Paste a URL and check its CORS headers. Understand what origins and methods are allowed.</div></a>
 </div>
 </div>
 </div>

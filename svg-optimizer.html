@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SVG Optimizer — DeskTools</title>
+<meta name="description" content="Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.pane{display:flex;flex-direction:column;gap:.6rem}
+.pane-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+.pane-label span{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted)}
+textarea{width:100%;height:340px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:1rem;outline:none;resize:none;line-height:1.6;transition:border-color .2s}
+textarea:focus{border-color:var(--accent)}
+textarea.output{color:#a8e6d8;cursor:default}
+.stats-row{display:flex;gap:1rem;margin:1rem 0}
+.stat-box{flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;text-align:center}
+.stat-box .num{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--accent);display:block}
+.stat-box .lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.stat-box.saving .num{color:#00d4aa}
+.opts{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+.opt{display:flex;align-items:center;gap:.4rem;font-size:.83rem;color:var(--muted);cursor:pointer;user-select:none}
+.opt input{accent-color:var(--accent);cursor:pointer}
+.opt:hover{color:var(--text)}
+.btn-row{display:flex;gap:.75rem}
+.btn{flex:1;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;border-radius:8px;padding:.65rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}.btn-secondary:hover{color:var(--text);border-color:var(--accent)}
+.btn.copied{background:#1a6b5a}
+.preview-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.5rem;display:flex;align-items:center;justify-content:center;min-height:120px;margin-top:.5rem}
+.preview-box svg{max-width:100%;max-height:100px}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:650px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">desk<span>tools</span>.dev</a>
+  <a href="/" class="back"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Tools</a>
+</nav>
+<div class="page">
+  <h1>SVG Optimizer</h1>
+  <p class="sub">Paste SVG markup to clean and minify it. Strips comments, metadata, and unnecessary whitespace.</p>
+
+  <div class="opts">
+    <label class="opt"><input type="checkbox" id="rmComments" checked/> Remove comments</label>
+    <label class="opt"><input type="checkbox" id="rmMeta" checked/> Remove metadata</label>
+    <label class="opt"><input type="checkbox" id="rmAttribs" checked/> Remove editor attributes</label>
+    <label class="opt"><input type="checkbox" id="minifyWS" checked/> Minify whitespace</label>
+    <label class="opt"><input type="checkbox" id="rmXmlDecl" checked/> Remove XML declaration</label>
+    <label class="opt"><input type="checkbox" id="rmTitle" /> Remove &lt;title&gt;</label>
+  </div>
+
+  <div class="layout">
+    <div class="pane">
+      <div class="pane-label">Input SVG <span id="inSize"></span></div>
+      <textarea id="inputSvg" placeholder="Paste your SVG here..." oninput="optimize()"></textarea>
+      <div class="preview-box" id="previewIn"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-label">Optimized SVG <span id="outSize"></span></div>
+      <textarea class="output" id="outputSvg" readonly></textarea>
+      <div class="preview-box" id="previewOut"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><span class="num" id="statIn">—</span><span class="lbl">Original</span></div>
+    <div class="stat-box"><span class="num" id="statOut">—</span><span class="lbl">Optimized</span></div>
+    <div class="stat-box saving"><span class="num" id="statSave">—</span><span class="lbl">Saved</span></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="copyBtn" onclick="copyOutput()">Copy Optimized SVG</button>
+    <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+  </div>
+</div>
+<footer>DeskTools &mdash; <a href="/">desktools.dev</a></footer>
+<script>
+function fmt(n){return n>=1024?(n/1024).toFixed(1)+'KB':n+'B'}
+function optimize(){
+  const raw=document.getElementById('inputSvg').value.trim();
+  document.getElementById('previewIn').innerHTML=raw||'';
+  if(!raw){['outputSvg','statIn','statOut','statSave'].forEach(id=>document.getElementById(id).textContent='');return;}
+  let out=raw;
+  if(document.getElementById('rmXmlDecl').checked) out=out.replace(/<\?xml[^?]*\?>/gi,'');
+  if(document.getElementById('rmComments').checked) out=out.replace(/<!--[\s\S]*?-->/g,'');
+  if(document.getElementById('rmMeta').checked) out=out.replace(/<metadata[\s\S]*?<\/metadata>/gi,'').replace(/<sodipodi:[^>]*\/?>/gi,'').replace(/<inkscape:[^>]*\/?>/gi,'');
+  if(document.getElementById('rmTitle').checked) out=out.replace(/<title[\s\S]*?<\/title>/gi,'');
+  if(document.getElementById('rmAttribs').checked){
+    out=out.replace(/\s+sodipodi:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+inkscape:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+dc:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+rdf:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+xmlns:(inkscape|sodipodi|dc|cc|rdf)="[^"]*"/g,'');
+  }
+  if(document.getElementById('minifyWS').checked){
+    out=out.replace(/\s*\n\s*/g,' ').replace(/\s{2,}/g,' ').replace(/>\s+</g,'><').trim();
+  }
+  const inB=new TextEncoder().encode(raw).length;
+  const outB=new TextEncoder().encode(out).length;
+  const pct=inB>0?Math.round((1-outB/inB)*100):0;
+  document.getElementById('outputSvg').value=out;
+  document.getElementById('previewOut').innerHTML=out;
+  document.getElementById('statIn').textContent=fmt(inB);
+  document.getElementById('statOut').textContent=fmt(outB);
+  document.getElementById('statSave').textContent=pct+'%';
+  document.getElementById('inSize').textContent=fmt(inB);
+  document.getElementById('outSize').textContent=fmt(outB);
+}
+document.querySelectorAll('.opts input').forEach(cb=>cb.addEventListener('change',optimize));
+function copyOutput(){
+  const v=document.getElementById('outputSvg').value;
+  if(!v)return;
+  navigator.clipboard.writeText(v);
+  const b=document.getElementById('copyBtn');b.textContent='Copied!';b.classList.add('copied');
+  setTimeout(()=>{b.textContent='Copy Optimized SVG';b.classList.remove('copied');},1800);
+}
+function clearAll(){
+  document.getElementById('inputSvg').value='';
+  document.getElementById('outputSvg').value='';
+  document.getElementById('previewIn').innerHTML='';
+  document.getElementById('previewOut').innerHTML='';
+  ['statIn','statOut','statSave','inSize','outSize'].forEach(id=>document.getElementById(id).textContent='');
+}
+</script>
+</body>
+</html>

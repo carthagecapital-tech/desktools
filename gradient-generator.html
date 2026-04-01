@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Gradient Generator — DeskTools</title>
+<meta name="description" content="Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.preview{border-radius:14px;height:260px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.preview-label{position:absolute;bottom:.75rem;right:.75rem;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border-radius:6px;padding:.25rem .6rem;font-size:.72rem;color:rgba(255,255,255,.7);font-family:'JetBrains Mono',monospace}
+.controls{display:flex;flex-direction:column;gap:1rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card label{font-size:.78rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.04em}
+.seg{display:flex;gap:.4rem;background:var(--bg3);border-radius:8px;padding:.25rem}
+.seg button{flex:1;background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;padding:.35rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.seg button.active{background:var(--accent);color:#0a0a0f}
+.angle-row{display:flex;align-items:center;gap:.75rem}
+.angle-row input[type=range]{flex:1;accent-color:var(--accent)}
+.angle-val{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--accent);min-width:3ch;text-align:right}
+.stops{display:flex;flex-direction:column;gap:.6rem}
+.stop-row{display:flex;align-items:center;gap:.6rem}
+.stop-row input[type=color]{width:36px;height:36px;border:1px solid var(--border);border-radius:6px;background:none;cursor:pointer;padding:2px}
+.stop-row input[type=range]{flex:1;accent-color:var(--accent)}
+.stop-pos{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted);min-width:3ch}
+.stop-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;padding:.1rem .3rem;border-radius:4px;transition:color .15s}
+.stop-del:hover{color:#ff6b6b}
+.add-stop{background:none;border:1px dashed var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.83rem;padding:.45rem;border-radius:8px;cursor:pointer;width:100%;transition:all .2s;margin-top:.25rem}
+.add-stop:hover{border-color:var(--accent);color:var(--accent)}
+.css-out{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);word-break:break-all;line-height:1.6;margin-top:.75rem;cursor:pointer;transition:border-color .2s}
+.css-out:hover{border-color:var(--accent)}
+.copy-btn{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;border-radius:8px;padding:.6rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.copy-btn:hover{background:var(--accent2)}
+.copy-btn.copied{background:#1a6b5a}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){.layout{grid-template-columns:1fr}.preview{height:180px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">desk<span>tools</span>.dev</a>
+  <a href="/" class="back"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Tools</a>
+</nav>
+<div class="page">
+  <h1>Gradient Generator</h1>
+  <p class="sub">Build CSS gradients visually — linear, radial, or conic. Copy the CSS instantly.</p>
+  <div class="layout">
+    <div>
+      <div class="preview" id="preview">
+        <div class="preview-label" id="previewLabel">linear</div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="card">
+        <label>Type</label>
+        <div class="seg" id="typeSeg">
+          <button class="active" onclick="setType('linear',this)">Linear</button>
+          <button onclick="setType('radial',this)">Radial</button>
+          <button onclick="setType('conic',this)">Conic</button>
+        </div>
+      </div>
+      <div class="card" id="angleCard">
+        <label>Angle</label>
+        <div class="angle-row">
+          <input type="range" id="angleRange" min="0" max="360" value="135" oninput="update()"/>
+          <span class="angle-val" id="angleVal">135°</span>
+        </div>
+      </div>
+      <div class="card">
+        <label>Color Stops</label>
+        <div class="stops" id="stops"></div>
+        <button class="add-stop" onclick="addStop()">+ Add stop</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.5rem">
+    <label>CSS Output</label>
+    <div class="css-out" id="cssOut" onclick="copyCSS()" title="Click to copy"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
+  </div>
+</div>
+<footer>DeskTools &mdash; <a href="/">desktools.dev</a></footer>
+<script>
+let type='linear', stops=[{color:'#00d4aa',pos:0},{color:'#7c3aed',pos:100}];
+function setType(t,btn){
+  type=t;
+  document.querySelectorAll('#typeSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('angleCard').style.display=(t==='radial')?'none':'';
+  update();
+}
+function renderStops(){
+  const el=document.getElementById('stops'); el.innerHTML='';
+  stops.forEach((s,i)=>{
+    const row=document.createElement('div'); row.className='stop-row';
+    row.innerHTML=`<input type="color" value="${s.color}" oninput="stops[${i}].color=this.value;update()"/>
+      <input type="range" min="0" max="100" value="${s.pos}" oninput="stops[${i}].pos=+this.value;update()"/>
+      <span class="stop-pos">${s.pos}%</span>
+      ${stops.length>2?`<button class="stop-del" onclick="removeStop(${i})">&#x2715;</button>`:''}`;
+    el.appendChild(row);
+  });
+}
+function addStop(){stops.push({color:'#ff6b6b',pos:50});stops.sort((a,b)=>a.pos-b.pos);renderStops();update();}
+function removeStop(i){if(stops.length<=2)return;stops.splice(i,1);renderStops();update();}
+function update(){
+  const angle=document.getElementById('angleRange').value;
+  document.getElementById('angleVal').textContent=angle+'°';
+  const sorted=[...stops].sort((a,b)=>a.pos-b.pos);
+  const sc=sorted.map(s=>`${s.color} ${s.pos}%`).join(', ');
+  let grad='';
+  if(type==='linear') grad=`linear-gradient(${angle}deg, ${sc})`;
+  else if(type==='radial') grad=`radial-gradient(circle, ${sc})`;
+  else grad=`conic-gradient(from ${angle}deg, ${sc})`;
+  document.getElementById('preview').style.background=grad;
+  document.getElementById('previewLabel').textContent=type;
+  document.getElementById('cssOut').textContent=`background: ${grad};`;
+  renderStops();
+}
+function copyCSS(){
+  const css=document.getElementById('cssOut').textContent;
+  navigator.clipboard.writeText(css);
+  const btn=document.getElementById('copyBtn'); btn.textContent='Copied!'; btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copy CSS';btn.classList.remove('copied');},1800);
+}
+update();
+</script>
+</body>
+</html>
