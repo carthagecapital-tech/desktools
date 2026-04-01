@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Security.txt Generator — Build Your Security Policy | DeskTools</title>
+<meta name="description" content="Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=url],input[type=email],input[type=date],textarea,select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer}
+textarea{min-height:60px;resize:vertical;line-height:1.5}
+.field{margin-bottom:1rem}
+.field:last-child{margin-bottom:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.check-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;cursor:pointer;font-size:.88rem}
+.check-row input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.outputs{display:grid;gap:1.25rem}
+.output-block{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.output-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border)}
+.output-name{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.output-name code{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.78rem}
+.copy-btn{background:var(--accent);color:#0a0a0f;border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;padding:.35rem .7rem;border-radius:5px;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:var(--accent2)}
+.output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-all;max-height:250px;overflow-y:auto}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:420px;position:relative;animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem}
+.modal h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
+.modal p{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.modal-field{margin-bottom:1rem}
+.modal-field label{font-size:.8rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.4rem}
+.modal-field input,.modal-field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.6rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
+.modal-field input:focus,.modal-field textarea:focus{border-color:var(--accent)}
+.modal-submit{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;border:none;border-radius:8px;padding:.7rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.modal-submit:hover{background:var(--accent2)}
+.modal-success{text-align:center;padding:1rem 0;display:none}
+.modal-success.show{display:block}
+.modal-success .check{font-size:2rem;margin-bottom:.5rem}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Security.txt Generator</h1>
+  <p class="sub">Generate security.txt, privacy meta tags, and robots.txt rules for your site.</p>
+
+  <div class="card">
+    <div class="card-title">Your Details</div>
+    <div class="field">
+      <label>Security contact email</label>
+      <input type="email" id="contactEmail" placeholder="security@example.com" oninput="generate()"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Contact URL (optional)</label>
+        <input type="url" id="contactUrl" placeholder="https://example.com/security" oninput="generate()"/>
+      </div>
+      <div class="field">
+        <label>Policy expiry date</label>
+        <input type="date" id="expires" oninput="generate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Preferred languages</label>
+      <input type="text" id="languages" placeholder="en, es, fr" value="en" oninput="generate()"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Encryption (PGP key URL)</label>
+        <input type="url" id="encryption" placeholder="https://example.com/pgp-key.txt" oninput="generate()"/>
+      </div>
+      <div class="field">
+        <label>Acknowledgments URL</label>
+        <input type="url" id="acknowledgments" placeholder="https://example.com/thanks" oninput="generate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Bug bounty / hiring URL (optional)</label>
+      <input type="url" id="hiring" placeholder="https://example.com/careers" oninput="generate()"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Privacy Options</div>
+    <label class="check-row"><input type="checkbox" id="optReferrer" checked onchange="generate()"/> Add referrer-policy meta tag</label>
+    <label class="check-row"><input type="checkbox" id="optPermissions" checked onchange="generate()"/> Add permissions-policy meta tag</label>
+    <label class="check-row"><input type="checkbox" id="optRobots" checked onchange="generate()"/> Generate privacy-focused robots.txt</label>
+    <label class="check-row"><input type="checkbox" id="optDnt" onchange="generate()"/> Block known AI scrapers in robots.txt</label>
+  </div>
+
+  <div class="outputs" id="outputs"></div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+// Set default expiry to 1 year from now
+const d=new Date();d.setFullYear(d.getFullYear()+1);
+document.getElementById('expires').value=d.toISOString().split('T')[0];
+
+function generate(){
+  const email=document.getElementById('contactEmail').value.trim();
+  const contactUrl=document.getElementById('contactUrl').value.trim();
+  const expires=document.getElementById('expires').value;
+  const langs=document.getElementById('languages').value.trim();
+  const encryption=document.getElementById('encryption').value.trim();
+  const ack=document.getElementById('acknowledgments').value.trim();
+  const hiring=document.getElementById('hiring').value.trim();
+  const optReferrer=document.getElementById('optReferrer').checked;
+  const optPermissions=document.getElementById('optPermissions').checked;
+  const optRobots=document.getElementById('optRobots').checked;
+  const optDnt=document.getElementById('optDnt').checked;
+
+  const outputs=document.getElementById('outputs');
+  outputs.innerHTML='';
+
+  // 1. security.txt
+  let secTxt='# Security Policy\n# https://securitytxt.org/\n\n';
+  if(email) secTxt+='Contact: mailto:'+email+'\n';
+  if(contactUrl) secTxt+='Contact: '+contactUrl+'\n';
+  if(!email&&!contactUrl) secTxt+='Contact: mailto:security@example.com\n';
+  if(expires) secTxt+='Expires: '+new Date(expires+'T00:00:00Z').toISOString()+'\n';
+  if(encryption) secTxt+='Encryption: '+encryption+'\n';
+  if(ack) secTxt+='Acknowledgments: '+ack+'\n';
+  if(langs) secTxt+='Preferred-Languages: '+langs+'\n';
+  if(hiring) secTxt+='Hiring: '+hiring+'\n';
+  secTxt+='\n# Place this file at /.well-known/security.txt';
+
+  addOutput(outputs,'security.txt','/.well-known/security.txt',secTxt);
+
+  // 2. Meta tags
+  let metaTags='';
+  if(optReferrer){
+    metaTags+='<!-- Referrer Policy -->\n<meta name="referrer" content="strict-origin-when-cross-origin"/>\n\n';
+  }
+  if(optPermissions){
+    metaTags+='<!-- Permissions Policy -->\n<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()"/>\n\n';
+  }
+  metaTags+='<!-- Security Headers (add via HTTP headers or meta) -->\n';
+  metaTags+='<meta http-equiv="X-Content-Type-Options" content="nosniff"/>\n';
+  metaTags+='<meta http-equiv="X-Frame-Options" content="DENY"/>';
+
+  addOutput(outputs,'Privacy Meta Tags','Add to &lt;head&gt;',metaTags);
+
+  // 3. Robots.txt
+  if(optRobots){
+    let robots='# Robots.txt — privacy-focused configuration\n\nUser-agent: *\nAllow: /\n';
+    robots+='Disallow: /api/\nDisallow: /admin/\nDisallow: /private/\n';
+    if(optDnt){
+      robots+='\n# Block known AI scrapers\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: Google-Extended\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n';
+    }
+    addOutput(outputs,'robots.txt','/robots.txt',robots);
+  }
+}
+
+function addOutput(container,title,path,content){
+  const block=document.createElement('div');
+  block.className='output-block';
+  const id='out-'+Math.random().toString(36).substr(2,6);
+  block.innerHTML=
+    '<div class="output-header">'+
+    '  <span class="output-name">'+title+' <code>'+path+'</code></span>'+
+    '  <button class="copy-btn" onclick="copyBlock(\''+id+'\')">Copy</button>'+
+    '</div>'+
+    '<div class="output-code" id="'+id+'"></div>';
+  container.appendChild(block);
+  document.getElementById(id).textContent=content;
+}
+
+function copyBlock(id){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text);
+  if(typeof showToast==='function') showToast('Copied!');
+}
+
+generate();
+</script>
+</body>
+</html>

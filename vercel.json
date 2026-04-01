@@ -139,6 +139,22 @@
     {
       "source": "/password-strength",
       "destination": "/password-strength.html"
+    },
+    {
+      "source": "/totp-generator",
+      "destination": "/totp-generator.html"
+    },
+    {
+      "source": "/text-encryptor",
+      "destination": "/text-encryptor.html"
+    },
+    {
+      "source": "/csp-generator",
+      "destination": "/csp-generator.html"
+    },
+    {
+      "source": "/security-txt-generator",
+      "destination": "/security-txt-generator.html"
     }
   ],
   "headers": [

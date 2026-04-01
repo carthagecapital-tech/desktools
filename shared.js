@@ -44,7 +44,7 @@
     '        <a class="dropdown-item" href="/security">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Security &amp; Privacy</span><span class="di-sub">100% client-side</span></span>' +
-    '          <span class="di-count">4</span>' +
+    '          <span class="di-count">8</span>' +
     '        </a>' +
     '      </div>' +
     '    </div>' +

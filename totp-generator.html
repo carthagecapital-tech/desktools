@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TOTP Generator — Free 2FA Code Generator | DeskTools</title>
+<meta name="description" content="Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:560px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem}
+input[type=text],select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.9rem;padding:.65rem .85rem;outline:none;transition:border-color .2s}
+input:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer;-webkit-appearance:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.code-display{text-align:center;padding:2rem 1rem}
+.code{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;letter-spacing:.25em;color:var(--accent);transition:opacity .15s}
+.code.fade{opacity:.3}
+.timer-bar{height:4px;background:var(--bg3);border-radius:2px;margin-top:1.25rem;overflow:hidden}
+.timer-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear}
+.timer-fill.urgent{background:#ffa94d}
+.timer-fill.critical{background:#ff6b6b}
+.timer-row{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem}
+.timer-text{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted)}
+.copy-code{background:none;border:1px solid var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;padding:.4rem .85rem;border-radius:7px;cursor:pointer;transition:all .2s}
+.copy-code:hover{border-color:var(--accent);color:var(--accent)}
+.info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
+.info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:420px;position:relative;animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem}
+.modal h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
+.modal p{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.modal-field{margin-bottom:1rem}
+.modal-field label{font-size:.8rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.4rem}
+.modal-field input,.modal-field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.6rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
+.modal-field input:focus,.modal-field textarea:focus{border-color:var(--accent)}
+.modal-submit{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;border:none;border-radius:8px;padding:.7rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.modal-submit:hover{background:var(--accent2)}
+.modal-success{text-align:center;padding:1rem 0;display:none}
+.modal-success.show{display:block}
+.modal-success .check{font-size:2rem;margin-bottom:.5rem}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>TOTP Generator</h1>
+  <p class="sub">Generate time-based one-time passwords for 2FA testing. Nothing leaves your browser.</p>
+
+  <div class="card">
+    <div class="card-title">Secret Key</div>
+    <label>Base32 secret</label>
+    <input type="text" id="secret" placeholder="JBSWY3DPEHPK3PXP" oninput="generate()" spellcheck="false" autocomplete="off"/>
+    <div class="row">
+      <div>
+        <label>Digits</label>
+        <select id="digits" onchange="generate()">
+          <option value="6" selected>6 digits</option>
+          <option value="8">8 digits</option>
+        </select>
+      </div>
+      <div>
+        <label>Period</label>
+        <select id="period" onchange="generate()">
+          <option value="30" selected>30 seconds</option>
+          <option value="60">60 seconds</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="code-display">
+      <div class="code" id="code">------</div>
+      <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+      <div class="timer-row">
+        <span class="timer-text" id="timerText">--s remaining</span>
+        <button class="copy-code" onclick="copyCode()">Copy code</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">How it works</div>
+    <p class="info">TOTP uses a shared secret and the current time to generate a one-time code that changes every <code>30s</code>. This is the same algorithm used by Google Authenticator, Authy, and 1Password. Enter any Base32 secret to generate live codes — useful for testing 2FA integrations.</p>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+// Base32 decode
+function b32decode(s){
+  s=s.replace(/[\s=-]+/g,'').toUpperCase();
+  const alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  let bits='',bytes=[];
+  for(let i=0;i<s.length;i++){
+    const v=alpha.indexOf(s[i]);
+    if(v===-1) continue;
+    bits+=v.toString(2).padStart(5,'0');
+  }
+  for(let i=0;i+8<=bits.length;i+=8) bytes.push(parseInt(bits.substr(i,8),2));
+  return new Uint8Array(bytes);
+}
+
+// HMAC-SHA1
+async function hmacSha1(key,msg){
+  const ck=await crypto.subtle.importKey('raw',key,{name:'HMAC',hash:'SHA-1'},false,['sign']);
+  const sig=await crypto.subtle.sign('HMAC',ck,msg);
+  return new Uint8Array(sig);
+}
+
+// TOTP
+async function totp(secret,period,digits){
+  const key=b32decode(secret);
+  if(key.length===0) return null;
+  const epoch=Math.floor(Date.now()/1000);
+  const counter=Math.floor(epoch/period);
+  const msg=new Uint8Array(8);
+  let tmp=counter;
+  for(let i=7;i>=0;i--){msg[i]=tmp&0xff;tmp=Math.floor(tmp/256);}
+  const hash=await hmacSha1(key,msg);
+  const offset=hash[hash.length-1]&0x0f;
+  const code=((hash[offset]&0x7f)<<24|(hash[offset+1]&0xff)<<16|(hash[offset+2]&0xff)<<8|(hash[offset+3]&0xff))%(10**digits);
+  return code.toString().padStart(digits,'0');
+}
+
+let currentCode='';
+
+async function generate(){
+  const secret=document.getElementById('secret').value.trim();
+  const digits=parseInt(document.getElementById('digits').value);
+  const period=parseInt(document.getElementById('period').value);
+  const codeEl=document.getElementById('code');
+  if(!secret){
+    codeEl.textContent='-'.repeat(digits);
+    currentCode='';
+    return;
+  }
+  try{
+    const code=await totp(secret,period,digits);
+    if(code){
+      currentCode=code;
+      // Add space in middle for readability
+      const mid=Math.floor(code.length/2);
+      codeEl.textContent=code.slice(0,mid)+' '+code.slice(mid);
+    } else {
+      codeEl.textContent='Invalid';
+      currentCode='';
+    }
+  }catch(e){
+    codeEl.textContent='Error';
+    currentCode='';
+  }
+}
+
+function copyCode(){
+  if(currentCode){
+    navigator.clipboard.writeText(currentCode);
+    if(typeof showToast==='function') showToast('Code copied!');
+  }
+}
+
+// Timer loop
+function tick(){
+  const period=parseInt(document.getElementById('period').value);
+  const epoch=Math.floor(Date.now()/1000);
+  const remaining=period-(epoch%period);
+  const pct=(remaining/period)*100;
+  const fill=document.getElementById('timerFill');
+  const text=document.getElementById('timerText');
+  fill.style.width=pct+'%';
+  fill.className='timer-fill'+(remaining<=5?' critical':remaining<=10?' urgent':'');
+  text.textContent=remaining+'s remaining';
+
+  // Regenerate when period rolls over
+  if(remaining===period) generate();
+
+  requestAnimationFrame(tick);
+}
+
+// Auto-regenerate every second
+setInterval(generate,1000);
+generate();
+tick();
+</script>
+</body>
+</html>

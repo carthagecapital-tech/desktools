@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Text Encryptor — AES-256 Encrypt &amp; Decrypt | DeskTools</title>
+<meta name="description" content="Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem}
+input[type=password],textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.88rem;padding:.65rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:120px;line-height:1.5}
+.mode-tabs{display:flex;gap:0;margin-bottom:1.25rem;background:var(--bg3);border-radius:10px;padding:3px;border:1px solid var(--border)}
+.mode-tab{flex:1;text-align:center;padding:.55rem;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;border-radius:8px;transition:all .2s;border:none;background:none;font-family:'Outfit',sans-serif}
+.mode-tab.active{background:var(--accent);color:#0a0a0f}
+.mode-tab:hover:not(.active){color:var(--text)}
+.field{margin-bottom:1rem}
+.btn-row{display:flex;gap:.75rem;margin-top:.25rem}
+.btn{flex:1;padding:.7rem;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.output-area{margin-top:1rem;display:none}
+.output-area.show{display:block}
+.output-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.5rem}
+.output-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);word-break:break-all;line-height:1.6;max-height:200px;overflow-y:auto;position:relative}
+.copy-out{position:absolute;top:.5rem;right:.5rem;background:var(--card-bg);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.copy-out:hover{border-color:var(--accent);color:var(--accent)}
+.error{color:#ff6b6b;font-size:.85rem;margin-top:.5rem;display:none}
+.error.show{display:block}
+.badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.2rem .6rem;border-radius:5px;margin-top:.75rem}
+.info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
+.info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:420px;position:relative;animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem}
+.modal h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
+.modal p{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.modal-field{margin-bottom:1rem}
+.modal-field label{font-size:.8rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.4rem}
+.modal-field input,.modal-field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.6rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
+.modal-field input:focus,.modal-field textarea:focus{border-color:var(--accent)}
+.modal-submit{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;border:none;border-radius:8px;padding:.7rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.modal-submit:hover{background:var(--accent2)}
+.modal-success{text-align:center;padding:1rem 0;display:none}
+.modal-success.show{display:block}
+.modal-success .check{font-size:2rem;margin-bottom:.5rem}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Text Encryptor</h1>
+  <p class="sub">Encrypt and decrypt text with AES-256-GCM. Nothing leaves your browser.</p>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabEnc" onclick="setMode('encrypt')">Encrypt</button>
+    <button class="mode-tab" id="tabDec" onclick="setMode('decrypt')">Decrypt</button>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label id="inputLabel">Text to encrypt</label>
+      <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    </div>
+    <div class="field">
+      <label>Passphrase</label>
+      <input type="password" id="passphrase" placeholder="Enter a strong passphrase"/>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="actionBtn" onclick="doAction()">Encrypt</button>
+      <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+    </div>
+    <div class="error" id="error"></div>
+    <div class="output-area" id="outputArea">
+      <div class="output-label" id="outputLabel">Encrypted output</div>
+      <div class="output-box" id="outputBox"><button class="copy-out" onclick="copyResult()">Copy</button><span id="outputText"></span></div>
+      <div class="badge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> AES-256-GCM &middot; PBKDF2 key derivation</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">How it works</div>
+    <p class="info">Your passphrase is turned into a 256-bit key using <code>PBKDF2</code> with 100,000 iterations. Text is then encrypted with <code>AES-256-GCM</code> which provides both confidentiality and integrity. The output includes the salt and IV needed for decryption. All processing happens in your browser using the Web Crypto API.</p>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+let mode='encrypt';
+function setMode(m){
+  mode=m;
+  document.getElementById('tabEnc').className='mode-tab'+(m==='encrypt'?' active':'');
+  document.getElementById('tabDec').className='mode-tab'+(m==='decrypt'?' active':'');
+  document.getElementById('inputLabel').textContent=m==='encrypt'?'Text to encrypt':'Encrypted text to decrypt';
+  document.getElementById('inputText').placeholder=m==='encrypt'?'Enter your text here...':'Paste the encrypted string here...';
+  document.getElementById('actionBtn').textContent=m==='encrypt'?'Encrypt':'Decrypt';
+  document.getElementById('outputArea').classList.remove('show');
+  document.getElementById('error').classList.remove('show');
+}
+
+async function deriveKey(passphrase,salt){
+  const enc=new TextEncoder();
+  const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(passphrase),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},keyMaterial,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+
+async function encryptText(text,passphrase){
+  const enc=new TextEncoder();
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const key=await deriveKey(passphrase,salt);
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(text));
+  // Combine salt + iv + ciphertext and base64
+  const combined=new Uint8Array(salt.length+iv.length+new Uint8Array(ct).length);
+  combined.set(salt,0);
+  combined.set(iv,salt.length);
+  combined.set(new Uint8Array(ct),salt.length+iv.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function decryptText(encoded,passphrase){
+  const data=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+  const salt=data.slice(0,16);
+  const iv=data.slice(16,28);
+  const ct=data.slice(28);
+  const key=await deriveKey(passphrase,salt);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
+  return new TextDecoder().decode(pt);
+}
+
+async function doAction(){
+  const text=document.getElementById('inputText').value.trim();
+  const pass=document.getElementById('passphrase').value;
+  const errEl=document.getElementById('error');
+  const outArea=document.getElementById('outputArea');
+  const outText=document.getElementById('outputText');
+  const outLabel=document.getElementById('outputLabel');
+  errEl.classList.remove('show');
+  outArea.classList.remove('show');
+  if(!text){errEl.textContent='Please enter some text.';errEl.classList.add('show');return;}
+  if(!pass){errEl.textContent='Please enter a passphrase.';errEl.classList.add('show');return;}
+  try{
+    if(mode==='encrypt'){
+      const result=await encryptText(text,pass);
+      outText.textContent=result;
+      outLabel.textContent='Encrypted output';
+      outText.style.color='var(--accent)';
+    } else {
+      const result=await decryptText(text,pass);
+      outText.textContent=result;
+      outLabel.textContent='Decrypted text';
+      outText.style.color='var(--text)';
+    }
+    outArea.classList.add('show');
+  }catch(e){
+    errEl.textContent=mode==='decrypt'?'Decryption failed — wrong passphrase or corrupted data.':'Encryption failed: '+e.message;
+    errEl.classList.add('show');
+  }
+}
+
+function copyResult(){
+  const text=document.getElementById('outputText').textContent;
+  if(text){navigator.clipboard.writeText(text);if(typeof showToast==='function') showToast('Copied!');}
+}
+
+function clearAll(){
+  document.getElementById('inputText').value='';
+  document.getElementById('passphrase').value='';
+  document.getElementById('outputArea').classList.remove('show');
+  document.getElementById('error').classList.remove('show');
+}
+</script>
+</body>
+</html>
