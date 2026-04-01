@@ -88,9 +88,17 @@ textarea{min-height:120px;line-height:1.5}
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">How it works</div>
-    <p class="info">Your passphrase is turned into a 256-bit key using <code>PBKDF2</code> with 100,000 iterations. Text is then encrypted with <code>AES-256-GCM</code> which provides both confidentiality and integrity. The output includes the salt and IV needed for decryption. All processing happens in your browser using the Web Crypto API.</p>
+  <div class="deep-dive" style="max-width:640px;padding:0">
+    <button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="dd-arrow">&#x25B8;</span> How does AES-256 encryption work?
+    </button>
+    <div class="deep-dive-body">
+      <div class="deep-dive-content">
+        <p><strong>AES-256-GCM</strong> (Advanced Encryption Standard with Galois/Counter Mode) is the gold standard for symmetric encryption. It uses a 256-bit key to both encrypt and decrypt data, and the GCM mode provides <strong>authenticated encryption</strong> — meaning it detects if the ciphertext has been tampered with.</p>
+        <p>Your passphrase is converted into a 256-bit encryption key using <strong>PBKDF2</strong> (Password-Based Key Derivation Function 2) with 100,000 iterations. This deliberate slowness makes brute-force attacks on weak passphrases much harder. A random salt ensures the same passphrase produces different keys each time.</p>
+        <p>The output contains three parts concatenated and Base64-encoded: the <strong>salt</strong> (16 bytes), the <strong>initialization vector</strong> (12 bytes), and the <strong>ciphertext</strong>. All three are needed for decryption. Everything runs in your browser using the <strong>Web Crypto API</strong> — the same cryptographic library used by banks and password managers. No data is ever sent to a server.</p>
+      </div>
+    </div>
   </div>
 </div>
 

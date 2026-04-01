@@ -89,9 +89,17 @@ select{cursor:pointer;-webkit-appearance:none}
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">How it works</div>
-    <p class="info">TOTP uses a shared secret and the current time to generate a one-time code that changes every <code>30s</code>. This is the same algorithm used by Google Authenticator, Authy, and 1Password. Enter any Base32 secret to generate live codes — useful for testing 2FA integrations.</p>
+  <div class="deep-dive" style="max-width:560px;padding:0">
+    <button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="dd-arrow">&#x25B8;</span> How do TOTP codes work?
+    </button>
+    <div class="deep-dive-body">
+      <div class="deep-dive-content">
+        <p><strong>TOTP (Time-based One-Time Password)</strong> uses a shared secret and the current time to generate a code that changes every 30 seconds. The algorithm takes the secret key, combines it with a time counter (current Unix time divided by the period), and runs it through HMAC-SHA1 to produce a 6 or 8-digit code.</p>
+        <p>This is the same algorithm behind <strong>Google Authenticator, Authy, 1Password, and Microsoft Authenticator</strong>. The secret key is typically shared as a Base32-encoded string or QR code during 2FA setup. Both the server and your authenticator app independently generate the same code from the same secret and time — no network request needed.</p>
+        <p>This tool is useful for developers <strong>testing 2FA integrations</strong>, verifying that a secret key produces the expected codes, or debugging authentication flows. Enter any Base32 secret to see live rotating codes. Everything runs in your browser using the Web Crypto API — your secret never leaves your device.</p>
+      </div>
+    </div>
   </div>
 </div>
 

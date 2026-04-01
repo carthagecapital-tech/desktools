@@ -144,7 +144,7 @@ function buildCats(){
     el.appendChild(b);
   });
 }
-function unitList(){const c=CATS[cat];return c.units?Object.keys(c.units):c.units;}
+function unitList(){const c=CATS[cat];return Array.isArray(c.units)?c.units:Object.keys(c.units);}
 function buildUnits(){
   const ul=unitList();
   ['fromUnit','toUnit'].forEach((id,i)=>{
