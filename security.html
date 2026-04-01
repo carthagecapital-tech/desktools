@@ -3,246 +3,119 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Security &amp; Privacy Tools — DeskTools</title>
-<meta name="description" content="Free browser-based security tools. Password generator, hash generator, JWT decoder, bcrypt generator, CORS tester. 100% client-side."/>
+<title>Security & Privacy Tools — DeskTools</title>
+<meta name="description" content="Tools that run 100% in your browser — nothing leaves your device."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--border-hover:rgba(0,212,170,0.3);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
+      --accent: #00d4aa; --accent2: #00b894;
+      --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 58px;
+    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 1rem; }
+    .nav-links a { color: var(--muted); font-size: 0.9rem; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-request { background: var(--accent); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; border: none; border-radius: 8px; padding: 0.45rem 1rem; cursor: pointer; transition: background .2s; white-space: nowrap; }
+    .btn-request:hover { background: var(--accent2); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.75rem 2rem; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; width: 100%; max-width: 420px; position: relative; animation: modalIn .2s ease; }
+    @keyframes modalIn { from { opacity:0; transform: translateY(12px) scale(.97); } to { opacity:1; transform: none; } }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.2rem; }
+    .modal h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: .4rem; }
+    .modal p { font-size: .85rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .modal-field { margin-bottom: 1rem; }
+    .modal-field label { font-size: .8rem; font-weight: 500; color: var(--muted); display: block; margin-bottom: .4rem; }
+    .modal-field input, .modal-field textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem; padding: .6rem .85rem; outline: none; transition: border-color .2s; resize: vertical; }
+    .modal-field input:focus, .modal-field textarea:focus { border-color: var(--accent); }
+    .modal-submit { width: 100%; background: var(--accent); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: .95rem; border: none; border-radius: 8px; padding: .7rem; cursor: pointer; transition: background .2s; margin-top: .5rem; }
+    .modal-submit:hover { background: var(--accent2); }
+    .modal-success { text-align: center; padding: 1rem 0; display: none; }
+    .modal-success.show { display: block; }
+    .modal-success .check { font-size: 2rem; margin-bottom: .5rem; }
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;gap:1.5rem}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none;letter-spacing:-0.02em;white-space:nowrap}
-.nav-logo span{color:var(--accent)}
-
-/* NAV RIGHT group */
-.nav-right{display:flex;align-items:center;gap:.75rem}
-
-/* Search */
-.nav-search{display:flex;align-items:center;gap:.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.4rem .75rem;width:190px;transition:border-color .2s,width .3s}
-.nav-search:focus-within{border-color:var(--accent);width:230px}
-.nav-search svg{color:var(--muted);flex-shrink:0}
-.nav-search input{background:none;border:none;outline:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;width:100%}
-.nav-search input::placeholder{color:var(--muted)}
-
-/* DROPDOWN — now lives in nav-right, right-aligned */
-.nav-dropdown{position:relative}
-.nav-dropdown-btn{
-  display:flex;align-items:center;gap:.5rem;
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:8px;
-  color:var(--text);
-  font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;
-  cursor:pointer;padding:.45rem .9rem;
-  transition:border-color .2s,background .2s;
-  white-space:nowrap;
-}
-.nav-dropdown-btn:hover{border-color:var(--border-hover);background:#16161f}
-.nav-dropdown-btn.open{border-color:var(--accent);background:rgba(0,212,170,0.06)}
-.nav-dropdown-btn .btn-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:2px;width:14px;
-}
-.nav-dropdown-btn .btn-grid span{width:5px;height:5px;background:var(--accent);border-radius:1px;display:block}
-.nav-dropdown-btn svg{transition:transform .2s;color:var(--muted)}
-.nav-dropdown-btn.open svg{transform:rotate(180deg)}
-
-/* Dropdown panel — right-aligned */
-.dropdown-menu{
-  position:absolute;top:calc(100% + 10px);right:0;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:.5rem;
-  min-width:230px;
-  opacity:0;;
-  transform:translateY(-8px) scale(.98);
-  transform-origin:top right;
-  transition:opacity .18s,transform .18s;
-  z-index:200;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-.dropdown-menu.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
-.dropdown-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:.4rem .75rem .2rem;display:block}
-.dropdown-item{
-  display:flex;align-items:center;gap:.7rem;
-  padding:.6rem .75rem;border-radius:8px;
-  text-decoration:none;color:var(--text);
-  font-size:.88rem;font-weight:500;
-  transition:background .15s;
-}
-.dropdown-item:hover{background:var(--bg3)}
-.dropdown-item:hover .di-icon{border-color:rgba(0,212,170,0.4);background:rgba(0,212,170,0.12)}
-.di-icon{
-  width:30px;height:30px;
-  background:rgba(0,212,170,0.07);
-  border:1px solid rgba(0,212,170,0.12);
-  border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--accent);flex-shrink:0;
-  transition:background .15s,border-color .15s;
-}
-.di-text{flex:1}
-.di-name{display:block;line-height:1.2}
-.di-sub{display:block;font-size:.72rem;color:var(--muted);font-weight:400}
-.di-count{
-  font-family:'JetBrains Mono',monospace;font-size:.7rem;
-  background:rgba(0,212,170,0.1);color:var(--accent);
-  padding:.1rem .4rem;border-radius:4px;
-  white-space:nowrap;
-}
-.dropdown-divider{height:1px;background:var(--border);margin:.3rem .5rem}
-
-/* Request btn */
-.btn-request{background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;border:none;border-radius:8px;padding:.45rem 1rem;cursor:pointer;transition:background .2s,transform .1s;white-space:nowrap}
-.btn-request:hover{background:var(--accent2);transform:translateY(-1px)}
-
-/* HERO */
-.hero{text-align:center;padding:5rem 2rem 4rem;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:320px;background:radial-gradient(ellipse at center,rgba(0,212,170,0.07) 0%,transparent 70%);}
-.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);color:var(--accent);font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;margin-bottom:1.5rem}
-.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero p{color:var(--muted);font-size:1.05rem;max-width:480px;margin:0 auto 2.5rem}
-.hero-stats{display:inline-flex;gap:2.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.9rem 2rem}
-.stat{text-align:center}
-.stat-num{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--accent);display:block}
-.stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-
-/* PAGE HERO */
-.page-hero{padding:3.5rem 2rem 2.5rem;max-width:1100px;margin:0 auto}
-.page-hero-back{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;margin-bottom:1.5rem;transition:color .2s}
-.page-hero-back:hover{color:var(--accent)}
-.page-hero-icon{width:52px;height:52px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1rem}
-.page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-.03em;margin-bottom:.6rem}
-.page-hero p{color:var(--muted);font-size:1rem;max-width:520px}
-
-/* MAIN */
-.main{max-width:1100px;margin:0 auto;padding:0 2rem 5rem}
-.audience-section{margin-bottom:3.5rem}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.section-header-left{display:flex;align-items:center;gap:.75rem}
-.section-icon{width:34px;height:34px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
-.section-title{font-size:1rem;font-weight:600;color:var(--text)}
-.section-desc{font-size:.8rem;color:var(--muted)}
-.view-all{font-size:.82rem;font-weight:500;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.3rem;opacity:.8;transition:opacity .2s;white-space:nowrap}
-.view-all:hover{opacity:1}
-
-/* TOOL GRID */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-.tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .15s,background .2s;position:relative;overflow:hidden}
-.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
-.tool-card:hover{border-color:var(--border-hover);transform:translateY(-2px);background:#13131c}
-.tool-card:hover::before{opacity:1}
-.tool-card.coming-soon{opacity:.55;cursor:default;}
-.tool-icon{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.3rem .55rem;border-radius:6px;width:fit-content}
-.tool-name{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.3}
-.tool-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1}
-.tool-footer{display:flex;align-items:center;justify-content:space-between}
-.tool-tag{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border:1px solid var(--border);padding:.15rem .45rem;border-radius:4px;width:fit-content}
-.tag-soon{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:rgba(0,212,170,.5);border:1px solid rgba(0,212,170,.15);padding:.15rem .45rem;border-radius:4px;background:rgba(0,212,170,.04)}
-
-.search-hidden{display:none!important}
-.no-results{text-align:center;padding:4rem 2rem;color:var(--muted);display:none}
-.no-results.visible{display:block}
-.no-results h3{font-size:1rem;margin-bottom:.4rem;color:var(--text)}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
-.modal-overlay.open{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:420px;position:relative;animation:modalIn .2s ease}
-@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
-.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;transition:color .2s}
-.modal-close:hover{color:var(--text)}
-.modal h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
-.modal p{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
-.modal-field{margin-bottom:1rem}
-.modal-field label{font-size:.8rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.4rem}
-.modal-field input,.modal-field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.6rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
-.modal-field input:focus,.modal-field textarea:focus{border-color:var(--accent)}
-.modal-submit{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;border:none;border-radius:8px;padding:.7rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
-.modal-submit:hover{background:var(--accent2)}
-.modal-success{text-align:center;padding:1rem 0;display:none}
-.modal-success.show{display:block}
-.modal-success .check{font-size:2rem;margin-bottom:.5rem}
-.modal-success h3{font-size:1rem;margin-bottom:.3rem}
-.modal-success p{font-size:.85rem;color:var(--muted)}
-
-footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
-footer a{color:var(--accent);text-decoration:none}
-
-@media(max-width:680px){.nav-search{display:none}.hero{padding:3.5rem 1.5rem 3rem}.hero-stats{gap:1.5rem;padding:.75rem 1.25rem}.main{padding:0 1.25rem 4rem}.tool-grid{grid-template-columns:1fr 1fr}.page-hero{padding:2rem 1.25rem 1.5rem}}
-@media(max-width:420px){.tool-grid{grid-template-columns:1fr}}
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+    .page-head { margin-bottom: 2rem; }
+    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .5rem; }
+    .page-head p { color: var(--muted); font-size: 1rem; max-width: 520px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .tool-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.3rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: .6rem; transition: border-color .2s, transform .15s, background .2s; position: relative; overflow: hidden; }
+    .tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); opacity:0; transition:opacity .2s; }
+    .tool-card:hover { border-color: var(--border-hover); transform: translateY(-2px); background: #13131c; }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 700; color: var(--accent); background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.15); padding: .3rem .55rem; border-radius: 6px; width: fit-content; }
+    .tool-name { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+    .tool-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; flex: 1; }
+    .tool-tag { font-size: .7rem; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--border); padding: .15rem .45rem; border-radius: 4px; width: fit-content; }
+    @media(max-width:600px) { .page-wrap{padding:1.5rem 1.25rem 4rem} .tool-grid{grid-template-columns:1fr 1fr} }
+    @media(max-width:400px) { .tool-grid{grid-template-columns:1fr} }
 </style>
 </head>
 <body><nav>
   <a href="/" class="nav-logo">desk<span>tools</span>.dev</a>
-  <div class="nav-right">
-    <div class="nav-search">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="searchInput" type="text" placeholder="Search tools..." autocomplete="off"/>
-    </div>
-    <div class="nav-dropdown" id="catDropdown">
-      <button class="nav-dropdown-btn" id="catBtn" onclick="toggleDropdown()">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Browse <span style="color:var(--muted);font-size:.78rem;font-weight:400">Categories</span> <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="dropdown-menu" id="catMenu">
-        <span class="dropdown-label">Browse by audience</span>
-        <a class="dropdown-item" href="/developers">
-          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
-          <span class="di-text"><span class="di-name">Developers</span><span class="di-sub">Formatters, converters, testers</span></span>
-          <span class="di-count">13</span>
-        </a>
-        <a class="dropdown-item" href="/freelancers">
-          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>
-          <span class="di-text"><span class="di-name">Freelancers</span><span class="di-sub">Design &amp; creative tools</span></span>
-          <span class="di-count">10</span>
-        </a>
-        <a class="dropdown-item" href="/business">
-          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
-          <span class="di-text"><span class="di-name">Business</span><span class="di-sub">Productivity &amp; comms</span></span>
-          <span class="di-count">10</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/security">
-          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <span class="di-text"><span class="di-name">Security &amp; Privacy</span><span class="di-sub">100% client-side</span></span>
-          <span class="di-count">6</span>
-        </a>
-      </div>
-    </div>
+  <div class="nav-links">
+    <a href="/">Tools</a>
     <button class="btn-request" onclick="openModal()">Request a Tool</button>
   </div>
 </nav>
-<div class="page-hero">
-  <a class="page-hero-back" href="/"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Tools</a>
-  <div class="page-hero-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-  <h1>Security &amp; Privacy</h1>
-  <p>Tools that run 100% in your browser — nothing leaves your device.</p>
-</div>
-<div class="main" style="padding-top:0">
-  <div class="no-results" id="noResults"><h3>No tools found</h3><p>Try a different search term.</p></div>
-  <div class="tool-grid">
-<a class="tool-card" href="/password-generator" data-name="password generate strong random secure"><span class="tool-icon">&#9919;</span><div class="tool-name">Password Generator</div><div class="tool-desc">Generate strong, random passwords with custom length, character sets, and bulk generation.</div><span class="tool-tag">Security</span></a>
-<a class="tool-card" href="/hash-generator" data-name="hash md5 sha256 sha512 generate"><span class="tool-icon">#</span><div class="tool-name">Hash Generator</div><div class="tool-desc">Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text. Real-time as you type.</div><span class="tool-tag">Security</span></a>
-<a class="tool-card" href="/jwt-decoder" data-name="jwt decoder json web token header payload"><span class="tool-icon">JWT</span><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend.</div></a>
-<a class="tool-card" href="/password-strength" data-name="password strength checker entropy analysis security"><span class="tool-icon">&#128274;</span><div class="tool-name">Password Strength Checker</div><div class="tool-desc">Test the strength of any password. Get instant feedback on entropy, patterns, and weaknesses.</div></a>
-
-
-</div>
-</div>
-<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="https://desktools.dev">desktools.dev</a></footer><div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page-wrap">
+  <div class="page-head">
+    <h1>Security & Privacy Tools</h1>
+    <p>Tools that run 100% in your browser — nothing leaves your device.</p>
+  </div>
+  <div class="tool-grid"><a class="tool-card" href="/password-generator" data-name="password generator generate strong, random passwords with custom length and character sets.">
+  <span class="tool-icon">&dagger;</span>
+  <div class="tool-name">Password Generator</div>
+  <div class="tool-desc">Generate strong, random passwords with custom length and character sets.</div>
+  <span class="tool-tag">Security</span>
+</a>
+<a class="tool-card" href="/hash-generator" data-name="hash generator generate md5, sha-1, sha-256, and sha-512 hashes. real-time.">
+  <span class="tool-icon">#</span>
+  <div class="tool-name">Hash Generator</div>
+  <div class="tool-desc">Generate MD5, SHA-1, SHA-256, and SHA-512 hashes. Real-time.</div>
+  <span class="tool-tag">Security</span>
+</a>
+<a class="tool-card" href="/jwt-decoder" data-name="jwt decoder decode json web tokens. view header, payload, expiry. 100% client-side.">
+  <span class="tool-icon">JWT</span>
+  <div class="tool-name">JWT Decoder</div>
+  <div class="tool-desc">Decode JSON Web Tokens. View header, payload, expiry. 100% client-side.</div>
+  <span class="tool-tag">Security</span>
+</a>
+<a class="tool-card" href="/password-strength" data-name="password strength test password strength. entropy, crack time, pattern analysis.">
+  <span class="tool-icon">&bull;&bull;</span>
+  <div class="tool-name">Password Strength</div>
+  <div class="tool-desc">Test password strength. Entropy, crack time, pattern analysis.</div>
+  <span class="tool-tag">Security</span>
+</a></div>
+</div><footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="https://desktools.dev">desktools.dev</a></footer><div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">&#x2715;</button>
     <div id="modalForm">
       <h2>Request a Tool</h2>
       <p>What tool would save you time? We build the most-requested ones first.</p>
       <div class="modal-field"><label>Tool idea</label><textarea id="toolIdea" rows="3" placeholder="e.g. SVG optimizer, cron expression builder..."></textarea></div>
-      <div class="modal-field"><label>Your email <span style="opacity:0.5">(optional)</span></label><input type="email" id="userEmail" placeholder="you@example.com"/></div>
+      <div class="modal-field"><label>Your email <span style="opacity:.5">(optional)</span></label><input type="email" id="userEmail" placeholder="you@example.com"/></div>
       <button class="modal-submit" onclick="submitRequest()">Submit Request</button>
     </div>
     <div class="modal-success" id="modalSuccess">
@@ -251,38 +124,8 @@ footer a{color:var(--accent);text-decoration:none}
     </div>
   </div>
 </div><script>
-function toggleDropdown(){
-  const b=document.getElementById('catBtn'),m=document.getElementById('catMenu');
-  b.classList.toggle('open');m.classList.toggle('open');
-}
-document.addEventListener('click',e=>{
-  const d=document.getElementById('catDropdown');
-  if(d&&!d.contains(e.target)){
-    document.getElementById('catBtn').classList.remove('open');
-    document.getElementById('catMenu').classList.remove('open');
-  }
-});
-const si=document.getElementById('searchInput'),nr=document.getElementById('noResults');
-if(si&&nr){si.addEventListener('input',()=>{
-  const q=si.value.trim().toLowerCase();let any=false;
-  document.querySelectorAll('.tool-card').forEach(c=>{
-    const m=!q||(c.dataset.name||'').includes(q)||c.querySelector('.tool-name').textContent.toLowerCase().includes(q);
-    c.classList.toggle('search-hidden',!m);if(m)any=true;
-  });
-  document.querySelectorAll('.audience-section').forEach(s=>{
-    s.style.display=Array.from(s.querySelectorAll('.tool-card')).some(c=>!c.classList.contains('search-hidden'))?'':'none';
-  });
-  nr.classList.toggle('visible',!any);
-});}
 function openModal(){document.getElementById('modalOverlay').classList.add('open');}
-function closeModal(){
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.getElementById('modalForm').style.display='';
-  document.getElementById('modalSuccess').classList.remove('show');
-  document.getElementById('toolIdea').value='';
-  document.getElementById('userEmail').value='';
-}
-function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('modalForm').style.display='';document.getElementById('modalSuccess').classList.remove('show');document.getElementById('toolIdea').value='';document.getElementById('userEmail').value='';}
 async function submitRequest(){
   const idea=document.getElementById('toolIdea').value.trim();
   if(!idea){document.getElementById('toolIdea').focus();return;}
