@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>For Freelancers & Designers Tools — DeskTools</title>
-<meta name="description" content="Free browser-based tools for freelancers and designers. Color picker, QR code generator, aspect ratio calculator, lorem ipsum generator, and more."/>
+<title>For Freelancers &amp; Designers Tools — DeskTools</title>
+<meta name="description" content="Free browser-based tools for freelancers and designers. Color picker, QR code generator, gradient generator, SVG optimizer, font pairer, and more."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -13,31 +13,97 @@
 :root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--border-hover:rgba(0,212,170,0.3);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;min-height:100vh;overflow-x:hidden}
-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;gap:1rem}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;gap:1.5rem}
 .nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none;letter-spacing:-0.02em;white-space:nowrap}
 .nav-logo span{color:var(--accent)}
-.nav-center{display:flex;align-items:center}
-.nav-dropdown{position:relative}
-.nav-dropdown-btn{background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;padding:.4rem .7rem;border-radius:7px;display:flex;align-items:center;gap:.35rem;transition:color .2s,background .2s}
-.nav-dropdown-btn:hover,.nav-dropdown-btn.open{color:var(--text);background:var(--bg3)}
-.nav-dropdown-btn svg{transition:transform .2s}
-.nav-dropdown-btn.open svg{transform:rotate(180deg)}
-.dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.4rem;min-width:200px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .18s,transform .18s;z-index:200}
-.dropdown-menu.open{opacity:1;pointer-events:all;transform:translateY(0)}
-.dropdown-item{display:flex;align-items:center;gap:.65rem;padding:.55rem .75rem;border-radius:7px;text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;transition:background .15s,color .15s}
-.dropdown-item:hover{background:var(--bg3);color:var(--text)}
-.dropdown-item-icon{width:28px;height:28px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
-.dropdown-item-count{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted)}
-.nav-right{display:flex;align-items:center;gap:1rem}
-.nav-search{display:flex;align-items:center;gap:.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.4rem .75rem;width:200px;transition:border-color .2s,width .3s}
-.nav-search:focus-within{border-color:var(--accent);width:240px}
+
+/* NAV RIGHT group */
+.nav-right{display:flex;align-items:center;gap:.75rem}
+
+/* Search */
+.nav-search{display:flex;align-items:center;gap:.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.4rem .75rem;width:190px;transition:border-color .2s,width .3s}
+.nav-search:focus-within{border-color:var(--accent);width:230px}
 .nav-search svg{color:var(--muted);flex-shrink:0}
 .nav-search input{background:none;border:none;outline:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;width:100%}
 .nav-search input::placeholder{color:var(--muted)}
+
+/* DROPDOWN — now lives in nav-right, right-aligned */
+.nav-dropdown{position:relative}
+.nav-dropdown-btn{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--text);
+  font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;
+  cursor:pointer;padding:.45rem .9rem;
+  transition:border-color .2s,background .2s;
+  white-space:nowrap;
+}
+.nav-dropdown-btn:hover{border-color:var(--border-hover);background:#16161f}
+.nav-dropdown-btn.open{border-color:var(--accent);background:rgba(0,212,170,0.06)}
+.nav-dropdown-btn .btn-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;width:14px;
+}
+.nav-dropdown-btn .btn-grid span{width:5px;height:5px;background:var(--accent);border-radius:1px;display:block}
+.nav-dropdown-btn svg{transition:transform .2s;color:var(--muted)}
+.nav-dropdown-btn.open svg{transform:rotate(180deg)}
+
+/* Dropdown panel — right-aligned */
+.dropdown-menu{
+  position:absolute;top:calc(100% + 10px);right:0;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:.5rem;
+  min-width:230px;
+  opacity:0;pointer-events:none;
+  transform:translateY(-8px) scale(.98);
+  transform-origin:top right;
+  transition:opacity .18s,transform .18s;
+  z-index:200;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.dropdown-menu.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.dropdown-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:.4rem .75rem .2rem;display:block}
+.dropdown-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.6rem .75rem;border-radius:8px;
+  text-decoration:none;color:var(--text);
+  font-size:.88rem;font-weight:500;
+  transition:background .15s;
+}
+.dropdown-item:hover{background:var(--bg3)}
+.dropdown-item:hover .di-icon{border-color:rgba(0,212,170,0.4);background:rgba(0,212,170,0.12)}
+.di-icon{
+  width:30px;height:30px;
+  background:rgba(0,212,170,0.07);
+  border:1px solid rgba(0,212,170,0.12);
+  border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);flex-shrink:0;
+  transition:background .15s,border-color .15s;
+}
+.di-text{flex:1}
+.di-name{display:block;line-height:1.2}
+.di-sub{display:block;font-size:.72rem;color:var(--muted);font-weight:400}
+.di-count{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  background:rgba(0,212,170,0.1);color:var(--accent);
+  padding:.1rem .4rem;border-radius:4px;
+  white-space:nowrap;
+}
+.dropdown-divider{height:1px;background:var(--border);margin:.3rem .5rem}
+
+/* Request btn */
 .btn-request{background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;border:none;border-radius:8px;padding:.45rem 1rem;cursor:pointer;transition:background .2s,transform .1s;white-space:nowrap}
 .btn-request:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* HERO */
 .hero{text-align:center;padding:5rem 2rem 4rem;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse at center,rgba(0,212,170,0.08) 0%,transparent 70%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:320px;background:radial-gradient(ellipse at center,rgba(0,212,170,0.07) 0%,transparent 70%);pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);color:var(--accent);font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;margin-bottom:1.5rem}
 .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
 .hero h1 em{font-style:normal;color:var(--accent)}
@@ -46,12 +112,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
 .stat{text-align:center}
 .stat-num{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--accent);display:block}
 .stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* PAGE HERO */
 .page-hero{padding:3.5rem 2rem 2.5rem;max-width:1100px;margin:0 auto}
 .page-hero-back{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;margin-bottom:1.5rem;transition:color .2s}
 .page-hero-back:hover{color:var(--accent)}
 .page-hero-icon{width:52px;height:52px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1rem}
 .page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-.03em;margin-bottom:.6rem}
 .page-hero p{color:var(--muted);font-size:1rem;max-width:520px}
+
+/* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:0 2rem 5rem}
 .audience-section{margin-bottom:3.5rem}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
@@ -61,20 +131,28 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
 .section-desc{font-size:.8rem;color:var(--muted)}
 .view-all{font-size:.82rem;font-weight:500;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.3rem;opacity:.8;transition:opacity .2s;white-space:nowrap}
 .view-all:hover{opacity:1}
+
+/* TOOL GRID */
 .tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
 .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .15s,background .2s;position:relative;overflow:hidden}
 .tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
 .tool-card:hover{border-color:var(--border-hover);transform:translateY(-2px);background:#13131c}
 .tool-card:hover::before{opacity:1}
+.tool-card.coming-soon{opacity:.55;cursor:default;pointer-events:none}
 .tool-icon{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.3rem .55rem;border-radius:6px;width:fit-content}
 .tool-name{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.3}
 .tool-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1}
+.tool-footer{display:flex;align-items:center;justify-content:space-between}
 .tool-tag{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border:1px solid var(--border);padding:.15rem .45rem;border-radius:4px;width:fit-content}
+.tag-soon{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:rgba(0,212,170,.5);border:1px solid rgba(0,212,170,.15);padding:.15rem .45rem;border-radius:4px;background:rgba(0,212,170,.04)}
+
 .search-hidden{display:none!important}
 .no-results{text-align:center;padding:4rem 2rem;color:var(--muted);display:none}
 .no-results.visible{display:block}
 .no-results h3{font-size:1rem;margin-bottom:.4rem;color:var(--text)}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:420px;position:relative;animation:modalIn .2s ease}
 @keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
@@ -93,52 +171,57 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-fi
 .modal-success .check{font-size:2rem;margin-bottom:.5rem}
 .modal-success h3{font-size:1rem;margin-bottom:.3rem}
 .modal-success p{font-size:.85rem;color:var(--muted)}
+
 footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
 footer a{color:var(--accent);text-decoration:none}
-@media(max-width:600px){.nav-search{display:none}.hero{padding:3.5rem 1.5rem 3rem}.hero-stats{gap:1.5rem;padding:.75rem 1.25rem}.main{padding:0 1.25rem 4rem}.tool-grid{grid-template-columns:1fr 1fr}.page-hero{padding:2rem 1.25rem 1.5rem}}
-@media(max-width:400px){.tool-grid{grid-template-columns:1fr}}
+
+@media(max-width:680px){.nav-search{display:none}.hero{padding:3.5rem 1.5rem 3rem}.hero-stats{gap:1.5rem;padding:.75rem 1.25rem}.main{padding:0 1.25rem 4rem}.tool-grid{grid-template-columns:1fr 1fr}.page-hero{padding:2rem 1.25rem 1.5rem}}
+@media(max-width:420px){.tool-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body><nav>
   <a href="/" class="nav-logo">desk<span>tools</span>.dev</a>
-  <div class="nav-center">
-    <div class="nav-dropdown" id="catDropdown">
-      <button class="nav-dropdown-btn" id="catBtn" onclick="toggleDropdown()">
-        Categories
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="dropdown-menu" id="catMenu">
-        <a class="dropdown-item" href="/developers">
-          <span class="dropdown-item-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
-          Developers <span class="dropdown-item-count">13</span>
-        </a>
-        <a class="dropdown-item" href="/freelancers">
-          <span class="dropdown-item-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>
-          Freelancers <span class="dropdown-item-count">7</span>
-        </a>
-        <a class="dropdown-item" href="/business">
-          <span class="dropdown-item-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
-          Business <span class="dropdown-item-count">5</span>
-        </a>
-        <a class="dropdown-item" href="/security">
-          <span class="dropdown-item-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          Security <span class="dropdown-item-count">2</span>
-        </a>
-      </div>
-    </div>
-  </div>
   <div class="nav-right">
     <div class="nav-search">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input id="searchInput" type="text" placeholder="Search tools..." autocomplete="off"/>
+    </div>
+    <div class="nav-dropdown" id="catDropdown">
+      <button class="nav-dropdown-btn" id="catBtn" onclick="toggleDropdown()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Browse <span style="color:var(--muted);font-size:.78rem;font-weight:400">Categories</span> <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="dropdown-menu" id="catMenu">
+        <span class="dropdown-label">Browse by audience</span>
+        <a class="dropdown-item" href="/developers">
+          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+          <span class="di-text"><span class="di-name">Developers</span><span class="di-sub">Formatters, converters, testers</span></span>
+          <span class="di-count">13</span>
+        </a>
+        <a class="dropdown-item" href="/freelancers">
+          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>
+          <span class="di-text"><span class="di-name">Freelancers</span><span class="di-sub">Design &amp; creative tools</span></span>
+          <span class="di-count">10</span>
+        </a>
+        <a class="dropdown-item" href="/business">
+          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
+          <span class="di-text"><span class="di-name">Business</span><span class="di-sub">Productivity &amp; comms</span></span>
+          <span class="di-count">10</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/security">
+          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <span class="di-text"><span class="di-name">Security &amp; Privacy</span><span class="di-sub">100% client-side</span></span>
+          <span class="di-count">6</span>
+        </a>
+      </div>
     </div>
     <button class="btn-request" onclick="openModal()">Request a Tool</button>
   </div>
 </nav>
 <div class="page-hero">
   <a class="page-hero-back" href="/"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Tools</a>
-  <div class="page-hero-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></div>
-  <h1>For Freelancers & Designers</h1>
+  <div class="page-hero-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></div>
+  <h1>For Freelancers &amp; Designers</h1>
   <p>Creative tools to speed up your workflow and impress clients.</p>
 </div>
 <div class="main" style="padding-top:0">
@@ -148,9 +231,12 @@ footer a{color:var(--accent);text-decoration:none}
 <a class="tool-card" href="/qr-code-generator" data-name="qr code generate url text wifi png"><span class="tool-icon">&#9635;</span><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate QR codes for URLs, text, email, WiFi. Custom colors and sizes. Download as PNG.</div><span class="tool-tag">Design</span></a>
 <a class="tool-card" href="/aspect-ratio-calculator" data-name="aspect ratio resize video social media"><span class="tool-icon">&#11026;</span><div class="tool-name">Aspect Ratio Calculator</div><div class="tool-desc">Calculate ratios, resize proportionally, presets for video, social media, and screens.</div><span class="tool-tag">Design</span></a>
 <a class="tool-card" href="/lorem-ipsum-generator" data-name="lorem ipsum placeholder text paragraphs"><span class="tool-icon">&#182;</span><div class="tool-name">Lorem Ipsum Generator</div><div class="tool-desc">Generate placeholder text by paragraphs, sentences, or words. Copy with one click.</div><span class="tool-tag">Text</span></a>
-<a class="tool-card" href="/image-to-base64" data-name="image base64 convert upload css html"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Upload an image, get Base64 string, HTML img tag, and CSS background &mdash; all client-side.</div><span class="tool-tag">Dev</span></a>
-<a class="tool-card" href="/text-transformer" data-name="text case convert word count encode decode"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Convert text between cases, count words, remove duplicates, sort lines, encode/decode, and more.</div><span class="tool-tag">Text</span></a>
+<a class="tool-card" href="/image-to-base64" data-name="image base64 convert upload css html"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Upload an image, get Base64 string, HTML img tag, and CSS background — all client-side.</div><span class="tool-tag">Dev</span></a>
+<a class="tool-card" href="/text-transformer" data-name="text case convert word count encode decode"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Convert text between cases, count words, remove duplicates, sort lines, and more.</div><span class="tool-tag">Text</span></a>
 <a class="tool-card" href="/html-entity-encoder" data-name="html entity encode decode special characters"><span class="tool-icon">&amp;</span><div class="tool-name">HTML Entity Encoder</div><div class="tool-desc">Convert special characters to HTML entities or decode entities back to readable text.</div><span class="tool-tag">Dev</span></a>
+<a class="tool-card coming-soon" href="/gradient-generator" data-name="gradient css generator linear radial design"><span class="tool-icon">&#9679;&#9675;</span><div class="tool-name">Gradient Generator</div><div class="tool-desc">Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients.</div><span class="tag-soon">Coming soon</span></a>
+<a class="tool-card coming-soon" href="/svg-optimizer" data-name="svg optimize minify clean markup"><span class="tool-icon">SVG</span><div class="tool-name">SVG Optimizer</div><div class="tool-desc">Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes.</div><span class="tag-soon">Coming soon</span></a>
+<a class="tool-card coming-soon" href="/font-pairer" data-name="font pairing google fonts preview design"><span class="tool-icon">Tt</span><div class="tool-name">Font Pairer</div><div class="tool-desc">Browse and pair Google Fonts visually. Preview heading and body combinations before you commit.</div><span class="tag-soon">Coming soon</span></a>
 </div>
 </div>
 <footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="https://desktools.dev">desktools.dev</a></footer><div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
@@ -170,11 +256,12 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </div><script>
 function toggleDropdown(){
-  document.getElementById('catBtn').classList.toggle('open');
-  document.getElementById('catMenu').classList.toggle('open');
+  const b=document.getElementById('catBtn'),m=document.getElementById('catMenu');
+  b.classList.toggle('open');m.classList.toggle('open');
 }
 document.addEventListener('click',e=>{
-  if(!document.getElementById('catDropdown').contains(e.target)){
+  const d=document.getElementById('catDropdown');
+  if(d&&!d.contains(e.target)){
     document.getElementById('catBtn').classList.remove('open');
     document.getElementById('catMenu').classList.remove('open');
   }
@@ -192,7 +279,13 @@ if(si&&nr){si.addEventListener('input',()=>{
   nr.classList.toggle('visible',!any);
 });}
 function openModal(){document.getElementById('modalOverlay').classList.add('open');}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('modalForm').style.display='';document.getElementById('modalSuccess').classList.remove('show');document.getElementById('toolIdea').value='';document.getElementById('userEmail').value='';}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('modalForm').style.display='';
+  document.getElementById('modalSuccess').classList.remove('show');
+  document.getElementById('toolIdea').value='';
+  document.getElementById('userEmail').value='';
+}
 function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 async function submitRequest(){
   const idea=document.getElementById('toolIdea').value.trim();
