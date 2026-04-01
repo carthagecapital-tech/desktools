@@ -1,4 +1,163 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "rewrites": [
+    {
+      "source": "/developers",
+      "destination": "/developers.html"
+    },
+    {
+      "source": "/freelancers",
+      "destination": "/freelancers.html"
+    },
+    {
+      "source": "/business",
+      "destination": "/business.html"
+    },
+    {
+      "source": "/security",
+      "destination": "/security.html"
+    },
+    {
+      "source": "/json-formatter",
+      "destination": "/json-formatter.html"
+    },
+    {
+      "source": "/text-transformer",
+      "destination": "/text-transformer.html"
+    },
+    {
+      "source": "/color-picker",
+      "destination": "/color-picker.html"
+    },
+    {
+      "source": "/password-generator",
+      "destination": "/password-generator.html"
+    },
+    {
+      "source": "/regex-tester",
+      "destination": "/regex-tester.html"
+    },
+    {
+      "source": "/base64-encoder",
+      "destination": "/base64-encoder.html"
+    },
+    {
+      "source": "/markdown-preview",
+      "destination": "/markdown-preview.html"
+    },
+    {
+      "source": "/url-encoder",
+      "destination": "/url-encoder.html"
+    },
+    {
+      "source": "/lorem-ipsum-generator",
+      "destination": "/lorem-ipsum-generator.html"
+    },
+    {
+      "source": "/json-to-table",
+      "destination": "/json-to-table.html"
+    },
+    {
+      "source": "/hash-generator",
+      "destination": "/hash-generator.html"
+    },
+    {
+      "source": "/diff-checker",
+      "destination": "/diff-checker.html"
+    },
+    {
+      "source": "/word-counter",
+      "destination": "/word-counter.html"
+    },
+    {
+      "source": "/uuid-generator",
+      "destination": "/uuid-generator.html"
+    },
+    {
+      "source": "/timestamp-converter",
+      "destination": "/timestamp-converter.html"
+    },
+    {
+      "source": "/css-minifier",
+      "destination": "/css-minifier.html"
+    },
+    {
+      "source": "/html-entity-encoder",
+      "destination": "/html-entity-encoder.html"
+    },
+    {
+      "source": "/qr-code-generator",
+      "destination": "/qr-code-generator.html"
+    },
+    {
+      "source": "/aspect-ratio-calculator",
+      "destination": "/aspect-ratio-calculator.html"
+    },
+    {
+      "source": "/number-base-converter",
+      "destination": "/number-base-converter.html"
+    },
+    {
+      "source": "/image-to-base64",
+      "destination": "/image-to-base64.html"
+    },
+    {
+      "source": "/gradient-generator",
+      "destination": "/gradient-generator.html"
+    },
+    {
+      "source": "/svg-optimizer",
+      "destination": "/svg-optimizer.html"
+    },
+    {
+      "source": "/font-pairer",
+      "destination": "/font-pairer.html"
+    },
+    {
+      "source": "/invoice-calculator",
+      "destination": "/invoice-calculator.html"
+    },
+    {
+      "source": "/pomodoro-timer",
+      "destination": "/pomodoro-timer.html"
+    },
+    {
+      "source": "/unit-converter",
+      "destination": "/unit-converter.html"
+    },
+    {
+      "source": "/meeting-cost",
+      "destination": "/meeting-cost.html"
+    },
+    {
+      "source": "/email-subject-tester",
+      "destination": "/email-subject-tester.html"
+    },
+    {
+      "source": "/jwt-decoder",
+      "destination": "/jwt-decoder.html"
+    },
+    {
+      "source": "/password-strength",
+      "destination": "/password-strength.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
 }
