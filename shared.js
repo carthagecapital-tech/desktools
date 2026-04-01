@@ -78,6 +78,19 @@
   var toastHTML = '<div class="toast" id="toast">Copied!</div>';
 
   /* ---------- INJECT ---------- */
+  // Inject fav CSS (for pages that don't load styles.css)
+  if (!document.querySelector('link[href="styles.css"], link[href="/styles.css"]')) {
+    var favStyle = document.createElement('style');
+    favStyle.textContent =
+      '.fav-btn{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--muted,#6b6b80);cursor:pointer;padding:4px;border-radius:6px;transition:color .2s,transform .15s;z-index:2;line-height:1}' +
+      '.fav-btn:hover{color:var(--accent,#00d4aa);transform:scale(1.15)}' +
+      '.fav-btn.active{color:#ff6b8a}.fav-btn.active:hover{color:#ff4d73}' +
+      '.fav-btn-page{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--border,rgba(255,255,255,0.07));color:var(--muted,#6b6b80);cursor:pointer;padding:6px 14px;border-radius:8px;font-family:"Outfit",sans-serif;font-size:.82rem;font-weight:500;transition:all .2s;margin-top:12px}' +
+      '.fav-btn-page:hover{border-color:#ff6b8a;color:#ff6b8a}' +
+      '.fav-btn-page.active{border-color:#ff6b8a;color:#ff6b8a}';
+    document.head.appendChild(favStyle);
+  }
+
   // Remove existing nav
   var oldNav = document.querySelector('nav');
   if (oldNav) oldNav.remove();
@@ -160,6 +173,168 @@
     document.getElementById('modalForm').style.display = 'none';
     document.getElementById('modalSuccess').classList.add('show');
   };
+
+  /* ---------- SMART BACK LINK ---------- */
+  // Use browser history instead of always going to /
+  document.querySelectorAll('.back-link').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+      // If no history (direct landing), the href="/" fallback works naturally
+    });
+  });
+
+  /* ---------- FAVORITES SYSTEM ---------- */
+  var FAVS_KEY = 'desktools_favs';
+
+  function getFavs() {
+    try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; }
+    catch (e) { return []; }
+  }
+
+  function saveFavs(favs) {
+    localStorage.setItem(FAVS_KEY, JSON.stringify(favs));
+  }
+
+  function isFav(slug) {
+    return getFavs().indexOf(slug) !== -1;
+  }
+
+  function toggleFav(slug) {
+    var favs = getFavs();
+    var idx = favs.indexOf(slug);
+    if (idx === -1) { favs.push(slug); } else { favs.splice(idx, 1); }
+    saveFavs(favs);
+    return idx === -1; // returns true if just added
+  }
+
+  // Heart SVG
+  var heartEmpty = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  var heartFull = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+  // Add fav buttons to tool cards (homepage + category pages)
+  document.querySelectorAll('.tool-card[href]').forEach(function (card) {
+    var href = card.getAttribute('href');
+    var slug = href.replace(/^\//, '');
+    if (!slug) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'fav-btn' + (isFav(slug) ? ' active' : '');
+    btn.innerHTML = isFav(slug) ? heartFull : heartEmpty;
+    btn.title = isFav(slug) ? 'Remove from favorites' : 'Add to favorites';
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var added = toggleFav(slug);
+      btn.className = 'fav-btn' + (added ? ' active' : '');
+      btn.innerHTML = added ? heartFull : heartEmpty;
+      btn.title = added ? 'Remove from favorites' : 'Add to favorites';
+      showToast(added ? 'Added to favorites' : 'Removed from favorites');
+      // Update favorites section on homepage
+      if (isHome && typeof renderFavoritesSection === 'function') renderFavoritesSection();
+    });
+    card.style.position = 'relative';
+    card.appendChild(btn);
+  });
+
+  // Add fav button to tool page header
+  var toolHeader = document.querySelector('.tool-page-header h1') || document.querySelector('.page h1');
+  if (toolHeader && !isHome) {
+    var pageSlug = location.pathname.replace(/^\//, '').replace(/\.html$/, '');
+    var catPages = ['developers', 'freelancers', 'business', 'security'];
+    if (catPages.indexOf(pageSlug) === -1 && pageSlug) {
+      var pageFavBtn = document.createElement('button');
+      pageFavBtn.className = 'fav-btn-page' + (isFav(pageSlug) ? ' active' : '');
+      pageFavBtn.innerHTML = (isFav(pageSlug) ? heartFull : heartEmpty) + '<span>' + (isFav(pageSlug) ? 'Favorited' : 'Favorite') + '</span>';
+      pageFavBtn.addEventListener('click', function () {
+        var added = toggleFav(pageSlug);
+        pageFavBtn.className = 'fav-btn-page' + (added ? ' active' : '');
+        pageFavBtn.innerHTML = (added ? heartFull : heartEmpty) + '<span>' + (added ? 'Favorited' : 'Favorite') + '</span>';
+        showToast(added ? 'Added to favorites' : 'Removed from favorites');
+      });
+      toolHeader.parentNode.insertBefore(pageFavBtn, toolHeader.nextSibling);
+    }
+  }
+
+  // Render favorites section on homepage
+  if (isHome) {
+    window.renderFavoritesSection = function () {
+      var existing = document.getElementById('fav-section');
+      if (existing) existing.remove();
+
+      var favs = getFavs();
+      if (favs.length === 0) return;
+
+      // Get tool data from existing cards
+      var allCards = document.querySelectorAll('.tool-card[href]');
+      var favCards = [];
+      var seen = {};
+      allCards.forEach(function (card) {
+        var slug = card.getAttribute('href').replace(/^\//, '');
+        if (favs.indexOf(slug) !== -1 && !seen[slug]) {
+          seen[slug] = true;
+          favCards.push(card.cloneNode(true));
+        }
+      });
+
+      if (favCards.length === 0) return;
+
+      var section = document.createElement('div');
+      section.className = 'section';
+      section.id = 'fav-section';
+      section.innerHTML =
+        '<div class="section-header">' +
+        '  <div class="section-left">' +
+        '    <div class="section-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>' +
+        '    <div><div class="section-title">Your Favorites</div><div class="section-desc">Tools you use all the time</div></div>' +
+        '  </div>' +
+        '</div>';
+
+      var grid = document.createElement('div');
+      grid.className = 'tool-grid';
+      favCards.forEach(function (card) {
+        // Re-attach fav button event listeners on cloned cards
+        var slug = card.getAttribute('href').replace(/^\//, '');
+        var oldBtn = card.querySelector('.fav-btn');
+        if (oldBtn) oldBtn.remove();
+
+        var btn = document.createElement('button');
+        btn.className = 'fav-btn active';
+        btn.innerHTML = heartFull;
+        btn.title = 'Remove from favorites';
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFav(slug);
+          showToast('Removed from favorites');
+          renderFavoritesSection();
+          // Also update the card in the main grid
+          document.querySelectorAll('.tool-card[href="/' + slug + '"] .fav-btn').forEach(function (b) {
+            b.className = 'fav-btn';
+            b.innerHTML = heartEmpty;
+            b.title = 'Add to favorites';
+          });
+        });
+        card.style.position = 'relative';
+        card.appendChild(btn);
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+
+      var main = document.querySelector('.main');
+      var noResults = document.getElementById('noResults');
+      if (main && noResults) {
+        main.insertBefore(section, noResults.nextSibling);
+      } else if (main) {
+        main.insertBefore(section, main.firstChild);
+      }
+    };
+
+    renderFavoritesSection();
+  }
 
   /* ---------- TOAST / COPY HELPERS ---------- */
   window.showToast = function (msg) {
