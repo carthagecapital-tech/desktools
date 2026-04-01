@@ -43,6 +43,8 @@
         </div>
     </div>
 </div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What does CSS minification do?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>CSS minification</strong> reduces file size by removing characters that browsers don't need: whitespace, line breaks, comments, and unnecessary semicolons. A typical CSS file can shrink by <strong>20-40%</strong> after minification, which means faster page loads and lower bandwidth costs.</p><p>Minification is safe because CSS syntax doesn't depend on whitespace (unlike Python). The browser parses <code>body{margin:0;padding:0}</code> identically to a nicely indented version. However, minification is a one-way operation for readability — always keep your source files formatted and minify only for production.</p><p>For production sites, minification is typically part of a build pipeline (Webpack, Vite, PostCSS). But for quick one-off minification — a snippet for an email template, an inline style block, or a quick size check — this browser-based tool is faster than setting up a build tool.</p></div></div></div>
 <script src="/shared.js"></script>
 <script>
     function minifyCSS() {

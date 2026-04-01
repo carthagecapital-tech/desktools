@@ -47,6 +47,8 @@
         <span style="color:var(--text-secondary);">&amp;amp; → &amp; &nbsp; &amp;lt; → &lt; &nbsp; &amp;gt; → &gt; &nbsp; &amp;quot; → " &nbsp; &amp;apos; → ' &nbsp; &amp;nbsp; → (space) &nbsp; &amp;copy; → © &nbsp; &amp;mdash; → —</span>
     </div>
 </div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What are HTML entities?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>HTML entities</strong> are special codes that represent characters which have reserved meaning in HTML. The angle brackets <code>&lt;</code> and <code>&gt;</code> define HTML tags, so to display them as literal text you must encode them as <code>&amp;lt;</code> and <code>&amp;gt;</code>. The ampersand <code>&amp;</code> itself becomes <code>&amp;amp;</code>.</p><p>Beyond reserved characters, entities are also used for characters not available on a standard keyboard — like <code>&amp;copy;</code> (©), <code>&amp;mdash;</code> (—), <code>&amp;euro;</code> (€), and Unicode characters like <code>&amp;#9829;</code> (♥). Named entities are easier to read; numeric entities (<code>&amp;#60;</code>) work for any Unicode code point.</p><p>Proper encoding prevents <strong>XSS (Cross-Site Scripting) attacks</strong> where malicious <code>&lt;script&gt;</code> tags are injected into user-generated content. Any user input displayed in HTML should always be entity-encoded first. This tool handles both encoding and decoding for quick reference and testing.</p></div></div></div>
 <script src="/shared.js"></script>
 <script>
     function doHtmlEntity(mode) {
