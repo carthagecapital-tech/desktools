@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator — Free Online QR Code Maker | DeskTools</title>
+    <meta name="description" content="Free online QR code generator. Create QR codes for URLs, text, email, WiFi, and more. Download as PNG. No signup, no tracking.">
+    <meta name="keywords" content="QR code generator, QR code maker, create QR code, free QR code, QR code online, generate QR code">
+    <meta property="og:title" content="QR Code Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/qr-code-generator">
+    <link rel="canonical" href="https://desktools.dev/qr-code-generator">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>QR Code Generator</h1>
+        <p class="desc">Generate QR codes for URLs, text, email, WiFi, and more. Download as PNG.</p>
+    </div>
+    <div class="workspace">
+        <div class="color-workspace">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;">
+                <div>
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Content</label>
+                        <textarea id="qr-input" placeholder="Enter URL, text, or any content..." oninput="generateQR()" style="width:100%;min-height:100px;padding:14px 16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.9rem;resize:vertical;">https://desktools.dev</textarea>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Size</label>
+                            <select id="qr-size" onchange="generateQR()" style="width:100%;padding:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+                                <option value="128">128 × 128</option>
+                                <option value="256" selected>256 × 256</option>
+                                <option value="512">512 × 512</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Error Correction</label>
+                            <select id="qr-ec" onchange="generateQR()" style="width:100%;padding:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+                                <option value="L">Low (7%)</option>
+                                <option value="M" selected>Medium (15%)</option>
+                                <option value="Q">Quartile (25%)</option>
+                                <option value="H">High (30%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Foreground</label>
+                            <div style="display:flex;gap:8px;">
+                                <input type="color" id="qr-fg" value="#000000" onchange="generateQR()" style="width:44px;height:38px;border:1px solid var(--border);border-radius:6px;background:var(--bg-surface);cursor:pointer;padding:2px;">
+                                <input type="text" id="qr-fg-hex" value="#000000" onchange="document.getElementById('qr-fg').value=this.value;generateQR()" style="flex:1;padding:8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Background</label>
+                            <div style="display:flex;gap:8px;">
+                                <input type="color" id="qr-bg" value="#ffffff" onchange="generateQR()" style="width:44px;height:38px;border:1px solid var(--border);border-radius:6px;background:var(--bg-surface);cursor:pointer;padding:2px;">
+                                <input type="text" id="qr-bg-hex" value="#ffffff" onchange="document.getElementById('qr-bg').value=this.value;generateQR()" style="flex:1;padding:8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <div id="qr-code" style="background:#fff;padding:16px;border-radius:12px;display:inline-block;margin-bottom:16px;"></div>
+                    <div><button class="copy-btn" onclick="downloadQR()" style="width:100%;padding:12px;border-color:var(--accent);color:var(--accent);">Download PNG</button></div>
+                </div>
+            </div>
+            <div class="palette-section">
+                <h4>Quick Templates</h4>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="copy-btn" onclick="setQrTemplate('url')">URL</button>
+                    <button class="copy-btn" onclick="setQrTemplate('email')">Email</button>
+                    <button class="copy-btn" onclick="setQrTemplate('tel')">Phone</button>
+                    <button class="copy-btn" onclick="setQrTemplate('wifi')">WiFi</button>
+                    <button class="copy-btn" onclick="setQrTemplate('sms')">SMS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    let qrInstance = null;
+    function generateQR() {
+        const text = document.getElementById('qr-input').value;
+        if (!text) return;
+        const size = parseInt(document.getElementById('qr-size').value);
+        const ec = document.getElementById('qr-ec').value;
+        const fg = document.getElementById('qr-fg').value;
+        const bg = document.getElementById('qr-bg').value;
+        document.getElementById('qr-fg-hex').value = fg;
+        document.getElementById('qr-bg-hex').value = bg;
+        const container = document.getElementById('qr-code');
+        container.innerHTML = '';
+        const ecLevel = {L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H};
+        qrInstance = new QRCode(container, {text: text, width: size, height: size, colorDark: fg, colorLight: bg, correctLevel: ecLevel[ec]});
+    }
+    function downloadQR() {
+        const canvas = document.querySelector('#qr-code canvas');
+        if (!canvas) return;
+        const link = document.createElement('a');
+        link.download = 'qrcode.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('QR code downloaded');
+    }
+    function setQrTemplate(type) {
+        const input = document.getElementById('qr-input');
+        switch(type) {
+            case 'url': input.value = 'https://'; break;
+            case 'email': input.value = 'mailto:hello@example.com?subject=Hello&body=Hi there'; break;
+            case 'tel': input.value = 'tel:+1234567890'; break;
+            case 'wifi': input.value = 'WIFI:T:WPA;S:NetworkName;P:Password123;;'; break;
+            case 'sms': input.value = 'sms:+1234567890?body=Hello'; break;
+        }
+        generateQR();
+    }
+    generateQR();
+</script>
+</body>
+</html>

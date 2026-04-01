@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Email Subject Line Tester — DeskTools</title>
+<meta name="description" content="Score your email subject lines for open rate potential. Get instant tips to improve clarity and impact."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.input-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.input-card label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:.6rem}
+.input-row{display:flex;gap:.6rem}
+.input-row input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'Outfit',sans-serif;font-size:1rem;padding:.65rem .9rem;outline:none;transition:border-color .2s}
+.input-row input:focus{border-color:var(--accent)}
+.char-count{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);display:flex;justify-content:space-between;margin-top:.5rem}
+.char-count .warn{color:#ffa94d}.char-count .ok{color:var(--accent)}
+.preview-inbox{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-top:1rem}
+.inbox-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.5rem}
+.inbox-row{display:flex;align-items:center;gap:.75rem;padding:.6rem;border-radius:7px;background:var(--bg2);border:1px solid var(--border)}
+.inbox-from{font-weight:600;font-size:.88rem;min-width:120px;color:var(--text)}
+.inbox-subject{font-size:.88rem;color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inbox-subject .subj-text{color:var(--text)}
+.inbox-time{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.score-ring{display:flex;align-items:center;gap:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.ring-wrap{position:relative;width:90px;height:90px;flex-shrink:0}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-bg-c{fill:none;stroke:var(--bg3);stroke-width:8}
+.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .5s,stroke .4s}
+.ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-num{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700}
+.ring-sub{font-size:.65rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.score-right h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
+.score-right p{font-size:.85rem;color:var(--muted);line-height:1.5}
+.feedback{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem}
+.feedback-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.85rem}
+.fb-item{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;font-size:.88rem;line-height:1.4}
+.fb-icon{font-size:.9rem;flex-shrink:0;margin-top:.05rem}
+.fb-txt{color:var(--muted)}.fb-txt b{color:var(--text);font-weight:500}
+.examples{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.examples-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.75rem}
+.ex-item{display:flex;align-items:center;justify-content:space-between;padding:.5rem .6rem;border-radius:7px;cursor:pointer;transition:background .15s;font-size:.88rem}
+.ex-item:hover{background:var(--bg3)}
+.ex-score{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.1rem .4rem;border-radius:4px}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>Email Subject Tester</h1>
+  <p class="sub">Score your subject lines for open rate potential. Get instant, actionable feedback.</p>
+
+  <div class="input-card">
+    <label>Subject Line</label>
+    <div class="input-row">
+      <input type="text" id="subjInput" placeholder="e.g. Your invoice is ready — action required" oninput="analyse()" maxlength="150"/>
+    </div>
+    <div class="char-count">
+      <span id="charCount">0 characters</span>
+      <span id="charHint"></span>
+    </div>
+    <div class="preview-inbox" id="inboxPreview" style="display:none">
+      <div class="inbox-label">Inbox preview</div>
+      <div class="inbox-row">
+        <div class="inbox-from">Your Name</div>
+        <div class="inbox-subject"><span class="subj-text" id="subjPreview"></span></div>
+        <div class="inbox-time">Just now</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-ring" id="scoreCard" style="display:none">
+    <div class="ring-wrap">
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        <circle class="ring-bg-c" cx="45" cy="45" r="37"/>
+        <circle class="ring-fill" id="ringFill" cx="45" cy="45" r="37"/>
+      </svg>
+      <div class="ring-label"><span class="ring-num" id="ringNum">0</span><span class="ring-sub">Score</span></div>
+    </div>
+    <div class="score-right">
+      <h3 id="scoreLabel">—</h3>
+      <p id="scoreDesc">—</p>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedbackCard" style="display:none">
+    <div class="feedback-title">Feedback</div>
+    <div id="feedbackList"></div>
+  </div>
+
+  <div class="examples">
+    <div class="examples-title">Try these examples</div>
+    <div id="examplesList"></div>
+  </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+const CIRC=2*Math.PI*37;
+const EXAMPLES=[
+  'Your invoice #1042 is ready',
+  'Quick question about our call',
+  '🚀 Launching in 24 hours — are you in?',
+  'Important update to your account',
+  'RE: Project proposal',
+  'You won\'t believe what happened',
+  'FREE FREE FREE — Click here NOW!!!',
+  '3 tips to ship faster this week',
+];
+const SPAM_WORDS=['free','click here','buy now','limited time','act now','urgent','winner','congratulations','cash','prize','guaranteed','100%','!!!'];
+const POWER_WORDS=['proven','exclusive','secret','instantly','new','discover','save','results','easy'];
+function analyse(){
+  const s=document.getElementById('subjInput').value;
+  const len=s.length;
+  document.getElementById('charCount').textContent=len+' characters';
+  const hint=document.getElementById('charHint');
+  if(!s){hint.textContent='';document.getElementById('scoreCard').style.display='none';document.getElementById('feedbackCard').style.display='none';document.getElementById('inboxPreview').style.display='none';return;}
+  hint.className=len<=50?'ok':len<=70?'warn':'';
+  hint.textContent=len<=50?'Ideal length':len<=70?'A bit long':'Too long for most clients';
+  document.getElementById('inboxPreview').style.display='block';
+  document.getElementById('subjPreview').textContent=s;
+  const lower=s.toLowerCase();
+  const words=s.trim().split(/\s+/);
+  const spamFound=SPAM_WORDS.filter(w=>lower.includes(w));
+  const powerFound=POWER_WORDS.filter(w=>lower.includes(w));
+  const hasQuestion=s.includes('?');
+  const hasNumber=/\d/.test(s);
+  const allCaps=s===s.toUpperCase()&&/[A-Z]/.test(s);
+  const excessExcl=(s.match(/!/g)||[]).length>1;
+  const tooShort=len<15;
+  const tooLong=len>70;
+  const startsLower=/^[a-z]/.test(s);
+  let score=50;
+  const feedback=[];
+  if(spamFound.length>0){score-=spamFound.length*8;feedback.push({icon:'🚫',txt:`Contains spam-trigger ${spamFound.length===1?'word':'words'}: <b>${spamFound.join(', ')}</b>. Avoid these.`});}
+  else feedback.push({icon:'✅',txt:'No common spam trigger words detected.'});
+  if(allCaps){score-=15;feedback.push({icon:'⚠️',txt:'<b>ALL CAPS</b> looks like spam and reduces trust.'});}
+  if(excessExcl){score-=10;feedback.push({icon:'⚠️',txt:'Multiple <b>exclamation marks</b> feel aggressive. Use at most one.'});}
+  if(len<=50&&len>=15){score+=15;feedback.push({icon:'✅',txt:`Good length (${len} chars). Most clients show 40–60 characters.`});}
+  else if(tooShort){score-=5;feedback.push({icon:'💡',txt:'Subject is <b>very short</b>. Add more context to improve clarity.'});}
+  else if(tooLong){score-=10;feedback.push({icon:'⚠️',txt:`At <b>${len} chars</b>, the subject may be truncated on mobile. Aim for under 50.`});}
+  if(hasNumber){score+=5;feedback.push({icon:'✅',txt:'Contains a <b>number</b> — specific details improve open rates.'});}
+  if(hasQuestion){score+=5;feedback.push({icon:'✅',txt:'Questions <b>invite curiosity</b> and can boost engagement.'});}
+  if(powerFound.length>0){score+=powerFound.length*3;feedback.push({icon:'✅',txt:`Power words detected: <b>${powerFound.join(', ')}</b>.`});}
+  if(startsLower){score+=3;feedback.push({icon:'💡',txt:'Starting lowercase can feel <b>more personal</b> and conversational.'});}
+  score=Math.max(0,Math.min(100,score));
+  const levels=[
+    {t:30,l:'Likely to be ignored',d:'High spam signals or very weak structure.',c:'#ff6b6b'},
+    {t:50,l:'Below average',d:'Needs improvement to stand out in a crowded inbox.',c:'#ffa94d'},
+    {t:70,l:'Average',d:'Decent, but there\'s room to sharpen it.',c:'#ffd43b'},
+    {t:85,l:'Good',d:'Well-structured and likely to perform above average.',c:'#69db7c'},
+    {t:101,l:'Excellent',d:'Strong, specific, and compelling. Great job.',c:'#00d4aa'},
+  ];
+  const lv=levels.find(l=>score<l.t);
+  document.getElementById('scoreCard').style.display='flex';
+  document.getElementById('feedbackCard').style.display='block';
+  const fill=document.getElementById('ringFill');
+  fill.style.strokeDasharray=CIRC;
+  fill.style.strokeDashoffset=CIRC*(1-score/100);
+  fill.style.stroke=lv.c;
+  document.getElementById('ringNum').textContent=score;
+  document.getElementById('ringNum').style.color=lv.c;
+  document.getElementById('scoreLabel').textContent=lv.l;
+  document.getElementById('scoreDesc').textContent=lv.d;
+  const fl=document.getElementById('feedbackList'); fl.innerHTML='';
+  feedback.forEach(f=>{
+    const d=document.createElement('div'); d.className='fb-item';
+    d.innerHTML=`<span class="fb-icon">${f.icon}</span><span class="fb-txt">${f.txt}</span>`;
+    fl.appendChild(d);
+  });
+}
+function buildExamples(){
+  const el=document.getElementById('examplesList'); el.innerHTML='';
+  EXAMPLES.forEach(ex=>{
+    const d=document.createElement('div'); d.className='ex-item';
+    const spamHit=SPAM_WORDS.filter(w=>ex.toLowerCase().includes(w)).length;
+    const col=spamHit>0?'#ff6b6b':ex.length<=50?'#00d4aa':'#ffa94d';
+    d.innerHTML=`<span>${ex}</span>`;
+    d.onclick=()=>{document.getElementById('subjInput').value=ex;analyse();};
+    el.appendChild(d);
+  });
+}
+buildExamples();
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester — Free Online Regular Expression Tester | DeskTools</title>
+    <meta name="description" content="Free online regex tester with live matching, capture groups, and match highlighting. Test regular expressions against any text instantly.">
+    <meta name="keywords" content="regex tester, regular expression tester, regex validator, regex online, regex matcher, regex debugger">
+    <meta property="og:title" content="Regex Tester — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/regex-tester">
+    <link rel="canonical" href="https://desktools.dev/regex-tester">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Regex Tester</h1>
+        <p class="desc">Write regex patterns and see matches highlighted in real time.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group" style="flex:1;gap:4px;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--text-muted);">/</span>
+                <input type="text" id="regex-pattern" placeholder="your pattern here" oninput="testRegex()" style="flex:1;padding:8px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.9rem;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--text-muted);">/</span>
+                <input type="text" id="regex-flags" value="gmi" oninput="testRegex()" style="width:50px;padding:8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.85rem;text-align:center;">
+            </div>
+            <div class="toolbar-group" style="margin-left:12px;"><span id="regex-match-count" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);"></span></div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Test String</span><textarea class="tool-input" id="regex-input" placeholder="Enter text to test..." oninput="testRegex()">The quick brown fox jumps over the lazy dog.
+Contact us at hello@desktools.dev or support@example.com
+Phone: 555-123-4567 or (555) 987-6543
+Dates: 2026-03-29, 03/29/2026, March 29 2026
+IPs: 192.168.1.1, 10.0.0.1, 255.255.255.0</textarea></div>
+            <div><span class="pane-label">Matches</span><div id="regex-output" style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:1.8;min-height:300px;overflow:auto;color:var(--text-secondary);"></div></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);display:flex;gap:20px;flex-wrap:wrap;">
+        <span>Common: </span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="setRegex('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')">Email</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="setRegex('\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b')">IP Address</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="setRegex('\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}')">Phone</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="setRegex('\\d{4}-\\d{2}-\\d{2}')">Date (YYYY-MM-DD)</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="setRegex('https?://[^\\s]+')">URL</span>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    function testRegex(){const pattern=document.getElementById('regex-pattern').value;const flags=document.getElementById('regex-flags').value;const input=document.getElementById('regex-input').value;const output=document.getElementById('regex-output');const countEl=document.getElementById('regex-match-count');if(!pattern){output.innerHTML='<span style="color:var(--text-muted)">Enter a pattern to see matches</span>';countEl.textContent='';return;}try{const regex=new RegExp(pattern,flags);let matches=[];let match;if(flags.includes('g')){while((match=regex.exec(input))!==null){matches.push({value:match[0],index:match.index,groups:match.slice(1)});if(match.index===regex.lastIndex)regex.lastIndex++;}}else{match=regex.exec(input);if(match)matches.push({value:match[0],index:match.index,groups:match.slice(1)});}countEl.textContent=matches.length+' match'+(matches.length!==1?'es':'');countEl.style.color=matches.length>0?'var(--accent)':'var(--text-muted)';if(matches.length===0){output.innerHTML='<span style="color:var(--text-muted)">No matches found</span>';return;}const escaped=(s)=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');let html='<div style="margin-bottom:16px;"><div style="white-space:pre-wrap;line-height:1.8;">';let lastIdx=0;let sorted=[...matches].sort((a,b)=>a.index-b.index);for(const m of sorted){html+=escaped(input.slice(lastIdx,m.index));html+='<span style="background:rgba(0,212,170,0.25);color:var(--accent);border-radius:2px;padding:0 2px;">'+escaped(m.value)+'</span>';lastIdx=m.index+m.value.length;}html+=escaped(input.slice(lastIdx));html+='</div></div><div style="border-top:1px solid var(--border);padding-top:12px;margin-top:12px;">';matches.forEach((m,i)=>{html+='<div style="margin-bottom:8px;"><span style="color:var(--text-muted);">#'+(i+1)+'</span> <span style="color:var(--accent);">"'+escaped(m.value)+'"</span> <span style="color:var(--text-muted);font-size:0.7rem;">at index '+m.index+'</span>';if(m.groups.length>0)m.groups.forEach((g,gi)=>{html+='<br><span style="color:var(--text-muted);margin-left:20px;font-size:0.75rem;">Group '+(gi+1)+': "'+escaped(g||'')+'"</span>';});html+='</div>';});html+='</div>';output.innerHTML=html;}catch(e){output.innerHTML='<span style="color:#ff6b6b;">Invalid regex: '+e.message+'</span>';countEl.textContent='Error';countEl.style.color='#ff6b6b';}}
+    function setRegex(pattern){document.getElementById('regex-pattern').value=pattern;testRegex();}
+</script>
+</body>
+</html>

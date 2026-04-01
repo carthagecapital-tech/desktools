@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diff Checker — Compare Text Online Free | DeskTools</title>
+    <meta name="description" content="Free online diff checker. Compare two texts side by side and see differences highlighted. Find additions, deletions, and changes instantly.">
+    <meta name="keywords" content="diff checker, text compare, compare text online, diff tool, text diff, find differences, compare two texts">
+    <meta property="og:title" content="Diff Checker — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/diff-checker">
+    <link rel="canonical" href="https://desktools.dev/diff-checker">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content" style="max-width:1100px;">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Diff Checker</h1>
+        <p class="desc">Compare two texts side by side — additions, deletions, and changes highlighted.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" onclick="runDiff()">Compare</button>
+                <button onclick="clearDiff()">Clear</button>
+                <button onclick="swapDiff()">⇄ Swap</button>
+            </div>
+            <div class="toolbar-group">
+                <span id="diff-status" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);"></span>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div>
+                <span class="pane-label">Original</span>
+                <textarea class="tool-input" id="diff-left" placeholder="Paste original text here..." style="min-height:250px;"></textarea>
+            </div>
+            <div>
+                <span class="pane-label">Modified</span>
+                <textarea class="tool-input" id="diff-right" placeholder="Paste modified text here..." style="min-height:250px;"></textarea>
+            </div>
+        </div>
+        <div id="diff-output" style="border-top:1px solid var(--border);padding:20px;min-height:100px;display:none;">
+        </div>
+    </div>
+</div>
+<style>
+    .diff-line { font-family:'JetBrains Mono',monospace; font-size:0.8rem; padding:4px 16px; line-height:1.7; white-space:pre-wrap; word-break:break-all; }
+    .diff-add { background:rgba(0,212,170,0.1); color:var(--accent); border-left:3px solid var(--accent); }
+    .diff-remove { background:rgba(255,107,107,0.1); color:#ff6b6b; border-left:3px solid #ff6b6b; text-decoration:line-through; }
+    .diff-same { color:var(--text-muted); border-left:3px solid transparent; }
+    .diff-header { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); padding:12px 16px; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:1px; display:flex; gap:20px; }
+    .diff-stat { display:inline-flex; align-items:center; gap:4px; }
+    .diff-stat-add { color:var(--accent); }
+    .diff-stat-remove { color:#ff6b6b; }
+</style>
+<script src="/shared.js"></script>
+<script>
+    function runDiff() {
+        const left = document.getElementById('diff-left').value;
+        const right = document.getElementById('diff-right').value;
+        const output = document.getElementById('diff-output');
+        const status = document.getElementById('diff-status');
+        output.style.display = 'block';
+
+        if (!left && !right) { output.innerHTML = '<span style="color:var(--text-muted);font-family:JetBrains Mono,monospace;font-size:0.85rem;">Paste text in both panes and click Compare</span>'; return; }
+
+        const leftLines = left.split('\n');
+        const rightLines = right.split('\n');
+        
+        // Simple LCS-based diff
+        const lcs = buildLCS(leftLines, rightLines);
+        const result = buildDiff(leftLines, rightLines, lcs);
+        
+        let adds = 0, removes = 0, same = 0;
+        let html = '';
+        
+        result.forEach(item => {
+            const escaped = item.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') || ' ';
+            if (item.type === 'add') { adds++; html += '<div class="diff-line diff-add">+ ' + escaped + '</div>'; }
+            else if (item.type === 'remove') { removes++; html += '<div class="diff-line diff-remove">- ' + escaped + '</div>'; }
+            else { same++; html += '<div class="diff-line diff-same">  ' + escaped + '</div>'; }
+        });
+
+        const header = '<div class="diff-header"><span class="diff-stat diff-stat-add">+ ' + adds + ' added</span><span class="diff-stat diff-stat-remove">- ' + removes + ' removed</span><span class="diff-stat">' + same + ' unchanged</span></div>';
+        output.innerHTML = header + html;
+
+        if (adds === 0 && removes === 0) {
+            status.textContent = '✓ Texts are identical';
+            status.style.color = 'var(--accent)';
+        } else {
+            status.textContent = (adds + removes) + ' difference' + (adds + removes !== 1 ? 's' : '');
+            status.style.color = '#ffd93d';
+        }
+    }
+
+    function buildLCS(a, b) {
+        const m = a.length, n = b.length;
+        const dp = Array.from({length: m + 1}, () => Array(n + 1).fill(0));
+        for (let i = 1; i <= m; i++)
+            for (let j = 1; j <= n; j++)
+                dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+        return dp;
+    }
+
+    function buildDiff(a, b, dp) {
+        const result = [];
+        let i = a.length, j = b.length;
+        while (i > 0 || j > 0) {
+            if (i > 0 && j > 0 && a[i-1] === b[j-1]) {
+                result.unshift({type: 'same', text: a[i-1]});
+                i--; j--;
+            } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+                result.unshift({type: 'add', text: b[j-1]});
+                j--;
+            } else {
+                result.unshift({type: 'remove', text: a[i-1]});
+                i--;
+            }
+        }
+        return result;
+    }
+
+    function clearDiff() {
+        document.getElementById('diff-left').value = '';
+        document.getElementById('diff-right').value = '';
+        document.getElementById('diff-output').style.display = 'none';
+        document.getElementById('diff-output').innerHTML = '';
+        document.getElementById('diff-status').textContent = '';
+    }
+
+    function swapDiff() {
+        const l = document.getElementById('diff-left');
+        const r = document.getElementById('diff-right');
+        const t = l.value; l.value = r.value; r.value = t;
+    }
+</script>
+</body>
+</html>

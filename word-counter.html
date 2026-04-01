@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter — Free Online Word & Character Counter | DeskTools</title>
+    <meta name="description" content="Free online word counter. Count words, characters, sentences, paragraphs, and estimate reading time. Real-time as you type. No signup required.">
+    <meta name="keywords" content="word counter, character counter, word count online, letter counter, reading time calculator, paragraph counter">
+    <meta property="og:title" content="Word Counter — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/word-counter">
+    <link rel="canonical" href="https://desktools.dev/word-counter">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Word Counter</h1>
+        <p class="desc">Count words, characters, sentences, paragraphs, and estimate reading time — live as you type.</p>
+    </div>
+    <div class="workspace">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border);">
+            <div style="background:var(--bg-card);padding:20px;text-align:center;">
+                <div id="wc-words" style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--accent);">0</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Words</div>
+            </div>
+            <div style="background:var(--bg-card);padding:20px;text-align:center;">
+                <div id="wc-chars" style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--text-primary);">0</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Characters</div>
+            </div>
+            <div style="background:var(--bg-card);padding:20px;text-align:center;">
+                <div id="wc-sentences" style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--text-primary);">0</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Sentences</div>
+            </div>
+            <div style="background:var(--bg-card);padding:20px;text-align:center;">
+                <div id="wc-paragraphs" style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--text-primary);">0</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Paragraphs</div>
+            </div>
+            <div style="background:var(--bg-card);padding:20px;text-align:center;">
+                <div id="wc-reading" style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--text-primary);">0s</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Read Time</div>
+            </div>
+        </div>
+        <textarea class="tool-input" id="wc-input" placeholder="Start typing or paste your text here..." oninput="countWords()" style="min-height:400px;"></textarea>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);display:flex;gap:20px;flex-wrap:wrap;">
+        <span>Chars (no spaces): <span id="wc-chars-ns">0</span></span>
+        <span>Lines: <span id="wc-lines">0</span></span>
+        <span>Avg word length: <span id="wc-avg">0</span></span>
+        <span>Speaking time: <span id="wc-speaking">0s</span></span>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    function countWords() {
+        const text = document.getElementById('wc-input').value;
+        const trimmed = text.trim();
+        
+        // Words
+        const words = trimmed ? trimmed.split(/\s+/).length : 0;
+        document.getElementById('wc-words').textContent = words.toLocaleString();
+        
+        // Characters
+        document.getElementById('wc-chars').textContent = text.length.toLocaleString();
+        document.getElementById('wc-chars-ns').textContent = text.replace(/\s/g, '').length.toLocaleString();
+        
+        // Sentences
+        const sentences = trimmed ? (trimmed.match(/[.!?]+\s|[.!?]+$/g) || []).length : 0;
+        document.getElementById('wc-sentences').textContent = sentences;
+        
+        // Paragraphs
+        const paragraphs = trimmed ? trimmed.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
+        document.getElementById('wc-paragraphs').textContent = paragraphs || (trimmed ? 1 : 0);
+        
+        // Lines
+        document.getElementById('wc-lines').textContent = text ? text.split('\n').length : 0;
+        
+        // Reading time (avg 238 wpm)
+        const readMin = words / 238;
+        if (readMin < 1) document.getElementById('wc-reading').textContent = Math.round(readMin * 60) + 's';
+        else document.getElementById('wc-reading').textContent = Math.round(readMin) + 'm';
+        
+        // Speaking time (avg 150 wpm)
+        const speakMin = words / 150;
+        if (speakMin < 1) document.getElementById('wc-speaking').textContent = Math.round(speakMin * 60) + 's';
+        else document.getElementById('wc-speaking').textContent = Math.round(speakMin) + 'm';
+        
+        // Avg word length
+        if (words > 0) {
+            const totalChars = trimmed.split(/\s+/).reduce((sum, w) => sum + w.length, 0);
+            document.getElementById('wc-avg').textContent = (totalChars / words).toFixed(1);
+        } else {
+            document.getElementById('wc-avg').textContent = '0';
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder & Decoder — Free Online Tool | DeskTools</title>
+    <meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 or decode Base64 back to text. Supports UTF-8 and URL-safe variants.">
+    <meta name="keywords" content="base64 encoder, base64 decoder, base64 converter, encode base64, decode base64, base64 online">
+    <meta property="og:title" content="Base64 Encoder & Decoder — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/base64-encoder">
+    <link rel="canonical" href="https://desktools.dev/base64-encoder">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Base64 Encode / Decode</h1>
+        <p class="desc">Encode text to Base64 or decode Base64 back to plain text.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="b64-encode-btn" onclick="doBase64('encode')">Encode →</button>
+                <button id="b64-decode-btn" onclick="doBase64('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="b64-urlsafe" style="accent-color:var(--accent);"> URL-safe</label>
+                <button onclick="copyOutput('b64-output')">Copy Output</button>
+                <button onclick="swapBase64()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="b64-input" placeholder="Enter text to encode or Base64 to decode..."></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="b64-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);display:flex;gap:24px;">
+        <span>Input: <span id="b64-input-size">0</span> bytes</span>
+        <span>Output: <span id="b64-output-size">0</span> bytes</span>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    function doBase64(mode){const input=document.getElementById('b64-input').value;const output=document.getElementById('b64-output');const urlSafe=document.getElementById('b64-urlsafe').checked;try{let result;if(mode==='encode'){result=btoa(unescape(encodeURIComponent(input)));if(urlSafe)result=result.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');document.getElementById('b64-encode-btn').classList.add('primary');document.getElementById('b64-decode-btn').classList.remove('primary');}else{let b64=input;if(urlSafe)b64=b64.replace(/-/g,'+').replace(/_/g,'/');while(b64.length%4)b64+='=';result=decodeURIComponent(escape(atob(b64)));document.getElementById('b64-decode-btn').classList.add('primary');document.getElementById('b64-encode-btn').classList.remove('primary');}output.value=result;document.getElementById('b64-input-size').textContent=new Blob([input]).size;document.getElementById('b64-output-size').textContent=new Blob([result]).size;}catch(e){output.value='Error: '+e.message;}}
+    function swapBase64(){const i=document.getElementById('b64-input');const o=document.getElementById('b64-output');const t=i.value;i.value=o.value;o.value=t;}
+</script>
+</body>
+</html>

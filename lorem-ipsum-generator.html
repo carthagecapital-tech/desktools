@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator — Free Placeholder Text | DeskTools</title>
+    <meta name="description" content="Free lorem ipsum generator. Generate placeholder text by paragraphs, sentences, or words. Copy with one click. Perfect for mockups and prototypes.">
+    <meta name="keywords" content="lorem ipsum generator, placeholder text, dummy text, lorem ipsum, filler text, lipsum generator">
+    <meta property="og:title" content="Lorem Ipsum Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/lorem-ipsum-generator">
+    <link rel="canonical" href="https://desktools.dev/lorem-ipsum-generator">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Lorem Ipsum Generator</h1>
+        <p class="desc">Generate placeholder text — paragraphs, sentences, or words.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" onclick="generateLorem()">Generate</button>
+                <button onclick="copyOutput('lorem-output')">Copy</button>
+            </div>
+            <div class="toolbar-group" style="gap:12px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Count:</label>
+                    <input type="number" id="lorem-count" value="3" min="1" max="50" style="width:56px;padding:6px 8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;">
+                </div>
+                <div class="toolbar-group transform-buttons">
+                    <button class="active" id="lorem-para" onclick="setLoremMode('paragraphs',this)">Paragraphs</button>
+                    <button id="lorem-sent" onclick="setLoremMode('sentences',this)">Sentences</button>
+                    <button id="lorem-word" onclick="setLoremMode('words',this)">Words</button>
+                </div>
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="lorem-start" checked style="accent-color:var(--accent);"> Start with "Lorem ipsum..."</label>
+            </div>
+        </div>
+        <div style="padding:0;"><textarea class="tool-input" id="lorem-output" readonly style="min-height:400px;line-height:1.8;color:var(--text-primary);"></textarea></div>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    const LOREM_WORDS='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem'.split(' ');
+    let loremMode='paragraphs';
+    function setLoremMode(mode,btn){loremMode=mode;document.querySelectorAll('#lorem-para,#lorem-sent,#lorem-word').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+    function getLoremSentence(startWithLorem,idx){const len=8+Math.floor(Math.random()*12);let words=[];for(let i=0;i<len;i++)words.push(LOREM_WORDS[Math.floor(Math.random()*LOREM_WORDS.length)]);if(startWithLorem&&idx===0){words[0]='lorem';words[1]='ipsum';words[2]='dolor';words[3]='sit';words[4]='amet';}words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);return words.join(' ')+'.';}
+    function getLoremParagraph(startWithLorem,idx){const count=4+Math.floor(Math.random()*4);let sentences=[];for(let i=0;i<count;i++)sentences.push(getLoremSentence(startWithLorem&&idx===0,i));return sentences.join(' ');}
+    function generateLorem(){const count=parseInt(document.getElementById('lorem-count').value)||3;const startWith=document.getElementById('lorem-start').checked;const output=document.getElementById('lorem-output');let result='';if(loremMode==='paragraphs'){let p=[];for(let i=0;i<count;i++)p.push(getLoremParagraph(startWith,i));result=p.join('\n\n');}else if(loremMode==='sentences'){let s=[];for(let i=0;i<count;i++)s.push(getLoremSentence(startWith,i));result=s.join(' ');}else{let w=[];if(startWith)w.push('Lorem','ipsum','dolor','sit','amet');while(w.length<count)w.push(LOREM_WORDS[Math.floor(Math.random()*LOREM_WORDS.length)]);result=w.slice(0,count).join(' ');result=result.charAt(0).toUpperCase()+result.slice(1);}output.value=result;}
+    generateLorem();
+</script>
+</body>
+</html>

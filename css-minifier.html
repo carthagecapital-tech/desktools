@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Minifier — Free Online CSS Compressor | DeskTools</title>
+    <meta name="description" content="Free online CSS minifier. Compress your CSS by removing whitespace, comments, and unnecessary characters. See the size reduction instantly.">
+    <meta name="keywords" content="CSS minifier, CSS compressor, minify CSS, compress CSS online, CSS optimizer, reduce CSS size">
+    <meta property="og:title" content="CSS Minifier — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/css-minifier">
+    <link rel="canonical" href="https://desktools.dev/css-minifier">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>CSS Minifier</h1>
+        <p class="desc">Compress CSS by removing whitespace, comments, and unnecessary characters.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" onclick="minifyCSS()">Minify</button>
+                <button onclick="beautifyCSS()">Beautify</button>
+                <button onclick="copyOutput('css-output')">Copy</button>
+            </div>
+            <div class="toolbar-group">
+                <span id="css-stats" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);"></span>
+                <button onclick="document.getElementById('css-input').value='';document.getElementById('css-output').value='';document.getElementById('css-stats').textContent=''">Clear</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="css-input" placeholder="Paste your CSS here..."></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="css-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+    function minifyCSS() {
+        const input = document.getElementById('css-input').value;
+        let css = input;
+        css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+        css = css.replace(/\s+/g, ' ');
+        css = css.replace(/\s*([{}:;,>~+])\s*/g, '$1');
+        css = css.replace(/;}/g, '}');
+        css = css.replace(/^\s+|\s+$/g, '');
+        document.getElementById('css-output').value = css;
+        showStats(input, css);
+    }
+    function beautifyCSS() {
+        const input = document.getElementById('css-input').value;
+        let css = input;
+        css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+        css = css.replace(/\s+/g, ' ');
+        css = css.replace(/\s*{\s*/g, ' {\n  ');
+        css = css.replace(/\s*}\s*/g, '\n}\n\n');
+        css = css.replace(/\s*;\s*/g, ';\n  ');
+        css = css.replace(/\n  }/g, '\n}');
+        css = css.replace(/\n{3,}/g, '\n\n');
+        css = css.trim();
+        document.getElementById('css-output').value = css;
+        document.getElementById('css-stats').textContent = 'Beautified';
+        document.getElementById('css-stats').style.color = 'var(--accent)';
+    }
+    function showStats(original, minified) {
+        const origSize = new Blob([original]).size;
+        const minSize = new Blob([minified]).size;
+        const saved = origSize - minSize;
+        const pct = origSize > 0 ? Math.round((saved / origSize) * 100) : 0;
+        const stats = document.getElementById('css-stats');
+        stats.textContent = origSize + 'B → ' + minSize + 'B (−' + pct + '%)';
+        stats.style.color = 'var(--accent)';
+    }
+</script>
+</body>
+</html>

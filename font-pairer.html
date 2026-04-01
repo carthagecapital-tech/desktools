@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Font Pairer — DeskTools</title>
+<meta name="description" content="Browse and pair Google Fonts visually. Preview heading and body combinations."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:960px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.ctrl-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.1rem}
+.ctrl-card label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:.5rem}
+select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.5rem .75rem;outline:none;cursor:pointer;transition:border-color .2s}
+select:focus{border-color:var(--accent)}
+.size-row{display:flex;align-items:center;gap:.75rem;margin-top:.75rem}
+.size-row input{flex:1;accent-color:var(--accent)}
+.size-val{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);min-width:3ch}
+.preview-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:2.5rem;margin-bottom:1.5rem;transition:all .3s}
+.preview-heading{font-size:2.6rem;font-weight:700;line-height:1.15;margin-bottom:.75rem;color:var(--text)}
+.preview-sub{font-size:1.15rem;font-weight:400;color:var(--muted);margin-bottom:1.25rem}
+.preview-body{font-size:1rem;color:#b0b0c0;line-height:1.75;max-width:600px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:1.5rem}
+.pair-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1rem;cursor:pointer;transition:all .2s}
+.pair-card:hover,.pair-card.active{border-color:var(--accent);background:#13131c}
+.pair-h{font-size:1.2rem;font-weight:700;margin-bottom:.3rem}
+.pair-b{font-size:.82rem;color:var(--muted)}
+.pair-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-top:.5rem;opacity:.7}
+.css-out{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);line-height:1.7;margin-top:1rem}
+.copy-row{display:flex;gap:.75rem;margin-top:.75rem}
+.btn{flex:1;font-family:'Outfit',sans-serif;font-weight:600;font-size:.88rem;border:none;border-radius:8px;padding:.6rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn.copied{background:#1a6b5a;color:var(--text)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){.controls{grid-template-columns:1fr}.preview-heading{font-size:2rem}}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>Font Pairer</h1>
+  <p class="sub">Pick heading and body fonts from Google Fonts. Preview live, copy the CSS import.</p>
+
+  <div class="controls">
+    <div class="ctrl-card">
+      <label>Heading Font</label>
+      <select id="headFont" onchange="applyFonts()"></select>
+      <div class="size-row">
+        <input type="range" id="headSize" min="1.5" max="4" step="0.1" value="2.6" oninput="applyFonts()"/>
+        <span class="size-val" id="headSizeVal">2.6rem</span>
+      </div>
+    </div>
+    <div class="ctrl-card">
+      <label>Body Font</label>
+      <select id="bodyFont" onchange="applyFonts()"></select>
+      <div class="size-row">
+        <input type="range" id="bodySize" min="0.8" max="1.4" step="0.05" value="1" oninput="applyFonts()"/>
+        <span class="size-val" id="bodySizeVal">1rem</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-card" id="previewCard">
+    <div class="preview-heading" id="prevHead">The quick brown fox jumps</div>
+    <div class="preview-sub" id="prevSub">Over the lazy dog — a perfect pangram</div>
+    <div class="preview-body" id="prevBody">Good typography creates a visual hierarchy that guides the reader's eye and establishes a clear tone. Pairing a strong display face with a readable body font is one of the most impactful design decisions you can make.</div>
+  </div>
+
+  <div style="margin-bottom:.6rem;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)">Suggested Pairings</div>
+  <div class="pairs" id="pairsGrid"></div>
+
+  <div class="css-out" id="cssOut"></div>
+  <div class="copy-row">
+    <button class="btn btn-primary" id="copyBtn" onclick="copyCSS()">Copy CSS Import</button>
+  </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+const FONTS = ['Playfair Display','Merriweather','Raleway','Oswald','Montserrat','Lora','Nunito','Poppins','Inter','Roboto Slab','Space Grotesk','DM Sans','Libre Baskerville','Cormorant Garamond','Fraunces','Syne','Plus Jakarta Sans','Lexend','Figtree','Spectral'];
+const PAIRS = [
+  {h:'Playfair Display',b:'Lato',tag:'Editorial'},
+  {h:'Oswald',b:'Merriweather',tag:'News'},
+  {h:'Raleway',b:'Lora',tag:'Elegant'},
+  {h:'Montserrat',b:'Nunito',tag:'Modern'},
+  {h:'Fraunces',b:'Figtree',tag:'Trendy'},
+  {h:'Cormorant Garamond',b:'Raleway',tag:'Luxury'},
+  {h:'Syne',b:'DM Sans',tag:'Creative'},
+  {h:'Space Grotesk',b:'Spectral',tag:'Tech'},
+];
+const loaded=new Set();
+function loadFont(f){
+  if(loaded.has(f))return;
+  loaded.add(f);
+  const l=document.createElement('link');
+  l.rel='stylesheet';
+  l.href=`https://fonts.googleapis.com/css2?family=${encodeURIComponent(f)}:wght@400;700&display=swap`;
+  document.head.appendChild(l);
+}
+function populateSelects(){
+  ['headFont','bodyFont'].forEach((id,idx)=>{
+    const sel=document.getElementById(id); sel.innerHTML='';
+    FONTS.forEach(f=>{
+      const o=document.createElement('option'); o.value=f; o.textContent=f;
+      sel.appendChild(o);
+    });
+    sel.value=idx===0?'Playfair Display':'Lato';
+  });
+}
+function applyFonts(){
+  const h=document.getElementById('headFont').value;
+  const b=document.getElementById('bodyFont').value;
+  const hs=document.getElementById('headSize').value;
+  const bs=document.getElementById('bodySize').value;
+  document.getElementById('headSizeVal').textContent=hs+'rem';
+  document.getElementById('bodySizeVal').textContent=bs+'rem';
+  loadFont(h); loadFont(b);
+  const ph=document.getElementById('prevHead');
+  const pb=document.getElementById('prevBody');
+  const ps=document.getElementById('prevSub');
+  ph.style.fontFamily=`'${h}', serif`;
+  ph.style.fontSize=hs+'rem';
+  [pb,ps].forEach(el=>{el.style.fontFamily=`'${b}', sans-serif`;});
+  pb.style.fontSize=bs+'rem';
+  updateCSS(h,b);
+}
+function updateCSS(h,b){
+  const url=`https://fonts.googleapis.com/css2?family=${encodeURIComponent(h)}:wght@400;700&family=${encodeURIComponent(b)}:wght@400;600&display=swap`;
+  document.getElementById('cssOut').textContent=`@import url('${url}');\n\nh1, h2, h3 { font-family: '${h}', serif; }\nbody        { font-family: '${b}', sans-serif; }`;
+}
+function buildPairs(){
+  const g=document.getElementById('pairsGrid'); g.innerHTML='';
+  PAIRS.forEach(p=>{
+    loadFont(p.h); loadFont(p.b);
+    const c=document.createElement('div'); c.className='pair-card';
+    c.innerHTML=`<div class="pair-h" style="font-family:'${p.h}',serif">${p.h}</div><div class="pair-b" style="font-family:'${p.b}',sans-serif">${p.b}</div><div class="pair-tag">${p.tag}</div>`;
+    c.onclick=()=>{
+      document.querySelectorAll('.pair-card').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      document.getElementById('headFont').value=p.h;
+      document.getElementById('bodyFont').value=p.b;
+      applyFonts();
+    };
+    g.appendChild(c);
+  });
+  g.children[0]&&g.children[0].classList.add('active');
+}
+function copyCSS(){
+  navigator.clipboard.writeText(document.getElementById('cssOut').textContent);
+  const b=document.getElementById('copyBtn');b.textContent='Copied!';b.classList.add('copied');
+  setTimeout(()=>{b.textContent='Copy CSS Import';b.classList.remove('copied');},1800);
+}
+populateSelects(); buildPairs(); applyFonts();
+</script>
+</body>
+</html>

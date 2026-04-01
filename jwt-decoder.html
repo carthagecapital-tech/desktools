@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JWT Decoder — DeskTools</title>
+<meta name="description" content="Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118;--red:#ff6b6b;--orange:#ffa94d;--green:#00d4aa}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.input-area{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem}
+.input-area label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:.6rem}
+textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:1rem;outline:none;resize:none;height:100px;line-height:1.6;transition:border-color .2s;word-break:break-all}
+textarea:focus{border-color:var(--accent)}
+.status{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;font-size:.83rem;min-height:1.4rem}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-ok{background:var(--green)}.dot-err{background:var(--red)}.dot-warn{background:var(--orange)}
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.part-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.part-title{display:flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
+.part-dot{width:10px;height:10px;border-radius:50%}
+.dot-header{background:#7c3aed}.dot-payload{background:#f59e0b}.dot-sig{background:var(--red)}
+pre{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.9rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#a8e6d8;min-height:80px}
+.claims{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.claim-box{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.9rem}
+.claim-key{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.3rem}
+.claim-val{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:600;color:var(--text)}
+.claim-val.expired{color:var(--red)}.claim-val.valid{color:var(--green)}.claim-val.warn{color:var(--orange)}
+.claim-sub{font-size:.72rem;color:var(--muted);margin-top:.15rem}
+.btn-row{display:flex;gap:.75rem}
+.btn{font-family:'Outfit',sans-serif;font-weight:600;font-size:.88rem;border:none;border-radius:8px;padding:.6rem 1.2rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}.btn-secondary:hover{color:var(--text)}
+.btn.copied{background:#1a6b5a;color:var(--text)}
+.jwt-colored{font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;word-break:break-all;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.9rem;margin-top:.75rem}
+.c-head{color:#a78bfa}.c-pay{color:#fbbf24}.c-sig{color:var(--red)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){.parts{grid-template-columns:1fr}.claims{grid-template-columns:1fr}}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>JWT Decoder</h1>
+  <p class="sub">Paste a JSON Web Token to decode header, payload, and inspect claims. 100% client-side.</p>
+
+  <div class="input-area">
+    <label>JWT Token</label>
+    <textarea id="jwtInput" placeholder="Paste your JWT here... eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." oninput="decode()"></textarea>
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="parts" id="parts" style="display:none">
+    <div class="part-card">
+      <div class="part-title"><span class="part-dot dot-header"></span> Header</div>
+      <pre id="headerPre"></pre>
+    </div>
+    <div class="part-card">
+      <div class="part-title"><span class="part-dot dot-payload"></span> Payload</div>
+      <pre id="payloadPre"></pre>
+    </div>
+  </div>
+
+  <div class="claims" id="claims" style="display:none"></div>
+
+  <div class="btn-row" id="btnRow" style="display:none">
+    <button class="btn btn-primary" id="copyBtn" onclick="copyPayload()">Copy Payload</button>
+    <button class="btn btn-secondary" onclick="clearInput()">Clear</button>
+  </div>
+
+  <div id="coloredJwt" style="display:none">
+    <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.5rem;margin-top:1.25rem">Token visualization</div>
+    <div class="jwt-colored" id="coloredInner"></div>
+    <div style="display:flex;gap:1rem;margin-top:.5rem;font-size:.75rem">
+      <span class="c-head">■ Header</span><span class="c-pay">■ Payload</span><span class="c-sig">■ Signature</span>
+    </div>
+  </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+function b64url(s){try{return atob(s.replace(/-/g,'+').replace(/_/g,'/').padEnd(s.length+3-(s.length+3)%4,'='));}catch{return null;}}
+function decode(){
+  const raw=document.getElementById('jwtInput').value.trim();
+  const st=document.getElementById('status');
+  if(!raw){st.innerHTML='';document.getElementById('parts').style.display='none';document.getElementById('claims').style.display='none';document.getElementById('btnRow').style.display='none';document.getElementById('coloredJwt').style.display='none';return;}
+  const parts=raw.split('.');
+  if(parts.length!==3){st.innerHTML='<span class="status-dot dot-err"></span><span style="color:var(--red)">Invalid JWT — must have 3 parts separated by dots</span>';document.getElementById('parts').style.display='none';return;}
+  const header=JSON.parse(b64url(parts[0])||'null');
+  const payload=JSON.parse(b64url(parts[1])||'null');
+  if(!header||!payload){st.innerHTML='<span class="status-dot dot-err"></span><span style="color:var(--red)">Could not decode — invalid base64url encoding</span>';return;}
+  document.getElementById('headerPre').textContent=JSON.stringify(header,null,2);
+  document.getElementById('payloadPre').textContent=JSON.stringify(payload,null,2);
+  document.getElementById('parts').style.display='grid';
+  document.getElementById('btnRow').style.display='flex';
+  // Claims
+  const cl=document.getElementById('claims'); cl.innerHTML=''; cl.style.display='grid';
+  const now=Math.floor(Date.now()/1000);
+  const claimsData=[];
+  if(payload.exp){const expired=now>payload.exp;const d=new Date(payload.exp*1000);claimsData.push({k:'Expires (exp)',v:expired?'EXPIRED':'Valid',sub:d.toLocaleString(),cls:expired?'expired':'valid'});}
+  if(payload.iat){claimsData.push({k:'Issued at (iat)',v:new Date(payload.iat*1000).toLocaleString(),sub:'',cls:''});}
+  if(payload.nbf){const ok=now>=payload.nbf;claimsData.push({k:'Not before (nbf)',v:ok?'Active':'Not yet valid',sub:new Date(payload.nbf*1000).toLocaleString(),cls:ok?'valid':'warn'});}
+  if(payload.sub) claimsData.push({k:'Subject (sub)',v:payload.sub,sub:'',cls:''});
+  if(payload.iss) claimsData.push({k:'Issuer (iss)',v:payload.iss,sub:'',cls:''});
+  if(payload.aud) claimsData.push({k:'Audience (aud)',v:Array.isArray(payload.aud)?payload.aud.join(', '):payload.aud,sub:'',cls:''});
+  if(header.alg) claimsData.push({k:'Algorithm (alg)',v:header.alg,sub:header.typ||'',cls:''});
+  claimsData.forEach(c=>{
+    const b=document.createElement('div'); b.className='claim-box';
+    b.innerHTML=`<div class="claim-key">${c.k}</div><div class="claim-val ${c.cls}">${c.v}</div>${c.sub?`<div class="claim-sub">${c.sub}</div>`:''}`;
+    cl.appendChild(b);
+  });
+  // Status
+  if(payload.exp&&now>payload.exp) st.innerHTML='<span class="status-dot dot-err"></span><span style="color:var(--red)">Token expired</span>';
+  else st.innerHTML='<span class="status-dot dot-ok"></span><span style="color:var(--green)">Valid JWT structure</span>';
+  // Colored
+  document.getElementById('coloredJwt').style.display='block';
+  document.getElementById('coloredInner').innerHTML=`<span class="c-head">${parts[0]}</span>.<span class="c-pay">${parts[1]}</span>.<span class="c-sig">${parts[2]}</span>`;
+}
+function copyPayload(){
+  const v=document.getElementById('payloadPre').textContent;
+  navigator.clipboard.writeText(v);
+  const b=document.getElementById('copyBtn');b.textContent='Copied!';b.classList.add('copied');
+  setTimeout(()=>{b.textContent='Copy Payload';b.classList.remove('copied');},1800);
+}
+function clearInput(){document.getElementById('jwtInput').value='';decode();}
+</script>
+</body>
+</html>
