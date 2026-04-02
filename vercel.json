@@ -155,6 +155,38 @@
     {
       "source": "/security-txt-generator",
       "destination": "/security-txt-generator.html"
+    },
+    {
+      "source": "/cron-builder",
+      "destination": "/cron-builder.html"
+    },
+    {
+      "source": "/api-tester",
+      "destination": "/api-tester.html"
+    },
+    {
+      "source": "/sql-formatter",
+      "destination": "/sql-formatter.html"
+    },
+    {
+      "source": "/json-schema-validator",
+      "destination": "/json-schema-validator.html"
+    },
+    {
+      "source": "/favicon-generator",
+      "destination": "/favicon-generator.html"
+    },
+    {
+      "source": "/og-previewer",
+      "destination": "/og-previewer.html"
+    },
+    {
+      "source": "/box-shadow-generator",
+      "destination": "/box-shadow-generator.html"
+    },
+    {
+      "source": "/env-generator",
+      "destination": "/env-generator.html"
     }
   ],
   "headers": [

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSS Box Shadow Generator — Visual Shadow Builder | DeskTools</title>
+<meta name="description" content="Build CSS box-shadow visually with multiple layers. Adjust offset, blur, spread, color, and inset. Copy the CSS instantly."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/box-shadow-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="CSS Box Shadow Generator — DeskTools"/><meta property="og:description" content="Build CSS box-shadow visually with multiple layers. Copy the CSS instantly."/><meta property="og:url" content="https://desktools.dev/box-shadow-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="CSS Box Shadow Generator — DeskTools"/><meta name="twitter:description" content="Build CSS box-shadow visually with multiple layers. Copy the CSS instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Box Shadow Generator","description":"Build CSS box-shadow visually with multiple layers. Copy the CSS instantly.","url":"https://desktools.dev/box-shadow-generator","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:700px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.78rem;color:var(--muted);display:block;margin-bottom:.3rem;font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:.25rem}
+input[type=color]{width:40px;height:32px;border:1px solid var(--border);border-radius:6px;background:var(--bg3);cursor:pointer;padding:2px}
+.preview-area{display:flex;align-items:center;justify-content:center;min-height:250px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:1.25rem;padding:2rem}
+.preview-box{width:180px;height:130px;background:var(--card-bg);border-radius:12px;transition:box-shadow .15s}
+.layer{padding:1rem;border:1px solid var(--border);border-radius:10px;margin-bottom:.75rem;position:relative;background:rgba(255,255,255,0.01)}
+.layer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.layer-title{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--accent)}
+.layer-btns{display:flex;gap:.3rem}
+.layer-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;padding:.1rem .3rem;transition:color .15s}
+.layer-btn:hover{color:var(--text)}
+.layer-btn.del:hover{color:#ff6b6b}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.control{display:flex;flex-direction:column}
+.val{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text);text-align:right}
+.color-row{display:flex;align-items:center;gap:.5rem}
+.color-hex{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text)}
+.check-label{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);cursor:pointer;margin-top:.25rem}
+.check-label input{accent-color:var(--accent)}
+.add-layer{width:100%;background:none;border:1px dashed var(--border);color:var(--muted);font-size:.82rem;padding:.55rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}
+.add-layer:hover{border-color:var(--accent);color:var(--accent)}
+.output{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);line-height:1.6;position:relative;word-break:break-all}
+.copy-css{position:absolute;top:.6rem;right:.6rem;background:var(--accent);color:#0a0a0f;border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;padding:.3rem .65rem;border-radius:5px;cursor:pointer;transition:background .2s}
+.copy-css:hover{background:var(--accent2)}
+.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.preset-btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.3rem .55rem;border-radius:5px;cursor:pointer;transition:all .15s}
+.preset-btn:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Box Shadow Generator</h1>
+  <p class="sub">Build CSS box-shadow visually. Add layers, tweak values, copy the code.</p>
+
+  <div class="presets">
+    <button class="preset-btn" onclick="loadPreset('subtle')">Subtle</button>
+    <button class="preset-btn" onclick="loadPreset('medium')">Medium</button>
+    <button class="preset-btn" onclick="loadPreset('heavy')">Heavy</button>
+    <button class="preset-btn" onclick="loadPreset('glow')">Glow</button>
+    <button class="preset-btn" onclick="loadPreset('layered')">Layered</button>
+    <button class="preset-btn" onclick="loadPreset('inset')">Inset</button>
+  </div>
+
+  <div class="preview-area"><div class="preview-box" id="previewBox"></div></div>
+
+  <div class="card">
+    <div class="card-title">Shadow Layers</div>
+    <div id="layers"></div>
+    <button class="add-layer" onclick="addLayer()">+ Add shadow layer</button>
+  </div>
+
+  <div class="output" id="output"><button class="copy-css" onclick="copyCss()">Copy CSS</button><span id="cssText"></span></div>
+</div>
+
+<div class="deep-dive" style="max-width:700px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Understanding CSS box-shadow</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>The CSS <code>box-shadow</code> property adds shadow effects to elements. Its syntax is: <code>box-shadow: offset-x offset-y blur-radius spread-radius color</code>. The <strong>offset</strong> controls the shadow's position, <strong>blur</strong> controls softness, and <strong>spread</strong> expands or contracts the shadow size. Adding the <code>inset</code> keyword creates an inner shadow.</p>
+<p><strong>Layered shadows</strong> create depth and realism that single shadows can't achieve. Modern UI design uses multiple subtle shadow layers — for example, a tight dark shadow for definition combined with a larger, softer shadow for elevation. This approach mimics how real-world light creates both umbra (sharp) and penumbra (soft) shadows.</p>
+<p>Performance tip: <code>box-shadow</code> triggers a repaint but not a reflow, making it safe for hover effects and transitions. However, very large blur values (100px+) on many elements can impact scroll performance. For elements that animate frequently, consider using <code>filter: drop-shadow()</code> instead, as it can be GPU-accelerated in some browsers.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+let shadows=[{x:0,y:4,blur:12,spread:0,color:'#00000040',inset:false}];
+
+function render(){
+  const layersEl=document.getElementById('layers');
+  layersEl.innerHTML='';
+  shadows.forEach((s,i)=>{
+    const div=document.createElement('div');div.className='layer';
+    div.innerHTML=
+      '<div class="layer-header"><span class="layer-title">Layer '+(i+1)+'</span><div class="layer-btns">'+(shadows.length>1?'<button class="layer-btn del" onclick="removeLayer('+i+')" title="Remove">&times;</button>':'')+'</div></div>'+
+      '<div class="controls">'+
+      '<div class="control"><label>X Offset <span class="val" id="vx'+i+'">'+s.x+'px</span></label><input type="range" min="-50" max="50" value="'+s.x+'" oninput="upd('+i+',\'x\',this.value)"/></div>'+
+      '<div class="control"><label>Y Offset <span class="val" id="vy'+i+'">'+s.y+'px</span></label><input type="range" min="-50" max="50" value="'+s.y+'" oninput="upd('+i+',\'y\',this.value)"/></div>'+
+      '<div class="control"><label>Blur <span class="val" id="vb'+i+'">'+s.blur+'px</span></label><input type="range" min="0" max="100" value="'+s.blur+'" oninput="upd('+i+',\'blur\',this.value)"/></div>'+
+      '<div class="control"><label>Spread <span class="val" id="vs'+i+'">'+s.spread+'px</span></label><input type="range" min="-30" max="30" value="'+s.spread+'" oninput="upd('+i+',\'spread\',this.value)"/></div>'+
+      '</div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:.5rem">'+
+      '<div class="color-row"><input type="color" value="'+s.color.slice(0,7)+'" oninput="updColor('+i+',this.value)"/><span class="color-hex">'+s.color+'</span></div>'+
+      '<label class="check-label"><input type="checkbox" '+(s.inset?'checked':'')+' onchange="updInset('+i+',this.checked)"/> Inset</label>'+
+      '</div>';
+    layersEl.appendChild(div);
+  });
+  updatePreview();
+}
+
+function upd(i,prop,val){
+  shadows[i][prop]=parseInt(val);
+  const ids={x:'vx',y:'vy',blur:'vb',spread:'vs'};
+  document.getElementById(ids[prop]+i).textContent=val+'px';
+  updatePreview();
+}
+function updColor(i,val){shadows[i].color=val+'40';render();}
+function updInset(i,checked){shadows[i].inset=checked;updatePreview();}
+function removeLayer(i){shadows.splice(i,1);render();}
+function addLayer(){shadows.push({x:0,y:8,blur:24,spread:0,color:'#00000030',inset:false});render();}
+
+function getCss(){
+  return shadows.map(s=>(s.inset?'inset ':'')+s.x+'px '+s.y+'px '+s.blur+'px '+s.spread+'px '+s.color).join(',\n    ');
+}
+
+function updatePreview(){
+  const css=getCss();
+  document.getElementById('previewBox').style.boxShadow=css;
+  document.getElementById('cssText').textContent='box-shadow: '+css+';';
+}
+
+function copyCss(){
+  navigator.clipboard.writeText('box-shadow: '+getCss()+';');
+  if(typeof showToast==='function') showToast('CSS copied!');
+}
+
+function loadPreset(name){
+  const presets={
+    subtle:[{x:0,y:1,blur:3,spread:0,color:'#00000020',inset:false}],
+    medium:[{x:0,y:4,blur:12,spread:0,color:'#00000040',inset:false}],
+    heavy:[{x:0,y:12,blur:40,spread:-4,color:'#00000060',inset:false}],
+    glow:[{x:0,y:0,blur:30,spread:4,color:'#00d4aa30',inset:false}],
+    layered:[{x:0,y:1,blur:2,spread:0,color:'#00000030',inset:false},{x:0,y:4,blur:8,spread:0,color:'#00000020',inset:false},{x:0,y:16,blur:32,spread:-4,color:'#00000015',inset:false}],
+    inset:[{x:0,y:2,blur:8,spread:0,color:'#00000050',inset:true},{x:0,y:-2,blur:8,spread:0,color:'#ffffff08',inset:true}]
+  };
+  shadows=JSON.parse(JSON.stringify(presets[name]));
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

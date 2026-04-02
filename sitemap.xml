@@ -40,4 +40,12 @@
   <url><loc>https://desktools.dev/text-encryptor</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://desktools.dev/csp-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://desktools.dev/security-txt-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/cron-builder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/api-tester</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/sql-formatter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/json-schema-validator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/favicon-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/og-previewer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/box-shadow-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/env-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>

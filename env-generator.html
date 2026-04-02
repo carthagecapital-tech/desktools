@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Env File Generator — .env Builder for Developers | DeskTools</title>
+<meta name="description" content="Build .env files quickly. Add variables, use templates for common stacks, export a clean .env file. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/env-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Env File Generator — DeskTools"/><meta property="og:description" content="Build .env files quickly. Add variables, use templates for common stacks."/><meta property="og:url" content="https://desktools.dev/env-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Env File Generator — DeskTools"/><meta name="twitter:description" content="Build .env files quickly. Add variables, use templates for common stacks."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Env File Generator","description":"Build .env files quickly. Add variables, use templates for common stacks, export a clean .env file.","url":"https://desktools.dev/env-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+.templates{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.tmpl{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.tmpl:hover{border-color:var(--accent);color:var(--accent)}
+.var-row{display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center}
+.var-row input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:.5rem .7rem;outline:none;transition:border-color .2s}
+.var-row input:focus{border-color:var(--accent)}
+.var-row input.key{max-width:200px;color:var(--accent)}
+.var-row input::placeholder{color:var(--muted)}
+.del-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:.2rem .35rem;transition:color .15s;border-radius:4px}
+.del-btn:hover{color:#ff6b6b}
+.add-btn{width:100%;background:none;border:1px dashed var(--border);color:var(--muted);font-size:.82rem;padding:.5rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;margin-top:.25rem}
+.add-btn:hover{border-color:var(--accent);color:var(--accent)}
+.comment-row{margin-bottom:.5rem}
+.comment-row input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:.35rem 0;outline:none;font-style:italic}
+.output-block{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.output-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border)}
+.output-name{font-size:.82rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.btn-row{display:flex;gap:.4rem}
+.out-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;padding:.3rem .65rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.out-btn:hover{border-color:var(--accent);color:var(--accent)}
+.out-btn.primary{background:var(--accent);color:#0a0a0f;border-color:var(--accent)}
+.out-btn.primary:hover{background:var(--accent2)}
+.output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text);line-height:1.7;white-space:pre-wrap;max-height:300px;overflow-y:auto}
+.output-code .cmt{color:var(--muted)}
+.output-code .key{color:var(--accent)}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Env File Generator</h1>
+  <p class="sub">Build .env files fast. Start from a template or add variables one by one.</p>
+
+  <div class="templates">
+    <button class="tmpl" onclick="loadTemplate('node')">Node.js</button>
+    <button class="tmpl" onclick="loadTemplate('nextjs')">Next.js</button>
+    <button class="tmpl" onclick="loadTemplate('django')">Django</button>
+    <button class="tmpl" onclick="loadTemplate('rails')">Rails</button>
+    <button class="tmpl" onclick="loadTemplate('docker')">Docker</button>
+    <button class="tmpl" onclick="loadTemplate('aws')">AWS</button>
+    <button class="tmpl" onclick="loadTemplate('supabase')">Supabase</button>
+    <button class="tmpl" onclick="loadTemplate('stripe')">Stripe</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Variables</div>
+    <div id="varList"></div>
+    <button class="add-btn" onclick="addVar()">+ Add variable</button>
+  </div>
+
+  <div class="output-block">
+    <div class="output-header">
+      <span class="output-name">.env</span>
+      <div class="btn-row">
+        <button class="out-btn" onclick="downloadFile()">Download</button>
+        <button class="out-btn primary" onclick="copyOutput()">Copy</button>
+      </div>
+    </div>
+    <div class="output-code" id="output"></div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:680px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What are .env files?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Environment variables</strong> store configuration that changes between environments — API keys, database URLs, feature flags, and secrets. A <code>.env</code> file keeps these values in one place, loaded at runtime by libraries like <code>dotenv</code> (Node.js), <code>python-dotenv</code> (Python), or built into frameworks like Next.js and Rails.</p>
+<p>The format is simple: <code>KEY=value</code>, one per line. Comments start with <code>#</code>. Values with spaces should be wrapped in quotes. The <code>.env</code> file should <strong>never be committed to version control</strong> — add it to <code>.gitignore</code> immediately. Instead, share a <code>.env.example</code> file with placeholder values so new developers know what variables are needed.</p>
+<p>Common patterns include separating variables by concern: database config (<code>DATABASE_URL</code>, <code>DB_HOST</code>), API keys (<code>STRIPE_SECRET_KEY</code>, <code>SENDGRID_API_KEY</code>), app config (<code>PORT</code>, <code>NODE_ENV</code>), and feature flags (<code>ENABLE_BETA=true</code>). This tool generates clean .env files with proper formatting, comments, and templates for popular frameworks.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+let vars=[{key:'NODE_ENV',value:'development',comment:''},{key:'PORT',value:'3000',comment:''},{key:'DATABASE_URL',value:'',comment:''}];
+const TEMPLATES={
+  node:[{c:'# App'},{k:'NODE_ENV',v:'development'},{k:'PORT',v:'3000'},{c:'# Database'},{k:'DATABASE_URL',v:'postgresql://user:pass@localhost:5432/mydb'},{c:'# Auth'},{k:'JWT_SECRET',v:''},{k:'SESSION_SECRET',v:''}],
+  nextjs:[{c:'# Next.js'},{k:'NEXT_PUBLIC_APP_URL',v:'http://localhost:3000'},{k:'NEXT_PUBLIC_API_URL',v:''},{c:'# Database'},{k:'DATABASE_URL',v:''},{c:'# Auth'},{k:'NEXTAUTH_URL',v:'http://localhost:3000'},{k:'NEXTAUTH_SECRET',v:''}],
+  django:[{c:'# Django'},{k:'DEBUG',v:'True'},{k:'SECRET_KEY',v:''},{k:'ALLOWED_HOSTS',v:'localhost,127.0.0.1'},{c:'# Database'},{k:'DATABASE_URL',v:'postgres://user:pass@localhost:5432/mydb'},{c:'# Email'},{k:'EMAIL_HOST',v:'smtp.gmail.com'},{k:'EMAIL_PORT',v:'587'}],
+  rails:[{c:'# Rails'},{k:'RAILS_ENV',v:'development'},{k:'SECRET_KEY_BASE',v:''},{k:'DATABASE_URL',v:'postgres://user:pass@localhost:5432/mydb'},{k:'REDIS_URL',v:'redis://localhost:6379'}],
+  docker:[{c:'# Docker Compose'},{k:'COMPOSE_PROJECT_NAME',v:'myapp'},{c:'# Postgres'},{k:'POSTGRES_USER',v:'postgres'},{k:'POSTGRES_PASSWORD',v:''},{k:'POSTGRES_DB',v:'mydb'},{c:'# Redis'},{k:'REDIS_HOST',v:'redis'},{k:'REDIS_PORT',v:'6379'}],
+  aws:[{c:'# AWS'},{k:'AWS_ACCESS_KEY_ID',v:''},{k:'AWS_SECRET_ACCESS_KEY',v:''},{k:'AWS_DEFAULT_REGION',v:'us-east-1'},{k:'S3_BUCKET',v:''}],
+  supabase:[{c:'# Supabase'},{k:'NEXT_PUBLIC_SUPABASE_URL',v:''},{k:'NEXT_PUBLIC_SUPABASE_ANON_KEY',v:''},{k:'SUPABASE_SERVICE_ROLE_KEY',v:''}],
+  stripe:[{c:'# Stripe'},{k:'STRIPE_PUBLIC_KEY',v:'pk_test_...'},{k:'STRIPE_SECRET_KEY',v:'sk_test_...'},{k:'STRIPE_WEBHOOK_SECRET',v:'whsec_...'}],
+};
+
+function loadTemplate(name){
+  vars=TEMPLATES[name].map(item=>item.c?{comment:item.c}:{key:item.k,value:item.v,comment:''});
+  render();
+}
+function addVar(k,v){vars.push({key:k||'',value:v||'',comment:''});render();}
+function render(){
+  const list=document.getElementById('varList');list.innerHTML='';
+  vars.forEach((v,i)=>{
+    if(v.comment!==undefined&&!v.key){
+      const div=document.createElement('div');div.className='comment-row';
+      div.innerHTML='<input type="text" value="'+escAttr(v.comment)+'" placeholder="# Comment" oninput="vars['+i+'].comment=this.value;genOutput()"/>';
+      list.appendChild(div);
+    } else {
+      const div=document.createElement('div');div.className='var-row';
+      div.innerHTML='<input class="key" type="text" value="'+escAttr(v.key)+'" placeholder="KEY" oninput="vars['+i+'].key=this.value;genOutput()"/>'+
+        '<input type="text" value="'+escAttr(v.value)+'" placeholder="value" oninput="vars['+i+'].value=this.value;genOutput()"/>'+
+        '<button class="del-btn" onclick="vars.splice('+i+',1);render()">&times;</button>';
+      list.appendChild(div);
+    }
+  });
+  genOutput();
+}
+function escAttr(s){return (s||'').replace(/"/g,'&quot;');}
+function genOutput(){
+  const lines=vars.map(v=>{
+    if(v.comment!==undefined&&!v.key) return '<span class="cmt">'+esc(v.comment)+'</span>';
+    const val=v.value.includes(' ')?'"'+v.value+'"':v.value;
+    return '<span class="key">'+esc(v.key)+'</span>='+esc(val);
+  });
+  document.getElementById('output').innerHTML=lines.join('\n');
+}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function getPlainText(){
+  return vars.map(v=>{
+    if(v.comment!==undefined&&!v.key) return v.comment;
+    const val=v.value.includes(' ')?'"'+v.value+'"':v.value;
+    return v.key+'='+val;
+  }).join('\n');
+}
+function copyOutput(){
+  navigator.clipboard.writeText(getPlainText());
+  if(typeof showToast==='function') showToast('Copied!');
+}
+function downloadFile(){
+  const blob=new Blob([getPlainText()],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='.env';a.click();
+}
+render();
+</script>
+</body>
+</html>
