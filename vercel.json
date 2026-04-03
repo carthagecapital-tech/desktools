@@ -227,6 +227,10 @@
     {
       "source": "/regex-cheat-sheet",
       "destination": "/regex-cheat-sheet.html"
+    },
+    {
+      "source": "/all-tools",
+      "destination": "/all-tools.html"
     }
   ],
   "headers": [

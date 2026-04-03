@@ -28,6 +28,12 @@
     '        <svg class="chev" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>' +
     '      </button>' +
     '      <div class="dropdown-menu" id="catMenu">' +
+    '        <a class="dropdown-item" href="/all-tools" style="margin-bottom:.25rem">' +
+    '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span>' +
+    '          <span class="di-text"><span class="di-name">All Tools</span><span class="di-sub">Browse the full collection</span></span>' +
+    '          <span class="di-count">53</span>' +
+    '        </a>' +
+    '        <div class="dropdown-divider"></div>' +
     '        <span class="dropdown-label">Browse by audience</span>' +
     '        <a class="dropdown-item" href="/developers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>' +
@@ -159,6 +165,11 @@
     '.deep-dive-content code{font-family:"JetBrains Mono",monospace;background:var(--bg3,#14141e);padding:.1rem .35rem;border-radius:4px;font-size:.82rem;color:var(--text,#e8e8f0)}' +
     '@media(max-width:768px){.deep-dive{padding:0 20px}}' +
     /* Cmd+K Palette */
+    '.tool-breadcrumb{display:flex;align-items:center;gap:.4rem;padding:.75rem 2rem;font-size:.82rem;flex-wrap:wrap}' +
+    '.tool-breadcrumb a{color:var(--muted,#6b6b80);text-decoration:none;transition:color .2s}' +
+    '.tool-breadcrumb a:hover{color:var(--accent,#00d4aa)}' +
+    '.bc-sep{color:var(--muted,#6b6b80);opacity:.4;font-size:.7rem}' +
+    '.bc-current{color:var(--text,#e8e8f0);font-weight:500}' +
     '.nav-search-btn{display:flex;align-items:center;gap:.5rem;background:var(--bg3,#14141e);border:1px solid var(--border,rgba(255,255,255,0.07));border-radius:8px;color:var(--muted,#6b6b80);font-family:"Outfit",sans-serif;font-size:.85rem;padding:.4rem .85rem;cursor:pointer;transition:border-color .2s,color .2s;white-space:nowrap}' +
     '.nav-search-btn:hover{border-color:var(--accent,#00d4aa);color:var(--text,#e8e8f0)}' +
     '.nav-search-btn svg{flex-shrink:0}' +
@@ -283,6 +294,40 @@
       // If no history (direct landing), the href="/" fallback works naturally
     });
   });
+
+  /* ---------- CATEGORY BREADCRUMB ---------- */
+  var TAG_TO_CAT = {
+    'Dev': { name: 'Developers', url: '/developers' },
+    'Design': { name: 'Freelancers & Designers', url: '/freelancers' },
+    'Text': { name: 'Freelancers & Designers', url: '/freelancers' },
+    'Biz': { name: 'Business & Teams', url: '/business' },
+    'Prod': { name: 'Business & Teams', url: '/business' },
+    'Util': { name: 'Business & Teams', url: '/business' },
+    'Sec': { name: 'Security & Privacy', url: '/security' },
+  };
+
+  if (!isHome) {
+    var pageSlug = location.pathname.replace(/^\//, '').replace(/\.html$/, '');
+    var catPages = ['developers', 'freelancers', 'business', 'security', 'all-tools'];
+    if (catPages.indexOf(pageSlug) === -1 && pageSlug) {
+      // Find this tool in TOOLS_DATA
+      var toolData = null;
+      for (var ti = 0; ti < TOOLS_DATA.length; ti++) {
+        if (TOOLS_DATA[ti].url === '/' + pageSlug) { toolData = TOOLS_DATA[ti]; break; }
+      }
+      if (toolData && TAG_TO_CAT[toolData.tag]) {
+        var cat = TAG_TO_CAT[toolData.tag];
+        var backLink = document.querySelector('.back-link');
+        if (backLink) {
+          var breadcrumb = document.createElement('div');
+          breadcrumb.className = 'tool-breadcrumb';
+          breadcrumb.innerHTML = '<a href="/">Tools</a> <span class="bc-sep">/</span> <a href="' + cat.url + '">' + cat.name + '</a> <span class="bc-sep">/</span> <span class="bc-current">' + toolData.name + '</span>';
+          backLink.parentNode.insertBefore(breadcrumb, backLink);
+          backLink.style.display = 'none';
+        }
+      }
+    }
+  }
 
   /* ---------- FAVORITES SYSTEM ---------- */
   var FAVS_KEY = 'desktools_favs';

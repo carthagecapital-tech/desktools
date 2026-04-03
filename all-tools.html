@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>All Tools — 53 Free Browser-Based Utilities | DeskTools</title>
+<meta name="description" content="Browse all 53 free browser-based tools for developers, designers, freelancers, and business users. No installs, no signups."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/all-tools"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="All Tools — DeskTools"/><meta property="og:description" content="Browse all 53 free browser-based tools."/><meta property="og:url" content="https://desktools.dev/all-tools"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="All Tools — DeskTools"/><meta name="twitter:description" content="Browse all 53 free browser-based tools."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"All Tools — DeskTools","description":"Browse all 53 free browser-based tools for developers, designers, freelancers, and business users.","url":"https://desktools.dev/all-tools","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--border-hover:rgba(0,212,170,0.3);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page-header{text-align:center;padding:3rem 2rem 2rem}
+.page-header h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.page-header p{color:var(--muted);font-size:1rem;margin-bottom:1.5rem}
+.search-bar{display:flex;align-items:center;gap:.6rem;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.65rem 1rem;max-width:400px;margin:0 auto;transition:border-color .2s}
+.search-bar:focus-within{border-color:var(--accent)}
+.search-bar svg{color:var(--muted);flex-shrink:0}
+.search-bar input{background:none;border:none;outline:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;width:100%}
+.search-bar input::placeholder{color:var(--muted)}
+.main{max-width:1100px;margin:0 auto;padding:0 2rem 5rem}
+.section{margin-bottom:3rem}
+.section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-icon{width:34px;height:34px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
+.section-title{font-size:1rem;font-weight:600}
+.section-count{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:rgba(0,212,170,0.1);color:var(--accent);padding:.15rem .45rem;border-radius:4px;margin-left:auto}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .15s,background .2s;position:relative;overflow:hidden}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
+.tool-card:hover{border-color:var(--border-hover);transform:translateY(-2px);background:#13131c}
+.tool-card:hover::before{opacity:1}
+.tool-icon{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.3rem .55rem;border-radius:6px;width:fit-content}
+.tool-name{font-size:.95rem;font-weight:600;line-height:1.3}
+.tool-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1}
+.tool-tag{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border:1px solid var(--border);padding:.15rem .45rem;border-radius:4px;width:fit-content}
+.search-hidden{display:none!important}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--muted);display:none}
+.no-results.visible{display:block}
+@media(max-width:600px){.tool-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.tool-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to home</a>
+
+<div class="page-header">
+  <h1>All Tools</h1>
+  <p>53 free browser-based tools. No installs, no signups, 100% client-side.</p>
+  <div class="search-bar">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search all tools..." autocomplete="off"/>
+  </div>
+</div>
+
+<div class="main">
+  <div class="no-results" id="noResults"><h3>No tools found</h3><p>Try a different search term.</p></div>
+
+  <div class="section" id="sec-dev">
+    <div class="section-header">
+      <div class="section-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="section-title">For Developers</div>
+      <span class="section-count">25</span>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/json-formatter" data-name="json formatter"><span class="tool-icon">{}</span><div class="tool-name">JSON Formatter</div><div class="tool-desc">Format, validate, and minify JSON</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/regex-tester" data-name="regex tester"><span class="tool-icon">.*</span><div class="tool-name">Regex Tester</div><div class="tool-desc">Test regular expressions with live matching</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/base64-encoder" data-name="base64 encoder decoder"><span class="tool-icon">B64</span><div class="tool-name">Base64 Encoder</div><div class="tool-desc">Encode and decode Base64 text</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/markdown-preview" data-name="markdown preview"><span class="tool-icon">M↓</span><div class="tool-name">Markdown Preview</div><div class="tool-desc">Write markdown, preview live</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/url-encoder" data-name="url encoder decoder"><span class="tool-icon">%</span><div class="tool-name">URL Encoder</div><div class="tool-desc">Encode/decode URL strings</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/diff-checker" data-name="diff checker compare"><span class="tool-icon">≠</span><div class="tool-name">Diff Checker</div><div class="tool-desc">Compare two texts side by side</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/uuid-generator" data-name="uuid generator"><span class="tool-icon">UID</span><div class="tool-name">UUID Generator</div><div class="tool-desc">Generate cryptographically secure UUIDs</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/json-to-table" data-name="json to table"><span class="tool-icon">♣</span><div class="tool-name">JSON to Table</div><div class="tool-desc">Convert JSON arrays to readable tables</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/timestamp-converter" data-name="timestamp converter unix"><span class="tool-icon">≈</span><div class="tool-name">Timestamp Converter</div><div class="tool-desc">Unix timestamp to human date</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/css-minifier" data-name="css minifier"><span class="tool-icon">.{}</span><div class="tool-name">CSS Minifier</div><div class="tool-desc">Compress CSS by removing whitespace</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/html-entity-encoder" data-name="html entity encoder"><span class="tool-icon">&amp;</span><div class="tool-name">HTML Entity Encoder</div><div class="tool-desc">Convert special chars to entities</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/number-base-converter" data-name="number base converter hex"><span class="tool-icon">0x</span><div class="tool-name">Number Base Converter</div><div class="tool-desc">Binary, decimal, hex, octal</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/image-to-base64" data-name="image to base64"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Upload image, get Base64 string</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/cron-builder" data-name="cron builder expression"><span class="tool-icon">⏰</span><div class="tool-name">Cron Builder</div><div class="tool-desc">Build cron expressions visually</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/api-tester" data-name="api request builder http"><span class="tool-icon">API</span><div class="tool-name">API Request Builder</div><div class="tool-desc">Send HTTP requests from browser</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/sql-formatter" data-name="sql formatter beautifier"><span class="tool-icon">SQL</span><div class="tool-name">SQL Formatter</div><div class="tool-desc">Format and highlight SQL queries</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/json-schema-validator" data-name="json schema validator"><span class="tool-icon">{✓}</span><div class="tool-name">JSON Schema Validator</div><div class="tool-desc">Validate JSON against a schema</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/env-generator" data-name="env file generator dotenv"><span class="tool-icon">.env</span><div class="tool-name">Env File Generator</div><div class="tool-desc">Build .env files with templates</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/markdown-to-html" data-name="markdown to html converter"><span class="tool-icon">M→</span><div class="tool-name">Markdown to HTML</div><div class="tool-desc">Convert Markdown to clean HTML</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/json-to-csv" data-name="json to csv converter"><span class="tool-icon">J→C</span><div class="tool-name">JSON to CSV</div><div class="tool-desc">Convert JSON arrays to CSV format</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/csv-to-json" data-name="csv to json converter"><span class="tool-icon">C→J</span><div class="tool-name">CSV to JSON</div><div class="tool-desc">Convert CSV data to JSON arrays</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/slug-generator" data-name="slug generator url"><span class="tool-icon">/-/</span><div class="tool-name">Slug Generator</div><div class="tool-desc">URL slug from any text</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/meta-tag-generator" data-name="meta tag generator seo og"><span class="tool-icon">&lt;&gt;</span><div class="tool-name">Meta Tag Generator</div><div class="tool-desc">SEO meta tags, OG, Twitter Cards</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/chmod-calculator" data-name="chmod calculator permissions"><span class="tool-icon">755</span><div class="tool-name">Chmod Calculator</div><div class="tool-desc">Unix file permissions calculator</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/http-status-codes" data-name="http status codes reference"><span class="tool-icon">4xx</span><div class="tool-name">HTTP Status Codes</div><div class="tool-desc">Complete status code reference</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/regex-cheat-sheet" data-name="regex cheat sheet reference"><span class="tool-icon">/.*/</span><div class="tool-name">Regex Cheat Sheet</div><div class="tool-desc">Interactive regex reference</div><span class="tool-tag">Dev</span></a>
+    </div>
+  </div>
+
+  <div class="section" id="sec-design">
+    <div class="section-header">
+      <div class="section-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="section-title">For Freelancers & Designers</div>
+      <span class="section-count">16</span>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/color-picker" data-name="color picker palette hex rgb hsl"><span class="tool-icon">⦿</span><div class="tool-name">Color Picker</div><div class="tool-desc">Pick colors, convert HEX/RGB/HSL</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/qr-code-generator" data-name="qr code generator"><span class="tool-icon">QR</span><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate QR codes for URLs and text</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/aspect-ratio-calculator" data-name="aspect ratio calculator"><span class="tool-icon">16:9</span><div class="tool-name">Aspect Ratio Calculator</div><div class="tool-desc">Calculate ratios and resize</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/lorem-ipsum-generator" data-name="lorem ipsum generator placeholder"><span class="tool-icon">¶</span><div class="tool-name">Lorem Ipsum Generator</div><div class="tool-desc">Generate placeholder text</div><span class="tool-tag">Text</span></a>
+      <a class="tool-card" href="/text-transformer" data-name="text transformer case converter"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Case conversion, sort, deduplicate</div><span class="tool-tag">Text</span></a>
+      <a class="tool-card" href="/gradient-generator" data-name="css gradient generator"><span class="tool-icon">▴</span><div class="tool-name">Gradient Generator</div><div class="tool-desc">Build CSS gradients visually</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/svg-optimizer" data-name="svg optimizer minifier"><span class="tool-icon">SVG</span><div class="tool-name">SVG Optimizer</div><div class="tool-desc">Clean and minify SVG markup</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/font-pairer" data-name="font pairer google fonts"><span class="tool-icon">Tt</span><div class="tool-name">Font Pairer</div><div class="tool-desc">Pair Google Fonts, preview live</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/favicon-generator" data-name="favicon generator sizes"><span class="tool-icon">🖼</span><div class="tool-name">Favicon Generator</div><div class="tool-desc">Upload image, get all favicon sizes</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/og-previewer" data-name="og open graph previewer social"><span class="tool-icon">OG</span><div class="tool-name">OG Image Previewer</div><div class="tool-desc">Preview social media share cards</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/box-shadow-generator" data-name="css box shadow generator"><span class="tool-icon">▣</span><div class="tool-name">Box Shadow Generator</div><div class="tool-desc">Visual multi-layer shadow builder</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/word-counter" data-name="word counter character"><span class="tool-icon">W#</span><div class="tool-name">Word Counter</div><div class="tool-desc">Count words, chars, reading time</div><span class="tool-tag">Text</span></a>
+      <a class="tool-card" href="/image-to-base64" data-name="image to base64"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Upload image, get Base64 string</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/contrast-checker" data-name="color contrast checker wcag accessibility"><span class="tool-icon">AA</span><div class="tool-name">Contrast Checker</div><div class="tool-desc">WCAG AA/AAA accessibility checker</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/tailwind-colors" data-name="tailwind css colors palette"><span class="tool-icon">TW</span><div class="tool-name">Tailwind Colors</div><div class="tool-desc">Full Tailwind CSS color palette</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/html-entity-encoder" data-name="html entity encoder decoder"><span class="tool-icon">&amp;</span><div class="tool-name">HTML Entity Encoder</div><div class="tool-desc">Convert special chars to entities</div><span class="tool-tag">Dev</span></a>
+    </div>
+  </div>
+
+  <div class="section" id="sec-biz">
+    <div class="section-header">
+      <div class="section-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+      <div class="section-title">For Business & Teams</div>
+      <span class="section-count">10</span>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/word-counter" data-name="word counter character"><span class="tool-icon">W#</span><div class="tool-name">Word Counter</div><div class="tool-desc">Count words, chars, reading time</div><span class="tool-tag">Text</span></a>
+      <a class="tool-card" href="/invoice-calculator" data-name="invoice calculator tax"><span class="tool-icon">$</span><div class="tool-name">Invoice Calculator</div><div class="tool-desc">Calculate totals, tax, discounts</div><span class="tool-tag">Biz</span></a>
+      <a class="tool-card" href="/pomodoro-timer" data-name="pomodoro timer focus"><span class="tool-icon">⊗</span><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">Focus timer with work/break intervals</div><span class="tool-tag">Prod</span></a>
+      <a class="tool-card" href="/unit-converter" data-name="unit converter metric imperial"><span class="tool-icon">⇔</span><div class="tool-name">Unit Converter</div><div class="tool-desc">Length, weight, temp, area, speed</div><span class="tool-tag">Util</span></a>
+      <a class="tool-card" href="/meeting-cost" data-name="meeting cost calculator"><span class="tool-icon">∑</span><div class="tool-name">Meeting Cost Calculator</div><div class="tool-desc">See the real cost of meetings</div><span class="tool-tag">Biz</span></a>
+      <a class="tool-card" href="/email-subject-tester" data-name="email subject line tester"><span class="tool-icon">@</span><div class="tool-name">Email Subject Tester</div><div class="tool-desc">Score subject lines for open rates</div><span class="tool-tag">Biz</span></a>
+      <a class="tool-card" href="/qr-code-generator" data-name="qr code generator"><span class="tool-icon">QR</span><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate QR codes for URLs and text</div><span class="tool-tag">Design</span></a>
+      <a class="tool-card" href="/markdown-preview" data-name="markdown preview"><span class="tool-icon">M↓</span><div class="tool-name">Markdown Preview</div><div class="tool-desc">Write documentation in markdown</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/json-to-table" data-name="json to table"><span class="tool-icon">♣</span><div class="tool-name">JSON to Table</div><div class="tool-desc">Share data with non-technical clients</div><span class="tool-tag">Dev</span></a>
+      <a class="tool-card" href="/text-transformer" data-name="text transformer"><span class="tool-icon">Aa</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Format and clean text quickly</div><span class="tool-tag">Text</span></a>
+    </div>
+  </div>
+
+  <div class="section" id="sec-sec">
+    <div class="section-header">
+      <div class="section-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="section-title">Security & Privacy</div>
+      <span class="section-count">8</span>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/password-generator" data-name="password generator"><span class="tool-icon">†</span><div class="tool-name">Password Generator</div><div class="tool-desc">Generate strong random passwords</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/hash-generator" data-name="hash generator md5 sha"><span class="tool-icon">#</span><div class="tool-name">Hash Generator</div><div class="tool-desc">MD5, SHA-1, SHA-256, SHA-512</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/jwt-decoder" data-name="jwt decoder json web token"><span class="tool-icon">JWT</span><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode JSON Web Tokens</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/password-strength" data-name="password strength checker"><span class="tool-icon">••</span><div class="tool-name">Password Strength</div><div class="tool-desc">Test entropy, crack time, patterns</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/totp-generator" data-name="totp generator 2fa"><span class="tool-icon">2FA</span><div class="tool-name">TOTP Generator</div><div class="tool-desc">Generate 2FA codes for testing</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/text-encryptor" data-name="text encryptor aes"><span class="tool-icon">🔒</span><div class="tool-name">Text Encryptor</div><div class="tool-desc">AES-256 encrypt and decrypt text</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/csp-generator" data-name="csp content security policy"><span class="tool-icon">CSP</span><div class="tool-name">CSP Header Generator</div><div class="tool-desc">Build Content-Security-Policy visually</div><span class="tool-tag">Sec</span></a>
+      <a class="tool-card" href="/security-txt-generator" data-name="security.txt generator"><span class="tool-icon">.txt</span><div class="tool-name">Security.txt Generator</div><div class="tool-desc">Generate security.txt and robots.txt</div><span class="tool-tag">Sec</span></a>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+var si=document.getElementById('searchInput');
+var nr=document.getElementById('noResults');
+si.addEventListener('input',function(){
+  var q=si.value.trim().toLowerCase();
+  var any=false;
+  document.querySelectorAll('.tool-card').forEach(function(c){
+    var match=!q||(c.dataset.name||'').indexOf(q)!==-1||c.querySelector('.tool-name').textContent.toLowerCase().indexOf(q)!==-1;
+    c.classList.toggle('search-hidden',!match);
+    if(match)any=true;
+  });
+  document.querySelectorAll('.section').forEach(function(s){
+    var hasVisible=Array.from(s.querySelectorAll('.tool-card')).some(function(c){return!c.classList.contains('search-hidden');});
+    s.style.display=hasVisible?'':'none';
+  });
+  nr.classList.toggle('visible',!any);
+});
+</script>
+</body>
+</html>
