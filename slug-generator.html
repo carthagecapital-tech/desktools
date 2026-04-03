@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>URL Slug Generator — Free Online Slugify Tool | DeskTools</title>
+<meta name="description" content="Convert any text into a clean URL slug. Handles special characters, accents, and multiple languages. Copy the slug instantly."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/slug-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="URL Slug Generator — DeskTools"/><meta property="og:description" content="Convert any text into a clean URL slug instantly."/><meta property="og:url" content="https://desktools.dev/slug-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="URL Slug Generator — DeskTools"/><meta name="twitter:description" content="Convert any text into a clean URL slug instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Slug Generator","description":"Convert any text into a clean URL slug.","url":"https://desktools.dev/slug-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:580px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:1rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;resize:vertical;min-height:80px;line-height:1.5}
+textarea:focus{border-color:var(--accent)}
+textarea::placeholder{color:var(--muted)}
+.output-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--accent);min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:.75rem;word-break:break-all;line-height:1.4}
+.output-text{flex:1}
+.copy-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.options{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.option{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted);cursor:pointer}
+.option input{accent-color:var(--accent)}
+.examples{margin-top:1rem}
+.example{display:flex;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.82rem;align-items:baseline}
+.example:last-child{border-bottom:none}
+.example-in{color:var(--muted);flex:1}
+.example-out{font-family:'JetBrains Mono',monospace;color:var(--accent);flex:1}
+.example-arrow{color:var(--muted);font-size:.7rem}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Slug Generator</h1>
+  <p class="sub">Convert any text into a clean, URL-safe slug. Live as you type.</p>
+
+  <div class="card">
+    <label>Your text</label>
+    <textarea id="input" placeholder="My Awesome Blog Post Title!" oninput="generate()"></textarea>
+    <div class="options">
+      <label class="option"><input type="radio" name="sep" value="-" checked onchange="generate()"/> hyphens</label>
+      <label class="option"><input type="radio" name="sep" value="_" onchange="generate()"/> underscores</label>
+      <label class="option"><input type="checkbox" id="lowercase" checked onchange="generate()"/> lowercase</label>
+      <label class="option"><input type="checkbox" id="stopwords" onchange="generate()"/> remove stop words</label>
+    </div>
+  </div>
+
+  <div class="output-box">
+    <span class="output-text" id="output">your-slug-here</span>
+    <button class="copy-btn" onclick="copySlug()">Copy</button>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Examples</div>
+    <div class="examples" id="examples"></div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:580px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is a URL slug?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>A <strong>URL slug</strong> is the human-readable part of a URL that identifies a specific page — like <code>/my-awesome-blog-post</code> in <code>https://example.com/my-awesome-blog-post</code>. Good slugs are lowercase, use hyphens to separate words, and contain only letters, numbers, and hyphens.</p>
+<p>Slugs matter for <strong>SEO</strong> because search engines use URL keywords as a ranking signal. A URL like <code>/how-to-learn-python</code> tells Google exactly what the page is about, while <code>/post?id=12345</code> tells it nothing. Slugs also improve link sharing — humans can read and remember clean URLs.</p>
+<p>Slug generation involves lowercasing, replacing spaces with hyphens (or underscores), removing special characters, transliterating accented characters (cafe becomes cafe), and optionally removing common stop words (a, the, is, of) to keep URLs short. This tool handles all of these transformations in real time as you type.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+var STOP_WORDS=['a','an','the','and','or','but','in','on','at','to','for','of','with','by','from','is','it','as','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','shall','can','this','that','these','those','not','no','nor','so','if','then','than','just','also','very','too'];
+var ACCENT_MAP={'a':'/[\\u00e0-\\u00e5]/g','c':'/[\\u00e7]/g','e':'/[\\u00e8-\\u00eb]/g','i':'/[\\u00ec-\\u00ef]/g','n':'/[\\u00f1]/g','o':'/[\\u00f2-\\u00f6\\u00f8]/g','u':'/[\\u00f9-\\u00fc]/g','y':'/[\\u00fd\\u00ff]/g','ss':'/[\\u00df]/g'};
+
+function slugify(text,sep,lower,removeStop){
+  var s=text;
+  // Transliterate accents
+  s=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  if(lower)s=s.toLowerCase();
+  // Remove stop words
+  if(removeStop){
+    var words=s.split(/\s+/);
+    words=words.filter(function(w){return STOP_WORDS.indexOf(w.toLowerCase())===-1;});
+    s=words.join(' ');
+  }
+  // Replace non-alphanumeric with separator
+  s=s.replace(/[^a-zA-Z0-9\s-_]/g,'');
+  s=s.replace(/[\s_-]+/g,sep);
+  s=s.replace(new RegExp('^['+sep+']+|['+sep+']+$','g'),'');
+  return s;
+}
+function generate(){
+  var text=document.getElementById('input').value;
+  var sep=document.querySelector('input[name=sep]:checked').value;
+  var lower=document.getElementById('lowercase').checked;
+  var stop=document.getElementById('stopwords').checked;
+  var slug=slugify(text,sep,lower,stop);
+  document.getElementById('output').textContent=slug||'your-slug-here';
+  showExamples(sep,lower,stop);
+}
+function showExamples(sep,lower,stop){
+  var samples=['How to Build a REST API in 2026','10 Tips for Better CSS','The Quick Brown Fox & Friends!','Cafe au lait - delicieux','My App v2.0: What\'s New?'];
+  var el=document.getElementById('examples');el.innerHTML='';
+  samples.forEach(function(s){
+    var div=document.createElement('div');div.className='example';
+    div.innerHTML='<span class="example-in">'+s+'</span><span class="example-arrow">&rarr;</span><span class="example-out">'+slugify(s,sep,lower,stop)+'</span>';
+    el.appendChild(div);
+  });
+}
+function copySlug(){
+  var t=document.getElementById('output').textContent;
+  if(t&&t!=='your-slug-here'){navigator.clipboard.writeText(t);if(typeof showToast==='function')showToast('Slug copied!');}
+}
+generate();
+</script>
+</body>
+</html>

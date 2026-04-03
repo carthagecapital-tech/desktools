@@ -32,12 +32,12 @@
     '        <a class="dropdown-item" href="/developers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Developers</span><span class="di-sub">Formatters, converters, testers</span></span>' +
-    '          <span class="di-count">18</span>' +
+    '          <span class="di-count">25</span>' +
     '        </a>' +
     '        <a class="dropdown-item" href="/freelancers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Freelancers</span><span class="di-sub">Design &amp; creative tools</span></span>' +
-    '          <span class="di-count">13</span>' +
+    '          <span class="di-count">16</span>' +
     '        </a>' +
     '        <a class="dropdown-item" href="/business">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>' +
@@ -521,6 +521,16 @@
     {name:'Text Encryptor',desc:'AES-256 encrypt and decrypt text',icon:'🔒',tag:'Sec',url:'/text-encryptor'},
     {name:'CSP Header Generator',desc:'Build Content-Security-Policy visually',icon:'CSP',tag:'Sec',url:'/csp-generator'},
     {name:'Security.txt Generator',desc:'Generate security.txt and robots.txt',icon:'.txt',tag:'Sec',url:'/security-txt-generator'},
+    {name:'Color Contrast Checker',desc:'WCAG AA/AAA accessibility checker',icon:'AA',tag:'Design',url:'/contrast-checker'},
+    {name:'Markdown to HTML',desc:'Convert Markdown to clean HTML',icon:'M→',tag:'Dev',url:'/markdown-to-html'},
+    {name:'JSON to CSV',desc:'Convert JSON arrays to CSV format',icon:'J→C',tag:'Dev',url:'/json-to-csv'},
+    {name:'CSV to JSON',desc:'Convert CSV data to JSON arrays',icon:'C→J',tag:'Dev',url:'/csv-to-json'},
+    {name:'Slug Generator',desc:'URL slug from any text',icon:'/-/',tag:'Dev',url:'/slug-generator'},
+    {name:'Meta Tag Generator',desc:'SEO meta tags, OG, Twitter Cards',icon:'<>',tag:'Dev',url:'/meta-tag-generator'},
+    {name:'Chmod Calculator',desc:'Unix file permissions calculator',icon:'755',tag:'Dev',url:'/chmod-calculator'},
+    {name:'HTTP Status Codes',desc:'Complete status code reference',icon:'4xx',tag:'Dev',url:'/http-status-codes'},
+    {name:'Tailwind Colors',desc:'Full Tailwind CSS color palette',icon:'TW',tag:'Design',url:'/tailwind-colors'},
+    {name:'Regex Cheat Sheet',desc:'Interactive regex reference',icon:'/./',tag:'Dev',url:'/regex-cheat-sheet'},
   ];
 
   // Inject palette HTML

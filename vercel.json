@@ -187,6 +187,46 @@
     {
       "source": "/env-generator",
       "destination": "/env-generator.html"
+    },
+    {
+      "source": "/contrast-checker",
+      "destination": "/contrast-checker.html"
+    },
+    {
+      "source": "/markdown-to-html",
+      "destination": "/markdown-to-html.html"
+    },
+    {
+      "source": "/json-to-csv",
+      "destination": "/json-to-csv.html"
+    },
+    {
+      "source": "/csv-to-json",
+      "destination": "/csv-to-json.html"
+    },
+    {
+      "source": "/slug-generator",
+      "destination": "/slug-generator.html"
+    },
+    {
+      "source": "/meta-tag-generator",
+      "destination": "/meta-tag-generator.html"
+    },
+    {
+      "source": "/chmod-calculator",
+      "destination": "/chmod-calculator.html"
+    },
+    {
+      "source": "/http-status-codes",
+      "destination": "/http-status-codes.html"
+    },
+    {
+      "source": "/tailwind-colors",
+      "destination": "/tailwind-colors.html"
+    },
+    {
+      "source": "/regex-cheat-sheet",
+      "destination": "/regex-cheat-sheet.html"
     }
   ],
   "headers": [

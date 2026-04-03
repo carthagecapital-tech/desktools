@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Meta Tag Generator — Free SEO Meta Tags Tool | DeskTools</title>
+<meta name="description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards. Fill in your page details, copy the complete code snippet."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/meta-tag-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Meta Tag Generator — DeskTools"/><meta property="og:description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards."/><meta property="og:url" content="https://desktools.dev/meta-tag-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Meta Tag Generator — DeskTools"/><meta name="twitter:description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Meta Tag Generator","description":"Generate HTML meta tags for SEO, Open Graph, and Twitter Cards.","url":"https://desktools.dev/meta-tag-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=url],textarea,select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:60px;line-height:1.5;font-family:'Outfit',sans-serif}
+select{cursor:pointer}
+.field{margin-bottom:1rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.char-count{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-align:right;margin-top:.2rem}
+.char-ok{color:var(--accent)}.char-warn{color:#ffa94d}.char-bad{color:#ff6b6b}
+.check-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;cursor:pointer;font-size:.85rem;color:var(--muted)}
+.check-row input{accent-color:var(--accent)}
+.output-block{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.output-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border)}
+.output-name{font-size:.82rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.copy-btn{background:var(--accent);color:#0a0a0f;border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;padding:.35rem .7rem;border-radius:5px;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:var(--accent2)}
+.output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.8;white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto}
+.tag-kw{color:var(--accent)}.tag-attr{color:#ffa94d}.tag-val{color:#74c0fc}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Meta Tag Generator</h1>
+  <p class="sub">Generate SEO meta tags, Open Graph, and Twitter Cards. Copy the HTML.</p>
+
+  <div class="card">
+    <div class="card-title">Basic SEO</div>
+    <div class="field">
+      <label>Page Title</label>
+      <input type="text" id="title" placeholder="My Page Title — Brand Name" oninput="generate();countChars('title',60)"/>
+      <div class="char-count" id="title-count"></div>
+    </div>
+    <div class="field">
+      <label>Meta Description</label>
+      <textarea id="description" rows="2" placeholder="A concise description of your page content..." oninput="generate();countChars('description',160)"></textarea>
+      <div class="char-count" id="description-count"></div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Canonical URL</label>
+        <input type="url" id="canonical" placeholder="https://example.com/page" oninput="generate()"/>
+      </div>
+      <div class="field">
+        <label>Robots</label>
+        <select id="robots" onchange="generate()">
+          <option value="index, follow">index, follow (default)</option>
+          <option value="noindex, follow">noindex, follow</option>
+          <option value="index, nofollow">index, nofollow</option>
+          <option value="noindex, nofollow">noindex, nofollow</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Keywords (comma-separated, optional)</label>
+      <input type="text" id="keywords" placeholder="web tools, developer, free" oninput="generate()"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Open Graph / Social</div>
+    <div class="row2">
+      <div class="field">
+        <label>OG Type</label>
+        <select id="ogType" onchange="generate()">
+          <option value="website">website</option>
+          <option value="article">article</option>
+          <option value="product">product</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Site Name</label>
+        <input type="text" id="siteName" placeholder="My Website" oninput="generate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>OG Image URL</label>
+      <input type="url" id="ogImage" placeholder="https://example.com/og-image.jpg" oninput="generate()"/>
+      <div class="hint">Recommended: 1200 x 630 pixels</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Options</div>
+    <label class="check-row"><input type="checkbox" id="optTwitter" checked onchange="generate()"/> Include Twitter Card tags</label>
+    <label class="check-row"><input type="checkbox" id="optViewport" checked onchange="generate()"/> Include viewport meta</label>
+    <label class="check-row"><input type="checkbox" id="optCharset" checked onchange="generate()"/> Include charset meta</label>
+  </div>
+
+  <div class="output-block">
+    <div class="output-header">
+      <span class="output-name">&lt;head&gt; tags</span>
+      <button class="copy-btn" onclick="copyCode()">Copy HTML</button>
+    </div>
+    <div class="output-code" id="output"></div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:680px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What are meta tags and why do they matter?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Meta tags</strong> are HTML elements in the <code>&lt;head&gt;</code> of a page that provide metadata to browsers and search engines. They don't appear on the page itself, but they control how your page appears in search results, social media shares, and browser behavior.</p>
+<p>The most important meta tags for SEO are the <strong>title tag</strong> (shown as the clickable headline in Google results, ideal length 50-60 characters) and the <strong>meta description</strong> (shown as the snippet below, ideal length 150-160 characters). The <strong>canonical URL</strong> tells Google which version of a page is the "official" one, preventing duplicate content issues.</p>
+<p><strong>Open Graph tags</strong> control how your page looks when shared on Facebook, LinkedIn, Slack, and Discord. <strong>Twitter Card tags</strong> do the same for Twitter/X. Without these tags, platforms generate previews from whatever content they can scrape — which often looks terrible. Setting them explicitly ensures your links always look professional when shared.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+function countChars(id,max){
+  var len=document.getElementById(id).value.length;
+  var el=document.getElementById(id+'-count');
+  var cls=len<=max?'char-ok':len<=max*1.2?'char-warn':'char-bad';
+  el.innerHTML='<span class="'+cls+'">'+len+'/'+max+'</span>';
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function generate(){
+  var title=document.getElementById('title').value;
+  var desc=document.getElementById('description').value;
+  var canonical=document.getElementById('canonical').value;
+  var robots=document.getElementById('robots').value;
+  var keywords=document.getElementById('keywords').value;
+  var ogType=document.getElementById('ogType').value;
+  var siteName=document.getElementById('siteName').value;
+  var ogImage=document.getElementById('ogImage').value;
+  var optTwitter=document.getElementById('optTwitter').checked;
+  var optViewport=document.getElementById('optViewport').checked;
+  var optCharset=document.getElementById('optCharset').checked;
+  var lines=[];
+  if(optCharset) lines.push('<meta charset="UTF-8"/>');
+  if(optViewport) lines.push('<meta name="viewport" content="width=device-width, initial-scale=1.0"/>');
+  if(title) lines.push('<title>'+esc(title)+'</title>');
+  if(desc) lines.push('<meta name="description" content="'+esc(desc)+'"/>');
+  if(keywords) lines.push('<meta name="keywords" content="'+esc(keywords)+'"/>');
+  if(robots!=='index, follow') lines.push('<meta name="robots" content="'+robots+'"/>');
+  if(canonical) lines.push('<link rel="canonical" href="'+esc(canonical)+'"/>');
+  lines.push('');
+  // OG
+  if(title||desc||ogImage){
+    lines.push('<!-- Open Graph -->');
+    lines.push('<meta property="og:type" content="'+ogType+'"/>');
+    if(title) lines.push('<meta property="og:title" content="'+esc(title)+'"/>');
+    if(desc) lines.push('<meta property="og:description" content="'+esc(desc)+'"/>');
+    if(canonical) lines.push('<meta property="og:url" content="'+esc(canonical)+'"/>');
+    if(siteName) lines.push('<meta property="og:site_name" content="'+esc(siteName)+'"/>');
+    if(ogImage) lines.push('<meta property="og:image" content="'+esc(ogImage)+'"/>');
+    lines.push('');
+  }
+  // Twitter
+  if(optTwitter&&(title||desc)){
+    lines.push('<!-- Twitter Card -->');
+    lines.push('<meta name="twitter:card" content="'+(ogImage?'summary_large_image':'summary')+'"/>');
+    if(title) lines.push('<meta name="twitter:title" content="'+esc(title)+'"/>');
+    if(desc) lines.push('<meta name="twitter:description" content="'+esc(desc)+'"/>');
+    if(ogImage) lines.push('<meta name="twitter:image" content="'+esc(ogImage)+'"/>');
+  }
+  var raw=lines.join('\n').trim();
+  // Syntax highlight
+  var highlighted=raw
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/(&lt;\/?)([\w:-]+)/g,'$1<span class="tag-kw">$2</span>')
+    .replace(/([\w:-]+)(=)/g,'<span class="tag-attr">$1</span>$2')
+    .replace(/"([^"]*)"/g,'"<span class="tag-val">$1</span>"');
+  document.getElementById('output').innerHTML=highlighted;
+}
+function copyCode(){
+  var el=document.getElementById('output');
+  var text=el.textContent||el.innerText;
+  if(text){navigator.clipboard.writeText(text);if(typeof showToast==='function')showToast('HTML copied!');}
+}
+generate();
+</script>
+</body>
+</html>

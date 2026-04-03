@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Markdown to HTML Converter — Free Online Tool | DeskTools</title>
+<meta name="description" content="Convert Markdown to clean HTML instantly. Supports headings, lists, code blocks, tables, and links. Copy the output HTML."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/markdown-to-html"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Markdown to HTML Converter — DeskTools"/><meta property="og:description" content="Convert Markdown to clean HTML instantly. Copy the output HTML."/><meta property="og:url" content="https://desktools.dev/markdown-to-html"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Markdown to HTML Converter — DeskTools"/><meta name="twitter:description" content="Convert Markdown to clean HTML instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Markdown to HTML Converter","description":"Convert Markdown to clean HTML instantly.","url":"https://desktools.dev/markdown-to-html","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.workspace{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.25rem}
+.toolbar{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);flex-wrap:wrap;gap:.5rem}
+.toolbar-group{display:flex;gap:.5rem}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.45rem 1rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.primary{background:var(--accent);color:#0a0a0f;border-color:var(--accent);font-weight:700}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split>div{position:relative}
+.split>div:first-child{border-right:1px solid var(--border)}
+.pane-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+textarea{width:100%;min-height:400px;padding:1.25rem;background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;resize:vertical;line-height:1.6;outline:none}
+textarea::placeholder{color:var(--muted)}
+pre.output{width:100%;min-height:400px;padding:1.25rem;background:transparent;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);overflow:auto;white-space:pre-wrap;line-height:1.6;margin:0}
+@media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Markdown to HTML</h1>
+  <p class="sub">Convert Markdown to clean, semantic HTML. Copy and use anywhere.</p>
+  <div class="workspace">
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tbtn primary" onclick="convert()">Convert</button>
+        <button class="tbtn" onclick="copyOut()">Copy HTML</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="tbtn" onclick="clearAll()">Clear</button>
+        <button class="tbtn" onclick="loadSample()">Sample</button>
+      </div>
+    </div>
+    <div class="split">
+      <div>
+        <span class="pane-label">Markdown</span>
+        <textarea id="input" placeholder="# Hello World" oninput="convert()"></textarea>
+      </div>
+      <div>
+        <span class="pane-label">HTML Output</span>
+        <pre class="output" id="output"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How does Markdown to HTML conversion work?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Markdown</strong> was designed as a lightweight alternative to HTML for writing content. Every Markdown element has a direct HTML equivalent: <code># Heading</code> becomes <code>&lt;h1&gt;</code>, <code>**bold**</code> becomes <code>&lt;strong&gt;</code>, <code>[link](url)</code> becomes <code>&lt;a href&gt;</code>. A Markdown-to-HTML converter parses these patterns and outputs valid, semantic HTML.</p>
+<p>This tool converts in real time as you type. It handles headings (h1-h6), bold, italic, links, images, ordered and unordered lists, code blocks (both inline and fenced), blockquotes, horizontal rules, and paragraphs. The output is clean HTML without unnecessary wrapper divs or class attributes — ready to paste into any CMS, email template, or static site.</p>
+<p>Common use cases include converting README files to HTML for documentation sites, preparing email newsletter content, migrating blog posts between platforms, and generating HTML snippets from quick Markdown drafts. Unlike a Markdown preview tool (which renders the visual output), this converter gives you the <strong>raw HTML source code</strong> to copy and use directly.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+function convert(){
+  var md=document.getElementById('input').value;
+  var html=mdToHtml(md);
+  document.getElementById('output').textContent=html;
+}
+function mdToHtml(md){
+  var lines=md.split('\n');
+  var html='';var inList=false;var listType='';var inCode=false;var codeLang='';var codeBlock='';
+  for(var i=0;i<lines.length;i++){
+    var line=lines[i];
+    // Fenced code blocks
+    if(line.match(/^```/)){
+      if(inCode){html+='</code></pre>\n';inCode=false;continue;}
+      codeLang=line.replace(/^```/,'').trim();
+      html+='<pre><code'+(codeLang?' class="language-'+codeLang+'"':'')+'>';
+      inCode=true;continue;
+    }
+    if(inCode){html+=esc(line)+'\n';continue;}
+    // Close list if needed
+    if(inList&&!line.match(/^[\s]*[-*+]\s/)&&!line.match(/^[\s]*\d+\.\s/)&&line.trim()!==''){
+      html+='</'+listType+'>\n';inList=false;
+    }
+    // Blank line
+    if(line.trim()===''){if(inList){html+='</'+listType+'>\n';inList=false;}continue;}
+    // Headings
+    var hm=line.match(/^(#{1,6})\s+(.*)/);
+    if(hm){var lv=hm[1].length;html+='<h'+lv+'>'+inline(hm[2])+'</h'+lv+'>\n';continue;}
+    // HR
+    if(line.match(/^[-*_]{3,}\s*$/)){html+='<hr/>\n';continue;}
+    // Blockquote
+    if(line.match(/^>\s?/)){html+='<blockquote>'+inline(line.replace(/^>\s?/,''))+'</blockquote>\n';continue;}
+    // Unordered list
+    var ulm=line.match(/^[\s]*[-*+]\s+(.*)/);
+    if(ulm){if(!inList||listType!=='ul'){if(inList)html+='</'+listType+'>\n';html+='<ul>\n';inList=true;listType='ul';}html+='  <li>'+inline(ulm[1])+'</li>\n';continue;}
+    // Ordered list
+    var olm=line.match(/^[\s]*\d+\.\s+(.*)/);
+    if(olm){if(!inList||listType!=='ol'){if(inList)html+='</'+listType+'>\n';html+='<ol>\n';inList=true;listType='ol';}html+='  <li>'+inline(olm[1])+'</li>\n';continue;}
+    // Paragraph
+    html+='<p>'+inline(line)+'</p>\n';
+  }
+  if(inList)html+='</'+listType+'>\n';
+  if(inCode)html+='</code></pre>\n';
+  return html.trim();
+}
+function inline(text){
+  text=text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1"/>');
+  text=text.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>');
+  text=text.replace(/`([^`]+)`/g,'<code>$1</code>');
+  text=text.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  text=text.replace(/__([^_]+)__/g,'<strong>$1</strong>');
+  text=text.replace(/\*([^*]+)\*/g,'<em>$1</em>');
+  text=text.replace(/_([^_]+)_/g,'<em>$1</em>');
+  text=text.replace(/~~([^~]+)~~/g,'<del>$1</del>');
+  return text;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function copyOut(){var t=document.getElementById('output').textContent;if(t){navigator.clipboard.writeText(t);if(typeof showToast==='function')showToast('HTML copied!');}}
+function clearAll(){document.getElementById('input').value='';document.getElementById('output').textContent='';}
+function loadSample(){document.getElementById('input').value='# Hello World\n\nThis is a **Markdown** document with _formatting_.\n\n## Features\n\n- Bold and *italic* text\n- [Links](https://desktools.dev)\n- `inline code`\n\n### Code Block\n\n```javascript\nconst greeting = "Hello!";\nconsole.log(greeting);\n```\n\n> This is a blockquote\n\n1. First item\n2. Second item\n3. Third item\n\n---\n\nThat\'s it!';convert();}
+</script>
+</body>
+</html>

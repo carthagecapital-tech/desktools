@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JSON to CSV Converter — Free Online Tool | DeskTools</title>
+<meta name="description" content="Convert JSON arrays to CSV format instantly. Flatten nested objects, download as .csv file. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/json-to-csv"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="JSON to CSV Converter — DeskTools"/><meta property="og:description" content="Convert JSON arrays to CSV format instantly. Download as .csv file."/><meta property="og:url" content="https://desktools.dev/json-to-csv"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="JSON to CSV Converter — DeskTools"/><meta name="twitter:description" content="Convert JSON arrays to CSV format instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON to CSV Converter","description":"Convert JSON arrays to CSV format instantly. Download as .csv file.","url":"https://desktools.dev/json-to-csv","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.workspace{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.25rem}
+.toolbar{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);flex-wrap:wrap;gap:.5rem}
+.toolbar-group{display:flex;gap:.5rem}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.45rem 1rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.primary{background:var(--accent);color:#0a0a0f;border-color:var(--accent);font-weight:700}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split>div{position:relative}
+.split>div:first-child{border-right:1px solid var(--border)}
+.pane-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+textarea,pre.output{width:100%;min-height:350px;padding:1.25rem;background:transparent;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;margin:0}
+textarea{border:none;color:var(--text);resize:vertical;outline:none}
+textarea::placeholder{color:var(--muted)}
+pre.output{color:var(--accent);overflow:auto;white-space:pre-wrap}
+.status{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted)}
+@media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>JSON to CSV</h1>
+  <p class="sub">Paste a JSON array, get CSV output. Download or copy.</p>
+  <div class="workspace">
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tbtn primary" onclick="convert()">Convert</button>
+        <button class="tbtn" onclick="copyOut()">Copy CSV</button>
+        <button class="tbtn" onclick="downloadCSV()">Download .csv</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="tbtn" onclick="clearAll()">Clear</button>
+        <button class="tbtn" onclick="loadSample()">Sample</button>
+        <span class="status" id="status"></span>
+      </div>
+    </div>
+    <div class="split">
+      <div>
+        <span class="pane-label">JSON Input</span>
+        <textarea id="input" placeholder='[{"name":"Alice","age":30},{"name":"Bob","age":25}]'></textarea>
+      </div>
+      <div>
+        <span class="pane-label">CSV Output</span>
+        <pre class="output" id="output"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> When to convert JSON to CSV</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>JSON</strong> and <strong>CSV</strong> are the two most common data interchange formats, but they serve different audiences. JSON is structured, supports nesting, and is native to APIs and JavaScript. CSV is flat, tabular, and opens directly in Excel, Google Sheets, and database import tools.</p>
+<p>Converting JSON to CSV is essential when you need to share API data with non-technical stakeholders, import records into a spreadsheet or database, generate reports from JSON-based data sources, or migrate data between systems that expect different formats.</p>
+<p>The main challenge is <strong>flattening nested objects</strong>. A JSON field like <code>{"address": {"city": "NYC"}}</code> needs to become a flat column — either <code>address.city</code> or stringified. Arrays within objects are typically joined or stringified. This tool handles both cases and properly escapes CSV values that contain commas, quotes, or newlines.</p>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+function convert(){
+  var raw=document.getElementById('input').value.trim();
+  if(!raw)return;
+  try{
+    var data=JSON.parse(raw);
+    if(!Array.isArray(data)){data=[data];}
+    var flat=data.map(function(obj){return flatten(obj);});
+    var keys={};flat.forEach(function(row){Object.keys(row).forEach(function(k){keys[k]=true;});});
+    var headers=Object.keys(keys);
+    var csv=headers.map(csvEscape).join(',')+'\n';
+    flat.forEach(function(row){
+      csv+=headers.map(function(h){
+        var v=row[h];
+        if(v===undefined||v===null)return'';
+        return csvEscape(String(v));
+      }).join(',')+'\n';
+    });
+    document.getElementById('output').textContent=csv;
+    document.getElementById('status').textContent=data.length+' rows, '+headers.length+' columns';
+    document.getElementById('status').style.color='var(--accent)';
+  }catch(e){
+    document.getElementById('output').textContent='Error: '+e.message;
+    document.getElementById('status').textContent='Invalid JSON';
+    document.getElementById('status').style.color='#ff6b6b';
+  }
+}
+function flatten(obj,prefix){
+  prefix=prefix||'';
+  var result={};
+  for(var key in obj){
+    var fullKey=prefix?prefix+'.'+key:key;
+    var val=obj[key];
+    if(val&&typeof val==='object'&&!Array.isArray(val)){
+      var sub=flatten(val,fullKey);
+      for(var sk in sub)result[sk]=sub[sk];
+    }else if(Array.isArray(val)){
+      result[fullKey]=JSON.stringify(val);
+    }else{
+      result[fullKey]=val;
+    }
+  }
+  return result;
+}
+function csvEscape(val){
+  if(val.indexOf(',')!==-1||val.indexOf('"')!==-1||val.indexOf('\n')!==-1){
+    return'"'+val.replace(/"/g,'""')+'"';
+  }
+  return val;
+}
+function copyOut(){var t=document.getElementById('output').textContent;if(t){navigator.clipboard.writeText(t);if(typeof showToast==='function')showToast('CSV copied!');}}
+function downloadCSV(){
+  var t=document.getElementById('output').textContent;if(!t)return;
+  var blob=new Blob([t],{type:'text/csv'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.csv';a.click();
+}
+function clearAll(){document.getElementById('input').value='';document.getElementById('output').textContent='';document.getElementById('status').textContent='';}
+function loadSample(){document.getElementById('input').value=JSON.stringify([{id:1,name:"Alice",email:"alice@example.com",age:30,address:{city:"New York",state:"NY"}},{id:2,name:"Bob",email:"bob@example.com",age:25,address:{city:"San Francisco",state:"CA"}},{id:3,name:"Charlie",email:"charlie@example.com",age:35,address:{city:"Chicago",state:"IL"}}],null,2);convert();}
+</script>
+</body>
+</html>

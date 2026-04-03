@@ -48,4 +48,14 @@
   <url><loc>https://desktools.dev/og-previewer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://desktools.dev/box-shadow-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://desktools.dev/env-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/contrast-checker</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/markdown-to-html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/json-to-csv</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/csv-to-json</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/slug-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/meta-tag-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/chmod-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/http-status-codes</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/tailwind-colors</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://desktools.dev/regex-cheat-sheet</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
