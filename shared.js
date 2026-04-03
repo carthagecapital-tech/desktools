@@ -16,7 +16,11 @@
         '      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>' +
         '      <input id="searchInput" type="text" placeholder="Search tools..." autocomplete="off"/>' +
         '    </div>'
-      : '') +
+      : '    <button class="nav-search-btn" onclick="openPalette()" title="Search all tools">' +
+        '      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>' +
+        '      <span class="search-btn-text">Search tools</span>' +
+        '      <kbd class="search-btn-kbd">/</kbd>' +
+        '    </button>') +
     '    <div class="nav-dropdown" id="catDropdown">' +
     '      <button class="nav-dropdown-btn" id="catBtn">' +
     '        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>' +
@@ -154,8 +158,35 @@
     '.deep-dive-content strong{color:var(--text,#e8e8f0);font-weight:600}' +
     '.deep-dive-content code{font-family:"JetBrains Mono",monospace;background:var(--bg3,#14141e);padding:.1rem .35rem;border-radius:4px;font-size:.82rem;color:var(--text,#e8e8f0)}' +
     '@media(max-width:768px){.deep-dive{padding:0 20px}}' +
+    /* Cmd+K Palette */
+    '.nav-search-btn{display:flex;align-items:center;gap:.5rem;background:var(--bg3,#14141e);border:1px solid var(--border,rgba(255,255,255,0.07));border-radius:8px;color:var(--muted,#6b6b80);font-family:"Outfit",sans-serif;font-size:.85rem;padding:.4rem .85rem;cursor:pointer;transition:border-color .2s,color .2s;white-space:nowrap}' +
+    '.nav-search-btn:hover{border-color:var(--accent,#00d4aa);color:var(--text,#e8e8f0)}' +
+    '.nav-search-btn svg{flex-shrink:0}' +
+    '.search-btn-text{font-weight:500}' +
+    '.search-btn-kbd{font-family:"JetBrains Mono",monospace;font-size:.65rem;background:rgba(255,255,255,0.06);border:1px solid var(--border,rgba(255,255,255,0.07));padding:.1rem .35rem;border-radius:4px;color:var(--muted,#6b6b80);line-height:1}' +
+    '.cmdk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:15vh 1rem 2rem}' +
+    '.cmdk-overlay.open{display:flex}' +
+    '.cmdk-box{background:var(--bg2,#0f0f16);border:1px solid var(--border,rgba(255,255,255,0.07));border-radius:14px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:cmdkIn .15s ease}' +
+    '@keyframes cmdkIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}' +
+    '.cmdk-input-wrap{display:flex;align-items:center;gap:.6rem;padding:.85rem 1.1rem;border-bottom:1px solid var(--border,rgba(255,255,255,0.07))}' +
+    '.cmdk-input-wrap svg{color:var(--muted,#6b6b80);flex-shrink:0}' +
+    '.cmdk-input{background:none;border:none;outline:none;color:var(--text,#e8e8f0);font-family:"Outfit",sans-serif;font-size:1rem;width:100%}' +
+    '.cmdk-input::placeholder{color:var(--muted,#6b6b80)}' +
+    '.cmdk-hint{font-family:"JetBrains Mono",monospace;font-size:.65rem;color:var(--muted,#6b6b80);background:var(--bg3,#14141e);padding:.15rem .4rem;border-radius:4px;white-space:nowrap}' +
+    '.cmdk-list{max-height:340px;overflow-y:auto;padding:.4rem}' +
+    '.cmdk-list::-webkit-scrollbar{width:4px}.cmdk-list::-webkit-scrollbar-thumb{background:var(--border,rgba(255,255,255,0.07));border-radius:2px}' +
+    '.cmdk-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;border-radius:8px;text-decoration:none;color:var(--text,#e8e8f0);transition:background .1s;cursor:pointer}' +
+    '.cmdk-item:hover,.cmdk-item.active{background:var(--bg3,#14141e)}' +
+    '.cmdk-item-icon{font-family:"JetBrains Mono",monospace;font-size:.75rem;font-weight:700;color:var(--accent,#00d4aa);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.25rem .45rem;border-radius:6px;min-width:36px;text-align:center;flex-shrink:0}' +
+    '.cmdk-item-text{flex:1;min-width:0}' +
+    '.cmdk-item-name{font-size:.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+    '.cmdk-item-desc{font-size:.75rem;color:var(--muted,#6b6b80);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+    '.cmdk-item-tag{font-family:"JetBrains Mono",monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted,#6b6b80);border:1px solid var(--border,rgba(255,255,255,0.07));padding:.1rem .35rem;border-radius:3px;flex-shrink:0}' +
+    '.cmdk-empty{text-align:center;padding:2rem 1rem;color:var(--muted,#6b6b80);font-size:.88rem}' +
+    '.cmdk-footer{display:flex;align-items:center;gap:1rem;padding:.6rem 1.1rem;border-top:1px solid var(--border,rgba(255,255,255,0.07));font-size:.7rem;color:var(--muted,#6b6b80)}' +
+    '.cmdk-footer kbd{font-family:"JetBrains Mono",monospace;background:var(--bg3,#14141e);padding:.1rem .35rem;border-radius:3px;font-size:.65rem;border:1px solid var(--border,rgba(255,255,255,0.07))}' +
     /* Mobile */
-    '@media(max-width:600px){nav,.dt-nav{padding:0 1rem;height:52px}.nav-search{width:140px}.nav-search:focus-within{width:170px}.btn-request{font-size:.78rem;padding:.4rem .75rem}}';
+    '@media(max-width:600px){nav,.dt-nav{padding:0 1rem;height:52px}.nav-search{width:140px}.nav-search:focus-within{width:170px}.btn-request{font-size:.78rem;padding:.4rem .75rem}.search-btn-text{display:none}.nav-search-btn{padding:.4rem .6rem}.search-btn-kbd{display:none}}';
   document.head.appendChild(sharedStyle);
 
   // Remove existing nav
@@ -424,5 +455,184 @@
     navigator.clipboard.writeText(text);
     showToast('Copied to clipboard');
   };
+
+  /* ---------- PWA ---------- */
+  // Inject manifest link if missing
+  if (!document.querySelector('link[rel="manifest"]')) {
+    var manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = '/manifest.json';
+    document.head.appendChild(manifestLink);
+  }
+  // Inject theme-color meta if missing
+  if (!document.querySelector('meta[name="theme-color"]')) {
+    var themeMeta = document.createElement('meta');
+    themeMeta.name = 'theme-color';
+    themeMeta.content = '#00d4aa';
+    document.head.appendChild(themeMeta);
+  }
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+  }
+
+  /* ---------- CMD+K COMMAND PALETTE ---------- */
+  var TOOLS_DATA = [
+    {name:'JSON Formatter',desc:'Format, validate, and minify JSON',icon:'{}',tag:'Dev',url:'/json-formatter'},
+    {name:'Regex Tester',desc:'Test regular expressions with live matching',icon:'.*',tag:'Dev',url:'/regex-tester'},
+    {name:'Base64 Encoder',desc:'Encode and decode Base64 text',icon:'B64',tag:'Dev',url:'/base64-encoder'},
+    {name:'Markdown Preview',desc:'Write markdown, preview live',icon:'M↓',tag:'Dev',url:'/markdown-preview'},
+    {name:'URL Encoder',desc:'Encode/decode URL strings',icon:'%',tag:'Dev',url:'/url-encoder'},
+    {name:'Diff Checker',desc:'Compare two texts side by side',icon:'≠',tag:'Dev',url:'/diff-checker'},
+    {name:'UUID Generator',desc:'Generate cryptographically secure UUIDs',icon:'UID',tag:'Dev',url:'/uuid-generator'},
+    {name:'JSON to Table',desc:'Convert JSON arrays to readable tables',icon:'♣',tag:'Dev',url:'/json-to-table'},
+    {name:'Timestamp Converter',desc:'Unix timestamp to human date',icon:'≈',tag:'Dev',url:'/timestamp-converter'},
+    {name:'CSS Minifier',desc:'Compress CSS by removing whitespace',icon:'.{}',tag:'Dev',url:'/css-minifier'},
+    {name:'HTML Entity Encoder',desc:'Convert special chars to entities',icon:'&',tag:'Dev',url:'/html-entity-encoder'},
+    {name:'Number Base Converter',desc:'Binary, decimal, hex, octal',icon:'0x',tag:'Dev',url:'/number-base-converter'},
+    {name:'Image to Base64',desc:'Upload image, get Base64 string',icon:'IMG',tag:'Dev',url:'/image-to-base64'},
+    {name:'Cron Builder',desc:'Build cron expressions visually',icon:'⏰',tag:'Dev',url:'/cron-builder'},
+    {name:'API Request Builder',desc:'Send HTTP requests from browser',icon:'API',tag:'Dev',url:'/api-tester'},
+    {name:'SQL Formatter',desc:'Format and highlight SQL queries',icon:'SQL',tag:'Dev',url:'/sql-formatter'},
+    {name:'JSON Schema Validator',desc:'Validate JSON against a schema',icon:'{✓}',tag:'Dev',url:'/json-schema-validator'},
+    {name:'Env File Generator',desc:'Build .env files with templates',icon:'.env',tag:'Dev',url:'/env-generator'},
+    {name:'Color Picker',desc:'Pick colors, convert HEX/RGB/HSL',icon:'⦿',tag:'Design',url:'/color-picker'},
+    {name:'QR Code Generator',desc:'Generate QR codes for URLs and text',icon:'QR',tag:'Design',url:'/qr-code-generator'},
+    {name:'Aspect Ratio Calculator',desc:'Calculate ratios and resize',icon:'16:9',tag:'Design',url:'/aspect-ratio-calculator'},
+    {name:'Lorem Ipsum Generator',desc:'Generate placeholder text',icon:'¶',tag:'Text',url:'/lorem-ipsum-generator'},
+    {name:'Text Transformer',desc:'Case conversion, sort, deduplicate',icon:'Aa',tag:'Text',url:'/text-transformer'},
+    {name:'Gradient Generator',desc:'Build CSS gradients visually',icon:'▴',tag:'Design',url:'/gradient-generator'},
+    {name:'SVG Optimizer',desc:'Clean and minify SVG markup',icon:'SVG',tag:'Design',url:'/svg-optimizer'},
+    {name:'Font Pairer',desc:'Pair Google Fonts, preview live',icon:'Tt',tag:'Design',url:'/font-pairer'},
+    {name:'Favicon Generator',desc:'Upload image, get all favicon sizes',icon:'🖼',tag:'Design',url:'/favicon-generator'},
+    {name:'OG Image Previewer',desc:'Preview social media share cards',icon:'OG',tag:'Design',url:'/og-previewer'},
+    {name:'Box Shadow Generator',desc:'Visual multi-layer shadow builder',icon:'▣',tag:'Design',url:'/box-shadow-generator'},
+    {name:'Word Counter',desc:'Count words, chars, reading time',icon:'W#',tag:'Text',url:'/word-counter'},
+    {name:'Invoice Calculator',desc:'Calculate totals, tax, discounts',icon:'$',tag:'Biz',url:'/invoice-calculator'},
+    {name:'Pomodoro Timer',desc:'Focus timer with work/break intervals',icon:'⊗',tag:'Prod',url:'/pomodoro-timer'},
+    {name:'Unit Converter',desc:'Length, weight, temp, area, speed',icon:'⇔',tag:'Util',url:'/unit-converter'},
+    {name:'Meeting Cost Calculator',desc:'See the real cost of meetings',icon:'∑',tag:'Biz',url:'/meeting-cost'},
+    {name:'Email Subject Tester',desc:'Score subject lines for open rates',icon:'@',tag:'Biz',url:'/email-subject-tester'},
+    {name:'Password Generator',desc:'Generate strong random passwords',icon:'†',tag:'Sec',url:'/password-generator'},
+    {name:'Hash Generator',desc:'MD5, SHA-1, SHA-256, SHA-512',icon:'#',tag:'Sec',url:'/hash-generator'},
+    {name:'JWT Decoder',desc:'Decode JSON Web Tokens',icon:'JWT',tag:'Sec',url:'/jwt-decoder'},
+    {name:'Password Strength',desc:'Test entropy, crack time, patterns',icon:'••',tag:'Sec',url:'/password-strength'},
+    {name:'TOTP Generator',desc:'Generate 2FA codes for testing',icon:'2FA',tag:'Sec',url:'/totp-generator'},
+    {name:'Text Encryptor',desc:'AES-256 encrypt and decrypt text',icon:'🔒',tag:'Sec',url:'/text-encryptor'},
+    {name:'CSP Header Generator',desc:'Build Content-Security-Policy visually',icon:'CSP',tag:'Sec',url:'/csp-generator'},
+    {name:'Security.txt Generator',desc:'Generate security.txt and robots.txt',icon:'.txt',tag:'Sec',url:'/security-txt-generator'},
+  ];
+
+  // Inject palette HTML
+  var paletteHTML =
+    '<div class="cmdk-overlay" id="cmdkOverlay" onclick="if(event.target===this)closePalette()">' +
+    '<div class="cmdk-box">' +
+    '<div class="cmdk-input-wrap">' +
+    '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>' +
+    '<input class="cmdk-input" id="cmdkInput" type="text" placeholder="Search tools..." autocomplete="off"/>' +
+    '<span class="cmdk-hint">ESC</span>' +
+    '</div>' +
+    '<div class="cmdk-list" id="cmdkList"></div>' +
+    '<div class="cmdk-footer">' +
+    '<span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span>' +
+    '<span><kbd>↵</kbd> open</span>' +
+    '<span><kbd>esc</kbd> close</span>' +
+    '</div>' +
+    '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', paletteHTML);
+
+  var cmdkActive = -1;
+
+  window.openPalette = function () {
+    document.getElementById('cmdkOverlay').classList.add('open');
+    var input = document.getElementById('cmdkInput');
+    input.value = '';
+    input.focus();
+    cmdkActive = -1;
+    renderPaletteList('');
+  };
+
+  window.closePalette = function () {
+    document.getElementById('cmdkOverlay').classList.remove('open');
+  };
+
+  function renderPaletteList(query) {
+    var list = document.getElementById('cmdkList');
+    var q = query.toLowerCase();
+    var filtered = TOOLS_DATA.filter(function (t) {
+      return !q || t.name.toLowerCase().indexOf(q) !== -1 || t.desc.toLowerCase().indexOf(q) !== -1 || t.tag.toLowerCase().indexOf(q) !== -1;
+    });
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="cmdk-empty">No tools found for &ldquo;' + query + '&rdquo;</div>';
+      return;
+    }
+    list.innerHTML = filtered.map(function (t, i) {
+      return '<a class="cmdk-item' + (i === cmdkActive ? ' active' : '') + '" href="' + t.url + '" data-idx="' + i + '">' +
+        '<span class="cmdk-item-icon">' + t.icon + '</span>' +
+        '<span class="cmdk-item-text"><span class="cmdk-item-name">' + t.name + '</span><span class="cmdk-item-desc">' + t.desc + '</span></span>' +
+        '<span class="cmdk-item-tag">' + t.tag + '</span></a>';
+    }).join('');
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function (e) {
+    var overlay = document.getElementById('cmdkOverlay');
+    var isOpen = overlay && overlay.classList.contains('open');
+
+    // Cmd+K or Ctrl+K to open
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (isOpen) closePalette(); else openPalette();
+      return;
+    }
+
+    // / key to open (only when not typing in an input/textarea)
+    if (e.key === '/' && !isOpen) {
+      var tag = document.activeElement.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT' && !document.activeElement.isContentEditable) {
+        e.preventDefault();
+        openPalette();
+        return;
+      }
+    }
+
+    if (!isOpen) return;
+
+    if (e.key === 'Escape') {
+      closePalette();
+      return;
+    }
+
+    var items = document.querySelectorAll('#cmdkList .cmdk-item');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cmdkActive = Math.min(cmdkActive + 1, items.length - 1);
+      items.forEach(function (el, i) { el.classList.toggle('active', i === cmdkActive); });
+      items[cmdkActive].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cmdkActive = Math.max(cmdkActive - 1, 0);
+      items.forEach(function (el, i) { el.classList.toggle('active', i === cmdkActive); });
+      items[cmdkActive].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (cmdkActive >= 0 && items[cmdkActive]) {
+        window.location.href = items[cmdkActive].getAttribute('href');
+      } else if (items.length > 0) {
+        window.location.href = items[0].getAttribute('href');
+      }
+    }
+  });
+
+  // Search input handler
+  var cmdkInput = document.getElementById('cmdkInput');
+  if (cmdkInput) {
+    cmdkInput.addEventListener('input', function () {
+      cmdkActive = -1;
+      renderPaletteList(this.value);
+    });
+  }
 
 })();

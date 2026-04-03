@@ -1,0 +1,18 @@
+{
+  "name": "DeskTools",
+  "short_name": "DeskTools",
+  "description": "Tiny browser-based tools that just work. Free, private, no install.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00d4aa",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["developer", "utilities", "productivity"],
+  "orientation": "any"
+}
