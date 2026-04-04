@@ -83,6 +83,7 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
       <div class="perm-cell"><label><input type="checkbox" checked data-who="u" data-perm="x" onchange="calc()"/> x</label></div>
     </div>
   </div>
+
 </div>
 
 <div class="deep-dive" style="max-width:580px;padding:0 2rem">
@@ -91,6 +92,17 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 <p><strong>Unix file permissions</strong> control who can read, write, and execute files. Every file has three permission groups: <strong>owner</strong> (the user who created it), <strong>group</strong> (users in the file's group), and <strong>others</strong> (everyone else). Each group can have read (r), write (w), and execute (x) permissions.</p>
 <p>Permissions are represented in two ways: <strong>symbolic notation</strong> like <code>rwxr-xr-x</code> (9 characters, 3 per group) and <strong>numeric/octal notation</strong> like <code>755</code>. In octal, each digit is the sum of: read=4, write=2, execute=1. So 7 (4+2+1) means full access, 5 (4+1) means read+execute, and 0 means no access.</p>
 <p>Common permission sets: <code>755</code> for executable files and directories (owner full, others read+execute), <code>644</code> for regular files (owner read+write, others read-only), <code>600</code> for private files (owner only), and <code>777</code> for full access (avoid in production — security risk). The <code>chmod</code> command changes permissions: <code>chmod 755 filename</code>.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Calculateur chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Calculadora chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Chmod-Rechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Calculadora chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>chmod計算機</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>chmod 权限计算器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>chmod 권한 계산기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة صلاحيات chmod</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

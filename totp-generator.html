@@ -98,6 +98,18 @@ select{cursor:pointer;-webkit-appearance:none}
         <p><strong>TOTP (Time-based One-Time Password)</strong> uses a shared secret and the current time to generate a code that changes every 30 seconds. The algorithm takes the secret key, combines it with a time counter (current Unix time divided by the period), and runs it through HMAC-SHA1 to produce a 6 or 8-digit code.</p>
         <p>This is the same algorithm behind <strong>Google Authenticator, Authy, 1Password, and Microsoft Authenticator</strong>. The secret key is typically shared as a Base32-encoded string or QR code during 2FA setup. Both the server and your authenticator app independently generate the same code from the same secret and time — no network request needed.</p>
         <p>This tool is useful for developers <strong>testing 2FA integrations</strong>, verifying that a secret key produces the expected codes, or debugging authentication flows. Enter any Base32 secret to see live rotating codes. Everything runs in your browser using the Web Crypto API — your secret never leaves your device.</p>
+
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur TOTP / Code 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador TOTP / Código 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>TOTP-Generator / 2FA-Code</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador TOTP / Código 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>TOTP生成ツール（二要素認証）</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>TOTP 生成器（双因素认证）</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>TOTP 생성기 (2단계 인증)</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد TOTP — رمز المصادقة الثنائية</p>
+</div>
       </div>
     </div>
   </div>

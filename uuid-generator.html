@@ -57,9 +57,22 @@
             </div>
         </div>
     </div>
+
 </div>
 
-<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is a UUID?</button><div class="deep-dive-body"><div class="deep-dive-content"><p>A <strong>UUID (Universally Unique Identifier)</strong> is a 128-bit number formatted as 32 hexadecimal characters in 5 groups: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. UUIDs are designed to be globally unique without requiring a central authority — the probability of generating two identical UUIDs is astronomically low.</p><p><strong>Version 4 UUIDs</strong> (which this tool generates) use cryptographically secure random numbers for all bits except the version indicator (<code>4</code>) and the variant bits. This makes them ideal for database primary keys, session IDs, file names, and distributed system identifiers.</p><p>This tool uses the browser's <code>crypto.getRandomValues()</code> API, which provides cryptographically strong randomness — the same source used for encryption keys. Unlike sequential IDs, UUIDs reveal no information about creation order or count, making them suitable for security-sensitive contexts.</p></div></div></div>
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is a UUID?</button><div class="deep-dive-body"><div class="deep-dive-content"><p>A <strong>UUID (Universally Unique Identifier)</strong> is a 128-bit number formatted as 32 hexadecimal characters in 5 groups: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. UUIDs are designed to be globally unique without requiring a central authority — the probability of generating two identical UUIDs is astronomically low.</p><p><strong>Version 4 UUIDs</strong> (which this tool generates) use cryptographically secure random numbers for all bits except the version indicator (<code>4</code>) and the variant bits. This makes them ideal for database primary keys, session IDs, file names, and distributed system identifiers.</p><p>This tool uses the browser's <code>crypto.getRandomValues()</code> API, which provides cryptographically strong randomness — the same source used for encryption keys. Unlike sequential IDs, UUIDs reveal no information about creation order or count, making them suitable for security-sensitive contexts.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur d'UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>UUID / GUID Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>UUID / GUIDジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>UUID / GUID 生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>UUID / GUID 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد UUID / GUID</p>
+</div>
+</div></div></div>
 <script src="/shared.js"></script>
 <script>
     let uuidFormat = 'default';

@@ -132,9 +132,22 @@ footer a{color:var(--accent);text-decoration:none}
     <button class="btn btn-primary" id="copyBtn" onclick="copyOutput()">Copy Optimized SVG</button>
     <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
   </div>
+
 </div>
 
-<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why optimize SVG files?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>SVG (Scalable Vector Graphics)</strong> files exported from design tools like Figma, Illustrator, and Sketch often contain unnecessary data: editor metadata, hidden layers, redundant groups, overly precise coordinates, and default namespaces. This bloat can double or triple the file size.</p><p>Optimizing SVGs removes this cruft while preserving visual output. Common optimizations include removing comments and metadata, collapsing unnecessary groups, shortening numeric precision (12 decimal places to 2), merging overlapping paths, and stripping default attribute values the browser already assumes.</p><p>Smaller SVGs mean faster page loads, especially on sites with many icons. An optimized icon set can save <strong>50-80% file size</strong> compared to raw design tool exports. This tool runs client-side so your SVG code never leaves your browser — important for proprietary icons and brand assets.</p></div></div></div>
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why optimize SVG files?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>SVG (Scalable Vector Graphics)</strong> files exported from design tools like Figma, Illustrator, and Sketch often contain unnecessary data: editor metadata, hidden layers, redundant groups, overly precise coordinates, and default namespaces. This bloat can double or triple the file size.</p><p>Optimizing SVGs removes this cruft while preserving visual output. Common optimizations include removing comments and metadata, collapsing unnecessary groups, shortening numeric precision (12 decimal places to 2), merging overlapping paths, and stripping default attribute values the browser already assumes.</p><p>Smaller SVGs mean faster page loads, especially on sites with many icons. An optimized icon set can save <strong>50-80% file size</strong> compared to raw design tool exports. This tool runs client-side so your SVG code never leaves your browser — important for proprietary icons and brand assets.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Optimiseur SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Optimizador SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>SVG-Optimierer</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Otimizador SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>SVG最適化ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>SVG 优化压缩工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>SVG 최적화 도구</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة تحسين SVG</p>
+</div>
+</div></div></div>
 <script src="/shared.js"></script>
 <script>
 function fmt(n){return n>=1024?(n/1024).toFixed(1)+'KB':n+'B'}

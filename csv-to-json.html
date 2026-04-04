@@ -68,6 +68,7 @@ pre.output{color:var(--accent);overflow:auto;white-space:pre-wrap}
       </div>
     </div>
   </div>
+
 </div>
 
 <div class="deep-dive" style="max-width:900px;padding:0 2rem">
@@ -76,6 +77,17 @@ pre.output{color:var(--accent);overflow:auto;white-space:pre-wrap}
 <p><strong>CSV (Comma-Separated Values)</strong> is the simplest tabular data format — just rows and columns separated by commas. It's the universal export format for spreadsheets, databases, and analytics tools. But modern APIs and web applications expect <strong>JSON</strong>, so conversion between the two is one of the most common data tasks.</p>
 <p>The first row of a CSV is typically the header row, defining column names. Each subsequent row becomes a JSON object where the keys are the header names and the values are the cell contents. This tool auto-detects <strong>data types</strong>: numbers become JSON numbers (not strings), "true"/"false" become booleans, and empty cells become null.</p>
 <p>CSV parsing has edge cases that trip up naive implementations: values containing commas must be quoted (<code>"New York, NY"</code>), values containing quotes must escape them by doubling (<code>""quoted""</code>), and newlines within quoted values are valid. This tool handles all RFC 4180 edge cases correctly.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur CSV en JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor de CSV a JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>CSV-zu-JSON Konverter</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor de CSV para JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>CSVからJSONへの変換</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>CSV 转 JSON 工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>CSV를 JSON으로 변환</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول CSV إلى JSON</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

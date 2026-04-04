@@ -95,6 +95,7 @@ select:focus,input:focus{border-color:var(--accent)}
     <div class="card-title">Next 5 Runs</div>
     <ul class="next-runs" id="nextRuns"></ul>
   </div>
+
 </div>
 
 <div class="deep-dive" style="max-width:640px;padding:0 2rem">
@@ -103,6 +104,17 @@ select:focus,input:focus{border-color:var(--accent)}
 <p><strong>Cron</strong> is a time-based job scheduler found in Unix-like systems. A cron expression is a string of five fields — <code>minute hour day-of-month month day-of-week</code> — that defines when a task should run. The asterisk <code>*</code> means "every," a number means "at exactly," and special characters like <code>*/5</code> (every 5th), <code>1-5</code> (range), and <code>1,15</code> (list) add flexibility.</p>
 <p>Cron is used for <strong>scheduled backups, log rotation, report generation, cache clearing, email digests, and deployment pipelines</strong>. Cloud platforms like AWS (CloudWatch Events), Google Cloud Scheduler, and GitHub Actions all use cron syntax. Even Kubernetes CronJobs use the same format.</p>
 <p>Common mistakes include confusing day-of-week numbering (0=Sunday in most systems), forgetting that both day-of-month and day-of-week can trigger a run (they're OR'd, not AND'd in standard cron), and accidentally scheduling intensive tasks every minute. This tool shows you exactly when your expression will fire next, so you can verify before deploying.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Constructeur d'expressions cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Constructor de expresiones cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Cron-Ausdruck-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Construtor de expressões cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Cron式ビルダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Cron 表达式生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Cron 표현식 빌더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>منشئ تعبيرات Cron</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

@@ -97,6 +97,18 @@ textarea{min-height:120px;line-height:1.5}
         <p><strong>AES-256-GCM</strong> (Advanced Encryption Standard with Galois/Counter Mode) is the gold standard for symmetric encryption. It uses a 256-bit key to both encrypt and decrypt data, and the GCM mode provides <strong>authenticated encryption</strong> — meaning it detects if the ciphertext has been tampered with.</p>
         <p>Your passphrase is converted into a 256-bit encryption key using <strong>PBKDF2</strong> (Password-Based Key Derivation Function 2) with 100,000 iterations. This deliberate slowness makes brute-force attacks on weak passphrases much harder. A random salt ensures the same passphrase produces different keys each time.</p>
         <p>The output contains three parts concatenated and Base64-encoded: the <strong>salt</strong> (16 bytes), the <strong>initialization vector</strong> (12 bytes), and the <strong>ciphertext</strong>. All three are needed for decryption. Everything runs in your browser using the <strong>Web Crypto API</strong> — the same cryptographic library used by banks and password managers. No data is ever sent to a server.</p>
+
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Chiffreur de texte AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Encriptador de texto AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Text-Verschlüsselung AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Criptografador de texto AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>テキスト暗号化ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>文本加密工具 AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>텍스트 암호화 도구</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة تشفير النصوص AES-256</p>
+</div>
       </div>
     </div>
   </div>

@@ -136,9 +136,22 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="css-out" id="cssOut" onclick="copyCSS()" title="Click to copy"></div>
     <button class="copy-btn" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
   </div>
+
 </div>
 
-<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> CSS gradients explained</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>CSS gradients</strong> create smooth transitions between colors without using images. <code>linear-gradient()</code> transitions along a straight line at any angle, <code>radial-gradient()</code> radiates from a center point, and <code>conic-gradient()</code> sweeps around a center like a color wheel.</p><p>Each gradient takes <strong>color stops</strong> — the colors and optional positions where they appear. Two stops create a simple fade; multiple stops create complex patterns. Stops can overlap (creating hard lines) or be spread apart (creating smooth blends). You can layer multiple gradients using comma separation for advanced effects.</p><p>Gradients are resolution-independent (they scale perfectly to any size), file-size free (no image download), and easily animated with CSS transitions. They're used for backgrounds, overlays, text effects, progress bars, and decorative elements. This tool lets you build gradients visually and copy the exact CSS.</p></div></div></div>
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> CSS gradients explained</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>CSS gradients</strong> create smooth transitions between colors without using images. <code>linear-gradient()</code> transitions along a straight line at any angle, <code>radial-gradient()</code> radiates from a center point, and <code>conic-gradient()</code> sweeps around a center like a color wheel.</p><p>Each gradient takes <strong>color stops</strong> — the colors and optional positions where they appear. Two stops create a simple fade; multiple stops create complex patterns. Stops can overlap (creating hard lines) or be spread apart (creating smooth blends). You can layer multiple gradients using comma separation for advanced effects.</p><p>Gradients are resolution-independent (they scale perfectly to any size), file-size free (no image download), and easily animated with CSS transitions. They're used for backgrounds, overlays, text effects, progress bars, and decorative elements. This tool lets you build gradients visually and copy the exact CSS.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de dégradés CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de gradientes CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>CSS-Farbverlauf-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de gradientes CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>CSSグラデーションジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>CSS 渐变生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>CSS 그라디언트 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد التدرجات CSS</p>
+</div>
+</div></div></div>
 <script src="/shared.js"></script>
 <script>
 let type='linear', stops=[{color:'#00d4aa',pos:0},{color:'#7c3aed',pos:100}];

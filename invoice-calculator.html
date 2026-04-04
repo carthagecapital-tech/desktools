@@ -150,9 +150,22 @@ footer a{color:var(--accent);text-decoration:none}
     <button class="btn btn-primary" id="copyBtn" onclick="copyBreakdown()">Copy Breakdown</button>
     <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
   </div>
+
 </div>
 
-<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How invoice calculations work</button><div class="deep-dive-body"><div class="deep-dive-content"><p>A proper invoice calculation follows a specific order: <strong>line items</strong> (quantity × unit price) are summed into a subtotal. Then <strong>discounts</strong> are applied (percentage or fixed amount off the subtotal). <strong>Tax</strong> is calculated on the post-discount amount. Finally, <strong>shipping</strong> or additional fees are added to reach the total.</p><p>Getting the order wrong — like calculating tax before discount — results in overcharging. Different jurisdictions have different rules about what's taxable, at what rate, and whether shipping is taxed. This tool follows the most common convention: subtotal → discount → tax → shipping → total.</p><p>The copy feature outputs a clean text breakdown suitable for pasting into emails, invoices, or accounting software. For freelancers and small businesses, this eliminates spreadsheet setup for quick quotes and estimates while keeping the math transparent and error-free.</p></div></div></div>
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How invoice calculations work</button><div class="deep-dive-body"><div class="deep-dive-content"><p>A proper invoice calculation follows a specific order: <strong>line items</strong> (quantity × unit price) are summed into a subtotal. Then <strong>discounts</strong> are applied (percentage or fixed amount off the subtotal). <strong>Tax</strong> is calculated on the post-discount amount. Finally, <strong>shipping</strong> or additional fees are added to reach the total.</p><p>Getting the order wrong — like calculating tax before discount — results in overcharging. Different jurisdictions have different rules about what's taxable, at what rate, and whether shipping is taxed. This tool follows the most common convention: subtotal → discount → tax → shipping → total.</p><p>The copy feature outputs a clean text breakdown suitable for pasting into emails, invoices, or accounting software. For freelancers and small businesses, this eliminates spreadsheet setup for quick quotes and estimates while keeping the math transparent and error-free.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Calculateur de facture</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Calculadora de facturas</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Rechnungsrechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Calculadora de fatura</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>請求書計算ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>发票计算器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>송장 계산기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة الفواتير</p>
+</div>
+</div></div></div>
 <script src="/shared.js"></script>
 <script>
 let items=[{desc:'',qty:1,price:0}];

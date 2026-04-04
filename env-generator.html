@@ -81,6 +81,7 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
     </div>
     <div class="output-code" id="output"></div>
   </div>
+
 </div>
 
 <div class="deep-dive" style="max-width:680px;padding:0 2rem">
@@ -89,6 +90,17 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 <p><strong>Environment variables</strong> store configuration that changes between environments — API keys, database URLs, feature flags, and secrets. A <code>.env</code> file keeps these values in one place, loaded at runtime by libraries like <code>dotenv</code> (Node.js), <code>python-dotenv</code> (Python), or built into frameworks like Next.js and Rails.</p>
 <p>The format is simple: <code>KEY=value</code>, one per line. Comments start with <code>#</code>. Values with spaces should be wrapped in quotes. The <code>.env</code> file should <strong>never be committed to version control</strong> — add it to <code>.gitignore</code> immediately. Instead, share a <code>.env.example</code> file with placeholder values so new developers know what variables are needed.</p>
 <p>Common patterns include separating variables by concern: database config (<code>DATABASE_URL</code>, <code>DB_HOST</code>), API keys (<code>STRIPE_SECRET_KEY</code>, <code>SENDGRID_API_KEY</code>), app config (<code>PORT</code>, <code>NODE_ENV</code>), and feature flags (<code>ENABLE_BETA=true</code>). This tool generates clean .env files with proper formatting, comments, and templates for popular frameworks.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de fichier .env</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de archivo .env</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>.env-Datei-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de arquivo .env</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>.env ファイルジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>.env 文件生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>.env 파일 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد ملف .env</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

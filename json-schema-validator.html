@@ -72,6 +72,7 @@ textarea::placeholder{color:var(--muted)}
       <span class="result-badge badge-empty">Paste a schema and data, then click Validate</span>
     </div>
   </div>
+
 </div>
 
 <div class="deep-dive" style="max-width:900px;padding:0 2rem">
@@ -80,6 +81,17 @@ textarea::placeholder{color:var(--muted)}
 <p><strong>JSON Schema</strong> is a vocabulary that lets you validate the structure of JSON data. It defines what properties are allowed, what types they must be, which fields are required, and constraints like minimum/maximum values, string patterns, and array lengths. It's used in API documentation (OpenAPI/Swagger), form validation, configuration files, and data pipelines.</p>
 <p>A schema is itself a JSON object with keywords like <code>"type"</code> (string, number, object, array, boolean, null), <code>"properties"</code> (defines object fields), <code>"required"</code> (mandatory fields), <code>"minimum"</code>/<code>"maximum"</code> (number constraints), and <code>"pattern"</code> (regex for strings). Schemas can be nested — an object property can itself have a schema with its own constraints.</p>
 <p>Validation catches errors early — before data reaches your database, your API consumers, or your application logic. Instead of writing manual if/else checks for every field, you define the contract once as a schema and validate against it. This tool implements a lightweight client-side validator supporting the most common JSON Schema Draft 7 keywords.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Validateur de schéma JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Validador de esquema JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>JSON-Schema Validator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Validador de esquema JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>JSONスキーマバリデーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>JSON Schema 验证工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>JSON 스키마 검증기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مدقق مخطط JSON</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

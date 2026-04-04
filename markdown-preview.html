@@ -35,9 +35,22 @@
             <div><span class="pane-label">Preview</span><div id="md-output" style="padding:20px;min-height:300px;overflow:auto;line-height:1.7;font-size:0.9rem;"></div></div>
         </div>
     </div>
+
 </div>
 
-<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is Markdown?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Markdown</strong> is a lightweight markup language created by John Gruber in 2004. It lets you write formatted content using plain text syntax — <code># headings</code>, <code>**bold**</code>, <code>*italic*</code>, <code>[links](url)</code>, and <code>```code blocks```</code>. It's the default format for GitHub READMEs, documentation sites, blogs, and note-taking apps.</p><p>Markdown is converted to HTML for display. A heading like <code>## Section</code> becomes <code>&lt;h2&gt;Section&lt;/h2&gt;</code>. This tool renders your Markdown in real time as you type, so you can preview exactly how it will look before committing to a repo or publishing to a site.</p><p>Most Markdown parsers support <strong>GitHub Flavored Markdown (GFM)</strong> extensions including task lists (<code>- [x]</code>), tables, strikethrough (<code>~~text~~</code>), and fenced code blocks with syntax highlighting. Learning Markdown takes minutes and saves hours of fighting with rich text editors.</p></div></div></div>
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is Markdown?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Markdown</strong> is a lightweight markup language created by John Gruber in 2004. It lets you write formatted content using plain text syntax — <code># headings</code>, <code>**bold**</code>, <code>*italic*</code>, <code>[links](url)</code>, and <code>```code blocks```</code>. It's the default format for GitHub READMEs, documentation sites, blogs, and note-taking apps.</p><p>Markdown is converted to HTML for display. A heading like <code>## Section</code> becomes <code>&lt;h2&gt;Section&lt;/h2&gt;</code>. This tool renders your Markdown in real time as you type, so you can preview exactly how it will look before committing to a repo or publishing to a site.</p><p>Most Markdown parsers support <strong>GitHub Flavored Markdown (GFM)</strong> extensions including task lists (<code>- [x]</code>), tables, strikethrough (<code>~~text~~</code>), and fenced code blocks with syntax highlighting. Learning Markdown takes minutes and saves hours of fighting with rich text editors.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Aperçu Markdown en direct</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Vista previa de Markdown en vivo</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Markdown-Live-Vorschau</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Pré-visualização Markdown ao vivo</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Markdownライブプレビュー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Markdown 实时预览</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>마크다운 실시간 미리보기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>معاينة Markdown مباشرة</p>
+</div>
+</div></div></div>
 <script src="/shared.js"></script>
 <script>
     function loadMdExample(){document.getElementById('md-input').value='# Heading 1\n## Heading 2\n### Heading 3\n\nA paragraph with **bold**, *italic*, and `inline code`.\n\n- List item one\n- List item two\n- List item three\n\n1. Numbered one\n2. Numbered two\n3. Numbered three\n\n> A blockquote looks like this.\n> It can span multiple lines.\n\n```\nconst x = 42;\nconsole.log(x);\n```\n\n[Link text](https://desktools.dev)\n\n| Header | Header 2 |\n|--------|----------|\n| Cell 1 | Cell 2   |\n| Cell 3 | Cell 4   |\n\n---\n\nThat is a horizontal rule above.';renderMarkdown();}

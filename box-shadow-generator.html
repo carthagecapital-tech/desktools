@@ -74,6 +74,7 @@ input[type=color]{width:40px;height:32px;border:1px solid var(--border);border-r
   </div>
 
   <div class="output" id="output"><button class="copy-css" onclick="copyCss()">Copy CSS</button><span id="cssText"></span></div>
+
 </div>
 
 <div class="deep-dive" style="max-width:700px;padding:0 2rem">
@@ -82,6 +83,17 @@ input[type=color]{width:40px;height:32px;border:1px solid var(--border);border-r
 <p>The CSS <code>box-shadow</code> property adds shadow effects to elements. Its syntax is: <code>box-shadow: offset-x offset-y blur-radius spread-radius color</code>. The <strong>offset</strong> controls the shadow's position, <strong>blur</strong> controls softness, and <strong>spread</strong> expands or contracts the shadow size. Adding the <code>inset</code> keyword creates an inner shadow.</p>
 <p><strong>Layered shadows</strong> create depth and realism that single shadows can't achieve. Modern UI design uses multiple subtle shadow layers — for example, a tight dark shadow for definition combined with a larger, softer shadow for elevation. This approach mimics how real-world light creates both umbra (sharp) and penumbra (soft) shadows.</p>
 <p>Performance tip: <code>box-shadow</code> triggers a repaint but not a reflow, making it safe for hover effects and transitions. However, very large blur values (100px+) on many elements can impact scroll performance. For elements that animate frequently, consider using <code>filter: drop-shadow()</code> instead, as it can be GPU-accelerated in some browsers.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de box-shadow CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de box-shadow CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>CSS Box-Shadow Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de box-shadow CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>CSSボックスシャドウジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>CSS 阴影生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>CSS 박스 그림자 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد ظل CSS</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>

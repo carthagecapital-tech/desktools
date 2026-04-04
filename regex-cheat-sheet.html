@@ -51,6 +51,7 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 
   <div id="content"></div>
   <div class="no-results hidden" id="noResults">No matches found.</div>
+
 </div>
 
 <div class="deep-dive" style="max-width:720px;padding:0 2rem">
@@ -59,6 +60,17 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 <p><strong>Regular expressions (regex)</strong> are one of the most powerful tools in a developer's toolkit, but they have a reputation for being cryptic. The key is to learn them in layers: start with literal characters, add character classes (<code>\d</code>, <code>\w</code>), then quantifiers (<code>*</code>, <code>+</code>, <code>{n}</code>), and finally groups and lookaheads.</p>
 <p>The most common mistake is writing overly complex patterns when simple ones would work. For example, validating an email doesn't need a 500-character RFC-compliant regex — <code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code> covers 99.9% of real-world emails. Start simple, test with real data, and add complexity only when needed.</p>
 <p>Performance matters for regex in production code. <strong>Catastrophic backtracking</strong> occurs when a pattern has nested quantifiers that can match the same input in exponentially many ways — like <code>(a+)+</code> on a string of a's. Use atomic groups or possessive quantifiers when available, and always test your patterns against edge cases and long inputs.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Aide-mémoire regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Hoja de referencia regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Regex-Spickzettel</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Folha de referência regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>正規表現チートシート</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>正则表达式速查表</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>정규식 치트 시트</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>ورقة مرجعية للتعبيرات النمطية</p>
+</div>
 </div></div></div>
 
 <script src="/shared.js"></script>
