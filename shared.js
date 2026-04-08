@@ -38,7 +38,7 @@
     '        <a class="dropdown-item" href="/developers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Developers</span><span class="di-sub">Formatters, converters, testers</span></span>' +
-    '          <span class="di-count">25</span>' +
+    '          <span class="di-count">26</span>' +
     '        </a>' +
     '        <a class="dropdown-item" href="/freelancers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>' +
@@ -322,7 +322,7 @@
     {name:'Gradient Generator',desc:'Build CSS gradients visually',icon:'▴',tag:'Design',url:'/gradient-generator'},
     {name:'SVG Optimizer',desc:'Clean and minify SVG markup',icon:'SVG',tag:'Design',url:'/svg-optimizer'},
     {name:'Font Pairer',desc:'Pair Google Fonts, preview live',icon:'Tt',tag:'Design',url:'/font-pairer'},
-    {name:'Favicon Generator',desc:'Upload image, get all favicon sizes',icon:'🖼',tag:'Design',url:'/favicon-generator'},
+    {name:'Favicon Generator',desc:'Upload image, get all favicon sizes',icon:'ICO',tag:'Design',url:'/favicon-generator'},
     {name:'OG Image Previewer',desc:'Preview social media share cards',icon:'OG',tag:'Design',url:'/og-previewer'},
     {name:'Box Shadow Generator',desc:'Visual multi-layer shadow builder',icon:'▣',tag:'Design',url:'/box-shadow-generator'},
     {name:'Word Counter',desc:'Count words, chars, reading time',icon:'W#',tag:'Text',url:'/word-counter'},
@@ -336,7 +336,7 @@
     {name:'JWT Decoder',desc:'Decode JSON Web Tokens',icon:'JWT',tag:'Sec',url:'/jwt-decoder'},
     {name:'Password Strength',desc:'Test entropy, crack time, patterns',icon:'••',tag:'Sec',url:'/password-strength'},
     {name:'TOTP Generator',desc:'Generate 2FA codes for testing',icon:'2FA',tag:'Sec',url:'/totp-generator'},
-    {name:'Text Encryptor',desc:'AES-256 encrypt and decrypt text',icon:'🔒',tag:'Sec',url:'/text-encryptor'},
+    {name:'Text Encryptor',desc:'AES-256 encrypt and decrypt text',icon:'AES',tag:'Sec',url:'/text-encryptor'},
     {name:'CSP Header Generator',desc:'Build Content-Security-Policy visually',icon:'CSP',tag:'Sec',url:'/csp-generator'},
     {name:'Security.txt Generator',desc:'Generate security.txt and robots.txt',icon:'.txt',tag:'Sec',url:'/security-txt-generator'},
     {name:'Color Contrast Checker',desc:'WCAG AA/AAA accessibility checker',icon:'AA',tag:'Design',url:'/contrast-checker'},

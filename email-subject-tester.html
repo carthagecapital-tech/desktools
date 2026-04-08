@@ -45,7 +45,7 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .feedback{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem}
 .feedback-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.85rem}
 .fb-item{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;font-size:.88rem;line-height:1.4}
-.fb-icon{font-size:.9rem;flex-shrink:0;margin-top:.05rem}
+.fb-icon{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;flex-shrink:0;background:rgba(0,212,170,0.1);color:var(--accent);border:1px solid rgba(0,212,170,0.2);padding:.15rem .4rem;border-radius:4px;min-width:28px;text-align:center;margin-top:.1rem}
 .fb-txt{color:var(--muted)}.fb-txt b{color:var(--text);font-weight:500}
 .examples{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
 .examples-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.75rem}
@@ -174,7 +174,7 @@ const CIRC=2*Math.PI*37;
 const EXAMPLES=[
   'Your invoice #1042 is ready',
   'Quick question about our call',
-  '🚀 Launching in 24 hours — are you in?',
+  'Launching in 24 hours — are you in?',
   'Important update to your account',
   'RE: Project proposal',
   'You won\'t believe what happened',
@@ -206,17 +206,17 @@ function analyse(){
   const startsLower=/^[a-z]/.test(s);
   let score=50;
   const feedback=[];
-  if(spamFound.length>0){score-=spamFound.length*8;feedback.push({icon:'🚫',txt:`Contains spam-trigger ${spamFound.length===1?'word':'words'}: <b>${spamFound.join(', ')}</b>. Avoid these.`});}
-  else feedback.push({icon:'✅',txt:'No common spam trigger words detected.'});
-  if(allCaps){score-=15;feedback.push({icon:'⚠️',txt:'<b>ALL CAPS</b> looks like spam and reduces trust.'});}
-  if(excessExcl){score-=10;feedback.push({icon:'⚠️',txt:'Multiple <b>exclamation marks</b> feel aggressive. Use at most one.'});}
-  if(len<=50&&len>=15){score+=15;feedback.push({icon:'✅',txt:`Good length (${len} chars). Most clients show 40–60 characters.`});}
-  else if(tooShort){score-=5;feedback.push({icon:'💡',txt:'Subject is <b>very short</b>. Add more context to improve clarity.'});}
-  else if(tooLong){score-=10;feedback.push({icon:'⚠️',txt:`At <b>${len} chars</b>, the subject may be truncated on mobile. Aim for under 50.`});}
-  if(hasNumber){score+=5;feedback.push({icon:'✅',txt:'Contains a <b>number</b> — specific details improve open rates.'});}
-  if(hasQuestion){score+=5;feedback.push({icon:'✅',txt:'Questions <b>invite curiosity</b> and can boost engagement.'});}
-  if(powerFound.length>0){score+=powerFound.length*3;feedback.push({icon:'✅',txt:`Power words detected: <b>${powerFound.join(', ')}</b>.`});}
-  if(startsLower){score+=3;feedback.push({icon:'💡',txt:'Starting lowercase can feel <b>more personal</b> and conversational.'});}
+  if(spamFound.length>0){score-=spamFound.length*8;feedback.push({icon:'NO',txt:`Contains spam-trigger ${spamFound.length===1?'word':'words'}: <b>${spamFound.join(', ')}</b>. Avoid these.`});}
+  else feedback.push({icon:'OK',txt:'No common spam trigger words detected.'});
+  if(allCaps){score-=15;feedback.push({icon:'!',txt:'<b>ALL CAPS</b> looks like spam and reduces trust.'});}
+  if(excessExcl){score-=10;feedback.push({icon:'!',txt:'Multiple <b>exclamation marks</b> feel aggressive. Use at most one.'});}
+  if(len<=50&&len>=15){score+=15;feedback.push({icon:'OK',txt:`Good length (${len} chars). Most clients show 40–60 characters.`});}
+  else if(tooShort){score-=5;feedback.push({icon:'TIP',txt:'Subject is <b>very short</b>. Add more context to improve clarity.'});}
+  else if(tooLong){score-=10;feedback.push({icon:'!',txt:`At <b>${len} chars</b>, the subject may be truncated on mobile. Aim for under 50.`});}
+  if(hasNumber){score+=5;feedback.push({icon:'OK',txt:'Contains a <b>number</b> — specific details improve open rates.'});}
+  if(hasQuestion){score+=5;feedback.push({icon:'OK',txt:'Questions <b>invite curiosity</b> and can boost engagement.'});}
+  if(powerFound.length>0){score+=powerFound.length*3;feedback.push({icon:'OK',txt:`Power words detected: <b>${powerFound.join(', ')}</b>.`});}
+  if(startsLower){score+=3;feedback.push({icon:'TIP',txt:'Starting lowercase can feel <b>more personal</b> and conversational.'});}
   score=Math.max(0,Math.min(100,score));
   const levels=[
     {t:30,l:'Likely to be ignored',d:'High spam signals or very weak structure.',c:'#ff6b6b'},
