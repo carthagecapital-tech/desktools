@@ -165,7 +165,7 @@
     '.deep-dive-content code{font-family:"JetBrains Mono",monospace;background:var(--bg3,#14141e);padding:.1rem .35rem;border-radius:4px;font-size:.82rem;color:var(--text,#e8e8f0)}' +
     '@media(max-width:768px){.deep-dive{padding:0 20px}}' +
     /* Cmd+K Palette */
-    '.tool-breadcrumb{display:flex;align-items:center;gap:.4rem;padding:.75rem 2rem;font-size:.82rem;flex-wrap:wrap}' +
+    '.tool-breadcrumb{display:flex;align-items:center;gap:.4rem;padding:.9rem 2rem .4rem;font-size:.82rem;flex-wrap:wrap;max-width:100%;margin:0}' +
     '.tool-breadcrumb a{color:var(--muted,#6b6b80);text-decoration:none;transition:color .2s}' +
     '.tool-breadcrumb a:hover{color:var(--accent,#00d4aa)}' +
     '.bc-sep{color:var(--muted,#6b6b80);opacity:.4;font-size:.7rem}' +
@@ -373,13 +373,20 @@
       }
       if (toolData && TAG_TO_CAT[toolData.tag]) {
         var cat = TAG_TO_CAT[toolData.tag];
-        var backLink = document.querySelector('.back-link');
-        if (backLink) {
-          var breadcrumb = document.createElement('div');
-          breadcrumb.className = 'tool-breadcrumb';
-          breadcrumb.innerHTML = '<a href="/">Tools</a> <span class="bc-sep">/</span> <a href="' + cat.url + '">' + cat.name + '</a> <span class="bc-sep">/</span> <span class="bc-current">' + toolData.name + '</span>';
-          backLink.parentNode.insertBefore(breadcrumb, backLink);
-          backLink.style.display = 'none';
+        var breadcrumb = document.createElement('div');
+        breadcrumb.className = 'tool-breadcrumb';
+        breadcrumb.innerHTML = '<a href="/">Tools</a> <span class="bc-sep">/</span> <a href="' + cat.url + '">' + cat.name + '</a> <span class="bc-sep">/</span> <span class="bc-current">' + toolData.name + '</span>';
+        // Insert breadcrumb right after nav so it's always top-left under the logo
+        var navEl = document.querySelector('nav, .dt-nav');
+        if (navEl && navEl.parentNode) {
+          navEl.parentNode.insertBefore(breadcrumb, navEl.nextSibling);
+        } else {
+          document.body.insertBefore(breadcrumb, document.body.firstChild);
+        }
+        // Hide any existing .back-link on the page since breadcrumb replaces it
+        var backLinks = document.querySelectorAll('.back-link');
+        for (var bi = 0; bi < backLinks.length; bi++) {
+          backLinks[bi].style.display = 'none';
         }
       }
     }
