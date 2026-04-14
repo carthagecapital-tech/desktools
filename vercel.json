@@ -229,6 +229,34 @@
       "destination": "/regex-cheat-sheet.html"
     },
     {
+      "source": "/yaml-json-converter",
+      "destination": "/yaml-json-converter.html"
+    },
+    {
+      "source": "/css-clamp-calculator",
+      "destination": "/css-clamp-calculator.html"
+    },
+    {
+      "source": "/image-compressor",
+      "destination": "/image-compressor.html"
+    },
+    {
+      "source": "/case-converter",
+      "destination": "/case-converter.html"
+    },
+    {
+      "source": "/bcrypt-generator",
+      "destination": "/bcrypt-generator.html"
+    },
+    {
+      "source": "/markdown-table-generator",
+      "destination": "/markdown-table-generator.html"
+    },
+    {
+      "source": "/timezone-converter",
+      "destination": "/timezone-converter.html"
+    },
+    {
       "source": "/all-tools",
       "destination": "/all-tools.html"
     }

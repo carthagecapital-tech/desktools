@@ -349,6 +349,13 @@
     {name:'HTTP Status Codes',desc:'Complete status code reference',icon:'4xx',tag:'Dev',url:'/http-status-codes'},
     {name:'Tailwind Colors',desc:'Full Tailwind CSS color palette',icon:'TW',tag:'Design',url:'/tailwind-colors'},
     {name:'Regex Cheat Sheet',desc:'Interactive regex reference',icon:'/./',tag:'Dev',url:'/regex-cheat-sheet'},
+    {name:'YAML ↔ JSON Converter',desc:'Convert YAML to JSON and back',icon:'Y/J',tag:'Dev',url:'/yaml-json-converter'},
+    {name:'CSS Clamp Calculator',desc:'Fluid typography and spacing',icon:'[ ]',tag:'Design',url:'/css-clamp-calculator'},
+    {name:'Image Compressor',desc:'Compress JPG, PNG, WebP in browser',icon:'IMG',tag:'Design',url:'/image-compressor'},
+    {name:'Case Converter',desc:'camelCase, snake_case, kebab-case',icon:'Aa',tag:'Text',url:'/case-converter'},
+    {name:'Bcrypt Generator',desc:'Hash and verify passwords with bcrypt',icon:'$2a',tag:'Sec',url:'/bcrypt-generator'},
+    {name:'Markdown Table Generator',desc:'Visual Markdown table builder',icon:'| |',tag:'Text',url:'/markdown-table-generator'},
+    {name:'Time Zone Converter',desc:'Compare times across cities',icon:'UTC',tag:'Prod',url:'/timezone-converter'},
   ];
 
   /* ---------- CATEGORY BREADCRUMB ---------- */
