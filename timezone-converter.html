@@ -120,18 +120,20 @@ function setNow(){
   update();
 }
 function getUtcFromLocal(dateStr,tz){
-  // dateStr is "YYYY-MM-DDTHH:MM" interpreted as time in tz
-  // Strategy: compute the offset of tz at approximately that UTC moment, iterate once
-  var d=new Date(dateStr+':00Z'); // naive UTC
-  for(var i=0;i<2;i++){
+  // dateStr is "YYYY-MM-DDTHH:MM" as wall-clock time in tz.
+  // Two-pass to handle DST transition days: first pass uses offset at the
+  // naive UTC moment; second pass re-evaluates offset at the corrected instant.
+  var naive=new Date(dateStr+':00Z');
+  function offsetAt(d){
     var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(d);
     var o={};parts.forEach(function(p){o[p.type]=p.value});
     var h=o.hour==='24'?'00':o.hour;
-    var asUtc=Date.UTC(+o.year,+o.month-1,+o.day,+h,+o.minute,+o.second);
-    var diff=asUtc-d.getTime();
-    d=new Date(d.getTime()-diff);
+    var tzTime=Date.UTC(+o.year,+o.month-1,+o.day,+h,+o.minute,+o.second);
+    return tzTime-d.getTime();
   }
-  return d;
+  var corrected=new Date(naive.getTime()-offsetAt(naive));
+  corrected=new Date(naive.getTime()-offsetAt(corrected));
+  return corrected;
 }
 function formatIn(d,tz){
   var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).formatToParts(d);
