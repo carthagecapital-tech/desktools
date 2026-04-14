@@ -1,4 +1,4 @@
-const CACHE_NAME = 'desktools-v1';
+const CACHE_NAME = 'desktools-v2';
 
 // Core files to cache on install
 const CORE_FILES = [
