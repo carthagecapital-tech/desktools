@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Image Compressor — Free Online JPG & PNG Compressor | DeskTools</title>
+<meta name="description" content="Compress JPG, PNG, and WebP images in your browser. No upload, 100% private. Reduce file size up to 90% with adjustable quality."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/image-compressor"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Image Compressor — DeskTools"/><meta property="og:description" content="Compress images in your browser. 100% private."/><meta property="og:url" content="https://desktools.dev/image-compressor"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Image Compressor — DeskTools"/><meta name="twitter:description" content="Compress images in your browser. 100% private."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Compressor","description":"Compress JPG, PNG, WebP images in browser.","url":"https://desktools.dev/image-compressor","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.drop{border:2px dashed var(--border);border-radius:12px;padding:2.5rem 1rem;text-align:center;cursor:pointer;transition:all .2s}
+.drop:hover,.drop.drag{border-color:var(--accent);background:var(--bg3)}
+.drop-text{color:var(--muted);font-size:.95rem}
+.drop-hint{color:var(--muted);font-size:.75rem;margin-top:.35rem;font-family:'JetBrains Mono',monospace}
+input[type=file]{display:none}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.quality-val{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.9rem;float:right}
+.format-toggle{display:flex;gap:.5rem;margin-top:1rem}
+.format-toggle button{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.5rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.75rem;cursor:pointer}
+.format-toggle button.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.result-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.75rem;text-align:center}
+.result-label{color:var(--muted);font-size:.7rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.result-val{color:var(--text);font-weight:600;margin-top:.25rem;font-size:.95rem}
+.result-val.saved{color:var(--accent)}
+.btn{display:block;width:100%;background:var(--accent);color:var(--bg);border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;padding:.8rem;border-radius:8px;cursor:pointer;margin-top:1rem;text-decoration:none;text-align:center}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.preview-img{max-width:100%;max-height:200px;border-radius:8px;margin-top:1rem;display:block;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Image Compressor</h1>
+  <p class="sub">Compress JPG, PNG, WebP in your browser. Nothing uploaded.</p>
+
+  <div class="card">
+    <label for="fileInput" class="drop" id="drop">
+      <div class="drop-text">Click or drop an image here</div>
+      <div class="drop-hint">JPG &middot; PNG &middot; WebP</div>
+    </label>
+    <input type="file" id="fileInput" accept="image/*"/>
+  </div>
+
+  <div class="card" id="controls" style="display:none">
+    <div class="card-title">Quality <span class="quality-val" id="qVal">80%</span></div>
+    <input type="range" id="quality" min="10" max="100" value="80" oninput="onQuality()"/>
+    <div class="card-title" style="margin-top:1.25rem">Output format</div>
+    <div class="format-toggle">
+      <button data-fmt="image/jpeg" class="active" onclick="setFmt(this)">JPEG</button>
+      <button data-fmt="image/webp" onclick="setFmt(this)">WebP</button>
+      <button data-fmt="image/png" onclick="setFmt(this)">PNG</button>
+    </div>
+    <div class="result">
+      <div class="result-box"><div class="result-label">Original</div><div class="result-val" id="origSize">&mdash;</div></div>
+      <div class="result-box"><div class="result-label">Compressed</div><div class="result-val saved" id="newSize">&mdash;</div></div>
+    </div>
+    <img id="preview" class="preview-img"/>
+    <a id="dlBtn" class="btn" download>Download compressed</a>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem;margin:0 auto">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How image compression works</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>Image compression reduces file size by removing data the human eye is unlikely to notice. <strong>Lossy compression</strong> (JPEG, WebP) permanently discards detail, achieving much smaller files &mdash; typical web JPEGs at 80% quality are 70-90% smaller than uncompressed bitmaps with no visible loss. <strong>Lossless compression</strong> (PNG) preserves every pixel but compresses less aggressively, best for screenshots, logos, and images with text.</p>
+<p>This tool runs entirely in your browser using the Canvas API &mdash; your images never leave your device. For photos, choose JPEG at 75-85% quality. For graphics with sharp edges or transparency, use PNG. WebP is a modern alternative that typically produces smaller files than both, and is supported by all modern browsers.</p>
+<p>Compression matters for web performance: every 100KB shaved off an image improves page load time and Core Web Vitals scores, directly affecting SEO rankings. Google's PageSpeed Insights specifically flags oversized images, and mobile users on slow connections benefit most.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Compresseur d'image</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Compresor de imagen</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Bildkomprimierer</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Compressor de imagem</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>画像圧縮ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>图片压缩工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>이미지 압축기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>ضاغط الصور</p>
+</div>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+var currentImg=null,currentFile=null,fmt='image/jpeg';
+var drop=document.getElementById('drop'),fileInput=document.getElementById('fileInput');
+drop.addEventListener('click',function(){fileInput.click()});
+drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('drag')});
+drop.addEventListener('dragleave',function(){drop.classList.remove('drag')});
+drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('drag');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])});
+fileInput.addEventListener('change',function(e){if(e.target.files[0])handleFile(e.target.files[0])});
+function handleFile(f){
+  if(!f.type.startsWith('image/')){if(typeof showToast==='function')showToast('Not an image');return;}
+  currentFile=f;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var img=new Image();
+    img.onload=function(){currentImg=img;document.getElementById('controls').style.display='block';compress();};
+    img.src=ev.target.result;
+  };
+  r.readAsDataURL(f);
+}
+function setFmt(btn){
+  fmt=btn.dataset.fmt;
+  document.querySelectorAll('.format-toggle button').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  compress();
+}
+function onQuality(){
+  document.getElementById('qVal').textContent=document.getElementById('quality').value+'%';
+  compress();
+}
+function compress(){
+  if(!currentImg)return;
+  var q=parseInt(document.getElementById('quality').value)/100;
+  var c=document.createElement('canvas');
+  c.width=currentImg.width;c.height=currentImg.height;
+  var ctx=c.getContext('2d');
+  ctx.drawImage(currentImg,0,0);
+  c.toBlob(function(blob){
+    if(!blob)return;
+    var url=URL.createObjectURL(blob);
+    document.getElementById('preview').src=url;
+    document.getElementById('origSize').textContent=fmtSize(currentFile.size);
+    var saved=((1-blob.size/currentFile.size)*100).toFixed(0);
+    document.getElementById('newSize').textContent=fmtSize(blob.size)+' ('+saved+'% smaller)';
+    var ext=fmt.split('/')[1];
+    var dl=document.getElementById('dlBtn');
+    dl.href=url;
+    dl.download=currentFile.name.replace(/\.[^.]+$/,'')+'-compressed.'+ext;
+  },fmt,q);
+}
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(1)+' KB';return (b/1048576).toFixed(2)+' MB';}
+</script>
+</body>
+</html>

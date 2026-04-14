@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bcrypt Generator — Free Online Bcrypt Hash & Verify | DeskTools</title>
+<meta name="description" content="Generate and verify bcrypt password hashes in your browser. Adjustable cost factor (rounds). 100% client-side, no data leaves your device."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/bcrypt-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Bcrypt Generator — DeskTools"/><meta property="og:description" content="Generate and verify bcrypt password hashes."/><meta property="og:url" content="https://desktools.dev/bcrypt-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Bcrypt Generator — DeskTools"/><meta name="twitter:description" content="Generate and verify bcrypt password hashes."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bcrypt Generator","description":"Generate and verify bcrypt password hashes client-side.","url":"https://desktools.dev/bcrypt-generator","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118;--err:#ff6b6b}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.tab{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.6rem;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s}
+.tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=password]{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.9rem;padding:.65rem .8rem;outline:none;margin-bottom:.9rem}
+input:focus{border-color:var(--accent)}
+.rounds-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.rounds-row input[type=range]{flex:1;accent-color:var(--accent)}
+.rounds-val{font-family:'JetBrains Mono',monospace;color:var(--accent);min-width:40px;text-align:right}
+.btn{display:block;width:100%;background:var(--accent);color:var(--bg);border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;padding:.75rem;border-radius:8px;cursor:pointer}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.5;cursor:wait}
+.output-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);margin-top:1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;word-break:break-all;min-height:48px}
+.output-text{flex:1}
+.copy-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.3rem .55rem;border-radius:5px;cursor:pointer;flex-shrink:0}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.status{margin-top:.75rem;font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;min-height:1.2em}
+.status.ok{color:var(--accent)}
+.status.err{color:var(--err)}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Bcrypt Generator</h1>
+  <p class="sub">Hash and verify passwords with bcrypt. Fully client-side.</p>
+
+  <div class="tabs">
+    <button class="tab active" id="tabHash" onclick="showTab('hash')">Hash</button>
+    <button class="tab" id="tabVerify" onclick="showTab('verify')">Verify</button>
+  </div>
+
+  <div class="card" id="panelHash">
+    <label>Password</label>
+    <input type="text" id="pw" placeholder="Enter password to hash" value=""/>
+    <label>Cost (rounds)</label>
+    <div class="rounds-row">
+      <input type="range" id="rounds" min="4" max="14" value="10" oninput="document.getElementById('roundsVal').textContent=this.value"/>
+      <span class="rounds-val" id="roundsVal">10</span>
+    </div>
+    <button class="btn" id="hashBtn" onclick="doHash()">Generate hash</button>
+    <div class="output-box" style="display:none" id="hashOutWrap">
+      <span class="output-text" id="hashOut"></span>
+      <button class="copy-btn" onclick="copyHash()">Copy</button>
+    </div>
+  </div>
+
+  <div class="card" id="panelVerify" style="display:none">
+    <label>Password</label>
+    <input type="text" id="vpw" placeholder="Password to check"/>
+    <label>Bcrypt hash</label>
+    <input type="text" id="vhash" placeholder="$2a$10$..."/>
+    <button class="btn" onclick="doVerify()">Verify</button>
+    <div class="status" id="verifyStatus"></div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem;margin:0 auto">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why bcrypt for password hashing?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Bcrypt</strong> is a password hashing function designed specifically to be slow. Unlike fast hashes like SHA-256 or MD5 &mdash; which are built for speed and are dangerous for passwords &mdash; bcrypt has a tunable <strong>cost factor</strong> (rounds) that makes it computationally expensive to brute-force. Each increase in cost doubles the time: cost 10 takes ~100ms, cost 12 takes ~400ms, cost 14 takes ~1.6s.</p>
+<p>Bcrypt also includes a built-in <strong>salt</strong>, a random value mixed into each hash. This means the same password produces different hashes every time, defeating rainbow-table attacks. The salt is embedded in the output string, so you only need to store the hash &mdash; no separate salt column required.</p>
+<p>A bcrypt hash looks like <code>$2a$10$N9qo8uLOickgx2ZMRZoMye...</code>. The parts: <code>$2a$</code> is the algorithm version, <code>10</code> is the cost, and the rest is the salt + hash. For production use in 2026, cost 12 is the common recommendation &mdash; fast enough for a web login, slow enough to resist large-scale cracking.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur bcrypt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador bcrypt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Bcrypt Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador bcrypt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>bcrypt ジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Bcrypt 生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>bcrypt 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد bcrypt</p>
+</div>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+<script>
+function showTab(t){
+  document.getElementById('tabHash').classList.toggle('active',t==='hash');
+  document.getElementById('tabVerify').classList.toggle('active',t==='verify');
+  document.getElementById('panelHash').style.display=t==='hash'?'block':'none';
+  document.getElementById('panelVerify').style.display=t==='verify'?'block':'none';
+}
+function doHash(){
+  var pw=document.getElementById('pw').value;
+  if(!pw){if(typeof showToast==='function')showToast('Enter a password');return;}
+  var rounds=parseInt(document.getElementById('rounds').value);
+  var btn=document.getElementById('hashBtn');
+  btn.disabled=true;btn.textContent='Hashing... (cost '+rounds+')';
+  setTimeout(function(){
+    try{
+      var salt=dcodeIO.bcrypt.genSaltSync(rounds);
+      var hash=dcodeIO.bcrypt.hashSync(pw,salt);
+      document.getElementById('hashOut').textContent=hash;
+      document.getElementById('hashOutWrap').style.display='flex';
+    }catch(e){if(typeof showToast==='function')showToast('Error: '+e.message);}
+    btn.disabled=false;btn.textContent='Generate hash';
+  },30);
+}
+function copyHash(){
+  navigator.clipboard.writeText(document.getElementById('hashOut').textContent);
+  if(typeof showToast==='function')showToast('Copied!');
+}
+function doVerify(){
+  var pw=document.getElementById('vpw').value,h=document.getElementById('vhash').value;
+  var s=document.getElementById('verifyStatus');
+  if(!pw||!h){s.textContent='Enter both fields';s.className='status err';return;}
+  try{
+    var match=dcodeIO.bcrypt.compareSync(pw,h);
+    s.textContent=match?'\u2713 Match':'\u2717 No match';
+    s.className='status '+(match?'ok':'err');
+  }catch(e){s.textContent='Invalid hash format';s.className='status err';}
+}
+</script>
+</body>
+</html>

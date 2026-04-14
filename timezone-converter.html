@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Time Zone Converter — Compare Times Across Cities | DeskTools</title>
+<meta name="description" content="Convert times across time zones and compare multiple cities at once. Perfect for scheduling meetings across regions. Free, no signup."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/timezone-converter"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Time Zone Converter — DeskTools"/><meta property="og:description" content="Compare times across multiple time zones."/><meta property="og:url" content="https://desktools.dev/timezone-converter"/><meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Time Zone Converter — DeskTools"/><meta name="twitter:description" content="Compare times across multiple time zones."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Time Zone Converter","description":"Convert and compare times across time zones.","url":"https://desktools.dev/timezone-converter","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=datetime-local],select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;padding:.6rem .75rem;outline:none}
+input:focus,select:focus{border-color:var(--accent)}
+.tz-row{display:flex;align-items:center;gap:.6rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;margin-bottom:.6rem}
+.tz-info{flex:1;min-width:0}
+.tz-city{font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tz-name{color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;margin-top:.15rem}
+.tz-time{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1rem;font-weight:600;text-align:right;white-space:nowrap}
+.tz-date{color:var(--muted);font-size:.72rem;margin-top:.15rem;text-align:right}
+.tz-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:0 .25rem}
+.tz-del:hover{color:#ff6b6b}
+.add-row{display:flex;gap:.5rem;margin-top:1rem}
+.add-row select{flex:1}
+.btn{background:var(--accent);color:var(--bg);border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;padding:.6rem 1rem;border-radius:8px;cursor:pointer;white-space:nowrap}
+.btn:hover{opacity:.85}
+.now-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.4rem .7rem;border-radius:6px;cursor:pointer;margin-top:.5rem}
+.now-btn:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Time Zone Converter</h1>
+  <p class="sub">Compare times across cities. Add as many as you need.</p>
+
+  <div class="card">
+    <label>Source time</label>
+    <input type="datetime-local" id="srcTime" oninput="update()"/>
+    <label style="margin-top:.75rem">Source timezone</label>
+    <select id="srcTz" onchange="update()"></select>
+    <button class="now-btn" onclick="setNow()">Use current time</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Converted</div>
+    <div id="tzList"></div>
+    <div class="add-row">
+      <select id="addTz"></select>
+      <button class="btn" onclick="addTz()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:680px;padding:0 2rem;margin:0 auto">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How time zones and DST work</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>Time zones are regional offsets from <strong>UTC</strong> (Coordinated Universal Time). Each zone has a canonical IANA identifier like <code>America/New_York</code> or <code>Asia/Tokyo</code>, and these identifiers &mdash; not abbreviations like EST or PST &mdash; are what software uses to handle history, future dates, and daylight saving time correctly.</p>
+<p><strong>Daylight saving time</strong> makes conversions tricky. Most US zones shift between EST (UTC-5) and EDT (UTC-4) on different dates than European zones. Some countries (Japan, India, most of Africa) never observe DST. A few zones have offsets that aren't whole hours &mdash; India is UTC+5:30, Nepal is UTC+5:45. This converter uses the browser's built-in Intl API, which is backed by the IANA tz database and handles DST automatically for any date you pick.</p>
+<p>When scheduling across zones, the safest approach is to pick a specific date and time and let the tool compute each party's local time. Common overlap windows for US-Europe meetings: 8-11am Pacific = 5-8pm Central European. For US-Asia: the overlap is narrow &mdash; late evening on one side, early morning on the other.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur de fuseau horaire</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor de zona horaria</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Zeitzonen-Konverter</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor de fuso horário</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>タイムゾーン変換ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>时区转换器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>시간대 변환기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول المنطقة الزمنية</p>
+</div>
+</div></div></div>
+
+<script src="/shared.js"></script>
+<script>
+var ZONES=[
+  ['America/Los_Angeles','Los Angeles'],['America/Denver','Denver'],['America/Chicago','Chicago'],
+  ['America/New_York','New York'],['America/Sao_Paulo','São Paulo'],['America/Mexico_City','Mexico City'],
+  ['America/Toronto','Toronto'],['Europe/London','London'],['Europe/Paris','Paris'],
+  ['Europe/Berlin','Berlin'],['Europe/Madrid','Madrid'],['Europe/Moscow','Moscow'],
+  ['Africa/Cairo','Cairo'],['Africa/Lagos','Lagos'],['Africa/Johannesburg','Johannesburg'],
+  ['Asia/Dubai','Dubai'],['Asia/Karachi','Karachi'],['Asia/Kolkata','Mumbai / Delhi'],
+  ['Asia/Bangkok','Bangkok'],['Asia/Singapore','Singapore'],['Asia/Shanghai','Shanghai'],
+  ['Asia/Hong_Kong','Hong Kong'],['Asia/Tokyo','Tokyo'],['Asia/Seoul','Seoul'],
+  ['Australia/Sydney','Sydney'],['Pacific/Auckland','Auckland'],['UTC','UTC']
+];
+var selected=['Europe/London','America/New_York','Asia/Tokyo'];
+var userTz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+function populate(){
+  var src=document.getElementById('srcTz'),add=document.getElementById('addTz');
+  src.innerHTML='';add.innerHTML='';
+  ZONES.forEach(function(z){
+    var o1=document.createElement('option');o1.value=z[0];o1.textContent=z[1]+' ('+z[0]+')';src.appendChild(o1);
+    var o2=document.createElement('option');o2.value=z[0];o2.textContent=z[1];add.appendChild(o2);
+  });
+  // Default source to user's zone if available
+  var found=ZONES.find(function(z){return z[0]===userTz});
+  src.value=found?userTz:'America/Los_Angeles';
+}
+function setNow(){
+  var d=new Date();
+  var pad=function(n){return String(n).padStart(2,'0')};
+  var tz=document.getElementById('srcTz').value;
+  // Get current time in selected source tz, format as datetime-local
+  var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(d);
+  var o={};parts.forEach(function(p){o[p.type]=p.value});
+  document.getElementById('srcTime').value=o.year+'-'+o.month+'-'+o.day+'T'+(o.hour==='24'?'00':o.hour)+':'+o.minute;
+  update();
+}
+function getUtcFromLocal(dateStr,tz){
+  // dateStr is "YYYY-MM-DDTHH:MM" interpreted as time in tz
+  // Strategy: compute the offset of tz at approximately that UTC moment, iterate once
+  var d=new Date(dateStr+':00Z'); // naive UTC
+  for(var i=0;i<2;i++){
+    var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(d);
+    var o={};parts.forEach(function(p){o[p.type]=p.value});
+    var h=o.hour==='24'?'00':o.hour;
+    var asUtc=Date.UTC(+o.year,+o.month-1,+o.day,+h,+o.minute,+o.second);
+    var diff=asUtc-d.getTime();
+    d=new Date(d.getTime()-diff);
+  }
+  return d;
+}
+function formatIn(d,tz){
+  var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).formatToParts(d);
+  var o={};parts.forEach(function(p){o[p.type]=p.value});
+  return {time:o.hour+':'+o.minute+' '+o.dayPeriod,date:o.weekday+', '+o.month+' '+o.day,offset:o.timeZoneName};
+}
+function update(){
+  var v=document.getElementById('srcTime').value;
+  if(!v)return;
+  var tz=document.getElementById('srcTz').value;
+  var utc=getUtcFromLocal(v,tz);
+  var list=document.getElementById('tzList');
+  list.innerHTML='';
+  selected.forEach(function(z,i){
+    var info=formatIn(utc,z);
+    var city=(ZONES.find(function(x){return x[0]===z})||[z,z])[1];
+    var row=document.createElement('div');row.className='tz-row';
+    row.innerHTML='<div class="tz-info"><div class="tz-city">'+city+'</div><div class="tz-name">'+z+' &middot; '+info.offset+'</div></div><div><div class="tz-time">'+info.time+'</div><div class="tz-date">'+info.date+'</div></div><button class="tz-del" onclick="delTz('+i+')" title="Remove">&times;</button>';
+    list.appendChild(row);
+  });
+}
+function addTz(){
+  var v=document.getElementById('addTz').value;
+  if(selected.indexOf(v)===-1){selected.push(v);update();}
+}
+function delTz(i){selected.splice(i,1);update()}
+populate();setNow();
+</script>
+</body>
+</html>
