@@ -38,23 +38,23 @@
     '        <a class="dropdown-item" href="/developers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Developers</span><span class="di-sub">Formatters, converters, testers</span></span>' +
-    '          <span class="di-count">26</span>' +
+    '          <span class="di-count">29</span>' +
     '        </a>' +
     '        <a class="dropdown-item" href="/freelancers">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Freelancers</span><span class="di-sub">Design &amp; creative tools</span></span>' +
-    '          <span class="di-count">16</span>' +
+    '          <span class="di-count">18</span>' +
     '        </a>' +
     '        <a class="dropdown-item" href="/business">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Business</span><span class="di-sub">Productivity &amp; comms</span></span>' +
-    '          <span class="di-count">10</span>' +
+    '          <span class="di-count">11</span>' +
     '        </a>' +
     '        <div class="dropdown-divider"></div>' +
     '        <a class="dropdown-item" href="/security">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">Security &amp; Privacy</span><span class="di-sub">100% client-side</span></span>' +
-    '          <span class="di-count">8</span>' +
+    '          <span class="di-count">9</span>' +
     '        </a>' +
     '      </div>' +
     '    </div>' +
