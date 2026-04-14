@@ -31,7 +31,7 @@
     '        <a class="dropdown-item" href="/all-tools" style="margin-bottom:.25rem">' +
     '          <span class="di-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span>' +
     '          <span class="di-text"><span class="di-name">All Tools</span><span class="di-sub">Browse the full collection</span></span>' +
-    '          <span class="di-count">53</span>' +
+    '          <span class="di-count">60</span>' +
     '        </a>' +
     '        <div class="dropdown-divider"></div>' +
     '        <span class="dropdown-label">Browse by audience</span>' +
