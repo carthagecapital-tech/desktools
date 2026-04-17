@@ -85,6 +85,21 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -97,6 +112,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Gradient Generator","description":"Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients.","url":"https://desktools.dev/gradient-generator","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"CSS gradient generator, gradient maker, linear radial gradient"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a CSS linear gradient online for free?","acceptedAnswer":{"@type":"Answer","text":"Pick the Linear type, drag the angle slider to set direction (0 degrees points up, 90 degrees points right, 180 degrees points down), and add as many color stops as you need. The linear-gradient() CSS is generated instantly below the preview. Click Copy CSS and paste it into your stylesheet. No signup, no watermark, runs entirely in your browser."}},{"@type":"Question","name":"What is the difference between linear, radial, and conic gradients?","acceptedAnswer":{"@type":"Answer","text":"Linear gradients transition colors along a straight line at a chosen angle, useful for backgrounds and buttons. Radial gradients radiate outward from a center point in a circle or ellipse, good for spotlights and soft glows. Conic gradients sweep colors around a center point like a pie chart or color wheel, used for loaders, pie charts, and hue pickers. This generator supports all three with a single click."}},{"@type":"Question","name":"How do I make a CSS gradient with more than two colors?","acceptedAnswer":{"@type":"Answer","text":"Click + Add stop under the Color Stops section. Each stop takes a color and a position from 0 to 100 percent. You can add as many stops as you need to build multi-color gradients, rainbows, or smooth blends. Drag the position slider on each stop to control where that color peaks."}},{"@type":"Question","name":"Can I use these CSS gradients with Tailwind CSS?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy the generated background: linear-gradient(...) value and use it in Tailwind's arbitrary-value syntax, for example bg-[linear-gradient(135deg,#00d4aa_0%,#7c3aed_100%)]. For cleaner code, add it to your tailwind.config.js under backgroundImage and reference it as a utility class like bg-brand-gradient."}},{"@type":"Question","name":"How do I create a conic gradient for a pie chart or loading spinner?","acceptedAnswer":{"@type":"Answer","text":"Select the Conic type, then add color stops at specific percentages to define each slice. For a pie chart with three equal sections, use stops at 0%, 33%, 33%, 66%, 66%, and 100% with hard transitions. Using the same position for adjacent stops creates a sharp edge. Adjust the starting angle with the Angle slider."}},{"@type":"Question","name":"Are CSS gradients better than background images for performance?","acceptedAnswer":{"@type":"Answer","text":"Yes, in most cases. CSS gradients are rendered by the browser with zero network requests, no file size cost, and scale perfectly to any resolution or screen density. A background image is a separate HTTP request and can blur on high-DPI displays. Gradients are also easily animated with CSS transitions, which is difficult with raster images."}},{"@type":"Question","name":"Does this gradient generator work offline and keep my data private?","acceptedAnswer":{"@type":"Answer","text":"Yes. DeskTools runs 100% in your browser. No data is ever sent to a server. Once the page is loaded, the gradient generator works fully offline. Nothing you create is logged, tracked, or stored outside your own device."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -152,6 +168,60 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد التدرجات CSS</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a CSS linear gradient online for free?</summary>
+    <div class="faq-body">
+      <p>Pick the <strong>Linear</strong> type above, drag the angle slider to set direction (0&deg; points up, 90&deg; points right, 180&deg; points down), and add as many color stops as you need. The <code>linear-gradient()</code> CSS is generated instantly below the preview &mdash; click <strong>Copy CSS</strong> and paste it into your stylesheet. No signup, no watermark, runs entirely in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between linear, radial, and conic gradients?</summary>
+    <div class="faq-body">
+      <p><strong>Linear gradients</strong> transition colors along a straight line at a chosen angle &mdash; useful for backgrounds and buttons. <strong>Radial gradients</strong> radiate outward from a center point in a circle or ellipse &mdash; good for spotlights and soft glows. <strong>Conic gradients</strong> sweep colors around a center point like a pie chart or color wheel &mdash; used for loaders, pie charts, and hue pickers. This generator supports all three with a single click.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I make a CSS gradient with more than two colors?</summary>
+    <div class="faq-body">
+      <p>Click <strong>+ Add stop</strong> under the Color Stops section. Each stop takes a color and a position (0&ndash;100%). You can add as many stops as you need to build multi-color gradients, rainbows, or smooth blends. Drag the position slider on each stop to control where that color peaks.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use these CSS gradients with Tailwind CSS?</summary>
+    <div class="faq-body">
+      <p>Yes. Copy the generated <code>background: linear-gradient(...)</code> value and use it in Tailwind's arbitrary-value syntax: <code>bg-[linear-gradient(135deg,#00d4aa_0%,#7c3aed_100%)]</code>. For cleaner code, add it to your <code>tailwind.config.js</code> under <code>backgroundImage</code> and reference it as a utility class like <code>bg-brand-gradient</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I create a conic gradient for a pie chart or loading spinner?</summary>
+    <div class="faq-body">
+      <p>Select the <strong>Conic</strong> type, then add color stops at specific percentages to define each slice. For a pie chart with three equal sections, use stops at 0%, 33%, 33%, 66%, 66%, and 100% with hard transitions (same position for adjacent stops creates a sharp edge). Adjust the starting angle with the Angle slider.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are CSS gradients better than background images for performance?</summary>
+    <div class="faq-body">
+      <p>Yes, in most cases. CSS gradients are rendered by the browser with zero network requests, no file size cost, and scale perfectly to any resolution or screen density. A background image is a separate HTTP request and can blur on high-DPI displays. Gradients are also easily animated with CSS transitions, which is difficult with raster images.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this gradient generator work offline and keep my data private?</summary>
+    <div class="faq-body">
+      <p>Yes. DeskTools runs 100% in your browser &mdash; no data is ever sent to a server. Once the page is loaded, the gradient generator works fully offline. Nothing you create is logged, tracked, or stored outside your own device.</p>
+    </div>
+  </details>
+</section>
+
 <script src="/shared.js"></script>
 <script>
 let type='linear', stops=[{color:'#00d4aa',pos:0},{color:'#7c3aed',pos:100}];
