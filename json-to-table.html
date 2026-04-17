@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JSON to Table Converter — Free Online Tool | DeskTools"/>
 <meta name="twitter:description" content="Free online JSON to table converter. Paste JSON data and instantly see it as a clean, readable HTML table. Perfect for sharing API data with non-technical people."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert JSON to an HTML table online?","acceptedAnswer":{"@type":"Answer","text":"Paste your JSON array into the input and click Convert. The tool detects object keys and generates an HTML table with headers and rows. Click Copy HTML to grab the markup for documents, emails, or web pages."}},{"@type":"Question","name":"What JSON structure does this tool expect?","acceptedAnswer":{"@type":"Answer","text":"An array of objects with consistent keys works best, e.g. [{\"name\":\"Ada\",\"age\":36},{\"name\":\"Linus\",\"age\":54}]. The tool uses the keys as column headers and each object becomes a row. Nested objects are flattened; missing keys become empty cells."}},{"@type":"Question","name":"Can I paste the HTML table into Word, Google Docs, or Excel?","acceptedAnswer":{"@type":"Answer","text":"Yes. The generated HTML renders as a real table when pasted into Word, Google Docs, and even Gmail. For Excel or Google Sheets, use the JSON to CSV tool instead &mdash; it produces a format those apps parse directly."}},{"@type":"Question","name":"How can I share API response data with non-technical teammates?","acceptedAnswer":{"@type":"Answer","text":"This is the main use case. Developers often get JSON from an API; non-developers need it in a readable format. Paste the response here, copy the HTML, and drop it into a doc or Slack message. No formatting, no sending raw JSON."}},{"@type":"Question","name":"Does the tool work with nested JSON objects?","acceptedAnswer":{"@type":"Answer","text":"Yes, but nested values are flattened. A key like user.address.city becomes a single column. For deeply nested or complex JSON, consider pre-processing with a JSON transformer first."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -64,6 +84,45 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول JSON إلى جدول</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert JSON to an HTML table online?</summary>
+    <div class="faq-body">
+      <p>Paste your JSON array into the input and click <strong>Convert</strong>. The tool detects object keys and generates an HTML table with headers and rows. Click <strong>Copy HTML</strong> to grab the markup for documents, emails, or web pages.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What JSON structure does this tool expect?</summary>
+    <div class="faq-body">
+      <p>An array of objects with consistent keys works best, e.g. <code>[{"name":"Ada","age":36},{"name":"Linus","age":54}]</code>. The tool uses the keys as column headers and each object becomes a row. Nested objects are flattened; missing keys become empty cells.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I paste the HTML table into Word, Google Docs, or Excel?</summary>
+    <div class="faq-body">
+      <p>Yes. The generated HTML renders as a real table when pasted into Word, Google Docs, and even Gmail. For Excel or Google Sheets, use the <a href="/json-to-csv">JSON to CSV</a> tool instead &mdash; it produces a format those apps parse directly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How can I share API response data with non-technical teammates?</summary>
+    <div class="faq-body">
+      <p>This is the main use case. Developers often get JSON from an API; non-developers need it in a readable format. Paste the response here, copy the HTML, and drop it into a doc or Slack message. No formatting, no sending raw JSON.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does the tool work with nested JSON objects?</summary>
+    <div class="faq-body">
+      <p>Yes, but nested values are flattened &mdash; a key like <code>user.address.city</code> becomes a single column. For deeply nested or complex JSON, consider pre-processing with a JSON transformer first.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function jsonToTable() {

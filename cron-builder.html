@@ -41,7 +41,26 @@ select:focus,input:focus{border-color:var(--accent)}
 .preset-btns{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
 .preset{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.3rem .6rem;border-radius:6px;cursor:pointer;transition:all .15s}
 .preset:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I build a cron expression visually?","acceptedAnswer":{"@type":"Answer","text":"Use the five control panels (Minute, Hour, Day of Month, Month, Day of Week) to pick values. The cron expression updates live, and a plain-English description tells you exactly when it will run. Click any preset button for common schedules."}},{"@type":"Question","name":"What do the cron expression fields mean?","acceptedAnswer":{"@type":"Answer","text":"Five fields: minute (0-59), hour (0-23), day of month (1-31), month (1-12), day of week (0-6, Sunday=0). An asterisk means any value. A slash (*/5) means every 5 units. Commas list multiple values, hyphens define ranges."}},{"@type":"Question","name":"How do I schedule a cron job to run every 5 minutes?","acceptedAnswer":{"@type":"Answer","text":"Use the expression */5 * * * *. Click the preset Every 5 min to build it automatically. This runs at minute 0, 5, 10, 15, etc. of every hour."}},{"@type":"Question","name":"What is the difference between crontab syntax and AWS/Quartz cron?","acceptedAnswer":{"@type":"Answer","text":"Standard Unix cron has 5 fields. AWS EventBridge and Quartz (Spring Scheduler) use 6 or 7 fields &mdash; they add seconds and/or a year field. Also, AWS uses ? (not *) in one of day-of-month or day-of-week. This tool generates standard 5-field Unix cron, compatible with most cron daemons and libraries."}},{"@type":"Question","name":"How do I schedule a cron job to run only on weekdays?","acceptedAnswer":{"@type":"Answer","text":"Set day of week to 1-5 (Monday-Friday). For weekdays at 9 AM: 0 9 * * 1-5. Click the Weekdays 9am preset to build it instantly."}},{"@type":"Question","name":"Why isn't my cron job running when I expect?","acceptedAnswer":{"@type":"Answer","text":"Common issues: the cron daemon uses a different timezone than you expect (often UTC), the job's environment has different PATH or variables than your shell, or the command fails silently. Use the Next 5 runs preview in this tool to sanity-check your schedule before deploying."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -117,6 +136,52 @@ select:focus,input:focus{border-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I build a cron expression visually?</summary>
+    <div class="faq-body">
+      <p>Use the five control panels (Minute, Hour, Day of Month, Month, Day of Week) to pick values. The cron expression updates live, and a plain-English description tells you exactly when it will run (e.g. "Every day at 9:00 AM"). Click any preset button for common schedules.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What do the cron expression fields mean?</summary>
+    <div class="faq-body">
+      <p>Five fields: <strong>minute</strong> (0-59), <strong>hour</strong> (0-23), <strong>day of month</strong> (1-31), <strong>month</strong> (1-12), <strong>day of week</strong> (0-6, Sunday=0). An asterisk (<code>*</code>) means "any value". A slash (<code>*/5</code>) means "every 5 units". Commas list multiple values, hyphens define ranges.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I schedule a cron job to run every 5 minutes?</summary>
+    <div class="faq-body">
+      <p>Use the expression <code>*/5 * * * *</code>. Click the preset <strong>Every 5 min</strong> to build it automatically. This runs at minute 0, 5, 10, 15, etc. of every hour.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between crontab syntax and AWS/Quartz cron?</summary>
+    <div class="faq-body">
+      <p>Standard Unix cron has 5 fields. AWS EventBridge and Quartz (Spring Scheduler) use 6 or 7 fields &mdash; they add seconds and/or a year field. Also, AWS uses <code>?</code> (not <code>*</code>) in one of day-of-month or day-of-week. This tool generates standard 5-field Unix cron, compatible with most cron daemons and libraries.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I schedule a cron job to run only on weekdays?</summary>
+    <div class="faq-body">
+      <p>Set day of week to <code>1-5</code> (Monday-Friday). For weekdays at 9 AM: <code>0 9 * * 1-5</code>. Click the <strong>Weekdays 9am</strong> preset to build it instantly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why isn't my cron job running when I expect?</summary>
+    <div class="faq-body">
+      <p>Common issues: the cron daemon uses a different timezone than you expect (often UTC), the job's environment has different PATH or variables than your shell, or the command fails silently. Use the "Next 5 runs" preview in this tool to sanity-check your schedule before deploying.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function build(){

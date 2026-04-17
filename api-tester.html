@@ -53,7 +53,26 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 .resp-empty{color:var(--muted);text-align:center;padding:3rem 1rem;font-size:.9rem}
 .copy-resp{background:none;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .2s}
 .copy-resp:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I test a REST API online without Postman?","acceptedAnswer":{"@type":"Answer","text":"Enter the URL, pick a method (GET, POST, PUT, DELETE, PATCH), optionally add headers, auth, or a JSON body, then click Send. You get the full response: status code, headers, and body. No install, no account, no import/export of collections."}},{"@type":"Question","name":"What HTTP methods does this API tester support?","acceptedAnswer":{"@type":"Answer","text":"GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS. For each method, you can add custom headers, an Authorization header (Bearer, Basic, API key), and a request body in JSON, form-urlencoded, or plain text."}},{"@type":"Question","name":"How do I add a Bearer token to my API request?","acceptedAnswer":{"@type":"Answer","text":"Click the Auth tab and paste your Bearer token. The tool sets the Authorization: Bearer header automatically. For API keys in custom headers, add them via the Headers tab instead."}},{"@type":"Question","name":"Why am I getting a CORS error when calling an API?","acceptedAnswer":{"@type":"Answer","text":"Browsers block cross-origin requests unless the API allows your origin in its CORS headers. If the API doesn't set Access-Control-Allow-Origin, requests from this tool (or any browser-based tool) will fail. Use a desktop tool like curl, Postman, or your backend to call CORS-restricted APIs."}},{"@type":"Question","name":"Is it safe to test APIs with auth tokens in this tool?","acceptedAnswer":{"@type":"Answer","text":"Requests are sent directly from your browser to the target API. Nothing passes through DeskTools' servers. Tokens aren't logged or stored. That said, for production credentials, prefer a tool you control (Postman desktop, curl, your own scripts)."}},{"@type":"Question","name":"How do I send a POST request with a JSON body?","acceptedAnswer":{"@type":"Answer","text":"Select POST, click the Body tab, choose application/json as Content-Type, and paste your JSON. The Content-Type header is set automatically. Click Send and you'll see the response in the panel below."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -139,6 +158,52 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I test a REST API online without Postman?</summary>
+    <div class="faq-body">
+      <p>Enter the URL, pick a method (GET, POST, PUT, DELETE, PATCH), optionally add headers, auth, or a JSON body, then click <strong>Send</strong>. You get the full response: status code, headers, and body. No install, no account, no import/export of collections.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What HTTP methods does this API tester support?</summary>
+    <div class="faq-body">
+      <p>GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS. For each method, you can add custom headers, an Authorization header (Bearer, Basic, API key), and a request body in JSON, form-urlencoded, or plain text.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I add a Bearer token to my API request?</summary>
+    <div class="faq-body">
+      <p>Click the <strong>Auth</strong> tab and paste your Bearer token. The tool sets the <code>Authorization: Bearer &lt;token&gt;</code> header automatically. For API keys in custom headers, add them via the <strong>Headers</strong> tab instead.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why am I getting a CORS error when calling an API?</summary>
+    <div class="faq-body">
+      <p>Browsers block cross-origin requests unless the API allows your origin in its CORS headers. If the API doesn't set <code>Access-Control-Allow-Origin</code>, requests from this tool (or any browser-based tool) will fail. Use a desktop tool like curl, Postman, or your backend to call CORS-restricted APIs.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to test APIs with auth tokens in this tool?</summary>
+    <div class="faq-body">
+      <p>Requests are sent directly from your browser to the target API &mdash; nothing passes through DeskTools' servers. Tokens aren't logged or stored. That said, for production credentials, prefer a tool you control (Postman desktop, curl, your own scripts).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I send a POST request with a JSON body?</summary>
+    <div class="faq-body">
+      <p>Select <strong>POST</strong>, click the <strong>Body</strong> tab, choose <strong>application/json</strong> as Content-Type, and paste your JSON. The Content-Type header is set automatically. Click Send and you'll see the response in the panel below.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 let respBody='',respHeaders='';

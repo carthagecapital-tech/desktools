@@ -41,7 +41,26 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .code-card.open .code-detail{display:block}
 .hidden{display:none}
 .no-results{text-align:center;padding:3rem;color:var(--muted)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I look up an HTTP status code?","acceptedAnswer":{"@type":"Answer","text":"Type a code number (like 404) or a keyword (like not found) in the search box. Matching codes appear instantly with their name, category, description, and common use cases. Filter by category (1xx, 2xx, 3xx, 4xx, 5xx) using the buttons."}},{"@type":"Question","name":"What is the difference between HTTP 401 and 403?","acceptedAnswer":{"@type":"Answer","text":"401 Unauthorized means authentication is missing or invalid. The user isn't logged in, or the token is bad. 403 Forbidden means the user is authenticated but not allowed to access this resource. 401 says who are you, 403 says you can't have this."}},{"@type":"Question","name":"When should I return 400 vs 422?","acceptedAnswer":{"@type":"Answer","text":"400 Bad Request is for malformed requests &mdash; invalid JSON, missing required headers, unparseable input. 422 Unprocessable Entity is for well-formed requests that fail business validation &mdash; email already exists, password too short, invalid date range. 400 is syntax error; 422 is semantic error."}},{"@type":"Question","name":"What HTTP status code should I use for a successful POST?","acceptedAnswer":{"@type":"Answer","text":"201 Created when the POST creates a new resource. Include a Location header pointing to it. 200 OK when POSTing to an action endpoint that doesn't create a resource (e.g. /login, /send-email). 204 No Content if the response has no body."}},{"@type":"Question","name":"What is the 418 I'm a Teapot status code?","acceptedAnswer":{"@type":"Answer","text":"A joke status code from the April Fools 1998 RFC 2324 (Hyper Text Coffee Pot Control Protocol). It's not part of the real HTTP spec, but some frameworks support it as an easter egg. Never use it in production &mdash; clients and proxies may not handle it correctly."}},{"@type":"Question","name":"Why am I getting a 500 Internal Server Error?","acceptedAnswer":{"@type":"Answer","text":"The server hit an unhandled exception or misconfiguration. The client did nothing wrong. The issue is server-side. Check your server logs for the actual error. Common causes: unhandled exceptions, database connection failures, missing environment variables, or misconfigured load balancers."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -87,6 +106,52 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I look up an HTTP status code?</summary>
+    <div class="faq-body">
+      <p>Type a code number (like <code>404</code>) or a keyword (like <code>not found</code>) in the search box. Matching codes appear instantly with their name, category, description, and common use cases. Filter by category (1xx, 2xx, 3xx, 4xx, 5xx) using the buttons.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between HTTP 401 and 403?</summary>
+    <div class="faq-body">
+      <p><strong>401 Unauthorized</strong> means authentication is missing or invalid &mdash; the user isn't logged in, or the token is bad. <strong>403 Forbidden</strong> means the user is authenticated but not allowed to access this resource. 401 says "who are you?", 403 says "you can't have this".</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I return 400 vs 422?</summary>
+    <div class="faq-body">
+      <p><strong>400 Bad Request</strong> is for malformed requests &mdash; invalid JSON, missing required headers, unparseable input. <strong>422 Unprocessable Entity</strong> is for well-formed requests that fail business validation &mdash; email already exists, password too short, invalid date range. 400 = syntax error; 422 = semantic error.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What HTTP status code should I use for a successful POST?</summary>
+    <div class="faq-body">
+      <p><strong>201 Created</strong> when the POST creates a new resource &mdash; include a <code>Location</code> header pointing to it. <strong>200 OK</strong> when POSTing to an action endpoint that doesn't create a resource (e.g. <code>/login</code>, <code>/send-email</code>). <strong>204 No Content</strong> if the response has no body.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the 418 I'm a Teapot status code?</summary>
+    <div class="faq-body">
+      <p>A joke status code from the April Fools 1998 RFC 2324 (Hyper Text Coffee Pot Control Protocol). It's not part of the real HTTP spec, but some frameworks support it as an easter egg. Never use it in production &mdash; clients and proxies may not handle it correctly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why am I getting a 500 Internal Server Error?</summary>
+    <div class="faq-body">
+      <p>The server hit an unhandled exception or misconfiguration. The client did nothing wrong &mdash; the issue is server-side. Check your server logs for the actual error. Common causes: unhandled exceptions, database connection failures, missing environment variables, or misconfigured load balancers.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var CODES=[

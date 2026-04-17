@@ -35,7 +35,26 @@ textarea:focus{border-color:var(--accent)}
 .status{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:.5rem;min-height:1.2em}
 .status.err{color:var(--err)}
 .status.ok{color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert YAML to JSON online?","acceptedAnswer":{"@type":"Answer","text":"Paste your YAML into the left panel and the JSON equivalent appears on the right instantly. Use the swap button to go the other direction (JSON to YAML). Click Copy to grab the output."}},{"@type":"Question","name":"What is the difference between YAML and JSON?","acceptedAnswer":{"@type":"Answer","text":"Both represent the same data structures (objects, arrays, strings, numbers, booleans). YAML uses indentation and is human-readable &mdash; common for config files (Kubernetes, Docker Compose, CI pipelines). JSON uses braces and brackets &mdash; standard for APIs and web data exchange. They're easily convertible in both directions."}},{"@type":"Question","name":"When should I use YAML instead of JSON?","acceptedAnswer":{"@type":"Answer","text":"Use YAML for configuration files humans will edit. Supports comments, multi-line strings, and is less cluttered. Use JSON for machine-to-machine data exchange. Stricter syntax means fewer parsing ambiguities, and it's natively supported in JavaScript."}},{"@type":"Question","name":"Why is my YAML converting to JSON incorrectly?","acceptedAnswer":{"@type":"Answer","text":"The most common YAML bug is indentation. YAML uses spaces (never tabs) and is strict about alignment. Also watch for unquoted strings that look like booleans (yes, no, on, off all parse as booleans in YAML 1.1). When in doubt, quote your strings."}},{"@type":"Question","name":"Does this tool handle YAML anchors and references?","acceptedAnswer":{"@type":"Answer","text":"Yes. YAML anchors (&amp;name) and aliases (*name) are resolved during conversion. The output JSON contains the expanded values. Note this means the JSON loses the DRY benefit; reconverting to YAML won't automatically re-create the anchors."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -81,6 +100,45 @@ textarea:focus{border-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert YAML to JSON online?</summary>
+    <div class="faq-body">
+      <p>Paste your YAML into the left panel and the JSON equivalent appears on the right instantly. Use the swap button to go the other direction (JSON to YAML). Click <strong>Copy</strong> to grab the output.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between YAML and JSON?</summary>
+    <div class="faq-body">
+      <p>Both represent the same data structures (objects, arrays, strings, numbers, booleans). <strong>YAML</strong> uses indentation and is human-readable &mdash; common for config files (Kubernetes, Docker Compose, CI pipelines). <strong>JSON</strong> uses braces and brackets &mdash; standard for APIs and web data exchange. They're easily convertible in both directions.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I use YAML instead of JSON?</summary>
+    <div class="faq-body">
+      <p>Use YAML for configuration files humans will edit &mdash; supports comments, multi-line strings, and is less cluttered. Use JSON for machine-to-machine data exchange &mdash; stricter syntax means fewer parsing ambiguities, and it's natively supported in JavaScript.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is my YAML converting to JSON incorrectly?</summary>
+    <div class="faq-body">
+      <p>The most common YAML bug is indentation &mdash; YAML uses spaces (never tabs) and is strict about alignment. Also watch for unquoted strings that look like booleans (<code>yes</code>, <code>no</code>, <code>on</code>, <code>off</code> all parse as booleans in YAML 1.1). When in doubt, quote your strings.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this tool handle YAML anchors and references?</summary>
+    <div class="faq-body">
+      <p>Yes. YAML anchors (<code>&amp;name</code>) and aliases (<code>*name</code>) are resolved during conversion &mdash; the output JSON contains the expanded values. Note this means the JSON loses the DRY benefit; reconverting to YAML won't automatically re-create the anchors.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <script>

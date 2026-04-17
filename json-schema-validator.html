@@ -43,7 +43,26 @@ textarea::placeholder{color:var(--muted)}
 .error-path{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);min-width:80px;flex-shrink:0}
 .error-msg{color:var(--text)}
 @media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I validate JSON against a JSON Schema?","acceptedAnswer":{"@type":"Answer","text":"Paste your JSON data in one panel and your JSON Schema in the other, then click Validate. The tool reports whether the data matches the schema, and if not, lists each validation error with its path and description."}},{"@type":"Question","name":"What JSON Schema draft does this validator support?","acceptedAnswer":{"@type":"Answer","text":"JSON Schema Draft 2020-12 and backward-compatible with Draft 7. Most fields (type, properties, required, enum, pattern, minLength, etc.) work across drafts. Complex features like $dynamicRef require Draft 2020-12."}},{"@type":"Question","name":"Why use JSON Schema instead of just checking JSON manually?","acceptedAnswer":{"@type":"Answer","text":"Schema validation is declarative. You describe what valid data looks like, and a validator handles the edge cases. Types, required fields, string patterns, number ranges, enums, nested object shapes, and arrays all get validated in one pass. Saves dozens of lines of imperative checking code."}},{"@type":"Question","name":"How do I write a JSON Schema for a simple object?","acceptedAnswer":{"@type":"Answer","text":"Start with type: object, properties: name (string) and age (integer with minimum 0), required: [name]. This says: the data is an object, it must have a string name, and an optional non-negative integer age."}},{"@type":"Question","name":"Where is JSON Schema used in real projects?","acceptedAnswer":{"@type":"Answer","text":"API contract validation (OpenAPI/Swagger uses JSON Schema), configuration file validation (like package.json, tsconfig.json), form validation libraries, and message queue payload validation. It's the de facto standard for describing JSON data shapes."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -94,6 +113,45 @@ textarea::placeholder{color:var(--muted)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I validate JSON against a JSON Schema?</summary>
+    <div class="faq-body">
+      <p>Paste your JSON data in one panel and your JSON Schema in the other, then click <strong>Validate</strong>. The tool reports whether the data matches the schema, and if not, lists each validation error with its path and description.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What JSON Schema draft does this validator support?</summary>
+    <div class="faq-body">
+      <p>JSON Schema Draft 2020-12 and backward-compatible with Draft 7. Most fields (<code>type</code>, <code>properties</code>, <code>required</code>, <code>enum</code>, <code>pattern</code>, <code>minLength</code>, etc.) work across drafts. Complex features like <code>$dynamicRef</code> require Draft 2020-12.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why use JSON Schema instead of just checking JSON manually?</summary>
+    <div class="faq-body">
+      <p>Schema validation is declarative &mdash; you describe what valid data looks like, and a validator handles the edge cases. Types, required fields, string patterns, number ranges, enums, nested object shapes, and arrays all get validated in one pass. Saves dozens of lines of imperative checking code.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I write a JSON Schema for a simple object?</summary>
+    <div class="faq-body">
+      <p>Start with <code>{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer","minimum":0}},"required":["name"]}</code>. This says: the data is an object, it must have a string <code>name</code>, and an optional non-negative integer <code>age</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where is JSON Schema used in real projects?</summary>
+    <div class="faq-body">
+      <p>API contract validation (OpenAPI/Swagger uses JSON Schema), configuration file validation (like <code>package.json</code>, <code>tsconfig.json</code>), form validation libraries, and message queue payload validation. It's the de facto standard for describing JSON data shapes.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function validate(){

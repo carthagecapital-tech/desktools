@@ -36,7 +36,26 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .try-link{font-size:.75rem;color:var(--accent);text-decoration:none;opacity:.7;transition:opacity .15s;margin-left:.5rem}
 .try-link:hover{opacity:1}
 @media(max-width:600px){.entry{grid-template-columns:80px 1fr;font-size:.82rem}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I use this regex cheat sheet?","acceptedAnswer":{"@type":"Answer","text":"Search by pattern or concept (e.g. email, lookahead, \\d). Each entry shows the pattern, what it matches, and a live example. Use it as a quick reference while building patterns in the Regex Tester."}},{"@type":"Question","name":"What are the most common regex character classes?","acceptedAnswer":{"@type":"Answer","text":"\\d matches any digit, \\w matches word characters (letters, digits, underscore), \\s matches whitespace (space, tab, newline). Uppercase versions (\\D, \\W, \\S) are the negations. [a-z] defines custom character ranges."}},{"@type":"Question","name":"What is the difference between * and + in regex?","acceptedAnswer":{"@type":"Answer","text":"* matches the preceding element zero or more times. + matches it one or more times. So a* matches an empty string, aa, aaa... while a+ requires at least one a. Both are greedy by default &mdash; add ? to make them lazy."}},{"@type":"Question","name":"What are lookahead and lookbehind in regex?","acceptedAnswer":{"@type":"Answer","text":"Lookahead (?=...) checks if something follows without consuming it. Negative lookahead (?!...) checks it doesn't follow. Lookbehind (?&lt;=...) and negative lookbehind (?&lt;!...) do the same backwards. Useful for validating passwords, finding words not preceded by something, etc."}},{"@type":"Question","name":"How do I match a whole word in regex?","acceptedAnswer":{"@type":"Answer","text":"Use word boundaries: \\bword\\b matches word as a standalone word, not inside password or keyword. \\b is a zero-width assertion that marks the position between a word character and a non-word character."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -73,6 +92,45 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I use this regex cheat sheet?</summary>
+    <div class="faq-body">
+      <p>Search by pattern or concept (e.g. <code>email</code>, <code>lookahead</code>, <code>\d</code>). Each entry shows the pattern, what it matches, and a live example. Use it as a quick reference while building patterns in the <a href="/regex-tester">Regex Tester</a>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the most common regex character classes?</summary>
+    <div class="faq-body">
+      <p><code>\d</code> matches any digit, <code>\w</code> matches word characters (letters, digits, underscore), <code>\s</code> matches whitespace (space, tab, newline). Uppercase versions (<code>\D</code>, <code>\W</code>, <code>\S</code>) are the negations. <code>[a-z]</code> defines custom character ranges.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between * and + in regex?</summary>
+    <div class="faq-body">
+      <p><code>*</code> matches the preceding element <strong>zero or more</strong> times. <code>+</code> matches it <strong>one or more</strong> times. So <code>a*</code> matches an empty string, <code>aa</code>, <code>aaa</code>... while <code>a+</code> requires at least one <code>a</code>. Both are greedy by default &mdash; add <code>?</code> to make them lazy.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are lookahead and lookbehind in regex?</summary>
+    <div class="faq-body">
+      <p><strong>Lookahead</strong> <code>(?=...)</code> checks if something follows without consuming it. <strong>Negative lookahead</strong> <code>(?!...)</code> checks it doesn't follow. <strong>Lookbehind</strong> <code>(?&lt;=...)</code> and <strong>negative lookbehind</strong> <code>(?&lt;!...)</code> do the same backwards. Useful for validating passwords, finding words not preceded by something, etc.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I match a whole word in regex?</summary>
+    <div class="faq-body">
+      <p>Use word boundaries: <code>\bword\b</code> matches <code>word</code> as a standalone word, not inside <code>password</code> or <code>keyword</code>. <code>\b</code> is a zero-width assertion that marks the position between a word character and a non-word character.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var DATA=[

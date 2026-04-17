@@ -38,7 +38,26 @@ pre.output{width:100%;min-height:350px;padding:1.25rem;background:transparent;fo
 .num{color:#74c0fc}
 .cmt{color:var(--muted);font-style:italic}
 @media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I format messy SQL queries online?","acceptedAnswer":{"@type":"Answer","text":"Paste your SQL into the input box and click Format. The tool adds line breaks, indents clauses (SELECT, FROM, WHERE, JOIN), and capitalizes keywords for readability. Click Copy to grab the formatted result."}},{"@type":"Question","name":"What SQL dialects does this formatter support?","acceptedAnswer":{"@type":"Answer","text":"Standard SQL plus common dialects: PostgreSQL, MySQL, SQLite, SQL Server (T-SQL), and Oracle. The formatter handles SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CTEs (WITH), window functions, and subqueries."}},{"@type":"Question","name":"How do I minify SQL to save space?","acceptedAnswer":{"@type":"Answer","text":"Click Minify to collapse the SQL to a single line with whitespace removed. Useful for embedding queries in code strings or log lines. The logical meaning is preserved &mdash; only formatting whitespace is stripped."}},{"@type":"Question","name":"Does formatting SQL affect query performance?","acceptedAnswer":{"@type":"Answer","text":"No. Whitespace is ignored by the SQL parser. The execution plan is identical whether the query is on one line or 50. Formatting is purely for human readability and code review."}},{"@type":"Question","name":"Can I use this to check if my SQL is valid?","acceptedAnswer":{"@type":"Answer","text":"Partially. The formatter will fail on clearly malformed SQL (missing brackets, unterminated strings). But it doesn't do full semantic validation (table names, column types). For that, run the query against your actual database in a sandbox."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -90,6 +109,45 @@ pre.output{width:100%;min-height:350px;padding:1.25rem;background:transparent;fo
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I format messy SQL queries online?</summary>
+    <div class="faq-body">
+      <p>Paste your SQL into the input box and click <strong>Format</strong>. The tool adds line breaks, indents clauses (SELECT, FROM, WHERE, JOIN), and capitalizes keywords for readability. Click <strong>Copy</strong> to grab the formatted result.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What SQL dialects does this formatter support?</summary>
+    <div class="faq-body">
+      <p>Standard SQL plus common dialects: PostgreSQL, MySQL, SQLite, SQL Server (T-SQL), and Oracle. The formatter handles SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CTEs (WITH), window functions, and subqueries.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I minify SQL to save space?</summary>
+    <div class="faq-body">
+      <p>Click <strong>Minify</strong> to collapse the SQL to a single line with whitespace removed. Useful for embedding queries in code strings or log lines. The logical meaning is preserved &mdash; only formatting whitespace is stripped.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does formatting SQL affect query performance?</summary>
+    <div class="faq-body">
+      <p>No. Whitespace is ignored by the SQL parser &mdash; the execution plan is identical whether the query is on one line or 50. Formatting is purely for human readability and code review.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use this to check if my SQL is valid?</summary>
+    <div class="faq-body">
+      <p>Partially &mdash; the formatter will fail on clearly malformed SQL (missing brackets, unterminated strings). But it doesn't do full semantic validation (table names, column types). For that, run the query against your actual database in a sandbox.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const KEYWORDS=['SELECT','DISTINCT','FROM','WHERE','AND','OR','NOT','IN','EXISTS','BETWEEN','LIKE','IS','NULL','AS',

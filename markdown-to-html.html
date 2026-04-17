@@ -33,7 +33,26 @@ textarea{width:100%;min-height:400px;padding:1.25rem;background:transparent;bord
 textarea::placeholder{color:var(--muted)}
 pre.output{width:100%;min-height:400px;padding:1.25rem;background:transparent;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);overflow:auto;white-space:pre-wrap;line-height:1.6;margin:0}
 @media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert Markdown to HTML online?","acceptedAnswer":{"@type":"Answer","text":"Paste your Markdown into the input area and click Convert. The HTML output appears with semantic tags: headings, paragraphs, lists, code blocks, tables, and links. Click Copy HTML to grab the result."}},{"@type":"Question","name":"What Markdown features does this converter support?","acceptedAnswer":{"@type":"Answer","text":"Standard CommonMark plus GitHub-flavored Markdown extensions: headings, bold/italic, lists (ordered, unordered, nested), code blocks with language hints, tables, task lists, strikethrough, links, images, blockquotes, and horizontal rules."}},{"@type":"Question","name":"Is the generated HTML safe to use on my site?","acceptedAnswer":{"@type":"Answer","text":"The tool produces semantic HTML without external dependencies, so you can drop it into any page or CMS. However, if the source Markdown contains raw HTML (allowed in Markdown syntax), that HTML passes through unchanged &mdash; if you're accepting Markdown from untrusted users, sanitize the output before rendering to prevent XSS."}},{"@type":"Question","name":"What is the difference between this tool and Markdown Preview?","acceptedAnswer":{"@type":"Answer","text":"The Markdown Preview tool renders your Markdown as it would appear when published &mdash; useful for checking formatting. This tool outputs the underlying HTML source &mdash; useful when you need to copy-paste HTML into a CMS, email, or static site."}},{"@type":"Question","name":"How do I convert a README.md file to HTML?","acceptedAnswer":{"@type":"Answer","text":"Open your README.md, copy all the content, paste it here, click Convert, and copy the HTML. Useful for publishing docs to a plain HTML site, converting project READMEs to blog posts, or previewing how a README will render before pushing."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -84,6 +103,45 @@ pre.output{width:100%;min-height:400px;padding:1.25rem;background:transparent;fo
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert Markdown to HTML online?</summary>
+    <div class="faq-body">
+      <p>Paste your Markdown into the input area and click <strong>Convert</strong>. The HTML output appears with semantic tags: headings, paragraphs, lists, code blocks, tables, and links. Click <strong>Copy HTML</strong> to grab the result.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What Markdown features does this converter support?</summary>
+    <div class="faq-body">
+      <p>Standard CommonMark plus GitHub-flavored Markdown extensions: headings, bold/italic, lists (ordered, unordered, nested), code blocks with language hints, tables, task lists, strikethrough, links, images, blockquotes, and horizontal rules.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is the generated HTML safe to use on my site?</summary>
+    <div class="faq-body">
+      <p>The tool produces semantic HTML without external dependencies, so you can drop it into any page or CMS. However, if the source Markdown contains raw HTML (allowed in Markdown syntax), that HTML passes through unchanged &mdash; if you're accepting Markdown from untrusted users, sanitize the output before rendering to prevent XSS.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between this tool and Markdown Preview?</summary>
+    <div class="faq-body">
+      <p>The <a href="/markdown-preview">Markdown Preview</a> tool renders your Markdown as it would appear when published &mdash; useful for checking formatting. This tool outputs the underlying HTML source &mdash; useful when you need to copy-paste HTML into a CMS, email, or static site.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I convert a README.md file to HTML?</summary>
+    <div class="faq-body">
+      <p>Open your README.md, copy all the content, paste it here, click Convert, and copy the HTML. Useful for publishing docs to a plain HTML site, converting project READMEs to blog posts, or previewing how a README will render before pushing.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function convert(){

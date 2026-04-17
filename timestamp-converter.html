@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unix Timestamp Converter — Epoch Time Converter Online | DeskTools"/>
 <meta name="twitter:description" content="Free online Unix timestamp converter. Convert between Unix epoch time and human-readable dates. See the current timestamp live. Supports seconds and milliseconds."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert a Unix timestamp to a human-readable date?","acceptedAnswer":{"@type":"Answer","text":"Paste the Unix timestamp (in seconds or milliseconds) into the input box and the converted date appears instantly in UTC and your local timezone. The tool auto-detects whether your input is seconds (10 digits) or milliseconds (13 digits)."}},{"@type":"Question","name":"What is the current Unix timestamp right now?","acceptedAnswer":{"@type":"Answer","text":"The current Unix epoch time updates live on the page. Unix timestamps count seconds since January 1, 1970 UTC &mdash; they're timezone-independent, making them the standard way to represent a moment in time in APIs, databases, and logs."}},{"@type":"Question","name":"How do I convert a date to a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"Use the date/time inputs (Year, Month, Day, Hour, Minute, Second) to build a specific date &mdash; the Unix timestamp updates automatically. Useful for querying time-ranged APIs or debugging log timestamps."}},{"@type":"Question","name":"What is the difference between Unix timestamp in seconds vs milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Unix seconds (10 digits, e.g. 1733000000) is the original Unix standard &mdash; used in most databases and Linux. Unix milliseconds (13 digits, e.g. 1733000000000) is what JavaScript's Date.now() returns and what many modern APIs use. This tool handles both."}},{"@type":"Question","name":"When will the Unix timestamp overflow (Year 2038 problem)?","acceptedAnswer":{"@type":"Answer","text":"Signed 32-bit Unix timestamps overflow on January 19, 2038 at 03:14:07 UTC. Most modern systems have moved to 64-bit timestamps, which won't overflow for ~292 billion years. If you're working with legacy systems, check whether timestamps are stored as int32 or int64."}},{"@type":"Question","name":"Does this tool handle timezones?","acceptedAnswer":{"@type":"Answer","text":"The converter shows your local timezone alongside UTC. For more complex timezone conversion (meeting planning across regions, DST boundaries), use the Timezone Converter tool."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -104,6 +124,52 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول الطابع الزمني Unix</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert a Unix timestamp to a human-readable date?</summary>
+    <div class="faq-body">
+      <p>Paste the Unix timestamp (in seconds or milliseconds) into the input box and the converted date appears instantly in UTC and your local timezone. The tool auto-detects whether your input is seconds (10 digits) or milliseconds (13 digits).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the current Unix timestamp right now?</summary>
+    <div class="faq-body">
+      <p>The current Unix epoch time updates live on the page. Unix timestamps count seconds since January 1, 1970 UTC &mdash; they're timezone-independent, making them the standard way to represent a moment in time in APIs, databases, and logs.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I convert a date to a Unix timestamp?</summary>
+    <div class="faq-body">
+      <p>Use the date/time inputs (Year, Month, Day, Hour, Minute, Second) to build a specific date &mdash; the Unix timestamp updates automatically. Useful for querying time-ranged APIs or debugging log timestamps.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between Unix timestamp in seconds vs milliseconds?</summary>
+    <div class="faq-body">
+      <p>Unix seconds (10 digits, e.g. <code>1733000000</code>) is the original Unix standard &mdash; used in most databases and Linux. Unix milliseconds (13 digits, e.g. <code>1733000000000</code>) is what JavaScript's <code>Date.now()</code> returns and what many modern APIs use. This tool handles both.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When will the Unix timestamp overflow (Year 2038 problem)?</summary>
+    <div class="faq-body">
+      <p>Signed 32-bit Unix timestamps overflow on January 19, 2038 at 03:14:07 UTC. Most modern systems have moved to 64-bit timestamps, which won't overflow for ~292 billion years. If you're working with legacy systems, check whether timestamps are stored as int32 or int64.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this tool handle timezones?</summary>
+    <div class="faq-body">
+      <p>The converter shows your local timezone alongside UTC. For more complex timezone conversion (meeting planning across regions, DST boundaries), use the <a href="/timezone-converter">Timezone Converter</a> tool.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     // Live clock

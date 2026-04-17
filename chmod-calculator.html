@@ -39,7 +39,26 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .preset:hover{border-color:var(--accent);color:var(--accent)}
 .copy-cmd{background:none;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.25rem .5rem;border-radius:4px;cursor:pointer;transition:all .2s;margin-left:.5rem}
 .copy-cmd:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate chmod permissions online?","acceptedAnswer":{"@type":"Answer","text":"Toggle the 9 checkboxes (read/write/execute for owner/group/world) to build your permissions. The numeric (e.g. 755), symbolic (rwxr-xr-x), and full chmod command update in real-time. Click a preset like 755 or 644 for common defaults."}},{"@type":"Question","name":"What does chmod 755 mean?","acceptedAnswer":{"@type":"Answer","text":"Owner can read, write, and execute (7 = 4+2+1). Group and world can read and execute (5 = 4+0+1) but not write. This is the standard permission for executable scripts and directories."}},{"@type":"Question","name":"What is the difference between chmod 644 and 755?","acceptedAnswer":{"@type":"Answer","text":"644 gives owner read/write, others read-only &mdash; standard for regular files. 755 adds execute permission for owner/group/world &mdash; use for executable files and directories (directories need execute to be traversable)."}},{"@type":"Question","name":"What are the most common chmod values and when should I use them?","acceptedAnswer":{"@type":"Answer","text":"644 = files (owner write, others read). 755 = directories, scripts (all can execute). 600 = private config files, SSH keys (owner only). 700 = private executables. 777 = world-writable (avoid &mdash; security risk)."}},{"@type":"Question","name":"Why is chmod 777 dangerous?","acceptedAnswer":{"@type":"Answer","text":"It lets any user on the system read, modify, and execute the file. On a shared server, any compromised account or process can alter 777 files, inject malicious code, or read secrets. Use the most restrictive permission that still works &mdash; rarely is 777 actually necessary."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -105,6 +124,45 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I calculate chmod permissions online?</summary>
+    <div class="faq-body">
+      <p>Toggle the 9 checkboxes (read/write/execute for owner/group/world) to build your permissions. The numeric (e.g. <code>755</code>), symbolic (<code>rwxr-xr-x</code>), and full <code>chmod</code> command update in real-time. Click a preset like 755 or 644 for common defaults.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does chmod 755 mean?</summary>
+    <div class="faq-body">
+      <p>Owner can read, write, and execute (7 = 4+2+1). Group and world can read and execute (5 = 4+0+1) but not write. This is the standard permission for executable scripts and directories.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between chmod 644 and 755?</summary>
+    <div class="faq-body">
+      <p><strong>644</strong> gives owner read/write, others read-only &mdash; standard for regular files. <strong>755</strong> adds execute permission for owner/group/world &mdash; use for executable files and directories (directories need execute to be traversable).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the most common chmod values and when should I use them?</summary>
+    <div class="faq-body">
+      <p><strong>644</strong> = files (owner write, others read). <strong>755</strong> = directories, scripts (all can execute). <strong>600</strong> = private config files, SSH keys (owner only). <strong>700</strong> = private executables. <strong>777</strong> = world-writable (avoid &mdash; security risk).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is chmod 777 dangerous?</summary>
+    <div class="faq-body">
+      <p>It lets any user on the system read, modify, and execute the file. On a shared server, any compromised account or process can alter 777 files, inject malicious code, or read secrets. Use the most restrictive permission that still works &mdash; rarely is 777 actually necessary.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function calc(){

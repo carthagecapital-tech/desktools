@@ -85,6 +85,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -97,6 +115,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder","description":"Decode and inspect JSON Web Tokens. View header, payload, and expiry without a backend.","url":"https://desktools.dev/jwt-decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"JWT decoder, JSON Web Token, JWT parser"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I decode a JWT token online?","acceptedAnswer":{"@type":"Answer","text":"Paste the JWT (header.payload.signature) into the input box. The tool instantly splits it into three parts and Base64-decodes the header and payload, showing the algorithm, claims, expiry, and any custom fields. Everything happens in your browser."}},{"@type":"Question","name":"Is it safe to paste a JWT into an online decoder?","acceptedAnswer":{"@type":"Answer","text":"With DeskTools, yes &mdash; decoding is 100% client-side, so the token never leaves your browser. But remember: a JWT you paste anywhere online should be treated as compromised for production use. For debugging, use expired or test tokens when possible."}},{"@type":"Question","name":"What do the JWT claims like iat, exp, and sub mean?","acceptedAnswer":{"@type":"Answer","text":"iat = issued at (Unix timestamp when the token was created). exp = expiry time. sub = subject (usually the user ID). iss = issuer. aud = audience. These are standard claims defined in RFC 7519, but any JWT can add custom claims for roles, permissions, etc."}},{"@type":"Question","name":"Can this tool verify a JWT signature?","acceptedAnswer":{"@type":"Answer","text":"No. Signature verification requires the secret or public key, and doing that in a browser would mean the key is exposed. This tool decodes the readable parts (header and payload) only. For signature verification, use your backend's JWT library."}},{"@type":"Question","name":"Why is my JWT payload encoded as Base64 if it's not encrypted?","acceptedAnswer":{"@type":"Answer","text":"JWTs use Base64URL encoding to make the token URL-safe and compact &mdash; not for secrecy. Anyone can decode the payload (like you're doing now). The signature is what prevents tampering. If you need confidentiality, use JWE (encrypted JWT) instead of JWS (signed JWT)."}},{"@type":"Question","name":"How do I check if a JWT has expired?","acceptedAnswer":{"@type":"Answer","text":"After decoding, look at the exp claim in the payload. It's a Unix timestamp. Compare it to the current time (or use the Timestamp Converter to read it as a date). If it's in the past, the token is expired."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -150,6 +169,52 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>فك تشفير JWT</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I decode a JWT token online?</summary>
+    <div class="faq-body">
+      <p>Paste the JWT (header.payload.signature) into the input box. The tool instantly splits it into three parts and Base64-decodes the header and payload, showing the algorithm, claims, expiry, and any custom fields. Everything happens in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to paste a JWT into an online decoder?</summary>
+    <div class="faq-body">
+      <p>With DeskTools, yes &mdash; decoding is 100% client-side, so the token never leaves your browser. But remember: a JWT you paste anywhere online should be treated as compromised for production use. For debugging, use expired or test tokens when possible.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What do the JWT claims like iat, exp, and sub mean?</summary>
+    <div class="faq-body">
+      <p><code>iat</code> = issued at (Unix timestamp when the token was created). <code>exp</code> = expiry time. <code>sub</code> = subject (usually the user ID). <code>iss</code> = issuer. <code>aud</code> = audience. These are standard claims defined in RFC 7519, but any JWT can add custom claims for roles, permissions, etc.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can this tool verify a JWT signature?</summary>
+    <div class="faq-body">
+      <p>No &mdash; signature verification requires the secret or public key, and doing that in a browser would mean the key is exposed. This tool decodes the readable parts (header and payload) only. For signature verification, use your backend's JWT library.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is my JWT payload encoded as Base64 if it's not encrypted?</summary>
+    <div class="faq-body">
+      <p>JWTs use Base64URL encoding to make the token URL-safe and compact &mdash; not for secrecy. Anyone can decode the payload (like you're doing now). The signature is what prevents tampering. If you need confidentiality, use JWE (encrypted JWT) instead of JWS (signed JWT).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I check if a JWT has expired?</summary>
+    <div class="faq-body">
+      <p>After decoding, look at the <code>exp</code> claim in the payload &mdash; it's a Unix timestamp. Compare it to the current time (or use the <a href="/timestamp-converter">Timestamp Converter</a> to read it as a date). If it's in the past, the token is expired.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function b64url(s){try{return atob(s.replace(/-/g,'+').replace(/_/g,'/').padEnd(s.length+3-(s.length+3)%4,'='));}catch{return null;}}

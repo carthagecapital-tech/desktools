@@ -46,7 +46,26 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text);line-height:1.7;white-space:pre-wrap;max-height:300px;overflow-y:auto}
 .output-code .cmt{color:var(--muted)}
 .output-code .key{color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a .env file quickly?","acceptedAnswer":{"@type":"Answer","text":"Either start with a template (Next.js, Stripe, Supabase, AWS, Docker, Rails) to pre-fill common variables, or click + Add variable to build one from scratch. Each row is a KEY=value pair. Click Copy to grab the .env output."}},{"@type":"Question","name":"What format do .env files use?","acceptedAnswer":{"@type":"Answer","text":"Plain text, one variable per line: KEY=value. No quotes needed for simple values. Values with spaces or special characters should be wrapped in double quotes. Comments start with #. Empty lines are ignored. Most languages have a library (dotenv, python-dotenv) to load these at runtime."}},{"@type":"Question","name":"Should I commit .env files to Git?","acceptedAnswer":{"@type":"Answer","text":"No. .env files typically contain secrets (API keys, database URLs, tokens). Add .env to your .gitignore and commit a .env.example with the keys but no values. Use environment-specific .env files (.env.production, .env.local) for different stages."}},{"@type":"Question","name":"What is the difference between .env, .env.local, and .env.production?","acceptedAnswer":{"@type":"Answer","text":"Convention varies by framework, but commonly: .env = defaults (sometimes committed), .env.local = your machine's overrides (never committed), .env.production = production-specific values. Next.js, Vite, and Create React App all use this pattern with slight variations."}},{"@type":"Question","name":"How do I keep .env file secrets out of my Git history?","acceptedAnswer":{"@type":"Answer","text":"If you've already committed a .env file with secrets: (1) rotate those secrets immediately (they're compromised), (2) use git filter-repo or BFG Repo-Cleaner to rewrite history, (3) add .env to .gitignore. Going forward, always ignore .env files before first commit."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -103,6 +122,45 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a .env file quickly?</summary>
+    <div class="faq-body">
+      <p>Either start with a template (Next.js, Stripe, Supabase, AWS, Docker, Rails) to pre-fill common variables, or click <strong>+ Add variable</strong> to build one from scratch. Each row is a KEY=value pair. Click <strong>Copy</strong> to grab the .env output.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What format do .env files use?</summary>
+    <div class="faq-body">
+      <p>Plain text, one variable per line: <code>KEY=value</code>. No quotes needed for simple values. Values with spaces or special characters should be wrapped in double quotes. Comments start with <code>#</code>. Empty lines are ignored. Most languages have a library (dotenv, python-dotenv) to load these at runtime.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I commit .env files to Git?</summary>
+    <div class="faq-body">
+      <p>No &mdash; .env files typically contain secrets (API keys, database URLs, tokens). Add <code>.env</code> to your <code>.gitignore</code> and commit a <code>.env.example</code> with the keys but no values. Use environment-specific .env files (<code>.env.production</code>, <code>.env.local</code>) for different stages.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between .env, .env.local, and .env.production?</summary>
+    <div class="faq-body">
+      <p>Convention varies by framework, but commonly: <code>.env</code> = defaults (sometimes committed), <code>.env.local</code> = your machine's overrides (never committed), <code>.env.production</code> = production-specific values. Next.js, Vite, and Create React App all use this pattern with slight variations.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I keep .env file secrets out of my Git history?</summary>
+    <div class="faq-body">
+      <p>If you've already committed a .env file with secrets: (1) rotate those secrets immediately (they're compromised), (2) use <code>git filter-repo</code> or BFG Repo-Cleaner to rewrite history, (3) add <code>.env</code> to <code>.gitignore</code>. Going forward, always ignore .env files before first commit.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 let vars=[{key:'NODE_ENV',value:'development',comment:''},{key:'PORT',value:'3000',comment:''},{key:'DATABASE_URL',value:'',comment:''}];
