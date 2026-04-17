@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Markdown Preview — Free Online Markdown Editor | DeskTools"/>
 <meta name="twitter:description" content="Free online markdown editor with live preview. Write markdown and see it rendered instantly. Supports headings, bold, italic, code blocks, tables, links, and more."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I preview Markdown online for free?","acceptedAnswer":{"@type":"Answer","text":"Type or paste Markdown in the left panel. The rendered preview appears on the right in real-time. Supports headings, bold/italic, lists, code blocks, tables, links, and blockquotes. Click Copy Markdown or Copy HTML to grab either version."}},{"@type":"Question","name":"What Markdown syntax does this editor support?","acceptedAnswer":{"@type":"Answer","text":"Standard CommonMark plus GitHub-flavored Markdown: # for headings, **bold**, *italic*, `code`, triple-backtick code blocks with language hints, [links](url), ![images](url), ordered and unordered lists, tables with pipes, blockquotes with &gt;, and task lists with - [ ]."}},{"@type":"Question","name":"How is this different from the Markdown to HTML tool?","acceptedAnswer":{"@type":"Answer","text":"This tool is a live editor. You write Markdown and see the styled output side-by-side. The Markdown to HTML tool is a converter. It shows the raw HTML source code so you can copy-paste it into a CMS or static site."}},{"@type":"Question","name":"Can I use this to write a README file for GitHub?","acceptedAnswer":{"@type":"Answer","text":"Yes. The preview uses GitHub-flavored Markdown, so what you see here is close to what will render on GitHub. Write your README, preview it live, then copy the Markdown and paste it into your repo's README.md file."}},{"@type":"Question","name":"Is my content saved or sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs 100% in your browser. The Markdown you type, the HTML that's generated, and any copies you make never leave your device. Refreshing the page clears the content &mdash; save elsewhere if you need persistence."}},{"@type":"Question","name":"How do I add a code block with syntax highlighting in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Wrap code in triple backticks and add the language name on the opening line: ```javascript for JS, ```python for Python, ```bash for shell. GitHub, GitLab, and most Markdown renderers (including this preview) use the language hint to apply syntax highlighting."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -51,6 +71,52 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>معاينة Markdown مباشرة</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I preview Markdown online for free?</summary>
+    <div class="faq-body">
+      <p>Type or paste Markdown in the left panel &mdash; the rendered preview appears on the right in real-time. Supports headings, bold/italic, lists, code blocks, tables, links, and blockquotes. Click <strong>Copy Markdown</strong> or <strong>Copy HTML</strong> to grab either version.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What Markdown syntax does this editor support?</summary>
+    <div class="faq-body">
+      <p>Standard CommonMark plus GitHub-flavored Markdown: <code>#</code> for headings, <code>**bold**</code>, <code>*italic*</code>, <code>`code`</code>, triple-backtick code blocks with language hints, <code>[links](url)</code>, <code>![images](url)</code>, ordered and unordered lists, tables with pipes, blockquotes with <code>&gt;</code>, and task lists with <code>- [ ]</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How is this different from the Markdown to HTML tool?</summary>
+    <div class="faq-body">
+      <p>This tool is a <strong>live editor</strong> &mdash; you write Markdown and see the styled output side-by-side. The <a href="/markdown-to-html">Markdown to HTML</a> tool is a <strong>converter</strong> &mdash; it shows the raw HTML source code so you can copy-paste it into a CMS or static site.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use this to write a README file for GitHub?</summary>
+    <div class="faq-body">
+      <p>Yes. The preview uses GitHub-flavored Markdown, so what you see here is close to what will render on GitHub. Write your README, preview it live, then copy the Markdown and paste it into your repo's README.md file.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is my content saved or sent to a server?</summary>
+    <div class="faq-body">
+      <p>No. Everything runs 100% in your browser. The Markdown you type, the HTML that's generated, and any copies you make never leave your device. Refreshing the page clears the content &mdash; save elsewhere if you need persistence.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I add a code block with syntax highlighting in Markdown?</summary>
+    <div class="faq-body">
+      <p>Wrap code in triple backticks and add the language name on the opening line: <code>```javascript</code> for JS, <code>```python</code> for Python, <code>```bash</code> for shell. GitHub, GitLab, and most Markdown renderers (including this preview) use the language hint to apply syntax highlighting.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function loadMdExample(){document.getElementById('md-input').value='# Heading 1\n## Heading 2\n### Heading 3\n\nA paragraph with **bold**, *italic*, and `inline code`.\n\n- List item one\n- List item two\n- List item three\n\n1. Numbered one\n2. Numbered two\n3. Numbered three\n\n> A blockquote looks like this.\n> It can span multiple lines.\n\n```\nconst x = 42;\nconsole.log(x);\n```\n\n[Link text](https://desktools.dev)\n\n| Header | Header 2 |\n|--------|----------|\n| Cell 1 | Cell 2   |\n| Cell 3 | Cell 4   |\n\n---\n\nThat is a horizontal rule above.';renderMarkdown();}

@@ -30,7 +30,26 @@ textarea:focus{border-color:var(--accent)}
 .copy-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.3rem .55rem;border-radius:5px;cursor:pointer;transition:all .2s;flex-shrink:0}
 .copy-btn:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:520px){.out-row{flex-wrap:wrap}.out-label{width:100%}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert text to camelCase, snake_case, or kebab-case?","acceptedAnswer":{"@type":"Answer","text":"Paste your text in the input. Every case variant (camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case, Sentence case) appears in its own row. Click Copy next to the one you want."}},{"@type":"Question","name":"Which case convention should I use in my code?","acceptedAnswer":{"@type":"Answer","text":"Follow your language's convention: JavaScript/Java/C#: camelCase for variables, PascalCase for classes. Python/Ruby: snake_case. URLs/CSS classes: kebab-case. Constants: SCREAMING_SNAKE_CASE across most languages. Consistency within a codebase matters more than which style is right."}},{"@type":"Question","name":"What is the difference between camelCase and PascalCase?","acceptedAnswer":{"@type":"Answer","text":"camelCase starts with a lowercase letter: userName, calculateTotal. PascalCase (also called UpperCamelCase) capitalizes every word including the first: UserName, CalculateTotal. In most languages, camelCase is for variables and functions, PascalCase is for classes and types."}},{"@type":"Question","name":"How does the converter handle text with numbers and acronyms?","acceptedAnswer":{"@type":"Answer","text":"Numbers stay adjacent to their word: order 2 quantity becomes order2Quantity in camelCase. For acronyms, the tool treats them as single words: HTTP request becomes httpRequest. Strict style guides may want HTTPRequest instead. Adjust manually if needed."}},{"@type":"Question","name":"Is this tool the same as the Text Transformer?","acceptedAnswer":{"@type":"Answer","text":"Text Transformer includes case conversion plus utilities like Sort Lines, Dedupe, Reverse, and Trim. This Case Converter focuses on showing every case variant at once for quick copying. Use whichever matches your workflow."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -65,6 +84,45 @@ textarea:focus{border-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert text to camelCase, snake_case, or kebab-case?</summary>
+    <div class="faq-body">
+      <p>Paste your text in the input. Every case variant (<strong>camelCase</strong>, <strong>PascalCase</strong>, <strong>snake_case</strong>, <strong>SCREAMING_SNAKE_CASE</strong>, <strong>kebab-case</strong>, <strong>Title Case</strong>, <strong>Sentence case</strong>) appears in its own row. Click <strong>Copy</strong> next to the one you want.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Which case convention should I use in my code?</summary>
+    <div class="faq-body">
+      <p>Follow your language's convention: <strong>JavaScript/Java/C#</strong>: camelCase for variables, PascalCase for classes. <strong>Python/Ruby</strong>: snake_case. <strong>URLs/CSS classes</strong>: kebab-case. <strong>Constants</strong>: SCREAMING_SNAKE_CASE across most languages. Consistency within a codebase matters more than which style is "right".</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between camelCase and PascalCase?</summary>
+    <div class="faq-body">
+      <p><strong>camelCase</strong> starts with a lowercase letter: <code>userName</code>, <code>calculateTotal</code>. <strong>PascalCase</strong> (also called UpperCamelCase) capitalizes every word including the first: <code>UserName</code>, <code>CalculateTotal</code>. In most languages, camelCase is for variables and functions, PascalCase is for classes and types.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How does the converter handle text with numbers and acronyms?</summary>
+    <div class="faq-body">
+      <p>Numbers stay adjacent to their word: <code>order 2 quantity</code> becomes <code>order2Quantity</code> in camelCase. For acronyms, the tool treats them as single words: <code>HTTP request</code> becomes <code>httpRequest</code>. Strict style guides may want <code>HTTPRequest</code> instead &mdash; adjust manually if needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is this tool the same as the Text Transformer?</summary>
+    <div class="faq-body">
+      <p><a href="/text-transformer">Text Transformer</a> includes case conversion plus utilities like Sort Lines, Dedupe, Reverse, and Trim. This Case Converter focuses on showing every case variant at once for quick copying. Use whichever matches your workflow.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function tokens(s){

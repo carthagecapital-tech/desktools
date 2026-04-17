@@ -41,7 +41,26 @@ tr{position:relative}
 .output-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);white-space:pre;overflow-x:auto;margin-top:1rem}
 .output-head{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;margin-bottom:.5rem}
 .output-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a Markdown table online?","acceptedAnswer":{"@type":"Answer","text":"Use the visual editor to add rows and columns. Type content into each cell, set column alignment (left, center, right), and the Markdown updates live. Click Copy Markdown when done and paste into GitHub, Notion, Obsidian, or any Markdown-capable tool."}},{"@type":"Question","name":"What is the Markdown table syntax?","acceptedAnswer":{"@type":"Answer","text":"Pipes separate cells, hyphens under the header row define the table, colons set alignment: left, center, right. Writing this by hand for a 5-column, 10-row table is painful. Use the visual editor instead."}},{"@type":"Question","name":"Does this work with GitHub, Notion, and Obsidian?","acceptedAnswer":{"@type":"Answer","text":"Yes. All three support GitHub-flavored Markdown tables, which is what this tool generates. Paste the output into a GitHub README, a Notion page, or an Obsidian note and it renders as a table. Some tools (like plain Reddit comments) don't support tables. Check your target first."}},{"@type":"Question","name":"Can I paste a table from Excel or Google Sheets to convert it?","acceptedAnswer":{"@type":"Answer","text":"Paste tab-separated data (which is how Sheets/Excel clipboard works) into the tool or into a cell and it will split across columns. For bulk conversion, consider using the CSV to JSON route and transforming from there, or paste your table into the first cell as TSV."}},{"@type":"Question","name":"How do I align columns in a Markdown table?","acceptedAnswer":{"@type":"Answer","text":"In each column header, use the alignment toggle to pick left, center, or right. The tool updates the separator row (the line of hyphens) accordingly: :--- for left, :---: for center, ---: for right. No alignment colons means default (typically left)."}},{"@type":"Question","name":"Why isn't my Markdown table rendering correctly?","acceptedAnswer":{"@type":"Answer","text":"Most common issues: the header row and separator row have different column counts, you forgot the separator row entirely, or you used spaces instead of pipes. Some renderers also require a blank line before the table. This tool generates syntactically correct tables; if something breaks, it's usually the surrounding context."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -85,6 +104,52 @@ tr{position:relative}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a Markdown table online?</summary>
+    <div class="faq-body">
+      <p>Use the visual editor to add rows and columns. Type content into each cell, set column alignment (left, center, right), and the Markdown updates live. Click <strong>Copy Markdown</strong> when done and paste into GitHub, Notion, Obsidian, or any Markdown-capable tool.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the Markdown table syntax?</summary>
+    <div class="faq-body">
+      <p>Pipes separate cells, hyphens under the header row define the table, colons set alignment: <code>|:---|</code> (left), <code>|:---:|</code> (center), <code>|---:|</code> (right). Example: <code>| Name | Age |</code>, <code>|:---|---:|</code>, <code>| Ada | 36 |</code>. Writing this by hand for a 5-column, 10-row table is painful &mdash; use the visual editor instead.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this work with GitHub, Notion, and Obsidian?</summary>
+    <div class="faq-body">
+      <p>Yes. All three support GitHub-flavored Markdown tables, which is what this tool generates. Paste the output into a GitHub README, a Notion page, or an Obsidian note and it renders as a table. Some tools (like plain Reddit comments) don't support tables &mdash; check your target first.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I paste a table from Excel or Google Sheets to convert it?</summary>
+    <div class="faq-body">
+      <p>Paste tab-separated data (which is how Sheets/Excel clipboard works) into the tool or into a cell and it will split across columns. For bulk conversion, consider using the <a href="/csv-to-json">CSV to JSON</a> route and transforming from there, or paste your table into the first cell as TSV.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I align columns in a Markdown table?</summary>
+    <div class="faq-body">
+      <p>In each column header, use the alignment toggle to pick left, center, or right. The tool updates the separator row (the line of hyphens) accordingly: <code>:---</code> for left, <code>:---:</code> for center, <code>---:</code> for right. No alignment colons means default (typically left).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why isn't my Markdown table rendering correctly?</summary>
+    <div class="faq-body">
+      <p>Most common issues: the header row and separator row have different column counts, you forgot the separator row entirely, or you used spaces instead of pipes. Some renderers also require a blank line before the table. This tool generates syntactically correct tables; if something breaks, it's usually the surrounding context.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var data={

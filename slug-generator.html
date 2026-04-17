@@ -38,7 +38,26 @@ textarea::placeholder{color:var(--muted)}
 .example-in{color:var(--muted);flex:1}
 .example-out{font-family:'JetBrains Mono',monospace;color:var(--accent);flex:1}
 .example-arrow{color:var(--muted);font-size:.7rem}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a URL slug from text online?","acceptedAnswer":{"@type":"Answer","text":"Type or paste your title or phrase. The URL-safe slug appears instantly below. Spaces become hyphens, uppercase becomes lowercase, special characters and accents are stripped or transliterated, and duplicate hyphens are collapsed. Click Copy to grab it."}},{"@type":"Question","name":"What is a URL slug and why do I need one?","acceptedAnswer":{"@type":"Answer","text":"A slug is the readable part of a URL that identifies a page. In example.com/blog/my-first-post, my-first-post is the slug. Slugs help SEO (search engines use them as ranking signals), improve shareability, and are easier to read than numeric IDs or random hashes."}},{"@type":"Question","name":"How does the slug generator handle accented characters and non-English text?","acceptedAnswer":{"@type":"Answer","text":"Accented letters are transliterated to their closest ASCII equivalent: café becomes cafe, naïve becomes naive, München becomes munchen. Non-Latin scripts (Chinese, Arabic, Cyrillic) are either transliterated or stripped depending on the character, so double-check slugs for multilingual content."}},{"@type":"Question","name":"Should slugs include stop words like \"the\" and \"a\"?","acceptedAnswer":{"@type":"Answer","text":"SEO best practice is to omit them when they don't change meaning. The 10 Best Laptops becomes 10-best-laptops, not the-10-best-laptops. But keep them when they matter: The Matrix needs the to disambiguate. This tool keeps stop words; strip them manually if you prefer."}},{"@type":"Question","name":"How long should a URL slug be?","acceptedAnswer":{"@type":"Answer","text":"Aim for 3-5 words and under 60 characters. Shorter is better for sharing and memorability. Very long slugs get truncated in search results and social previews. If the title is long, pick the most distinctive keywords rather than including every word."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -88,6 +107,45 @@ textarea::placeholder{color:var(--muted)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a URL slug from text online?</summary>
+    <div class="faq-body">
+      <p>Type or paste your title or phrase &mdash; the URL-safe slug appears instantly below. Spaces become hyphens, uppercase becomes lowercase, special characters and accents are stripped or transliterated, and duplicate hyphens are collapsed. Click <strong>Copy</strong> to grab it.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is a URL slug and why do I need one?</summary>
+    <div class="faq-body">
+      <p>A slug is the readable part of a URL that identifies a page &mdash; in <code>example.com/blog/my-first-post</code>, <code>my-first-post</code> is the slug. Slugs help SEO (search engines use them as ranking signals), improve shareability, and are easier to read than numeric IDs or random hashes.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How does the slug generator handle accented characters and non-English text?</summary>
+    <div class="faq-body">
+      <p>Accented letters are transliterated to their closest ASCII equivalent: <code>caf&eacute;</code> becomes <code>cafe</code>, <code>na&iuml;ve</code> becomes <code>naive</code>, <code>M&uuml;nchen</code> becomes <code>munchen</code>. Non-Latin scripts (Chinese, Arabic, Cyrillic) are either transliterated or stripped depending on the character, so double-check slugs for multilingual content.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should slugs include stop words like "the" and "a"?</summary>
+    <div class="faq-body">
+      <p>SEO best practice is to omit them when they don't change meaning. "The 10 Best Laptops" &rarr; <code>10-best-laptops</code>, not <code>the-10-best-laptops</code>. But keep them when they matter: "The Matrix" needs "the" to disambiguate. This tool keeps stop words; strip them manually if you prefer.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How long should a URL slug be?</summary>
+    <div class="faq-body">
+      <p>Aim for 3-5 words and under 60 characters. Shorter is better for sharing and memorability. Very long slugs get truncated in search results and social previews. If the title is long, pick the most distinctive keywords rather than including every word.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var STOP_WORDS=['a','an','the','and','or','but','in','on','at','to','for','of','with','by','from','is','it','as','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','shall','can','this','that','these','those','not','no','nor','so','if','then','than','just','also','very','too'];

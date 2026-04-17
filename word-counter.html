@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Word Counter — Free Online Word & Character Counter | DeskTools"/>
 <meta name="twitter:description" content="Free online word counter. Count words, characters, sentences, paragraphs, and estimate reading time. Real-time as you type. No signup required."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I count words in text online?","acceptedAnswer":{"@type":"Answer","text":"Paste or type your text in the box. The counters update live as you type: words, characters (with and without spaces), sentences, paragraphs, and estimated reading time. No button to click, no signup."}},{"@type":"Question","name":"How is word count calculated?","acceptedAnswer":{"@type":"Answer","text":"Words are separated by whitespace. Hyphenated terms like mother-in-law count as one word. Numbers count as words. Punctuation doesn't. This matches what Microsoft Word, Google Docs, and most writing platforms use."}},{"@type":"Question","name":"What is the difference between character count with and without spaces?","acceptedAnswer":{"@type":"Answer","text":"With spaces counts every character including blanks. Used for SMS, Twitter/X limits, and ad copy. Without spaces is often the count editors want for word rate calculations. Both are shown."}},{"@type":"Question","name":"How is reading time estimated?","acceptedAnswer":{"@type":"Answer","text":"Based on 200-250 words per minute, which is the average adult reading speed for general prose. Technical content reads slower (~150 WPM), light fiction faster (~300 WPM). The estimate is a useful ballpark for blog posts and articles, not a precise measurement."}},{"@type":"Question","name":"What's the ideal word count for different content types?","acceptedAnswer":{"@type":"Answer","text":"Tweet/X post: 280 characters. Meta description: 150-160 characters. Blog post: 1,500-2,500 words for SEO. Essay: varies by assignment. Novel chapter: 3,000-5,000 words. These are guidelines, not rules. The right length is whatever serves the content."}},{"@type":"Question","name":"Can I count words in a PDF or Word document?","acceptedAnswer":{"@type":"Answer","text":"Not directly. This tool works on pasted text only. For a PDF, open it, copy all the text, and paste here. For a Word doc, Word's own Word Count (Review tab) is usually easier. For programmatic counting of many files, use a script with a tokenizer."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -72,6 +92,52 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>عداد الكلمات والأحرف</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I count words in text online?</summary>
+    <div class="faq-body">
+      <p>Paste or type your text in the box. The counters update live as you type: words, characters (with and without spaces), sentences, paragraphs, and estimated reading time. No button to click, no signup.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How is word count calculated?</summary>
+    <div class="faq-body">
+      <p>Words are separated by whitespace. Hyphenated terms like "mother-in-law" count as one word. Numbers count as words. Punctuation doesn't. This matches what Microsoft Word, Google Docs, and most writing platforms use.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between character count with and without spaces?</summary>
+    <div class="faq-body">
+      <p><strong>With spaces</strong> counts every character including blanks &mdash; used for SMS, Twitter/X limits, and ad copy. <strong>Without spaces</strong> is often the count editors want for word rate calculations. Both are shown.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How is reading time estimated?</summary>
+    <div class="faq-body">
+      <p>Based on 200-250 words per minute, which is the average adult reading speed for general prose. Technical content reads slower (~150 WPM), light fiction faster (~300 WPM). The estimate is a useful ballpark for blog posts and articles, not a precise measurement.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the ideal word count for different content types?</summary>
+    <div class="faq-body">
+      <p><strong>Tweet/X post</strong>: 280 characters. <strong>Meta description</strong>: 150-160 characters. <strong>Blog post</strong>: 1,500-2,500 words for SEO. <strong>Essay</strong>: varies by assignment. <strong>Novel chapter</strong>: 3,000-5,000 words. These are guidelines, not rules &mdash; the right length is whatever serves the content.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I count words in a PDF or Word document?</summary>
+    <div class="faq-body">
+      <p>Not directly &mdash; this tool works on pasted text only. For a PDF, open it, copy all the text, and paste here. For a Word doc, Word's own Word Count (Review tab) is usually easier. For programmatic counting of many files, use a script with a tokenizer.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function countWords() {
