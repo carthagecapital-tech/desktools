@@ -83,6 +83,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -95,6 +113,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="A clean focus timer with work and break intervals. Boost productivity without distractions."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer","description":"A clean focus timer with work and break intervals. Boost productivity without distractions.","url":"https://desktools.dev/pomodoro-timer","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"pomodoro timer, focus timer, productivity timer"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the Pomodoro Technique work?","acceptedAnswer":{"@type":"Answer","text":"Work in focused 25-minute blocks called Pomodoros, separated by 5-minute short breaks. After 4 Pomodoros, take a longer 15-30 minute break. The short, defined intervals help sustain attention and create natural rest points before mental fatigue kicks in."}},{"@type":"Question","name":"How do I use this Pomodoro timer online?","acceptedAnswer":{"@type":"Answer","text":"Click Start and the focus timer begins. When it ends, the timer automatically switches to a short break. You can also manually switch between Focus, Short Break, and Long Break modes. Everything runs in your browser. No account, no tracking."}},{"@type":"Question","name":"Why is 25 minutes the standard Pomodoro length?","acceptedAnswer":{"@type":"Answer","text":"Francesco Cirillo chose 25 minutes in the 1980s because it's long enough for meaningful work but short enough that most people can sustain focus without the mind wandering. It also makes the commitment feel low-stakes. Just 25 minutes is easier to start than a whole morning of deep work."}},{"@type":"Question","name":"Can I customize Pomodoro intervals?","acceptedAnswer":{"@type":"Answer","text":"Yes. The standard 25/5/15 is a starting point, not a law. Some people find 50-minute focus blocks with 10-minute breaks work better for deep work (coding, writing). Others prefer 15/3 for repetitive tasks. Experiment and use whatever keeps you productive without fatigue."}},{"@type":"Question","name":"Does the Pomodoro Technique actually improve productivity?","acceptedAnswer":{"@type":"Answer","text":"Research supports the benefits of scheduled breaks and time-boxing for knowledge work. The specific 25/5 structure isn't magic; the underlying mechanisms (reducing cognitive load, protecting focus time, building rest into the schedule) are what work. If you find yourself ignoring the timer, the break structure is still the win."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -146,6 +165,45 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مؤقت بومودورو</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How does the Pomodoro Technique work?</summary>
+    <div class="faq-body">
+      <p>Work in focused 25-minute blocks called "Pomodoros", separated by 5-minute short breaks. After 4 Pomodoros, take a longer 15-30 minute break. The short, defined intervals help sustain attention and create natural rest points before mental fatigue kicks in.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I use this Pomodoro timer online?</summary>
+    <div class="faq-body">
+      <p>Click <strong>Start</strong> and the focus timer begins. When it ends, the timer automatically switches to a short break. You can also manually switch between <strong>Focus</strong>, <strong>Short Break</strong>, and <strong>Long Break</strong> modes. Everything runs in your browser &mdash; no account, no tracking.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is 25 minutes the standard Pomodoro length?</summary>
+    <div class="faq-body">
+      <p>Francesco Cirillo chose 25 minutes in the 1980s because it's long enough for meaningful work but short enough that most people can sustain focus without the mind wandering. It also makes the commitment feel low-stakes &mdash; "just 25 minutes" is easier to start than "a whole morning of deep work".</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I customize Pomodoro intervals?</summary>
+    <div class="faq-body">
+      <p>Yes &mdash; the standard 25/5/15 is a starting point, not a law. Some people find 50-minute focus blocks with 10-minute breaks work better for deep work (coding, writing). Others prefer 15/3 for repetitive tasks. Experiment and use whatever keeps you productive without fatigue.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does the Pomodoro Technique actually improve productivity?</summary>
+    <div class="faq-body">
+      <p>Research supports the benefits of scheduled breaks and time-boxing for knowledge work. The specific 25/5 structure isn't magic; the underlying mechanisms (reducing cognitive load, protecting focus time, building rest into the schedule) are what work. If you find yourself ignoring the timer, the break structure is still the win.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const CIRC=2*Math.PI*108;

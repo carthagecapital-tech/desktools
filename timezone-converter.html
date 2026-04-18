@@ -38,7 +38,26 @@ input:focus,select:focus{border-color:var(--accent)}
 .btn:hover{opacity:.85}
 .now-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.4rem .7rem;border-radius:6px;cursor:pointer;margin-top:.5rem}
 .now-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert time between timezones online?","acceptedAnswer":{"@type":"Answer","text":"Set your source time and timezone, then add destination cities. The converted time appears for each one instantly. Click Use current time to start from now, or pick a specific time for meeting planning. All conversions happen in your browser."}},{"@type":"Question","name":"How do I find a meeting time that works across multiple timezones?","acceptedAnswer":{"@type":"Answer","text":"Add every participant's city. The tool shows the meeting time in each zone side by side. You can spot at a glance whether 9 AM EST works for your Berlin and Tokyo colleagues (it's 3 PM in Berlin but midnight in Tokyo, so probably not). Adjust until you find a window where everyone is in working hours."}},{"@type":"Question","name":"Does this handle Daylight Saving Time correctly?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser's IANA timezone database, which tracks DST rules for every region. If you're converting between a zone that observes DST and one that doesn't (e.g. Eastern Time to Arizona), the offset changes depending on the date. The converter accounts for this automatically."}},{"@type":"Question","name":"What's the difference between UTC, GMT, and my local time?","acceptedAnswer":{"@type":"Answer","text":"UTC (Coordinated Universal Time) is the global time standard. The reference against which other zones are defined. GMT (Greenwich Mean Time) is usually the same as UTC in practice but technically a timezone, not a standard. Your local time is UTC plus or minus your zone's offset, adjusted for DST when applicable."}},{"@type":"Question","name":"Why do some international meetings span different dates?","acceptedAnswer":{"@type":"Answer","text":"Because timezones cover a 26-hour spread globally (from UTC-12 to UTC+14). When it's Monday 10 PM in Los Angeles, it's already Tuesday 3 PM in Sydney. The next calendar day. For regular cross-Pacific meetings, stating both dates (Mon Apr 14 / Tue Apr 15 morning AEST) prevents confusion."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -83,6 +102,45 @@ input:focus,select:focus{border-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert time between timezones online?</summary>
+    <div class="faq-body">
+      <p>Set your source time and timezone, then add destination cities. The converted time appears for each one instantly. Click <strong>Use current time</strong> to start from now, or pick a specific time for meeting planning. All conversions happen in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I find a meeting time that works across multiple timezones?</summary>
+    <div class="faq-body">
+      <p>Add every participant's city. The tool shows the meeting time in each zone side by side &mdash; you can spot at a glance whether 9 AM EST works for your Berlin and Tokyo colleagues (it's 3 PM in Berlin but midnight in Tokyo, so probably not). Adjust until you find a window where everyone is in working hours.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this handle Daylight Saving Time correctly?</summary>
+    <div class="faq-body">
+      <p>Yes. The tool uses the browser's IANA timezone database, which tracks DST rules for every region. If you're converting between a zone that observes DST and one that doesn't (e.g. Eastern Time to Arizona), the offset changes depending on the date &mdash; the converter accounts for this automatically.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between UTC, GMT, and my local time?</summary>
+    <div class="faq-body">
+      <p><strong>UTC</strong> (Coordinated Universal Time) is the global time standard &mdash; the reference against which other zones are defined. <strong>GMT</strong> (Greenwich Mean Time) is usually the same as UTC in practice but technically a timezone, not a standard. Your local time is UTC plus or minus your zone's offset, adjusted for DST when applicable.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why do some international meetings span different dates?</summary>
+    <div class="faq-body">
+      <p>Because timezones cover a 26-hour spread globally (from UTC-12 to UTC+14). When it's Monday 10 PM in Los Angeles, it's already Tuesday 3 PM in Sydney &mdash; the next calendar day. For regular cross-Pacific meetings, stating both dates ("Mon Apr 14 / Tue Apr 15 morning AEST") prevents confusion.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var ZONES=[
