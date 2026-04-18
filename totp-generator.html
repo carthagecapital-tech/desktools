@@ -37,6 +37,24 @@ select{cursor:pointer;-webkit-appearance:none}
 .info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
 .info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -49,6 +67,7 @@ select{cursor:pointer;-webkit-appearance:none}
 <meta name="twitter:description" content="Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TOTP Generator","description":"Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side.","url":"https://desktools.dev/totp-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"TOTP generator, 2FA code, authenticator code"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate TOTP codes for 2FA testing?","acceptedAnswer":{"@type":"Answer","text":"Paste your Base32 secret key into the input. The tool generates the current 6-digit (or 8-digit) TOTP code and updates every 30 seconds (or 60, depending on your setting). Matches what Google Authenticator, Authy, 1Password, and hardware tokens produce."}},{"@type":"Question","name":"What is TOTP and how does it work?","acceptedAnswer":{"@type":"Answer","text":"TOTP (Time-based One-Time Password, RFC 6238) derives a 6-digit code from a shared secret and the current time. The secret is stored on both the server and your authenticator app. Every 30 seconds, both sides compute the same code from the same time and secret. No network needed."}},{"@type":"Question","name":"Why would I use this instead of Google Authenticator?","acceptedAnswer":{"@type":"Answer","text":"Primarily for development and testing: debugging a 2FA flow, verifying TOTP implementation in your backend, or recovering when you don't have your phone. For daily use, a proper authenticator app (or 1Password/Bitwarden) is safer. This tool holds the secret only in browser memory."}},{"@type":"Question","name":"Is it safe to paste my TOTP secret into a browser tool?","acceptedAnswer":{"@type":"Answer","text":"Generation is 100% client-side. The secret never leaves your device. That said, anyone with your TOTP secret can generate codes for your account forever. Don't paste production 2FA secrets here unless you have a specific testing reason; use test accounts or development credentials."}},{"@type":"Question","name":"What format should my TOTP secret be in?","acceptedAnswer":{"@type":"Answer","text":"Base32 (uppercase A-Z and 2-7, no padding). Most services show this when you set up 2FA alongside the QR code. If you only have a QR code, scan it with a decoder to extract the otpauth:// URL. The secret is in the secret= parameter."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -115,6 +134,45 @@ select{cursor:pointer;-webkit-appearance:none}
   </div>
 </div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate TOTP codes for 2FA testing?</summary>
+    <div class="faq-body">
+      <p>Paste your Base32 secret key into the input. The tool generates the current 6-digit (or 8-digit) TOTP code and updates every 30 seconds (or 60, depending on your setting). Matches what Google Authenticator, Authy, 1Password, and hardware tokens produce.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is TOTP and how does it work?</summary>
+    <div class="faq-body">
+      <p>TOTP (Time-based One-Time Password, RFC 6238) derives a 6-digit code from a shared secret and the current time. The secret is stored on both the server and your authenticator app. Every 30 seconds, both sides compute the same code from the same time and secret &mdash; no network needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why would I use this instead of Google Authenticator?</summary>
+    <div class="faq-body">
+      <p>Primarily for <strong>development and testing</strong>: debugging a 2FA flow, verifying TOTP implementation in your backend, or recovering when you don't have your phone. For daily use, a proper authenticator app (or 1Password/Bitwarden) is safer &mdash; this tool holds the secret only in browser memory.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to paste my TOTP secret into a browser tool?</summary>
+    <div class="faq-body">
+      <p>Generation is 100% client-side &mdash; the secret never leaves your device. That said, anyone with your TOTP secret can generate codes for your account forever. Don't paste production 2FA secrets here unless you have a specific testing reason; use test accounts or development credentials.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What format should my TOTP secret be in?</summary>
+    <div class="faq-body">
+      <p>Base32 (uppercase A-Z and 2-7, no padding). Most services show this when you set up 2FA alongside the QR code. If you only have a QR code, scan it with a decoder to extract the <code>otpauth://</code> URL &mdash; the secret is in the <code>secret=</code> parameter.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 // Base32 decode

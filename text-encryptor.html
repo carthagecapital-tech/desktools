@@ -43,6 +43,24 @@ textarea{min-height:120px;line-height:1.5}
 .info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
 .info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -55,6 +73,7 @@ textarea{min-height:120px;line-height:1.5}
 <meta name="twitter:description" content="Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text Encryptor \u2014 AES-256","description":"Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API.","url":"https://desktools.dev/text-encryptor","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"text encryption, AES-256 encrypt, decrypt text"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I encrypt text with a password online?","acceptedAnswer":{"@type":"Answer","text":"Paste your text, enter a passphrase, and click Encrypt. The tool uses AES-256-GCM (an authenticated encryption standard) via the browser's Web Crypto API. Copy the encrypted output and share the passphrase through a separate channel to whoever needs to decrypt."}},{"@type":"Question","name":"What encryption algorithm does this tool use?","acceptedAnswer":{"@type":"Answer","text":"AES-256-GCM. The same algorithm used by TLS, disk encryption, and most modern secure applications. The passphrase is converted to a 256-bit key via PBKDF2 with a random salt. GCM mode provides both confidentiality and authentication, so tampering with the ciphertext is detectable."}},{"@type":"Question","name":"Is this as secure as end-to-end encrypted messaging?","acceptedAnswer":{"@type":"Answer","text":"The cryptography is industry-standard. The weakest link is the passphrase. A short or guessable passphrase breaks everything. Use a long, random passphrase (16+ characters) and share it through a different channel than the ciphertext. For routine communication, use a proper end-to-end app (Signal, iMessage). They handle key exchange automatically."}},{"@type":"Question","name":"How do I decrypt the text on the other end?","acceptedAnswer":{"@type":"Answer","text":"The recipient opens this tool, pastes the encrypted output, enters the same passphrase, and clicks Decrypt. If the passphrase is correct and the ciphertext hasn't been tampered with, the original text appears. Wrong passphrase or altered ciphertext results in an error (no partial decryption)."}},{"@type":"Question","name":"Can someone break this encryption if they get the ciphertext?","acceptedAnswer":{"@type":"Answer","text":"Not without the passphrase. AES-256 with a strong passphrase is computationally infeasible to break. Even state actors can't brute-force it in any practical time. The attacker's best bet is guessing your passphrase (if it's weak) or getting it from you some other way (phishing, shoulder-surfing)."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -114,6 +133,45 @@ textarea{min-height:120px;line-height:1.5}
   </div>
 </div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I encrypt text with a password online?</summary>
+    <div class="faq-body">
+      <p>Paste your text, enter a passphrase, and click <strong>Encrypt</strong>. The tool uses AES-256-GCM (an authenticated encryption standard) via the browser's Web Crypto API. Copy the encrypted output and share the passphrase through a separate channel to whoever needs to decrypt.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What encryption algorithm does this tool use?</summary>
+    <div class="faq-body">
+      <p>AES-256-GCM &mdash; the same algorithm used by TLS, disk encryption, and most modern secure applications. The passphrase is converted to a 256-bit key via PBKDF2 with a random salt. GCM mode provides both confidentiality and authentication, so tampering with the ciphertext is detectable.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is this as secure as end-to-end encrypted messaging?</summary>
+    <div class="faq-body">
+      <p>The cryptography is industry-standard. The weakest link is the passphrase &mdash; a short or guessable passphrase breaks everything. Use a long, random passphrase (16+ characters) and share it through a different channel than the ciphertext. For routine communication, use a proper end-to-end app (Signal, iMessage) &mdash; they handle key exchange automatically.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I decrypt the text on the other end?</summary>
+    <div class="faq-body">
+      <p>The recipient opens this tool, pastes the encrypted output, enters the same passphrase, and clicks <strong>Decrypt</strong>. If the passphrase is correct and the ciphertext hasn't been tampered with, the original text appears. Wrong passphrase or altered ciphertext results in an error (no partial decryption).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can someone break this encryption if they get the ciphertext?</summary>
+    <div class="faq-body">
+      <p>Not without the passphrase. AES-256 with a strong passphrase is computationally infeasible to break &mdash; even state actors can't brute-force it in any practical time. The attacker's best bet is guessing your passphrase (if it's weak) or getting it from you some other way (phishing, shoulder-surfing).</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 let mode='encrypt';

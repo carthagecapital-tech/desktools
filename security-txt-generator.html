@@ -38,6 +38,24 @@ textarea{min-height:60px;resize:vertical;line-height:1.5}
 .copy-btn:hover{background:var(--accent2)}
 .output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-all;max-height:250px;overflow-y:auto}
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -50,6 +68,7 @@ textarea{min-height:60px;resize:vertical;line-height:1.5}
 <meta name="twitter:description" content="Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Security.txt Generator","description":"Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side.","url":"https://desktools.dev/security-txt-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"security.txt generator, robots.txt, security policy"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a security.txt file for my website?","acceptedAnswer":{"@type":"Answer","text":"Fill in your security contact email, optional contact URL, PGP encryption URL, acknowledgments URL, policy expiry date, and preferred languages. The tool generates a compliant security.txt file ready to deploy at /.well-known/security.txt."}},{"@type":"Question","name":"What is security.txt and why should I have one?","acceptedAnswer":{"@type":"Answer","text":"Security.txt (RFC 9116) is a standardized plain-text file that tells security researchers how to responsibly report vulnerabilities. Without it, researchers either give up or try random contact forms. With it, legitimate security reports reach you quickly. You avoid unreported bugs becoming public exploits."}},{"@type":"Question","name":"Where do I put the security.txt file?","acceptedAnswer":{"@type":"Answer","text":"At the well-known location: https://yourdomain.com/.well-known/security.txt. Some older sites also serve it at /security.txt (the root) for compatibility with tools that check both. Serve it with Content-Type: text/plain; charset=utf-8."}},{"@type":"Question","name":"Does security.txt have to be signed?","acceptedAnswer":{"@type":"Answer","text":"It's recommended but not required. Signing with your PGP key proves the file hasn't been tampered with (an attacker could otherwise replace it with their own email to divert reports). For high-security sites, sign with PGP and publish the signature in the same location."}},{"@type":"Question","name":"What should I put in the Expires field?","acceptedAnswer":{"@type":"Answer","text":"A date up to one year in the future. The field exists so researchers know the file is current. Set a reminder to regenerate before expiry. An expired security.txt may be ignored or treated as abandoned. Annual renewal is typical."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -119,6 +138,45 @@ textarea{min-height:60px;resize:vertical;line-height:1.5}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد ملف security.txt</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a security.txt file for my website?</summary>
+    <div class="faq-body">
+      <p>Fill in your security contact email, optional contact URL, PGP encryption URL, acknowledgments URL, policy expiry date, and preferred languages. The tool generates a compliant <code>security.txt</code> file ready to deploy at <code>/.well-known/security.txt</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is security.txt and why should I have one?</summary>
+    <div class="faq-body">
+      <p>Security.txt (RFC 9116) is a standardized plain-text file that tells security researchers how to responsibly report vulnerabilities. Without it, researchers either give up or try random contact forms. With it, legitimate security reports reach you quickly &mdash; and you avoid unreported bugs becoming public exploits.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where do I put the security.txt file?</summary>
+    <div class="faq-body">
+      <p>At the well-known location: <code>https://yourdomain.com/.well-known/security.txt</code>. Some older sites also serve it at <code>/security.txt</code> (the root) for compatibility with tools that check both. Serve it with <code>Content-Type: text/plain; charset=utf-8</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does security.txt have to be signed?</summary>
+    <div class="faq-body">
+      <p>It's recommended but not required. Signing with your PGP key proves the file hasn't been tampered with (an attacker could otherwise replace it with their own email to divert reports). For high-security sites, sign with PGP and publish the signature in the same location.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What should I put in the Expires field?</summary>
+    <div class="faq-body">
+      <p>A date up to one year in the future. The field exists so researchers know the file is current. Set a reminder to regenerate before expiry &mdash; an expired security.txt may be ignored or treated as abandoned. Annual renewal is typical.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 // Set default expiry to 1 year from now

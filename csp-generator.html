@@ -51,6 +51,24 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .output-code{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);word-break:break-all;line-height:1.7;min-height:2rem}
 .empty-msg{color:var(--muted);font-style:italic}
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -63,6 +81,7 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 <meta name="twitter:description" content="Build Content-Security-Policy headers visually. Pick directives, add sources, copy the header. No more CSP syntax headaches."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSP Header Generator","description":"Build Content-Security-Policy headers visually. Pick directives, add sources, copy the header. No more CSP syntax headaches.","url":"https://desktools.dev/csp-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"CSP generator, Content-Security-Policy builder, security headers"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I build a Content-Security-Policy header?","acceptedAnswer":{"@type":"Answer","text":"Pick the directives you need (default-src, script-src, style-src, etc.) and add sources for each ('self', specific domains, 'unsafe-inline', etc.). The full CSP header string is generated live and copyable with one click."}},{"@type":"Question","name":"What is a Content-Security-Policy and why do I need one?","acceptedAnswer":{"@type":"Answer","text":"CSP is an HTTP header that tells the browser which sources of scripts, styles, images, and other resources are allowed to load. A correctly configured CSP blocks the vast majority of XSS attacks by preventing malicious injected scripts from executing, even if an attacker manages to inject content into your page."}},{"@type":"Question","name":"What's the difference between default-src and script-src?","acceptedAnswer":{"@type":"Answer","text":"default-src is the fallback for every resource type not explicitly set. script-src (and style-src, img-src, font-src, etc.) override the default for that specific resource type. Set a restrictive default-src 'self' and open up specific types as needed."}},{"@type":"Question","name":"Should I use 'unsafe-inline' in my CSP?","acceptedAnswer":{"@type":"Answer","text":"Avoid it for script-src. It undoes much of CSP's XSS protection. For style-src, it's sometimes unavoidable (many libraries inject inline styles), but prefer nonces or hashes. If you must use 'unsafe-inline', pair it with 'nonce-xyz' so only explicitly-marked inline content is allowed."}},{"@type":"Question","name":"How do I test my CSP without breaking my site?","acceptedAnswer":{"@type":"Answer","text":"Use Content-Security-Policy-Report-Only instead of Content-Security-Policy. The browser reports violations to the console (and optionally to a reporting endpoint) but doesn't actually block anything. Deploy in report-only mode first, fix the violations you see, then switch to enforcement."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -99,6 +118,45 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد رأس CSP</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I build a Content-Security-Policy header?</summary>
+    <div class="faq-body">
+      <p>Pick the directives you need (<code>default-src</code>, <code>script-src</code>, <code>style-src</code>, etc.) and add sources for each (<code>'self'</code>, specific domains, <code>'unsafe-inline'</code>, etc.). The full CSP header string is generated live and copyable with one click.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is a Content-Security-Policy and why do I need one?</summary>
+    <div class="faq-body">
+      <p>CSP is an HTTP header that tells the browser which sources of scripts, styles, images, and other resources are allowed to load. A correctly configured CSP blocks the vast majority of XSS attacks by preventing malicious injected scripts from executing, even if an attacker manages to inject content into your page.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between default-src and script-src?</summary>
+    <div class="faq-body">
+      <p><strong>default-src</strong> is the fallback for every resource type not explicitly set. <strong>script-src</strong> (and <strong>style-src</strong>, <strong>img-src</strong>, <strong>font-src</strong>, etc.) override the default for that specific resource type. Set a restrictive <code>default-src 'self'</code> and open up specific types as needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I use 'unsafe-inline' in my CSP?</summary>
+    <div class="faq-body">
+      <p>Avoid it for <code>script-src</code> &mdash; it undoes much of CSP's XSS protection. For <code>style-src</code>, it's sometimes unavoidable (many libraries inject inline styles), but prefer nonces or hashes. If you must use <code>'unsafe-inline'</code>, pair it with <code>'nonce-xyz'</code> so only explicitly-marked inline content is allowed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I test my CSP without breaking my site?</summary>
+    <div class="faq-body">
+      <p>Use <strong>Content-Security-Policy-Report-Only</strong> instead of <strong>Content-Security-Policy</strong>. The browser reports violations to the console (and optionally to a reporting endpoint) but doesn't actually block anything. Deploy in report-only mode first, fix the violations you see, then switch to enforcement.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const DIRECTIVES=[
