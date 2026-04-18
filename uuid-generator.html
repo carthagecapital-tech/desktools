@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="styles.css">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UUID Generator","description":"Free online UUID generator. Generate v4 UUIDs instantly. Bulk generate up to 100 UUIDs at once. Copy with one click. No signup required.","url":"https://desktools.dev/uuid-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"UUID generator, GUID generator, unique ID"}</script>
-<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="UUID Generator — Free Online UUID/GUID Generator | DeskTools"/>
 <meta name="twitter:description" content="Free online UUID generator. Generate v4 UUIDs instantly. Bulk generate up to 100 UUIDs at once. Copy with one click. No signup required."/>
 <style>
@@ -37,6 +36,11 @@
 
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate a UUID v4 online?","acceptedAnswer":{"@type":"Answer","text":"Click Generate and a cryptographically random UUID v4 appears instantly. Click Copy to grab it. Use the Count control to generate up to 100 UUIDs at once, useful for seeding databases or test data."}},{"@type":"Question","name":"What formatting options does this UUID generator support?","acceptedAnswer":{"@type":"Answer","text":"Four formats: Standard (xxxxxxxx-xxxx-...), No Dashes (compact 32 characters), UPPERCASE, and {Braces} (wrapped in curly braces, common in .NET). Pick the format that matches your database or framework convention."}},{"@type":"Question","name":"What is the difference between UUID v1, v4, and v7?","acceptedAnswer":{"@type":"Answer","text":"v1 is timestamp-based and includes the MAC address (privacy leak). v4 is fully random (122 bits of entropy, essentially zero collision risk). v7 is time-ordered and sortable &mdash; better for database primary keys. This tool generates v4, the most widely used version for general-purpose unique IDs."}},{"@type":"Question","name":"Are these UUIDs cryptographically secure?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser's built-in crypto.getRandomValues() API, which produces cryptographically strong random numbers. The output is suitable for session tokens, database keys, and other security-adjacent use cases."}},{"@type":"Question","name":"Can I generate UUIDs in bulk for test data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set the Count to any number up to 100 and click Generate &mdash; you get a list of unique UUIDs. Use Copy All to grab them as a newline-separated list, ready to paste into a SQL INSERT or a test fixture."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
 </head>
 <body>
 <div class="tool-content">
