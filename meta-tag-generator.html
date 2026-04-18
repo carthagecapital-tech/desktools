@@ -6,7 +6,12 @@
 <meta name="description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards. Fill in your page details, copy the complete code snippet."/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="canonical" href="https://desktools.dev/meta-tag-generator"/>
-<meta property="og:type" content="website"/><meta property="og:title" content="Meta Tag Generator — DeskTools"/><meta property="og:description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards."/><meta property="og:url" content="https://desktools.dev/meta-tag-generator"/><meta property="og:site_name" content="DeskTools"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Meta Tag Generator — DeskTools"/><meta property="og:description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards."/><meta property="og:url" content="https://desktools.dev/meta-tag-generator"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:site_name" content="DeskTools"/>
 <meta name="twitter:title" content="Meta Tag Generator — DeskTools"/><meta name="twitter:description" content="Generate HTML meta tags for SEO, Open Graph, and Twitter Cards."/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Meta Tag Generator","description":"Generate HTML meta tags for SEO, Open Graph, and Twitter Cards.","url":"https://desktools.dev/meta-tag-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -249,11 +254,10 @@ function generate(){
   // Twitter
   if(optTwitter&&(title||desc)){
     lines.push('<!-- Twitter Card -->');
-    lines.push('');
+    lines.push('<meta name="twitter:card" content="'+(ogImage?'summary_large_image':'summary')+'"/>');
     if(title) lines.push('<meta name="twitter:title" content="'+esc(title)+'"/>');
     if(desc) lines.push('<meta name="twitter:description" content="'+esc(desc)+'"/>');
-    if(ogImage) lines.push('<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="'+esc(ogImage)+'"/>');
+    if(ogImage) lines.push('<meta name="twitter:image" content="'+esc(ogImage)+'"/>');
   }
   var raw=lines.join('\n').trim();
   // Syntax highlight
