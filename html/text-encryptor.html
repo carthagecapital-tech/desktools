@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Text Encryptor — AES-256 Encrypt &amp; Decrypt | DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/text-encryptor"/>
+<meta name="description" content="Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem}
+input[type=password],textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.88rem;padding:.65rem .85rem;outline:none;transition:border-color .2s;resize:vertical}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:120px;line-height:1.5}
+.mode-tabs{display:flex;gap:0;margin-bottom:1.25rem;background:var(--bg3);border-radius:10px;padding:3px;border:1px solid var(--border)}
+.mode-tab{flex:1;text-align:center;padding:.55rem;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;border-radius:8px;transition:all .2s;border:none;background:none;font-family:'Outfit',sans-serif}
+.mode-tab.active{background:var(--accent);color:#0a0a0f}
+.mode-tab:hover:not(.active){color:var(--text)}
+.field{margin-bottom:1rem}
+.btn-row{display:flex;gap:.75rem;margin-top:.25rem}
+.btn{flex:1;padding:.7rem;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.output-area{margin-top:1rem;display:none}
+.output-area.show{display:block}
+.output-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.5rem}
+.output-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent);word-break:break-all;line-height:1.6;max-height:200px;overflow-y:auto;position:relative}
+.copy-out{position:absolute;top:.5rem;right:.5rem;background:var(--card-bg);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.copy-out:hover{border-color:var(--accent);color:var(--accent)}
+.error{color:#ff6b6b;font-size:.85rem;margin-top:.5rem;display:none}
+.error.show{display:block}
+.badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--accent);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);padding:.2rem .6rem;border-radius:5px;margin-top:.75rem}
+.info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
+.info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Text Encryptor — AES-256 Encrypt &amp; Decrypt | DeskTools"/>
+<meta property="og:description" content="Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API."/>
+<meta property="og:url" content="https://desktools.dev/text-encryptor"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Text Encryptor — AES-256 Encrypt &amp; Decrypt | DeskTools"/>
+<meta name="twitter:description" content="Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text Encryptor \u2014 AES-256","description":"Encrypt and decrypt text with AES-256-GCM. Enter a passphrase, get encrypted output. 100% client-side using Web Crypto API.","url":"https://desktools.dev/text-encryptor","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"text encryption, AES-256 encrypt, decrypt text"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I encrypt text with a password online?","acceptedAnswer":{"@type":"Answer","text":"Paste your text, enter a passphrase, and click Encrypt. The tool uses AES-256-GCM (an authenticated encryption standard) via the browser's Web Crypto API. Copy the encrypted output and share the passphrase through a separate channel to whoever needs to decrypt."}},{"@type":"Question","name":"What encryption algorithm does this tool use?","acceptedAnswer":{"@type":"Answer","text":"AES-256-GCM. The same algorithm used by TLS, disk encryption, and most modern secure applications. The passphrase is converted to a 256-bit key via PBKDF2 with a random salt. GCM mode provides both confidentiality and authentication, so tampering with the ciphertext is detectable."}},{"@type":"Question","name":"Is this as secure as end-to-end encrypted messaging?","acceptedAnswer":{"@type":"Answer","text":"The cryptography is industry-standard. The weakest link is the passphrase. A short or guessable passphrase breaks everything. Use a long, random passphrase (16+ characters) and share it through a different channel than the ciphertext. For routine communication, use a proper end-to-end app (Signal, iMessage). They handle key exchange automatically."}},{"@type":"Question","name":"How do I decrypt the text on the other end?","acceptedAnswer":{"@type":"Answer","text":"The recipient opens this tool, pastes the encrypted output, enters the same passphrase, and clicks Decrypt. If the passphrase is correct and the ciphertext hasn't been tampered with, the original text appears. Wrong passphrase or altered ciphertext results in an error (no partial decryption)."}},{"@type":"Question","name":"Can someone break this encryption if they get the ciphertext?","acceptedAnswer":{"@type":"Answer","text":"Not without the passphrase. AES-256 with a strong passphrase is computationally infeasible to break. Even state actors can't brute-force it in any practical time. The attacker's best bet is guessing your passphrase (if it's weak) or getting it from you some other way (phishing, shoulder-surfing)."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Text Encryptor</h1>
+  <p class="sub">Encrypt and decrypt text with AES-256-GCM. Nothing leaves your browser.</p>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabEnc" onclick="setMode('encrypt')">Encrypt</button>
+    <button class="mode-tab" id="tabDec" onclick="setMode('decrypt')">Decrypt</button>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label id="inputLabel">Text to encrypt</label>
+      <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    </div>
+    <div class="field">
+      <label>Passphrase</label>
+      <input type="password" id="passphrase" placeholder="Enter a strong passphrase"/>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="actionBtn" onclick="doAction()">Encrypt</button>
+      <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+    </div>
+    <div class="error" id="error"></div>
+    <div class="output-area" id="outputArea">
+      <div class="output-label" id="outputLabel">Encrypted output</div>
+      <div class="output-box" id="outputBox"><button class="copy-out" onclick="copyResult()">Copy</button><span id="outputText"></span></div>
+      <div class="badge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> AES-256-GCM &middot; PBKDF2 key derivation</div>
+    </div>
+  </div>
+
+  <div class="deep-dive" style="max-width:640px;padding:0">
+    <button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="dd-arrow">&#x25B8;</span> How does AES-256 encryption work?
+    </button>
+    <div class="deep-dive-body">
+      <div class="deep-dive-content">
+        <p><strong>AES-256-GCM</strong> (Advanced Encryption Standard with Galois/Counter Mode) is the gold standard for symmetric encryption. It uses a 256-bit key to both encrypt and decrypt data, and the GCM mode provides <strong>authenticated encryption</strong> — meaning it detects if the ciphertext has been tampered with.</p>
+        <p>Your passphrase is converted into a 256-bit encryption key using <strong>PBKDF2</strong> (Password-Based Key Derivation Function 2) with 100,000 iterations. This deliberate slowness makes brute-force attacks on weak passphrases much harder. A random salt ensures the same passphrase produces different keys each time.</p>
+        <p>The output contains three parts concatenated and Base64-encoded: the <strong>salt</strong> (16 bytes), the <strong>initialization vector</strong> (12 bytes), and the <strong>ciphertext</strong>. All three are needed for decryption. Everything runs in your browser using the <strong>Web Crypto API</strong> — the same cryptographic library used by banks and password managers. No data is ever sent to a server.</p>
+
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Chiffreur de texte AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Encriptador de texto AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Text-Verschlüsselung AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Criptografador de texto AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>テキスト暗号化ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>文本加密工具 AES-256</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>텍스트 암호화 도구</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة تشفير النصوص AES-256</p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I encrypt text with a password online?</summary>
+    <div class="faq-body">
+      <p>Paste your text, enter a passphrase, and click <strong>Encrypt</strong>. The tool uses AES-256-GCM (an authenticated encryption standard) via the browser's Web Crypto API. Copy the encrypted output and share the passphrase through a separate channel to whoever needs to decrypt.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What encryption algorithm does this tool use?</summary>
+    <div class="faq-body">
+      <p>AES-256-GCM &mdash; the same algorithm used by TLS, disk encryption, and most modern secure applications. The passphrase is converted to a 256-bit key via PBKDF2 with a random salt. GCM mode provides both confidentiality and authentication, so tampering with the ciphertext is detectable.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is this as secure as end-to-end encrypted messaging?</summary>
+    <div class="faq-body">
+      <p>The cryptography is industry-standard. The weakest link is the passphrase &mdash; a short or guessable passphrase breaks everything. Use a long, random passphrase (16+ characters) and share it through a different channel than the ciphertext. For routine communication, use a proper end-to-end app (Signal, iMessage) &mdash; they handle key exchange automatically.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I decrypt the text on the other end?</summary>
+    <div class="faq-body">
+      <p>The recipient opens this tool, pastes the encrypted output, enters the same passphrase, and clicks <strong>Decrypt</strong>. If the passphrase is correct and the ciphertext hasn't been tampered with, the original text appears. Wrong passphrase or altered ciphertext results in an error (no partial decryption).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can someone break this encryption if they get the ciphertext?</summary>
+    <div class="faq-body">
+      <p>Not without the passphrase. AES-256 with a strong passphrase is computationally infeasible to break &mdash; even state actors can't brute-force it in any practical time. The attacker's best bet is guessing your passphrase (if it's weak) or getting it from you some other way (phishing, shoulder-surfing).</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+let mode='encrypt';
+function setMode(m){
+  mode=m;
+  document.getElementById('tabEnc').className='mode-tab'+(m==='encrypt'?' active':'');
+  document.getElementById('tabDec').className='mode-tab'+(m==='decrypt'?' active':'');
+  document.getElementById('inputLabel').textContent=m==='encrypt'?'Text to encrypt':'Encrypted text to decrypt';
+  document.getElementById('inputText').placeholder=m==='encrypt'?'Enter your text here...':'Paste the encrypted string here...';
+  document.getElementById('actionBtn').textContent=m==='encrypt'?'Encrypt':'Decrypt';
+  document.getElementById('outputArea').classList.remove('show');
+  document.getElementById('error').classList.remove('show');
+}
+
+async function deriveKey(passphrase,salt){
+  const enc=new TextEncoder();
+  const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(passphrase),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},keyMaterial,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+
+async function encryptText(text,passphrase){
+  const enc=new TextEncoder();
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const key=await deriveKey(passphrase,salt);
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(text));
+  // Combine salt + iv + ciphertext and base64
+  const combined=new Uint8Array(salt.length+iv.length+new Uint8Array(ct).length);
+  combined.set(salt,0);
+  combined.set(iv,salt.length);
+  combined.set(new Uint8Array(ct),salt.length+iv.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function decryptText(encoded,passphrase){
+  const data=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+  const salt=data.slice(0,16);
+  const iv=data.slice(16,28);
+  const ct=data.slice(28);
+  const key=await deriveKey(passphrase,salt);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
+  return new TextDecoder().decode(pt);
+}
+
+async function doAction(){
+  const text=document.getElementById('inputText').value.trim();
+  const pass=document.getElementById('passphrase').value;
+  const errEl=document.getElementById('error');
+  const outArea=document.getElementById('outputArea');
+  const outText=document.getElementById('outputText');
+  const outLabel=document.getElementById('outputLabel');
+  errEl.classList.remove('show');
+  outArea.classList.remove('show');
+  if(!text){errEl.textContent='Please enter some text.';errEl.classList.add('show');return;}
+  if(!pass){errEl.textContent='Please enter a passphrase.';errEl.classList.add('show');return;}
+  try{
+    if(mode==='encrypt'){
+      const result=await encryptText(text,pass);
+      outText.textContent=result;
+      outLabel.textContent='Encrypted output';
+      outText.style.color='var(--accent)';
+    } else {
+      const result=await decryptText(text,pass);
+      outText.textContent=result;
+      outLabel.textContent='Decrypted text';
+      outText.style.color='var(--text)';
+    }
+    outArea.classList.add('show');
+  }catch(e){
+    errEl.textContent=mode==='decrypt'?'Decryption failed — wrong passphrase or corrupted data.':'Encryption failed: '+e.message;
+    errEl.classList.add('show');
+  }
+}
+
+function copyResult(){
+  const text=document.getElementById('outputText').textContent;
+  if(text){navigator.clipboard.writeText(text);if(typeof showToast==='function') showToast('Copied!');}
+}
+
+function clearAll(){
+  document.getElementById('inputText').value='';
+  document.getElementById('passphrase').value='';
+  document.getElementById('outputArea').classList.remove('show');
+  document.getElementById('error').classList.remove('show');
+}
+</script>
+</body>
+</html>

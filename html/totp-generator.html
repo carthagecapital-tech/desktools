@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TOTP Generator — Free 2FA Code Generator | DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/totp-generator"/>
+<meta name="description" content="Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:560px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem}
+input[type=text],select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.9rem;padding:.65rem .85rem;outline:none;transition:border-color .2s}
+input:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer;-webkit-appearance:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.code-display{text-align:center;padding:2rem 1rem}
+.code{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;letter-spacing:.25em;color:var(--accent);transition:opacity .15s}
+.code.fade{opacity:.3}
+.timer-bar{height:4px;background:var(--bg3);border-radius:2px;margin-top:1.25rem;overflow:hidden}
+.timer-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear}
+.timer-fill.urgent{background:#ffa94d}
+.timer-fill.critical{background:#ff6b6b}
+.timer-row{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem}
+.timer-text{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted)}
+.copy-code{background:none;border:1px solid var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;padding:.4rem .85rem;border-radius:7px;cursor:pointer;transition:all .2s}
+.copy-code:hover{border-color:var(--accent);color:var(--accent)}
+.info{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:.5rem}
+.info code{font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;font-size:.78rem;color:var(--text)}
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="TOTP Generator — Free 2FA Code Generator | DeskTools"/>
+<meta property="og:description" content="Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side."/>
+<meta property="og:url" content="https://desktools.dev/totp-generator"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="TOTP Generator — Free 2FA Code Generator | DeskTools"/>
+<meta name="twitter:description" content="Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TOTP Generator","description":"Generate time-based one-time passwords (TOTP) for 2FA testing. Enter a secret key, get live rotating codes. 100% client-side.","url":"https://desktools.dev/totp-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"TOTP generator, 2FA code, authenticator code"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate TOTP codes for 2FA testing?","acceptedAnswer":{"@type":"Answer","text":"Paste your Base32 secret key into the input. The tool generates the current 6-digit (or 8-digit) TOTP code and updates every 30 seconds (or 60, depending on your setting). Matches what Google Authenticator, Authy, 1Password, and hardware tokens produce."}},{"@type":"Question","name":"What is TOTP and how does it work?","acceptedAnswer":{"@type":"Answer","text":"TOTP (Time-based One-Time Password, RFC 6238) derives a 6-digit code from a shared secret and the current time. The secret is stored on both the server and your authenticator app. Every 30 seconds, both sides compute the same code from the same time and secret. No network needed."}},{"@type":"Question","name":"Why would I use this instead of Google Authenticator?","acceptedAnswer":{"@type":"Answer","text":"Primarily for development and testing: debugging a 2FA flow, verifying TOTP implementation in your backend, or recovering when you don't have your phone. For daily use, a proper authenticator app (or 1Password/Bitwarden) is safer. This tool holds the secret only in browser memory."}},{"@type":"Question","name":"Is it safe to paste my TOTP secret into a browser tool?","acceptedAnswer":{"@type":"Answer","text":"Generation is 100% client-side. The secret never leaves your device. That said, anyone with your TOTP secret can generate codes for your account forever. Don't paste production 2FA secrets here unless you have a specific testing reason; use test accounts or development credentials."}},{"@type":"Question","name":"What format should my TOTP secret be in?","acceptedAnswer":{"@type":"Answer","text":"Base32 (uppercase A-Z and 2-7, no padding). Most services show this when you set up 2FA alongside the QR code. If you only have a QR code, scan it with a decoder to extract the otpauth:// URL. The secret is in the secret= parameter."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>TOTP Generator</h1>
+  <p class="sub">Generate time-based one-time passwords for 2FA testing. Nothing leaves your browser.</p>
+
+  <div class="card">
+    <div class="card-title">Secret Key</div>
+    <label>Base32 secret</label>
+    <input type="text" id="secret" placeholder="JBSWY3DPEHPK3PXP" oninput="generate()" spellcheck="false" autocomplete="off"/>
+    <div class="row">
+      <div>
+        <label>Digits</label>
+        <select id="digits" onchange="generate()">
+          <option value="6" selected>6 digits</option>
+          <option value="8">8 digits</option>
+        </select>
+      </div>
+      <div>
+        <label>Period</label>
+        <select id="period" onchange="generate()">
+          <option value="30" selected>30 seconds</option>
+          <option value="60">60 seconds</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="code-display">
+      <div class="code" id="code">------</div>
+      <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+      <div class="timer-row">
+        <span class="timer-text" id="timerText">--s remaining</span>
+        <button class="copy-code" onclick="copyCode()">Copy code</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="deep-dive" style="max-width:560px;padding:0">
+    <button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="dd-arrow">&#x25B8;</span> How do TOTP codes work?
+    </button>
+    <div class="deep-dive-body">
+      <div class="deep-dive-content">
+        <p><strong>TOTP (Time-based One-Time Password)</strong> uses a shared secret and the current time to generate a code that changes every 30 seconds. The algorithm takes the secret key, combines it with a time counter (current Unix time divided by the period), and runs it through HMAC-SHA1 to produce a 6 or 8-digit code.</p>
+        <p>This is the same algorithm behind <strong>Google Authenticator, Authy, 1Password, and Microsoft Authenticator</strong>. The secret key is typically shared as a Base32-encoded string or QR code during 2FA setup. Both the server and your authenticator app independently generate the same code from the same secret and time — no network request needed.</p>
+        <p>This tool is useful for developers <strong>testing 2FA integrations</strong>, verifying that a secret key produces the expected codes, or debugging authentication flows. Enter any Base32 secret to see live rotating codes. Everything runs in your browser using the Web Crypto API — your secret never leaves your device.</p>
+
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur TOTP / Code 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador TOTP / Código 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>TOTP-Generator / 2FA-Code</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador TOTP / Código 2FA</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>TOTP生成ツール（二要素認証）</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>TOTP 生成器（双因素认证）</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>TOTP 생성기 (2단계 인증)</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد TOTP — رمز المصادقة الثنائية</p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate TOTP codes for 2FA testing?</summary>
+    <div class="faq-body">
+      <p>Paste your Base32 secret key into the input. The tool generates the current 6-digit (or 8-digit) TOTP code and updates every 30 seconds (or 60, depending on your setting). Matches what Google Authenticator, Authy, 1Password, and hardware tokens produce.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is TOTP and how does it work?</summary>
+    <div class="faq-body">
+      <p>TOTP (Time-based One-Time Password, RFC 6238) derives a 6-digit code from a shared secret and the current time. The secret is stored on both the server and your authenticator app. Every 30 seconds, both sides compute the same code from the same time and secret &mdash; no network needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why would I use this instead of Google Authenticator?</summary>
+    <div class="faq-body">
+      <p>Primarily for <strong>development and testing</strong>: debugging a 2FA flow, verifying TOTP implementation in your backend, or recovering when you don't have your phone. For daily use, a proper authenticator app (or 1Password/Bitwarden) is safer &mdash; this tool holds the secret only in browser memory.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to paste my TOTP secret into a browser tool?</summary>
+    <div class="faq-body">
+      <p>Generation is 100% client-side &mdash; the secret never leaves your device. That said, anyone with your TOTP secret can generate codes for your account forever. Don't paste production 2FA secrets here unless you have a specific testing reason; use test accounts or development credentials.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What format should my TOTP secret be in?</summary>
+    <div class="faq-body">
+      <p>Base32 (uppercase A-Z and 2-7, no padding). Most services show this when you set up 2FA alongside the QR code. If you only have a QR code, scan it with a decoder to extract the <code>otpauth://</code> URL &mdash; the secret is in the <code>secret=</code> parameter.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+// Base32 decode
+function b32decode(s){
+  s=s.replace(/[\s=-]+/g,'').toUpperCase();
+  const alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  let bits='',bytes=[];
+  for(let i=0;i<s.length;i++){
+    const v=alpha.indexOf(s[i]);
+    if(v===-1) continue;
+    bits+=v.toString(2).padStart(5,'0');
+  }
+  for(let i=0;i+8<=bits.length;i+=8) bytes.push(parseInt(bits.substr(i,8),2));
+  return new Uint8Array(bytes);
+}
+
+// HMAC-SHA1
+async function hmacSha1(key,msg){
+  const ck=await crypto.subtle.importKey('raw',key,{name:'HMAC',hash:'SHA-1'},false,['sign']);
+  const sig=await crypto.subtle.sign('HMAC',ck,msg);
+  return new Uint8Array(sig);
+}
+
+// TOTP
+async function totp(secret,period,digits){
+  const key=b32decode(secret);
+  if(key.length===0) return null;
+  const epoch=Math.floor(Date.now()/1000);
+  const counter=Math.floor(epoch/period);
+  const msg=new Uint8Array(8);
+  let tmp=counter;
+  for(let i=7;i>=0;i--){msg[i]=tmp&0xff;tmp=Math.floor(tmp/256);}
+  const hash=await hmacSha1(key,msg);
+  const offset=hash[hash.length-1]&0x0f;
+  const code=((hash[offset]&0x7f)<<24|(hash[offset+1]&0xff)<<16|(hash[offset+2]&0xff)<<8|(hash[offset+3]&0xff))%(10**digits);
+  return code.toString().padStart(digits,'0');
+}
+
+let currentCode='';
+
+async function generate(){
+  const secret=document.getElementById('secret').value.trim();
+  const digits=parseInt(document.getElementById('digits').value);
+  const period=parseInt(document.getElementById('period').value);
+  const codeEl=document.getElementById('code');
+  if(!secret){
+    codeEl.textContent='-'.repeat(digits);
+    currentCode='';
+    return;
+  }
+  try{
+    const code=await totp(secret,period,digits);
+    if(code){
+      currentCode=code;
+      // Add space in middle for readability
+      const mid=Math.floor(code.length/2);
+      codeEl.textContent=code.slice(0,mid)+' '+code.slice(mid);
+    } else {
+      codeEl.textContent='Invalid';
+      currentCode='';
+    }
+  }catch(e){
+    codeEl.textContent='Error';
+    currentCode='';
+  }
+}
+
+function copyCode(){
+  if(currentCode){
+    navigator.clipboard.writeText(currentCode);
+    if(typeof showToast==='function') showToast('Code copied!');
+  }
+}
+
+// Timer loop
+function tick(){
+  const period=parseInt(document.getElementById('period').value);
+  const epoch=Math.floor(Date.now()/1000);
+  const remaining=period-(epoch%period);
+  const pct=(remaining/period)*100;
+  const fill=document.getElementById('timerFill');
+  const text=document.getElementById('timerText');
+  fill.style.width=pct+'%';
+  fill.className='timer-fill'+(remaining<=5?' critical':remaining<=10?' urgent':'');
+  text.textContent=remaining+'s remaining';
+
+  // Regenerate when period rolls over
+  if(remaining===period) generate();
+
+  requestAnimationFrame(tick);
+}
+
+// Auto-regenerate every second
+setInterval(generate,1000);
+generate();
+tick();
+</script>
+</body>
+</html>

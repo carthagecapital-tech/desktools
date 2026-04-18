@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Chmod Calculator — Unix File Permissions Tool | DeskTools</title>
+<meta name="description" content="Calculate Unix file permissions visually. Convert between numeric (755) and symbolic (rwxr-xr-x) notation. See the chmod command."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/chmod-calculator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Chmod Calculator — DeskTools"/><meta property="og:description" content="Calculate Unix file permissions visually. Convert between numeric and symbolic notation."/><meta property="og:url" content="https://desktools.dev/chmod-calculator"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Chmod Calculator — DeskTools"/><meta name="twitter:description" content="Calculate Unix file permissions visually."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Chmod Calculator","description":"Calculate Unix file permissions visually. Convert between numeric and symbolic notation.","url":"https://desktools.dev/chmod-calculator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:580px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+.display{text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem}
+.display-num{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;color:var(--accent);letter-spacing:.2em}
+.display-sym{font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--text);margin-top:.25rem}
+.display-cmd{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--muted);margin-top:.75rem;background:var(--bg);padding:.5rem .75rem;border-radius:6px;display:inline-block}
+.display-cmd span{color:var(--accent)}
+.perm-grid{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.perm-cell{padding:.7rem .8rem;text-align:center;border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-size:.85rem}
+.perm-cell:nth-child(4n){border-right:none}
+.perm-cell.header{background:rgba(0,212,170,0.06);font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.perm-cell.role{background:var(--bg3);font-weight:600;font-size:.82rem;color:var(--text);text-align:left}
+.perm-cell label{display:flex;align-items:center;justify-content:center;gap:.4rem;cursor:pointer;font-size:.82rem;color:var(--text)}
+.perm-cell input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.perm-cell:last-child,.perm-cell:nth-last-child(-n+4){border-bottom:none}
+.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.preset{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.preset:hover{border-color:var(--accent);color:var(--accent)}
+.copy-cmd{background:none;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.25rem .5rem;border-radius:4px;cursor:pointer;transition:all .2s;margin-left:.5rem}
+.copy-cmd:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate chmod permissions online?","acceptedAnswer":{"@type":"Answer","text":"Toggle the 9 checkboxes (read/write/execute for owner/group/world) to build your permissions. The numeric (e.g. 755), symbolic (rwxr-xr-x), and full chmod command update in real-time. Click a preset like 755 or 644 for common defaults."}},{"@type":"Question","name":"What does chmod 755 mean?","acceptedAnswer":{"@type":"Answer","text":"Owner can read, write, and execute (7 = 4+2+1). Group and world can read and execute (5 = 4+0+1) but not write. This is the standard permission for executable scripts and directories."}},{"@type":"Question","name":"What is the difference between chmod 644 and 755?","acceptedAnswer":{"@type":"Answer","text":"644 gives owner read/write, others read-only &mdash; standard for regular files. 755 adds execute permission for owner/group/world &mdash; use for executable files and directories (directories need execute to be traversable)."}},{"@type":"Question","name":"What are the most common chmod values and when should I use them?","acceptedAnswer":{"@type":"Answer","text":"644 = files (owner write, others read). 755 = directories, scripts (all can execute). 600 = private config files, SSH keys (owner only). 700 = private executables. 777 = world-writable (avoid &mdash; security risk)."}},{"@type":"Question","name":"Why is chmod 777 dangerous?","acceptedAnswer":{"@type":"Answer","text":"It lets any user on the system read, modify, and execute the file. On a shared server, any compromised account or process can alter 777 files, inject malicious code, or read secrets. Use the most restrictive permission that still works &mdash; rarely is 777 actually necessary."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Chmod Calculator</h1>
+  <p class="sub">Calculate Unix file permissions. Toggle checkboxes or use presets.</p>
+
+  <div class="presets">
+    <button class="preset" onclick="setOctal(644)">644</button>
+    <button class="preset" onclick="setOctal(755)">755</button>
+    <button class="preset" onclick="setOctal(777)">777</button>
+    <button class="preset" onclick="setOctal(600)">600</button>
+    <button class="preset" onclick="setOctal(700)">700</button>
+    <button class="preset" onclick="setOctal(444)">444</button>
+    <button class="preset" onclick="setOctal(400)">400</button>
+  </div>
+
+  <div class="display">
+    <div class="display-num" id="octal">755</div>
+    <div class="display-sym" id="symbolic">rwxr-xr-x</div>
+    <div class="display-cmd">chmod <span id="cmdNum">755</span> filename<button class="copy-cmd" onclick="copyCmd()">Copy</button></div>
+  </div>
+
+  <div class="card">
+    <div class="perm-grid">
+      <div class="perm-cell header"></div>
+      <div class="perm-cell header">Read (4)</div>
+      <div class="perm-cell header">Write (2)</div>
+      <div class="perm-cell header">Execute (1)</div>
+      <div class="perm-cell role">Owner</div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="o" data-perm="r" onchange="calc()"/> r</label></div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="o" data-perm="w" onchange="calc()"/> w</label></div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="o" data-perm="x" onchange="calc()"/> x</label></div>
+      <div class="perm-cell role">Group</div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="g" data-perm="r" onchange="calc()"/> r</label></div>
+      <div class="perm-cell"><label><input type="checkbox" data-who="g" data-perm="w" onchange="calc()"/> w</label></div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="g" data-perm="x" onchange="calc()"/> x</label></div>
+      <div class="perm-cell role">Others</div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="u" data-perm="r" onchange="calc()"/> r</label></div>
+      <div class="perm-cell"><label><input type="checkbox" data-who="u" data-perm="w" onchange="calc()"/> w</label></div>
+      <div class="perm-cell"><label><input type="checkbox" checked data-who="u" data-perm="x" onchange="calc()"/> x</label></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:580px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Understanding Unix file permissions</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Unix file permissions</strong> control who can read, write, and execute files. Every file has three permission groups: <strong>owner</strong> (the user who created it), <strong>group</strong> (users in the file's group), and <strong>others</strong> (everyone else). Each group can have read (r), write (w), and execute (x) permissions.</p>
+<p>Permissions are represented in two ways: <strong>symbolic notation</strong> like <code>rwxr-xr-x</code> (9 characters, 3 per group) and <strong>numeric/octal notation</strong> like <code>755</code>. In octal, each digit is the sum of: read=4, write=2, execute=1. So 7 (4+2+1) means full access, 5 (4+1) means read+execute, and 0 means no access.</p>
+<p>Common permission sets: <code>755</code> for executable files and directories (owner full, others read+execute), <code>644</code> for regular files (owner read+write, others read-only), <code>600</code> for private files (owner only), and <code>777</code> for full access (avoid in production — security risk). The <code>chmod</code> command changes permissions: <code>chmod 755 filename</code>.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Calculateur chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Calculadora chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Chmod-Rechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Calculadora chmod</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>chmod計算機</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>chmod 权限计算器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>chmod 권한 계산기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة صلاحيات chmod</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I calculate chmod permissions online?</summary>
+    <div class="faq-body">
+      <p>Toggle the 9 checkboxes (read/write/execute for owner/group/world) to build your permissions. The numeric (e.g. <code>755</code>), symbolic (<code>rwxr-xr-x</code>), and full <code>chmod</code> command update in real-time. Click a preset like 755 or 644 for common defaults.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does chmod 755 mean?</summary>
+    <div class="faq-body">
+      <p>Owner can read, write, and execute (7 = 4+2+1). Group and world can read and execute (5 = 4+0+1) but not write. This is the standard permission for executable scripts and directories.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between chmod 644 and 755?</summary>
+    <div class="faq-body">
+      <p><strong>644</strong> gives owner read/write, others read-only &mdash; standard for regular files. <strong>755</strong> adds execute permission for owner/group/world &mdash; use for executable files and directories (directories need execute to be traversable).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the most common chmod values and when should I use them?</summary>
+    <div class="faq-body">
+      <p><strong>644</strong> = files (owner write, others read). <strong>755</strong> = directories, scripts (all can execute). <strong>600</strong> = private config files, SSH keys (owner only). <strong>700</strong> = private executables. <strong>777</strong> = world-writable (avoid &mdash; security risk).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is chmod 777 dangerous?</summary>
+    <div class="faq-body">
+      <p>It lets any user on the system read, modify, and execute the file. On a shared server, any compromised account or process can alter 777 files, inject malicious code, or read secrets. Use the most restrictive permission that still works &mdash; rarely is 777 actually necessary.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function calc(){
+  var perms={o:{r:false,w:false,x:false},g:{r:false,w:false,x:false},u:{r:false,w:false,x:false}};
+  document.querySelectorAll('.perm-grid input[type=checkbox]').forEach(function(cb){
+    perms[cb.dataset.who][cb.dataset.perm]=cb.checked;
+  });
+  function toNum(p){return(p.r?4:0)+(p.w?2:0)+(p.x?1:0);}
+  function toSym(p){return(p.r?'r':'-')+(p.w?'w':'-')+(p.x?'x':'-');}
+  var num=''+toNum(perms.o)+toNum(perms.g)+toNum(perms.u);
+  var sym=toSym(perms.o)+toSym(perms.g)+toSym(perms.u);
+  document.getElementById('octal').textContent=num;
+  document.getElementById('symbolic').textContent=sym;
+  document.getElementById('cmdNum').textContent=num;
+}
+function setOctal(n){
+  var s=String(n);
+  var map=['o','g','u'];
+  for(var i=0;i<3;i++){
+    var d=parseInt(s[i]);
+    var who=map[i];
+    document.querySelector('input[data-who="'+who+'"][data-perm="r"]').checked=!!(d&4);
+    document.querySelector('input[data-who="'+who+'"][data-perm="w"]').checked=!!(d&2);
+    document.querySelector('input[data-who="'+who+'"][data-perm="x"]').checked=!!(d&1);
+  }
+  calc();
+}
+function copyCmd(){
+  var num=document.getElementById('cmdNum').textContent;
+  navigator.clipboard.writeText('chmod '+num+' filename');
+  if(typeof showToast==='function')showToast('Command copied!');
+}
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cron Expression Builder — Free Visual Cron Generator | DeskTools</title>
+<meta name="description" content="Build cron expressions visually. See human-readable schedules and the next 5 execution times. Free, runs in your browser."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/cron-builder"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Cron Expression Builder — DeskTools"/><meta property="og:description" content="Build cron expressions visually. See human-readable schedules and the next 5 execution times."/><meta property="og:url" content="https://desktools.dev/cron-builder"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Cron Expression Builder — DeskTools"/><meta name="twitter:description" content="Build cron expressions visually. See human-readable schedules and the next 5 execution times."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Cron Expression Builder","description":"Build cron expressions visually. See human-readable schedules and the next 5 execution times.","url":"https://desktools.dev/cron-builder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+select,input[type=text]{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.88rem;padding:.6rem .8rem;outline:none;transition:border-color .2s;cursor:pointer}
+select:focus,input:focus{border-color:var(--accent)}
+.field{margin-bottom:1rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.expr-display{text-align:center;padding:1.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:1.25rem;position:relative}
+.expr{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:.5rem}
+.expr-human{font-size:.9rem;color:var(--text);line-height:1.5}
+.copy-expr{position:absolute;top:.75rem;right:.75rem;background:none;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.copy-expr:hover{border-color:var(--accent);color:var(--accent)}
+.next-runs{list-style:none;padding:0}
+.next-runs li{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.next-runs li:last-child{border-bottom:none}
+.run-idx{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);background:rgba(0,212,170,0.1);padding:.15rem .4rem;border-radius:4px;min-width:20px;text-align:center}
+.run-time{font-family:'JetBrains Mono',monospace;color:var(--text)}
+.run-rel{color:var(--muted);font-size:.78rem;margin-left:auto}
+.preset-btns{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.preset{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.3rem .6rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.preset:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I build a cron expression visually?","acceptedAnswer":{"@type":"Answer","text":"Use the five control panels (Minute, Hour, Day of Month, Month, Day of Week) to pick values. The cron expression updates live, and a plain-English description tells you exactly when it will run. Click any preset button for common schedules."}},{"@type":"Question","name":"What do the cron expression fields mean?","acceptedAnswer":{"@type":"Answer","text":"Five fields: minute (0-59), hour (0-23), day of month (1-31), month (1-12), day of week (0-6, Sunday=0). An asterisk means any value. A slash (*/5) means every 5 units. Commas list multiple values, hyphens define ranges."}},{"@type":"Question","name":"How do I schedule a cron job to run every 5 minutes?","acceptedAnswer":{"@type":"Answer","text":"Use the expression */5 * * * *. Click the preset Every 5 min to build it automatically. This runs at minute 0, 5, 10, 15, etc. of every hour."}},{"@type":"Question","name":"What is the difference between crontab syntax and AWS/Quartz cron?","acceptedAnswer":{"@type":"Answer","text":"Standard Unix cron has 5 fields. AWS EventBridge and Quartz (Spring Scheduler) use 6 or 7 fields &mdash; they add seconds and/or a year field. Also, AWS uses ? (not *) in one of day-of-month or day-of-week. This tool generates standard 5-field Unix cron, compatible with most cron daemons and libraries."}},{"@type":"Question","name":"How do I schedule a cron job to run only on weekdays?","acceptedAnswer":{"@type":"Answer","text":"Set day of week to 1-5 (Monday-Friday). For weekdays at 9 AM: 0 9 * * 1-5. Click the Weekdays 9am preset to build it instantly."}},{"@type":"Question","name":"Why isn't my cron job running when I expect?","acceptedAnswer":{"@type":"Answer","text":"Common issues: the cron daemon uses a different timezone than you expect (often UTC), the job's environment has different PATH or variables than your shell, or the command fails silently. Use the Next 5 runs preview in this tool to sanity-check your schedule before deploying."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Cron Expression Builder</h1>
+  <p class="sub">Build cron expressions visually. See the schedule in plain English.</p>
+
+  <div class="preset-btns">
+    <button class="preset" onclick="setPreset('* * * * *')">Every minute</button>
+    <button class="preset" onclick="setPreset('*/5 * * * *')">Every 5 min</button>
+    <button class="preset" onclick="setPreset('0 * * * *')">Every hour</button>
+    <button class="preset" onclick="setPreset('0 0 * * *')">Daily midnight</button>
+    <button class="preset" onclick="setPreset('0 9 * * 1-5')">Weekdays 9am</button>
+    <button class="preset" onclick="setPreset('0 0 * * 0')">Weekly Sunday</button>
+    <button class="preset" onclick="setPreset('0 0 1 * *')">Monthly 1st</button>
+  </div>
+
+  <div class="expr-display">
+    <button class="copy-expr" onclick="copyExpr()">Copy</button>
+    <div class="expr" id="expr">* * * * *</div>
+    <div class="expr-human" id="human">Every minute</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Configure</div>
+    <div class="field">
+      <label>Minute (0-59)</label>
+      <input type="text" id="fMin" value="*" oninput="build()" placeholder="* or */5 or 0,15,30,45"/>
+    </div>
+    <div class="field">
+      <label>Hour (0-23)</label>
+      <input type="text" id="fHour" value="*" oninput="build()" placeholder="* or 9 or 0-5"/>
+    </div>
+    <div class="row3">
+      <div class="field">
+        <label>Day of Month (1-31)</label>
+        <input type="text" id="fDom" value="*" oninput="build()" placeholder="* or 1,15"/>
+      </div>
+      <div class="field">
+        <label>Month (1-12)</label>
+        <input type="text" id="fMonth" value="*" oninput="build()" placeholder="* or 1-6"/>
+      </div>
+      <div class="field">
+        <label>Day of Week (0-6)</label>
+        <input type="text" id="fDow" value="*" oninput="build()" placeholder="* or 1-5"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Next 5 Runs</div>
+    <ul class="next-runs" id="nextRuns"></ul>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is a cron expression?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Cron</strong> is a time-based job scheduler found in Unix-like systems. A cron expression is a string of five fields — <code>minute hour day-of-month month day-of-week</code> — that defines when a task should run. The asterisk <code>*</code> means "every," a number means "at exactly," and special characters like <code>*/5</code> (every 5th), <code>1-5</code> (range), and <code>1,15</code> (list) add flexibility.</p>
+<p>Cron is used for <strong>scheduled backups, log rotation, report generation, cache clearing, email digests, and deployment pipelines</strong>. Cloud platforms like AWS (CloudWatch Events), Google Cloud Scheduler, and GitHub Actions all use cron syntax. Even Kubernetes CronJobs use the same format.</p>
+<p>Common mistakes include confusing day-of-week numbering (0=Sunday in most systems), forgetting that both day-of-month and day-of-week can trigger a run (they're OR'd, not AND'd in standard cron), and accidentally scheduling intensive tasks every minute. This tool shows you exactly when your expression will fire next, so you can verify before deploying.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Constructeur d'expressions cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Constructor de expresiones cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Cron-Ausdruck-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Construtor de expressões cron</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Cron式ビルダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Cron 表达式生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Cron 표현식 빌더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>منشئ تعبيرات Cron</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I build a cron expression visually?</summary>
+    <div class="faq-body">
+      <p>Use the five control panels (Minute, Hour, Day of Month, Month, Day of Week) to pick values. The cron expression updates live, and a plain-English description tells you exactly when it will run (e.g. "Every day at 9:00 AM"). Click any preset button for common schedules.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What do the cron expression fields mean?</summary>
+    <div class="faq-body">
+      <p>Five fields: <strong>minute</strong> (0-59), <strong>hour</strong> (0-23), <strong>day of month</strong> (1-31), <strong>month</strong> (1-12), <strong>day of week</strong> (0-6, Sunday=0). An asterisk (<code>*</code>) means "any value". A slash (<code>*/5</code>) means "every 5 units". Commas list multiple values, hyphens define ranges.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I schedule a cron job to run every 5 minutes?</summary>
+    <div class="faq-body">
+      <p>Use the expression <code>*/5 * * * *</code>. Click the preset <strong>Every 5 min</strong> to build it automatically. This runs at minute 0, 5, 10, 15, etc. of every hour.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between crontab syntax and AWS/Quartz cron?</summary>
+    <div class="faq-body">
+      <p>Standard Unix cron has 5 fields. AWS EventBridge and Quartz (Spring Scheduler) use 6 or 7 fields &mdash; they add seconds and/or a year field. Also, AWS uses <code>?</code> (not <code>*</code>) in one of day-of-month or day-of-week. This tool generates standard 5-field Unix cron, compatible with most cron daemons and libraries.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I schedule a cron job to run only on weekdays?</summary>
+    <div class="faq-body">
+      <p>Set day of week to <code>1-5</code> (Monday-Friday). For weekdays at 9 AM: <code>0 9 * * 1-5</code>. Click the <strong>Weekdays 9am</strong> preset to build it instantly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why isn't my cron job running when I expect?</summary>
+    <div class="faq-body">
+      <p>Common issues: the cron daemon uses a different timezone than you expect (often UTC), the job's environment has different PATH or variables than your shell, or the command fails silently. Use the "Next 5 runs" preview in this tool to sanity-check your schedule before deploying.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function build(){
+  const m=document.getElementById('fMin').value.trim()||'*';
+  const h=document.getElementById('fHour').value.trim()||'*';
+  const dom=document.getElementById('fDom').value.trim()||'*';
+  const mon=document.getElementById('fMonth').value.trim()||'*';
+  const dow=document.getElementById('fDow').value.trim()||'*';
+  const expr=m+' '+h+' '+dom+' '+mon+' '+dow;
+  document.getElementById('expr').textContent=expr;
+  document.getElementById('human').textContent=toHuman(m,h,dom,mon,dow);
+  calcNext(m,h,dom,mon,dow);
+}
+function setPreset(e){
+  const p=e.split(' ');
+  document.getElementById('fMin').value=p[0];
+  document.getElementById('fHour').value=p[1];
+  document.getElementById('fDom').value=p[2];
+  document.getElementById('fMonth').value=p[3];
+  document.getElementById('fDow').value=p[4];
+  build();
+}
+function copyExpr(){
+  navigator.clipboard.writeText(document.getElementById('expr').textContent);
+  if(typeof showToast==='function') showToast('Copied!');
+}
+
+const DOW_NAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MON_NAMES=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function toHuman(m,h,dom,mon,dow){
+  let parts=[];
+  // Minute
+  if(m==='*') parts.push('Every minute');
+  else if(m.startsWith('*/')) parts.push('Every '+m.slice(2)+' minutes');
+  else if(m==='0') parts.push('At minute 0');
+  else parts.push('At minute '+m);
+  // Hour
+  if(h!=='*'){
+    if(h.startsWith('*/')) parts.push('every '+h.slice(2)+' hours');
+    else{const hr=parseInt(h);parts.push('past '+(hr>12?(hr-12)+'pm':(hr||12)+(hr<12?'am':'pm')));}
+  }
+  // DOM
+  if(dom!=='*') parts.push('on day '+dom+' of the month');
+  // Month
+  if(mon!=='*'){
+    const mi=parseInt(mon);
+    parts.push('in '+(MON_NAMES[mi]||'month '+mon));
+  }
+  // DOW
+  if(dow!=='*'){
+    if(dow==='1-5') parts.push('on weekdays');
+    else if(dow==='0,6') parts.push('on weekends');
+    else{
+      const days=dow.split(',').map(d=>{
+        if(d.includes('-')){const[a,b]=d.split('-');return DOW_NAMES[a]+'-'+DOW_NAMES[b];}
+        return DOW_NAMES[parseInt(d)]||d;
+      });
+      parts.push('on '+days.join(', '));
+    }
+  }
+  return parts.join(' ')||'Every minute';
+}
+
+function expandField(field,min,max){
+  if(field==='*') return Array.from({length:max-min+1},(_,i)=>i+min);
+  const vals=new Set();
+  field.split(',').forEach(part=>{
+    if(part.includes('/')){
+      const[range,step]=part.split('/');
+      const s=parseInt(step);
+      const start=range==='*'?min:parseInt(range);
+      for(let i=start;i<=max;i+=s) vals.add(i);
+    } else if(part.includes('-')){
+      const[a,b]=part.split('-').map(Number);
+      for(let i=a;i<=b;i++) vals.add(i);
+    } else {
+      vals.add(parseInt(part));
+    }
+  });
+  return [...vals].filter(v=>v>=min&&v<=max).sort((a,b)=>a-b);
+}
+
+function calcNext(m,h,dom,mon,dow){
+  const mins=expandField(m,0,59);
+  const hrs=expandField(h,0,23);
+  const doms=expandField(dom,1,31);
+  const mons=expandField(mon,1,12);
+  const dows=expandField(dow,0,6);
+  const results=[];
+  const now=new Date();
+  const check=new Date(now);
+  check.setSeconds(0,0);
+  check.setMinutes(check.getMinutes()+1);
+  let safety=0;
+  while(results.length<5&&safety<525960){
+    const cmin=check.getMinutes(),chr=check.getHours(),cdom=check.getDate(),cmon=check.getMonth()+1,cdow=check.getDay();
+    if(mins.includes(cmin)&&hrs.includes(chr)&&doms.includes(cdom)&&mons.includes(cmon)&&dows.includes(cdow)){
+      results.push(new Date(check));
+    }
+    check.setMinutes(check.getMinutes()+1);
+    safety++;
+  }
+  const ul=document.getElementById('nextRuns');ul.innerHTML='';
+  results.forEach((d,i)=>{
+    const li=document.createElement('li');
+    const diff=d-now;
+    const mins=Math.floor(diff/60000);
+    let rel='';
+    if(mins<60) rel='in '+mins+'m';
+    else if(mins<1440) rel='in '+Math.floor(mins/60)+'h '+mins%60+'m';
+    else rel='in '+Math.floor(mins/1440)+'d '+Math.floor((mins%1440)/60)+'h';
+    li.innerHTML='<span class="run-idx">'+(i+1)+'</span><span class="run-time">'+d.toLocaleString()+'</span><span class="run-rel">'+rel+'</span>';
+    ul.appendChild(li);
+  });
+  if(!results.length) ul.innerHTML='<li style="color:var(--muted)">No runs found in next year</li>';
+}
+build();
+</script>
+</body>
+</html>

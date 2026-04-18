@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tailwind CSS Colors — Color Picker &amp; Palette Reference | DeskTools</title>
+<meta name="description" content="Browse all Tailwind CSS colors with shades. Click to copy class names or hex values. Complete Tailwind v3 color palette reference."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/tailwind-colors"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Tailwind CSS Colors — DeskTools"/><meta property="og:description" content="Browse all Tailwind CSS colors. Click to copy class names or hex values."/><meta property="og:url" content="https://desktools.dev/tailwind-colors"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Tailwind CSS Colors — DeskTools"/><meta name="twitter:description" content="Browse all Tailwind CSS colors. Click to copy class names or hex values."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tailwind CSS Colors","description":"Browse all Tailwind CSS colors with shades. Click to copy class names or hex values.","url":"https://desktools.dev/tailwind-colors","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:1.5rem}
+.mode-toggle{display:flex;gap:0;background:var(--bg3);border-radius:8px;padding:2px;border:1px solid var(--border);margin-bottom:1.5rem;width:fit-content}
+.mode-btn{padding:.4rem .85rem;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;border-radius:6px;border:none;background:none;font-family:'Outfit',sans-serif;transition:all .15s}
+.mode-btn.active{background:var(--accent);color:#0a0a0f}
+.color-group{margin-bottom:1.25rem}
+.group-name{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:capitalize;margin-bottom:.5rem}
+.shades{display:flex;gap:3px;border-radius:8px;overflow:hidden}
+.shade{flex:1;height:52px;cursor:pointer;position:relative;transition:transform .1s}
+.shade:hover{transform:scaleY(1.15);z-index:1;border-radius:4px}
+.shade-label{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.55rem;opacity:0;transition:opacity .15s;white-space:nowrap;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.shade:hover .shade-label{opacity:1}
+.selected-info{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:none;align-items:center;gap:1rem}
+.selected-info.show{display:flex}
+.selected-swatch{width:48px;height:48px;border-radius:8px;border:1px solid var(--border);flex-shrink:0}
+.selected-details{flex:1;display:flex;flex-wrap:wrap;gap:.5rem}
+.selected-chip{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--bg3);border:1px solid var(--border);padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .15s;color:var(--text)}
+.selected-chip:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:600px){.shade{height:36px}.shades{gap:1px}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find Tailwind CSS color class names?","acceptedAnswer":{"@type":"Answer","text":"Browse the full v3 palette on the page. Click any shade to copy either the class name (like bg-sky-500), the HEX value (#0ea5e9), or the RGB value. Use the toggle at the top to set your default copy format."}},{"@type":"Question","name":"What are the Tailwind CSS shade numbers (50, 100, 500, 900)?","acceptedAnswer":{"@type":"Answer","text":"Every color in Tailwind has 11 shades from 50 (lightest) to 950 (darkest), with 500 as the base shade. This gives you a predictable, consistent way to lighten and darken without manually calculating hex values. 50/100 for backgrounds, 500 for accents, 900/950 for dark text or backgrounds."}},{"@type":"Question","name":"How do I use Tailwind colors outside of a Tailwind project?","acceptedAnswer":{"@type":"Answer","text":"Copy the HEX or RGB values and use them in any CSS project. Tailwind's palette is just well-chosen colors. Nothing Tailwind-specific about the hex codes themselves. Many designers use the Tailwind palette as a starting point even in non-Tailwind projects because the progressions are carefully tuned."}},{"@type":"Question","name":"What's the difference between Tailwind v3 and v4 colors?","acceptedAnswer":{"@type":"Answer","text":"Tailwind v4 uses a new OKLCH color space for more uniform perceptual lightness across shades. The default palette hexes are similar but subtly different. This tool shows v3 values, which are still widely used. Any v3 hex works in v4 if you paste it directly."}},{"@type":"Question","name":"Which Tailwind color shades work well for body text?","acceptedAnswer":{"@type":"Answer","text":"For light backgrounds: slate-900, zinc-900, or neutral-900. Near-black with a hint of color for warmth. For dark backgrounds: slate-100, zinc-100. Off-white, easier on the eyes than pure white. Always verify with the Contrast Checker."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Tailwind CSS Colors</h1>
+  <p class="sub">Click any shade to copy. Full Tailwind v3 color palette.</p>
+
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode('hex',this)">HEX</button>
+    <button class="mode-btn" onclick="setMode('class',this)">Class Name</button>
+    <button class="mode-btn" onclick="setMode('rgb',this)">RGB</button>
+  </div>
+
+  <div class="selected-info" id="selectedInfo">
+    <div class="selected-swatch" id="selectedSwatch"></div>
+    <div class="selected-details" id="selectedDetails"></div>
+  </div>
+
+  <div id="palette"></div>
+
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> About Tailwind CSS colors</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Tailwind CSS</strong> ships with a carefully curated color palette of 22 color families, each with 11 shades (50-950). These colors are designed to work harmoniously together, with consistent lightness and saturation curves across all families. They're used via utility classes like <code>bg-blue-500</code>, <code>text-red-700</code>, or <code>border-gray-300</code>.</p>
+<p>The shade scale runs from <strong>50</strong> (lightest, near-white) to <strong>950</strong> (darkest, near-black). The <strong>500</strong> shade is the "base" color — the most saturated, recognizable version. Shades below 500 are tints (mixed with white), shades above are tones (mixed with black). This systematic approach makes it easy to build consistent, accessible UIs.</p>
+<p>When choosing colors for accessibility, pair light backgrounds (50-200) with dark text (700-950) or vice versa to ensure sufficient contrast. Tailwind's <strong>slate</strong> and <strong>zinc</strong> grays are popular for UI chrome, while <strong>neutral</strong> is a pure gray without blue or warm undertones. This tool lets you browse the complete palette and copy values in any format.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Palette de couleurs Tailwind CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Paleta de colores Tailwind CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Tailwind CSS Farbpalette</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Paleta de cores Tailwind CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Tailwind CSS カラーパレット</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Tailwind CSS 颜色面板</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Tailwind CSS 색상 팔레트</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>لوحة ألوان Tailwind CSS</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I find Tailwind CSS color class names?</summary>
+    <div class="faq-body">
+      <p>Browse the full v3 palette on the page. Click any shade to copy either the <strong>class name</strong> (like <code>bg-sky-500</code>), the <strong>HEX</strong> value (<code>#0ea5e9</code>), or the <strong>RGB</strong> value. Use the toggle at the top to set your default copy format.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the Tailwind CSS shade numbers (50, 100, 500, 900)?</summary>
+    <div class="faq-body">
+      <p>Every color in Tailwind has 11 shades from <strong>50</strong> (lightest) to <strong>950</strong> (darkest), with 500 as the "base" shade. This gives you a predictable, consistent way to lighten and darken without manually calculating hex values. 50/100 for backgrounds, 500 for accents, 900/950 for dark text or backgrounds.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I use Tailwind colors outside of a Tailwind project?</summary>
+    <div class="faq-body">
+      <p>Copy the HEX or RGB values and use them in any CSS project. Tailwind's palette is just well-chosen colors &mdash; nothing Tailwind-specific about the hex codes themselves. Many designers use the Tailwind palette as a starting point even in non-Tailwind projects because the progressions are carefully tuned.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between Tailwind v3 and v4 colors?</summary>
+    <div class="faq-body">
+      <p>Tailwind v4 uses a new <strong>OKLCH</strong> color space for more uniform perceptual lightness across shades. The default palette hexes are similar but subtly different. This tool shows v3 values, which are still widely used &mdash; any v3 hex works in v4 if you paste it directly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Which Tailwind color shades work well for body text?</summary>
+    <div class="faq-body">
+      <p>For light backgrounds: <code>slate-900</code>, <code>zinc-900</code>, or <code>neutral-900</code> &mdash; near-black with a hint of color for warmth. For dark backgrounds: <code>slate-100</code>, <code>zinc-100</code> &mdash; off-white, easier on the eyes than pure white. Always verify with the <a href="/contrast-checker">Contrast Checker</a>.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+var COLORS={
+slate:{50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',500:'#64748b',600:'#475569',700:'#334155',800:'#1e293b',900:'#0f172a',950:'#020617'},
+gray:{50:'#f9fafb',100:'#f3f4f6',200:'#e5e7eb',300:'#d1d5db',400:'#9ca3af',500:'#6b7280',600:'#4b5563',700:'#374151',800:'#1f2937',900:'#111827',950:'#030712'},
+zinc:{50:'#fafafa',100:'#f4f4f5',200:'#e4e4e7',300:'#d4d4d8',400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b'},
+neutral:{50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',400:'#a3a3a3',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#171717',950:'#0a0a0a'},
+red:{50:'#fef2f2',100:'#fee2e2',200:'#fecaca',300:'#fca5a5',400:'#f87171',500:'#ef4444',600:'#dc2626',700:'#b91c1c',800:'#991b1b',900:'#7f1d1d',950:'#450a0a'},
+orange:{50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c',800:'#9a3412',900:'#7c2d12',950:'#431407'},
+amber:{50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03'},
+yellow:{50:'#fefce8',100:'#fef9c3',200:'#fef08a',300:'#fde047',400:'#facc15',500:'#eab308',600:'#ca8a04',700:'#a16207',800:'#854d0e',900:'#713f12',950:'#422006'},
+lime:{50:'#f7fee7',100:'#ecfccb',200:'#d9f99d',300:'#bef264',400:'#a3e635',500:'#84cc16',600:'#65a30d',700:'#4d7c0f',800:'#3f6212',900:'#365314',950:'#1a2e05'},
+green:{50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d',950:'#052e16'},
+emerald:{50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b',950:'#022c22'},
+teal:{50:'#f0fdfa',100:'#ccfbf1',200:'#99f6e4',300:'#5eead4',400:'#2dd4bf',500:'#14b8a6',600:'#0d9488',700:'#0f766e',800:'#115e59',900:'#134e4a',950:'#042f2e'},
+cyan:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63',950:'#083344'},
+sky:{50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e',950:'#082f49'},
+blue:{50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a',950:'#172554'},
+indigo:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81',950:'#1e1b4b'},
+violet:{50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',400:'#a78bfa',500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9',800:'#5b21b6',900:'#4c1d95',950:'#2e1065'},
+purple:{50:'#faf5ff',100:'#f3e8ff',200:'#e9d5ff',300:'#d8b4fe',400:'#c084fc',500:'#a855f7',600:'#9333ea',700:'#7e22ce',800:'#6b21a8',900:'#581c87',950:'#3b0764'},
+fuchsia:{50:'#fdf4ff',100:'#fae8ff',200:'#f5d0fe',300:'#f0abfc',400:'#e879f9',500:'#d946ef',600:'#c026d3',700:'#a21caf',800:'#86198f',900:'#701a75',950:'#4a044e'},
+pink:{50:'#fdf2f8',100:'#fce7f3',200:'#fbcfe8',300:'#f9a8d4',400:'#f472b6',500:'#ec4899',600:'#db2777',700:'#be185d',800:'#9d174d',900:'#831843',950:'#500724'},
+rose:{50:'#fff1f2',100:'#ffe4e6',200:'#fecdd3',300:'#fda4af',400:'#fb7185',500:'#f43f5e',600:'#e11d48',700:'#be123c',800:'#9f1239',900:'#881337',950:'#4c0519'},
+};
+var SHADES=['50','100','200','300','400','500','600','700','800','900','950'];
+var copyMode='hex';
+
+function setMode(mode,btn){
+  copyMode=mode;
+  document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+function hexToRgb(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  return r+', '+g+', '+b;
+}
+
+function selectColor(name,shade,hex){
+  var info=document.getElementById('selectedInfo');
+  info.classList.add('show');
+  document.getElementById('selectedSwatch').style.background=hex;
+  var cls=name+'-'+shade;
+  var rgb=hexToRgb(hex);
+  var chips=[
+    {label:'bg-'+cls,val:'bg-'+cls},
+    {label:'text-'+cls,val:'text-'+cls},
+    {label:hex,val:hex},
+    {label:'rgb('+rgb+')',val:'rgb('+rgb+')'},
+  ];
+  document.getElementById('selectedDetails').innerHTML=chips.map(function(c){
+    return '<span class="selected-chip" onclick="navigator.clipboard.writeText(\''+c.val+'\');if(typeof showToast===\'function\')showToast(\'Copied: '+c.val+'\')">'+c.label+'</span>';
+  }).join('');
+}
+
+function render(){
+  var el=document.getElementById('palette');
+  var html='';
+  for(var name in COLORS){
+    html+='<div class="color-group"><div class="group-name">'+name+'</div><div class="shades">';
+    SHADES.forEach(function(shade){
+      var hex=COLORS[name][shade];
+      var textColor=parseInt(shade)>=500?'#fff':'#000';
+      html+='<div class="shade" style="background:'+hex+'" onclick="selectColor(\''+name+'\',\''+shade+'\',\''+hex+'\');copyShade(\''+name+'\',\''+shade+'\',\''+hex+'\')">';
+      html+='<span class="shade-label" style="color:'+textColor+'">'+shade+'</span>';
+      html+='</div>';
+    });
+    html+='</div></div>';
+  }
+  el.innerHTML=html;
+}
+
+function copyShade(name,shade,hex){
+  var val;
+  if(copyMode==='hex') val=hex;
+  else if(copyMode==='class') val=name+'-'+shade;
+  else val='rgb('+hexToRgb(hex)+')';
+  navigator.clipboard.writeText(val);
+  if(typeof showToast==='function') showToast('Copied: '+val);
+}
+
+render();
+</script>
+</body>
+</html>

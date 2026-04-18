@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator — Free Online QR Code Maker | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online QR code generator. Create QR codes for URLs, text, email, WiFi, and more. Download as PNG. No signup, no tracking.">
+    <meta name="keywords" content="QR code generator, QR code maker, create QR code, free QR code, QR code online, generate QR code">
+    <meta property="og:title" content="QR Code Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/qr-code-generator">
+    <link rel="canonical" href="https://desktools.dev/qr-code-generator">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","description":"Free online QR code generator. Create QR codes for URLs, text, email, WiFi, and more. Download as PNG. No signup, no tracking.","url":"https://desktools.dev/qr-code-generator","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"QR code generator, QR code maker, free QR code"}</script>
+<meta name="twitter:title" content="QR Code Generator — Free Online QR Code Maker | DeskTools"/>
+<meta name="twitter:description" content="Free online QR code generator. Create QR codes for URLs, text, email, WiFi, and more. Download as PNG. No signup, no tracking."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a QR code online for free?","acceptedAnswer":{"@type":"Answer","text":"Pick a content type (URL, text, email, phone, SMS, WiFi), fill in the details, and the QR code generates instantly. Adjust size, foreground/background color, and error correction level, then click Download PNG. No signup, no watermark, no tracking."}},{"@type":"Question","name":"What types of data can I encode in a QR code?","acceptedAnswer":{"@type":"Answer","text":"This tool supports: URL (most common), plain text, email (opens mail app with recipient pre-filled), phone (triggers dial), SMS (opens messaging app), and WiFi (auto-joins the network when scanned on modern phones)."}},{"@type":"Question","name":"What is QR code error correction and which level should I use?","acceptedAnswer":{"@type":"Answer","text":"Error correction lets a QR code remain scannable even when partially damaged or obscured. Low (7%) for clean digital use. Medium (15%) balanced default. Quartile (25%) good for printed materials. High (30%) required if you're adding a logo overlay in the center."}},{"@type":"Question","name":"How do I make a QR code for my WiFi network?","acceptedAnswer":{"@type":"Answer","text":"Select the WiFi content type, enter your SSID, password, and encryption type (WPA/WPA2 is typical). When someone scans the QR code with a modern phone, their device auto-joins. No password typing. Great for guest networks at cafes, offices, and events."}},{"@type":"Question","name":"Can I use colored QR codes and still have them scannable?","acceptedAnswer":{"@type":"Answer","text":"Yes, but keep strong contrast between foreground and background (dark on light is safest). Light foreground on dark background works for some scanners but fails on older ones. Avoid reds on greens or other combos that look dim in grayscale. Most scanners read in grayscale first."}},{"@type":"Question","name":"Are QR codes free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"The QR code standard itself is patent-free and royalty-free for any use. The codes generated here are plain PNGs with no restrictions. Use them on business cards, posters, products, or anywhere else."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>QR Code Generator</h1>
+        <p class="desc">Generate QR codes for URLs, text, email, WiFi, and more. Download as PNG.</p>
+    </div>
+    <div class="workspace">
+        <div class="color-workspace">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;">
+                <div>
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Content</label>
+                        <textarea id="qr-input" placeholder="Enter URL, text, or any content..." oninput="generateQR()" style="width:100%;min-height:100px;padding:14px 16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.9rem;resize:vertical;">https://desktools.dev</textarea>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Size</label>
+                            <select id="qr-size" onchange="generateQR()" style="width:100%;padding:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+                                <option value="128">128 × 128</option>
+                                <option value="256" selected>256 × 256</option>
+                                <option value="512">512 × 512</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Error Correction</label>
+                            <select id="qr-ec" onchange="generateQR()" style="width:100%;padding:10px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+                                <option value="L">Low (7%)</option>
+                                <option value="M" selected>Medium (15%)</option>
+                                <option value="Q">Quartile (25%)</option>
+                                <option value="H">High (30%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Foreground</label>
+                            <div style="display:flex;gap:8px;">
+                                <input type="color" id="qr-fg" value="#000000" onchange="generateQR()" style="width:44px;height:38px;border:1px solid var(--border);border-radius:6px;background:var(--bg-surface);cursor:pointer;padding:2px;">
+                                <input type="text" id="qr-fg-hex" value="#000000" onchange="document.getElementById('qr-fg').value=this.value;generateQR()" style="flex:1;padding:8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Background</label>
+                            <div style="display:flex;gap:8px;">
+                                <input type="color" id="qr-bg" value="#ffffff" onchange="generateQR()" style="width:44px;height:38px;border:1px solid var(--border);border-radius:6px;background:var(--bg-surface);cursor:pointer;padding:2px;">
+                                <input type="text" id="qr-bg-hex" value="#ffffff" onchange="document.getElementById('qr-bg').value=this.value;generateQR()" style="flex:1;padding:8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <div id="qr-code" style="background:#fff;padding:16px;border-radius:12px;display:inline-block;margin-bottom:16px;"></div>
+                    <div><button class="copy-btn" onclick="downloadQR()" style="width:100%;padding:12px;border-color:var(--accent);color:var(--accent);">Download PNG</button></div>
+                </div>
+            </div>
+            <div class="palette-section">
+                <h4>Quick Templates</h4>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="copy-btn" onclick="setQrTemplate('url')">URL</button>
+                    <button class="copy-btn" onclick="setQrTemplate('email')">Email</button>
+                    <button class="copy-btn" onclick="setQrTemplate('tel')">Phone</button>
+                    <button class="copy-btn" onclick="setQrTemplate('wifi')">WiFi</button>
+                    <button class="copy-btn" onclick="setQrTemplate('sms')">SMS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How do QR codes work?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>QR (Quick Response) codes</strong> encode data in a two-dimensional grid of black and white squares. Invented by Denso Wave in 1994 for tracking automotive parts, they've become universal for URLs, WiFi credentials, payments, and contact information.</p><p>A QR code contains several key elements: <strong>finder patterns</strong> (the three large squares in corners) help scanners detect and orient the code, <strong>alignment patterns</strong> correct for distortion, and <strong>error correction</strong> (Reed-Solomon codes) allows the code to be read even when partially damaged — up to 30% at the highest level.</p><p>QR codes can store up to <strong>4,296 alphanumeric characters</strong> or 7,089 numeric digits, though shorter content produces smaller, more reliably scannable codes. For URLs, keep them short — use a link shortener if needed. This tool generates standard QR codes that work with any smartphone camera or scanner app.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de code QR</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de código QR</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>QR-Code Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de código QR</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>QRコードジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>QR码生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>QR 코드 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد رمز QR</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a QR code online for free?</summary>
+    <div class="faq-body">
+      <p>Pick a content type (URL, text, email, phone, SMS, WiFi), fill in the details, and the QR code generates instantly. Adjust size, foreground/background color, and error correction level, then click <strong>Download PNG</strong>. No signup, no watermark, no tracking.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What types of data can I encode in a QR code?</summary>
+    <div class="faq-body">
+      <p>This tool supports: <strong>URL</strong> (most common), <strong>plain text</strong>, <strong>email</strong> (opens mail app with recipient pre-filled), <strong>phone</strong> (triggers dial), <strong>SMS</strong> (opens messaging app), and <strong>WiFi</strong> (auto-joins the network when scanned on modern phones).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is QR code error correction and which level should I use?</summary>
+    <div class="faq-body">
+      <p>Error correction lets a QR code remain scannable even when partially damaged or obscured. <strong>Low (7%)</strong> &mdash; for clean digital use. <strong>Medium (15%)</strong> &mdash; balanced default. <strong>Quartile (25%)</strong> &mdash; good for printed materials. <strong>High (30%)</strong> &mdash; required if you're adding a logo overlay in the center.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I make a QR code for my WiFi network?</summary>
+    <div class="faq-body">
+      <p>Select the <strong>WiFi</strong> content type, enter your SSID, password, and encryption type (WPA/WPA2 is typical). When someone scans the QR code with a modern phone, their device auto-joins &mdash; no password typing. Great for guest networks at cafes, offices, and events.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use colored QR codes and still have them scannable?</summary>
+    <div class="faq-body">
+      <p>Yes, but keep strong contrast between foreground and background (dark on light is safest). Light foreground on dark background works for some scanners but fails on older ones. Avoid reds on greens or other combos that look dim in grayscale &mdash; most scanners read in grayscale first.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are QR codes free to use commercially?</summary>
+    <div class="faq-body">
+      <p>The QR code standard itself is patent-free and royalty-free for any use. The codes generated here are plain PNGs with no restrictions &mdash; use them on business cards, posters, products, or anywhere else.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    let qrInstance = null;
+    function generateQR() {
+        const text = document.getElementById('qr-input').value;
+        if (!text) return;
+        const size = parseInt(document.getElementById('qr-size').value);
+        const ec = document.getElementById('qr-ec').value;
+        const fg = document.getElementById('qr-fg').value;
+        const bg = document.getElementById('qr-bg').value;
+        document.getElementById('qr-fg-hex').value = fg;
+        document.getElementById('qr-bg-hex').value = bg;
+        const container = document.getElementById('qr-code');
+        container.innerHTML = '';
+        const ecLevel = {L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H};
+        qrInstance = new QRCode(container, {text: text, width: size, height: size, colorDark: fg, colorLight: bg, correctLevel: ecLevel[ec]});
+    }
+    function downloadQR() {
+        const canvas = document.querySelector('#qr-code canvas');
+        if (!canvas) return;
+        const link = document.createElement('a');
+        link.download = 'qrcode.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('QR code downloaded');
+    }
+    function setQrTemplate(type) {
+        const input = document.getElementById('qr-input');
+        switch(type) {
+            case 'url': input.value = 'https://'; break;
+            case 'email': input.value = 'mailto:hello@example.com?subject=Hello&body=Hi there'; break;
+            case 'tel': input.value = 'tel:+1234567890'; break;
+            case 'wifi': input.value = 'WIFI:T:WPA;S:NetworkName;P:Password123;;'; break;
+            case 'sms': input.value = 'sms:+1234567890?body=Hello'; break;
+        }
+        generateQR();
+    }
+    generateQR();
+</script>
+</body>
+</html>

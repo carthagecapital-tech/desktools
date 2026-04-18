@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HTTP Status Codes — Complete Reference Guide | DeskTools</title>
+<meta name="description" content="Complete HTTP status code reference. Search by code or description. 1xx to 5xx with explanations, use cases, and quick fixes."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/http-status-codes"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="HTTP Status Codes — DeskTools"/><meta property="og:description" content="Complete HTTP status code reference with explanations and quick fixes."/><meta property="og:url" content="https://desktools.dev/http-status-codes"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="HTTP Status Codes — DeskTools"/><meta name="twitter:description" content="Complete HTTP status code reference with explanations and quick fixes."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"HTTP Status Code Reference","description":"Complete HTTP status code reference. Search by code or description.","url":"https://desktools.dev/http-status-codes","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:720px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:1.5rem}
+.search-box{display:flex;align-items:center;gap:.6rem;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.65rem 1rem;margin-bottom:1.5rem;transition:border-color .2s}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{color:var(--muted);flex-shrink:0}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;width:100%}
+.search-box input::placeholder{color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.filter-btn{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:none;border:1px solid var(--border);color:var(--muted);padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,212,170,0.06)}
+.group{margin-bottom:1.5rem}
+.group-title{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.c1xx{color:#74c0fc}.c2xx{color:#00d4aa}.c3xx{color:#ffd43b}.c4xx{color:#ffa94d}.c5xx{color:#ff6b6b}
+.code-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.6rem;cursor:pointer;transition:border-color .15s}
+.code-card:hover{border-color:rgba(255,255,255,0.15)}
+.code-header{display:flex;align-items:center;gap:.75rem}
+.code-num{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;min-width:40px}
+.code-name{font-weight:600;font-size:.92rem;flex:1}
+.code-arrow{color:var(--muted);font-size:.7rem;transition:transform .2s}
+.code-card.open .code-arrow{transform:rotate(90deg)}
+.code-detail{display:none;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border);font-size:.85rem;color:var(--muted);line-height:1.6}
+.code-card.open .code-detail{display:block}
+.hidden{display:none}
+.no-results{text-align:center;padding:3rem;color:var(--muted)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I look up an HTTP status code?","acceptedAnswer":{"@type":"Answer","text":"Type a code number (like 404) or a keyword (like not found) in the search box. Matching codes appear instantly with their name, category, description, and common use cases. Filter by category (1xx, 2xx, 3xx, 4xx, 5xx) using the buttons."}},{"@type":"Question","name":"What is the difference between HTTP 401 and 403?","acceptedAnswer":{"@type":"Answer","text":"401 Unauthorized means authentication is missing or invalid. The user isn't logged in, or the token is bad. 403 Forbidden means the user is authenticated but not allowed to access this resource. 401 says who are you, 403 says you can't have this."}},{"@type":"Question","name":"When should I return 400 vs 422?","acceptedAnswer":{"@type":"Answer","text":"400 Bad Request is for malformed requests &mdash; invalid JSON, missing required headers, unparseable input. 422 Unprocessable Entity is for well-formed requests that fail business validation &mdash; email already exists, password too short, invalid date range. 400 is syntax error; 422 is semantic error."}},{"@type":"Question","name":"What HTTP status code should I use for a successful POST?","acceptedAnswer":{"@type":"Answer","text":"201 Created when the POST creates a new resource. Include a Location header pointing to it. 200 OK when POSTing to an action endpoint that doesn't create a resource (e.g. /login, /send-email). 204 No Content if the response has no body."}},{"@type":"Question","name":"What is the 418 I'm a Teapot status code?","acceptedAnswer":{"@type":"Answer","text":"A joke status code from the April Fools 1998 RFC 2324 (Hyper Text Coffee Pot Control Protocol). It's not part of the real HTTP spec, but some frameworks support it as an easter egg. Never use it in production &mdash; clients and proxies may not handle it correctly."}},{"@type":"Question","name":"Why am I getting a 500 Internal Server Error?","acceptedAnswer":{"@type":"Answer","text":"The server hit an unhandled exception or misconfiguration. The client did nothing wrong. The issue is server-side. Check your server logs for the actual error. Common causes: unhandled exceptions, database connection failures, missing environment variables, or misconfigured load balancers."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>HTTP Status Codes</h1>
+  <p class="sub">Complete reference. Search by code number or description.</p>
+
+  <div class="search-box">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Search codes... (e.g. 404, not found, redirect)" oninput="filterCodes()" autocomplete="off"/>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('1',this)">1xx Info</button>
+    <button class="filter-btn" onclick="setFilter('2',this)">2xx Success</button>
+    <button class="filter-btn" onclick="setFilter('3',this)">3xx Redirect</button>
+    <button class="filter-btn" onclick="setFilter('4',this)">4xx Client Error</button>
+    <button class="filter-btn" onclick="setFilter('5',this)">5xx Server Error</button>
+  </div>
+
+  <div id="codesList"></div>
+  <div class="no-results hidden" id="noResults">No status codes match your search.</div>
+
+</div>
+
+<div class="deep-dive" style="max-width:720px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Understanding HTTP status codes</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>HTTP status codes</strong> are three-digit numbers returned by a server in response to every HTTP request. They tell the client (browser, API consumer, crawler) whether the request succeeded, failed, or needs further action. Understanding these codes is essential for debugging APIs, fixing broken pages, and building robust web applications.</p>
+<p>Codes are grouped by their first digit: <strong>1xx</strong> (informational — request received, processing), <strong>2xx</strong> (success — request accepted and processed), <strong>3xx</strong> (redirection — further action needed), <strong>4xx</strong> (client error — bad request from the caller), and <strong>5xx</strong> (server error — the server failed to fulfill a valid request).</p>
+<p>The most commonly encountered codes are <strong>200 OK</strong> (success), <strong>301/302</strong> (redirects), <strong>404 Not Found</strong> (page doesn't exist), <strong>401/403</strong> (authentication/authorization failures), and <strong>500 Internal Server Error</strong> (something broke on the server). This reference covers all standard codes with explanations and common causes.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Référence des codes HTTP</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Referencia de códigos HTTP</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>HTTP-Statuscode-Referenz</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Referência de códigos HTTP</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>HTTPステータスコード一覧</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>HTTP 状态码参考</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>HTTP 상태 코드 참조</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مرجع رموز حالة HTTP</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I look up an HTTP status code?</summary>
+    <div class="faq-body">
+      <p>Type a code number (like <code>404</code>) or a keyword (like <code>not found</code>) in the search box. Matching codes appear instantly with their name, category, description, and common use cases. Filter by category (1xx, 2xx, 3xx, 4xx, 5xx) using the buttons.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between HTTP 401 and 403?</summary>
+    <div class="faq-body">
+      <p><strong>401 Unauthorized</strong> means authentication is missing or invalid &mdash; the user isn't logged in, or the token is bad. <strong>403 Forbidden</strong> means the user is authenticated but not allowed to access this resource. 401 says "who are you?", 403 says "you can't have this".</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I return 400 vs 422?</summary>
+    <div class="faq-body">
+      <p><strong>400 Bad Request</strong> is for malformed requests &mdash; invalid JSON, missing required headers, unparseable input. <strong>422 Unprocessable Entity</strong> is for well-formed requests that fail business validation &mdash; email already exists, password too short, invalid date range. 400 = syntax error; 422 = semantic error.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What HTTP status code should I use for a successful POST?</summary>
+    <div class="faq-body">
+      <p><strong>201 Created</strong> when the POST creates a new resource &mdash; include a <code>Location</code> header pointing to it. <strong>200 OK</strong> when POSTing to an action endpoint that doesn't create a resource (e.g. <code>/login</code>, <code>/send-email</code>). <strong>204 No Content</strong> if the response has no body.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the 418 I'm a Teapot status code?</summary>
+    <div class="faq-body">
+      <p>A joke status code from the April Fools 1998 RFC 2324 (Hyper Text Coffee Pot Control Protocol). It's not part of the real HTTP spec, but some frameworks support it as an easter egg. Never use it in production &mdash; clients and proxies may not handle it correctly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why am I getting a 500 Internal Server Error?</summary>
+    <div class="faq-body">
+      <p>The server hit an unhandled exception or misconfiguration. The client did nothing wrong &mdash; the issue is server-side. Check your server logs for the actual error. Common causes: unhandled exceptions, database connection failures, missing environment variables, or misconfigured load balancers.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+var CODES=[
+{c:100,n:'Continue',d:'The server has received the request headers. The client should proceed to send the body. Used in large uploads with Expect: 100-continue header.'},
+{c:101,n:'Switching Protocols',d:'The server is switching to the protocol requested by the client (e.g., upgrading from HTTP to WebSocket via Upgrade header).'},
+{c:200,n:'OK',d:'The standard success response. GET returns the resource, POST returns the result of the action, PUT/PATCH confirm the update.'},
+{c:201,n:'Created',d:'A new resource was successfully created. Typically returned by POST requests. Should include a Location header pointing to the new resource.'},
+{c:204,n:'No Content',d:'Request succeeded but there is no content to return. Common for DELETE requests and successful updates that don\'t need to return data.'},
+{c:206,n:'Partial Content',d:'The server is delivering only part of the resource, as requested by a Range header. Used for resumable downloads and video streaming.'},
+{c:301,n:'Moved Permanently',d:'The resource has permanently moved to a new URL (in the Location header). Search engines transfer SEO value to the new URL. Browsers cache this redirect.'},
+{c:302,n:'Found (Temporary Redirect)',d:'The resource is temporarily at a different URL. Unlike 301, search engines don\'t transfer ranking. The original URL should be used for future requests.'},
+{c:304,n:'Not Modified',d:'The resource hasn\'t changed since the last request (based on If-Modified-Since or ETag headers). The client should use its cached version. Saves bandwidth.'},
+{c:307,n:'Temporary Redirect',d:'Like 302, but guarantees the HTTP method won\'t change (POST stays POST). More predictable than 302 which some clients change to GET.'},
+{c:308,n:'Permanent Redirect',d:'Like 301, but guarantees the HTTP method won\'t change. The permanent equivalent of 307.'},
+{c:400,n:'Bad Request',d:'The server cannot process the request due to malformed syntax — invalid JSON, missing required fields, wrong data types, or malformed URL parameters.'},
+{c:401,n:'Unauthorized',d:'Authentication is required but missing or invalid. The client needs to provide valid credentials (API key, bearer token, session cookie). Despite the name, this is about authentication, not authorization.'},
+{c:403,n:'Forbidden',d:'The server understood the request but refuses to authorize it. Unlike 401, re-authenticating won\'t help — the user simply doesn\'t have permission for this resource.'},
+{c:404,n:'Not Found',d:'The requested resource doesn\'t exist at this URL. Check for typos in the URL, ensure the route is configured, and verify the resource hasn\'t been deleted or moved.'},
+{c:405,n:'Method Not Allowed',d:'The HTTP method (GET, POST, etc.) is not supported for this endpoint. For example, sending DELETE to a read-only endpoint. Check the Allow header for supported methods.'},
+{c:408,n:'Request Timeout',d:'The server timed out waiting for the client to finish sending the request. Often caused by slow network connections or large file uploads.'},
+{c:409,n:'Conflict',d:'The request conflicts with the current state of the resource. Common in concurrent updates — two users editing the same record simultaneously.'},
+{c:410,n:'Gone',d:'The resource existed but has been permanently deleted and won\'t be coming back. Unlike 404, this is intentional. Search engines will de-index the URL.'},
+{c:413,n:'Payload Too Large',d:'The request body exceeds the server\'s size limit. Increase the server\'s max body size setting (e.g., client_max_body_size in Nginx) or compress the payload.'},
+{c:415,n:'Unsupported Media Type',d:'The server doesn\'t support the Content-Type of the request body. Check that you\'re sending application/json (not text/plain) or the correct multipart format.'},
+{c:422,n:'Unprocessable Entity',d:'The server understands the Content-Type and syntax, but can\'t process the contained instructions. Common for validation errors — correct format but invalid data.'},
+{c:429,n:'Too Many Requests',d:'Rate limiting — the client has sent too many requests in a given time window. Check the Retry-After header for when to try again. Implement exponential backoff.'},
+{c:500,n:'Internal Server Error',d:'A generic catch-all for server-side failures. Check server logs for the actual error. Common causes: unhandled exceptions, database connection failures, null pointer errors.'},
+{c:502,n:'Bad Gateway',d:'The server (acting as a gateway/proxy) received an invalid response from the upstream server. Common when a reverse proxy (Nginx) can\'t reach the application server.'},
+{c:503,n:'Service Unavailable',d:'The server is temporarily unable to handle requests — usually due to maintenance or overload. Should include a Retry-After header with estimated recovery time.'},
+{c:504,n:'Gateway Timeout',d:'The server (acting as a gateway) didn\'t receive a timely response from the upstream server. Common when backend services are slow or unresponsive. Check upstream service health.'},
+];
+
+var currentFilter='all';
+function getClass(c){if(c<200)return'c1xx';if(c<300)return'c2xx';if(c<400)return'c3xx';if(c<500)return'c4xx';return'c5xx';}
+
+function renderCodes(){
+  var el=document.getElementById('codesList');
+  var q=document.getElementById('search').value.toLowerCase();
+  var groups={};
+  var visible=0;
+  CODES.forEach(function(code){
+    if(currentFilter!=='all'&&!String(code.c).startsWith(currentFilter))return;
+    if(q&&String(code.c).indexOf(q)===-1&&code.n.toLowerCase().indexOf(q)===-1&&code.d.toLowerCase().indexOf(q)===-1)return;
+    var g=Math.floor(code.c/100);
+    if(!groups[g])groups[g]=[];
+    groups[g].push(code);
+    visible++;
+  });
+  var names={1:'1xx — Informational',2:'2xx — Success',3:'3xx — Redirection',4:'4xx — Client Error',5:'5xx — Server Error'};
+  var html='';
+  [1,2,3,4,5].forEach(function(g){
+    if(!groups[g])return;
+    html+='<div class="group"><div class="group-title '+getClass(g*100)+'">'+names[g]+'</div>';
+    groups[g].forEach(function(code){
+      html+='<div class="code-card" onclick="this.classList.toggle(\'open\')">'+
+        '<div class="code-header"><span class="code-num '+getClass(code.c)+'">'+code.c+'</span><span class="code-name">'+code.n+'</span><span class="code-arrow">&#x25B8;</span></div>'+
+        '<div class="code-detail">'+code.d+'</div></div>';
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+  document.getElementById('noResults').classList.toggle('hidden',visible>0);
+}
+function filterCodes(){renderCodes();}
+function setFilter(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderCodes();
+}
+renderCodes();
+</script>
+</body>
+</html>

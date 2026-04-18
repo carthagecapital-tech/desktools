@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>YAML to JSON Converter — Free Online YAML JSON Tool | DeskTools</title>
+<meta name="description" content="Convert YAML to JSON and JSON to YAML instantly. Free online bidirectional converter with syntax validation. No signup required."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/yaml-json-converter"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="YAML to JSON Converter — DeskTools"/><meta property="og:description" content="Convert YAML to JSON and back instantly."/><meta property="og:url" content="https://desktools.dev/yaml-json-converter"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="YAML to JSON Converter — DeskTools"/><meta name="twitter:description" content="Convert YAML to JSON and back instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"YAML to JSON Converter","description":"Convert YAML to JSON and JSON to YAML.","url":"https://desktools.dev/yaml-json-converter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118;--err:#ff6b6b}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.75rem;outline:none;resize:vertical;min-height:320px;line-height:1.5}
+textarea:focus{border-color:var(--accent)}
+.copy-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .2s}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.controls{display:flex;gap:.75rem;margin:1.25rem 0;justify-content:center}
+.btn{background:var(--accent);color:var(--bg);border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;padding:.65rem 1.25rem;border-radius:8px;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-ghost{background:none;border:1px solid var(--border);color:var(--text)}
+.status{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:.5rem;min-height:1.2em}
+.status.err{color:var(--err)}
+.status.ok{color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert YAML to JSON online?","acceptedAnswer":{"@type":"Answer","text":"Paste your YAML into the left panel and the JSON equivalent appears on the right instantly. Use the swap button to go the other direction (JSON to YAML). Click Copy to grab the output."}},{"@type":"Question","name":"What is the difference between YAML and JSON?","acceptedAnswer":{"@type":"Answer","text":"Both represent the same data structures (objects, arrays, strings, numbers, booleans). YAML uses indentation and is human-readable &mdash; common for config files (Kubernetes, Docker Compose, CI pipelines). JSON uses braces and brackets &mdash; standard for APIs and web data exchange. They're easily convertible in both directions."}},{"@type":"Question","name":"When should I use YAML instead of JSON?","acceptedAnswer":{"@type":"Answer","text":"Use YAML for configuration files humans will edit. Supports comments, multi-line strings, and is less cluttered. Use JSON for machine-to-machine data exchange. Stricter syntax means fewer parsing ambiguities, and it's natively supported in JavaScript."}},{"@type":"Question","name":"Why is my YAML converting to JSON incorrectly?","acceptedAnswer":{"@type":"Answer","text":"The most common YAML bug is indentation. YAML uses spaces (never tabs) and is strict about alignment. Also watch for unquoted strings that look like booleans (yes, no, on, off all parse as booleans in YAML 1.1). When in doubt, quote your strings."}},{"@type":"Question","name":"Does this tool handle YAML anchors and references?","acceptedAnswer":{"@type":"Answer","text":"Yes. YAML anchors (&amp;name) and aliases (*name) are resolved during conversion. The output JSON contains the expanded values. Note this means the JSON loses the DRY benefit; reconverting to YAML won't automatically re-create the anchors."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>YAML &harr; JSON Converter</h1>
+  <p class="sub">Convert YAML to JSON or JSON to YAML. Live validation.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-head"><span class="card-title">YAML</span><button class="copy-btn" onclick="copyText('yaml')">Copy</button></div>
+      <textarea id="yaml" placeholder="name: DeskTools&#10;version: 1.0&#10;features:&#10;  - fast&#10;  - free" oninput="fromYaml()"></textarea>
+      <div class="status" id="yamlStatus"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="card-title">JSON</span><button class="copy-btn" onclick="copyText('json')">Copy</button></div>
+      <textarea id="json" placeholder='{&#10;  "name": "DeskTools",&#10;  "version": 1.0&#10;}' oninput="fromJson()"></textarea>
+      <div class="status" id="jsonStatus"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-ghost" onclick="loadSample()">Load sample</button>
+    <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem;margin:0 auto">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> YAML vs JSON — when to use each</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>YAML</strong> (YAML Ain't Markup Language) and <strong>JSON</strong> (JavaScript Object Notation) both represent structured data, but serve different purposes. JSON is strict, compact, and ideal for APIs and data exchange between systems. YAML is more human-readable with indentation-based structure, comments, and less punctuation &mdash; making it popular for configuration files in Docker, Kubernetes, GitHub Actions, and Ansible.</p>
+<p>Converting between the two is common: you might receive a JSON API response but need YAML for a config file, or export YAML settings as JSON for a frontend. This tool handles both directions with full support for nested objects, arrays, strings, numbers, booleans, and null values.</p>
+<p>Common pitfalls: YAML is whitespace-sensitive (use spaces, not tabs), and unquoted strings like <code>yes</code>, <code>no</code>, <code>on</code>, <code>off</code> are parsed as booleans. JSON requires double quotes around all string keys and values. This converter validates syntax as you type and shows clear error messages.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur YAML JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor YAML a JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>YAML zu JSON Konverter</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor YAML para JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>YAML JSON 変換ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>YAML 转 JSON 转换器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>YAML JSON 변환기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول YAML إلى JSON</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert YAML to JSON online?</summary>
+    <div class="faq-body">
+      <p>Paste your YAML into the left panel and the JSON equivalent appears on the right instantly. Use the swap button to go the other direction (JSON to YAML). Click <strong>Copy</strong> to grab the output.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between YAML and JSON?</summary>
+    <div class="faq-body">
+      <p>Both represent the same data structures (objects, arrays, strings, numbers, booleans). <strong>YAML</strong> uses indentation and is human-readable &mdash; common for config files (Kubernetes, Docker Compose, CI pipelines). <strong>JSON</strong> uses braces and brackets &mdash; standard for APIs and web data exchange. They're easily convertible in both directions.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I use YAML instead of JSON?</summary>
+    <div class="faq-body">
+      <p>Use YAML for configuration files humans will edit &mdash; supports comments, multi-line strings, and is less cluttered. Use JSON for machine-to-machine data exchange &mdash; stricter syntax means fewer parsing ambiguities, and it's natively supported in JavaScript.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is my YAML converting to JSON incorrectly?</summary>
+    <div class="faq-body">
+      <p>The most common YAML bug is indentation &mdash; YAML uses spaces (never tabs) and is strict about alignment. Also watch for unquoted strings that look like booleans (<code>yes</code>, <code>no</code>, <code>on</code>, <code>off</code> all parse as booleans in YAML 1.1). When in doubt, quote your strings.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this tool handle YAML anchors and references?</summary>
+    <div class="faq-body">
+      <p>Yes. YAML anchors (<code>&amp;name</code>) and aliases (<code>*name</code>) are resolved during conversion &mdash; the output JSON contains the expanded values. Note this means the JSON loses the DRY benefit; reconverting to YAML won't automatically re-create the anchors.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script>
+var syncing=false;
+function fromYaml(){
+  if(syncing)return;
+  var t=document.getElementById('yaml').value;
+  var s=document.getElementById('yamlStatus');
+  if(!t.trim()){s.textContent='';document.getElementById('json').value='';document.getElementById('jsonStatus').textContent='';return;}
+  try{
+    var obj=jsyaml.load(t);
+    syncing=true;
+    document.getElementById('json').value=JSON.stringify(obj,null,2);
+    syncing=false;
+    s.textContent='Valid YAML';s.className='status ok';
+    document.getElementById('jsonStatus').textContent='';
+  }catch(e){s.textContent=e.message;s.className='status err';}
+}
+function fromJson(){
+  if(syncing)return;
+  var t=document.getElementById('json').value;
+  var s=document.getElementById('jsonStatus');
+  if(!t.trim()){s.textContent='';document.getElementById('yaml').value='';document.getElementById('yamlStatus').textContent='';return;}
+  try{
+    var obj=JSON.parse(t);
+    syncing=true;
+    document.getElementById('yaml').value=jsyaml.dump(obj);
+    syncing=false;
+    s.textContent='Valid JSON';s.className='status ok';
+    document.getElementById('yamlStatus').textContent='';
+  }catch(e){s.textContent=e.message;s.className='status err';}
+}
+function copyText(id){
+  var t=document.getElementById(id).value;
+  if(t){navigator.clipboard.writeText(t);if(typeof showToast==='function')showToast('Copied!');}
+}
+function loadSample(){
+  document.getElementById('yaml').value='name: DeskTools\nversion: 2.1\nactive: true\nfeatures:\n  - fast\n  - free\n  - open\nauthor:\n  name: Moe\n  role: creator';
+  fromYaml();
+}
+function clearAll(){
+  document.getElementById('yaml').value='';document.getElementById('json').value='';
+  document.getElementById('yamlStatus').textContent='';document.getElementById('jsonStatus').textContent='';
+}
+</script>
+</body>
+</html>

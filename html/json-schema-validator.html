@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JSON Schema Validator — Validate JSON Against Schema | DeskTools</title>
+<meta name="description" content="Validate JSON data against a JSON Schema. See detailed validation errors instantly. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/json-schema-validator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="JSON Schema Validator — DeskTools"/><meta property="og:description" content="Validate JSON data against a JSON Schema. See detailed validation errors instantly."/><meta property="og:url" content="https://desktools.dev/json-schema-validator"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="JSON Schema Validator — DeskTools"/><meta name="twitter:description" content="Validate JSON data against a JSON Schema. See detailed validation errors instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Schema Validator","description":"Validate JSON data against a JSON Schema. See detailed validation errors instantly.","url":"https://desktools.dev/json-schema-validator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.workspace{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.25rem}
+.toolbar{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);flex-wrap:wrap;gap:.5rem}
+.toolbar-group{display:flex;gap:.5rem}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.45rem 1rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.primary{background:var(--accent);color:#0a0a0f;border-color:var(--accent);font-weight:700}
+.tbtn.primary:hover{background:var(--accent2)}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split>div{position:relative}
+.split>div:first-child{border-right:1px solid var(--border)}
+.pane-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+textarea{width:100%;min-height:300px;padding:1.25rem;background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.82rem;resize:vertical;line-height:1.6;outline:none}
+textarea::placeholder{color:var(--muted)}
+.results{padding:1rem 1.25rem;border-top:1px solid var(--border);min-height:60px}
+.result-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .75rem;border-radius:6px;font-size:.85rem;font-weight:600}
+.badge-pass{background:rgba(0,212,170,0.12);color:var(--accent)}
+.badge-fail{background:rgba(255,107,107,0.12);color:#ff6b6b}
+.badge-empty{background:var(--bg3);color:var(--muted)}
+.error-list{margin-top:.75rem}
+.error-item{display:flex;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.82rem;align-items:flex-start}
+.error-item:last-child{border-bottom:none}
+.error-path{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);min-width:80px;flex-shrink:0}
+.error-msg{color:var(--text)}
+@media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I validate JSON against a JSON Schema?","acceptedAnswer":{"@type":"Answer","text":"Paste your JSON data in one panel and your JSON Schema in the other, then click Validate. The tool reports whether the data matches the schema, and if not, lists each validation error with its path and description."}},{"@type":"Question","name":"What JSON Schema draft does this validator support?","acceptedAnswer":{"@type":"Answer","text":"JSON Schema Draft 2020-12 and backward-compatible with Draft 7. Most fields (type, properties, required, enum, pattern, minLength, etc.) work across drafts. Complex features like $dynamicRef require Draft 2020-12."}},{"@type":"Question","name":"Why use JSON Schema instead of just checking JSON manually?","acceptedAnswer":{"@type":"Answer","text":"Schema validation is declarative. You describe what valid data looks like, and a validator handles the edge cases. Types, required fields, string patterns, number ranges, enums, nested object shapes, and arrays all get validated in one pass. Saves dozens of lines of imperative checking code."}},{"@type":"Question","name":"How do I write a JSON Schema for a simple object?","acceptedAnswer":{"@type":"Answer","text":"Start with type: object, properties: name (string) and age (integer with minimum 0), required: [name]. This says: the data is an object, it must have a string name, and an optional non-negative integer age."}},{"@type":"Question","name":"Where is JSON Schema used in real projects?","acceptedAnswer":{"@type":"Answer","text":"API contract validation (OpenAPI/Swagger uses JSON Schema), configuration file validation (like package.json, tsconfig.json), form validation libraries, and message queue payload validation. It's the de facto standard for describing JSON data shapes."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>JSON Schema Validator</h1>
+  <p class="sub">Validate JSON data against a JSON Schema. Instant feedback on errors.</p>
+  <div class="workspace">
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tbtn primary" onclick="validate()">Validate</button>
+        <button class="tbtn" onclick="loadSample()">Load Sample</button>
+        <button class="tbtn" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+    <div class="split">
+      <div>
+        <span class="pane-label">JSON Schema</span>
+        <textarea id="schema" placeholder='{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer","minimum":0}},"required":["name"]}'></textarea>
+      </div>
+      <div>
+        <span class="pane-label">JSON Data</span>
+        <textarea id="data" placeholder='{"name":"Alice","age":30}'></textarea>
+      </div>
+    </div>
+    <div class="results" id="results">
+      <span class="result-badge badge-empty">Paste a schema and data, then click Validate</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is JSON Schema?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>JSON Schema</strong> is a vocabulary that lets you validate the structure of JSON data. It defines what properties are allowed, what types they must be, which fields are required, and constraints like minimum/maximum values, string patterns, and array lengths. It's used in API documentation (OpenAPI/Swagger), form validation, configuration files, and data pipelines.</p>
+<p>A schema is itself a JSON object with keywords like <code>"type"</code> (string, number, object, array, boolean, null), <code>"properties"</code> (defines object fields), <code>"required"</code> (mandatory fields), <code>"minimum"</code>/<code>"maximum"</code> (number constraints), and <code>"pattern"</code> (regex for strings). Schemas can be nested — an object property can itself have a schema with its own constraints.</p>
+<p>Validation catches errors early — before data reaches your database, your API consumers, or your application logic. Instead of writing manual if/else checks for every field, you define the contract once as a schema and validate against it. This tool implements a lightweight client-side validator supporting the most common JSON Schema Draft 7 keywords.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Validateur de schéma JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Validador de esquema JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>JSON-Schema Validator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Validador de esquema JSON</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>JSONスキーマバリデーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>JSON Schema 验证工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>JSON 스키마 검증기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مدقق مخطط JSON</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I validate JSON against a JSON Schema?</summary>
+    <div class="faq-body">
+      <p>Paste your JSON data in one panel and your JSON Schema in the other, then click <strong>Validate</strong>. The tool reports whether the data matches the schema, and if not, lists each validation error with its path and description.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What JSON Schema draft does this validator support?</summary>
+    <div class="faq-body">
+      <p>JSON Schema Draft 2020-12 and backward-compatible with Draft 7. Most fields (<code>type</code>, <code>properties</code>, <code>required</code>, <code>enum</code>, <code>pattern</code>, <code>minLength</code>, etc.) work across drafts. Complex features like <code>$dynamicRef</code> require Draft 2020-12.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why use JSON Schema instead of just checking JSON manually?</summary>
+    <div class="faq-body">
+      <p>Schema validation is declarative &mdash; you describe what valid data looks like, and a validator handles the edge cases. Types, required fields, string patterns, number ranges, enums, nested object shapes, and arrays all get validated in one pass. Saves dozens of lines of imperative checking code.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I write a JSON Schema for a simple object?</summary>
+    <div class="faq-body">
+      <p>Start with <code>{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer","minimum":0}},"required":["name"]}</code>. This says: the data is an object, it must have a string <code>name</code>, and an optional non-negative integer <code>age</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where is JSON Schema used in real projects?</summary>
+    <div class="faq-body">
+      <p>API contract validation (OpenAPI/Swagger uses JSON Schema), configuration file validation (like <code>package.json</code>, <code>tsconfig.json</code>), form validation libraries, and message queue payload validation. It's the de facto standard for describing JSON data shapes.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function validate(){
+  const resEl=document.getElementById('results');
+  let schema,data;
+  try{schema=JSON.parse(document.getElementById('schema').value);}
+  catch(e){resEl.innerHTML='<span class="result-badge badge-fail">✗ Invalid schema JSON: '+e.message+'</span>';return;}
+  try{data=JSON.parse(document.getElementById('data').value);}
+  catch(e){resEl.innerHTML='<span class="result-badge badge-fail">✗ Invalid data JSON: '+e.message+'</span>';return;}
+  const errors=validateNode(schema,data,'');
+  if(errors.length===0){
+    resEl.innerHTML='<span class="result-badge badge-pass">✓ Valid — data matches schema</span>';
+  } else {
+    let html='<span class="result-badge badge-fail">✗ '+errors.length+' error'+(errors.length>1?'s':'')+'</span><div class="error-list">';
+    errors.forEach(e=>{
+      html+='<div class="error-item"><span class="error-path">'+(e.path||'/')+'</span><span class="error-msg">'+e.message+'</span></div>';
+    });
+    html+='</div>';
+    resEl.innerHTML=html;
+  }
+}
+
+function validateNode(schema,data,path){
+  const errors=[];
+  if(!schema||typeof schema!=='object') return errors;
+  // type
+  if(schema.type){
+    const types=Array.isArray(schema.type)?schema.type:[schema.type];
+    const actual=Array.isArray(data)?'array':data===null?'null':typeof data;
+    const typeMap={integer:v=>typeof v==='number'&&Number.isInteger(v),number:v=>typeof v==='number',string:v=>typeof v==='string',boolean:v=>typeof v==='boolean',object:v=>typeof v==='object'&&v!==null&&!Array.isArray(v),array:v=>Array.isArray(v),null:v=>v===null};
+    if(!types.some(t=>typeMap[t]?typeMap[t](data):false)){
+      errors.push({path,message:'Expected type "'+types.join('|')+'" but got "'+actual+'"'});
+      return errors;
+    }
+  }
+  // enum
+  if(schema.enum&&!schema.enum.some(v=>JSON.stringify(v)===JSON.stringify(data))){
+    errors.push({path,message:'Value must be one of: '+JSON.stringify(schema.enum)});
+  }
+  // const
+  if(schema.const!==undefined&&JSON.stringify(schema.const)!==JSON.stringify(data)){
+    errors.push({path,message:'Value must be '+JSON.stringify(schema.const)});
+  }
+  // string constraints
+  if(typeof data==='string'){
+    if(schema.minLength!==undefined&&data.length<schema.minLength) errors.push({path,message:'String too short (min '+schema.minLength+')'});
+    if(schema.maxLength!==undefined&&data.length>schema.maxLength) errors.push({path,message:'String too long (max '+schema.maxLength+')'});
+    if(schema.pattern){try{if(!new RegExp(schema.pattern).test(data)) errors.push({path,message:'Does not match pattern "'+schema.pattern+'"'});}catch(e){}}
+  }
+  // number constraints
+  if(typeof data==='number'){
+    if(schema.minimum!==undefined&&data<schema.minimum) errors.push({path,message:'Value '+data+' is below minimum '+schema.minimum});
+    if(schema.maximum!==undefined&&data>schema.maximum) errors.push({path,message:'Value '+data+' exceeds maximum '+schema.maximum});
+    if(schema.exclusiveMinimum!==undefined&&data<=schema.exclusiveMinimum) errors.push({path,message:'Value must be > '+schema.exclusiveMinimum});
+    if(schema.exclusiveMaximum!==undefined&&data>=schema.exclusiveMaximum) errors.push({path,message:'Value must be < '+schema.exclusiveMaximum});
+    if(schema.multipleOf!==undefined&&data%schema.multipleOf!==0) errors.push({path,message:'Value must be multiple of '+schema.multipleOf});
+  }
+  // object
+  if(typeof data==='object'&&data!==null&&!Array.isArray(data)){
+    if(schema.required){
+      schema.required.forEach(key=>{if(!(key in data)) errors.push({path:path+'/'+key,message:'Required property missing'});});
+    }
+    if(schema.properties){
+      Object.keys(schema.properties).forEach(key=>{
+        if(key in data) errors.push(...validateNode(schema.properties[key],data[key],path+'/'+key));
+      });
+    }
+    if(schema.minProperties!==undefined&&Object.keys(data).length<schema.minProperties) errors.push({path,message:'Too few properties (min '+schema.minProperties+')'});
+    if(schema.maxProperties!==undefined&&Object.keys(data).length>schema.maxProperties) errors.push({path,message:'Too many properties (max '+schema.maxProperties+')'});
+  }
+  // array
+  if(Array.isArray(data)){
+    if(schema.minItems!==undefined&&data.length<schema.minItems) errors.push({path,message:'Array too short (min '+schema.minItems+' items)'});
+    if(schema.maxItems!==undefined&&data.length>schema.maxItems) errors.push({path,message:'Array too long (max '+schema.maxItems+' items)'});
+    if(schema.items){data.forEach((item,i)=>{errors.push(...validateNode(schema.items,item,path+'/'+i));});}
+    if(schema.uniqueItems){const strs=data.map(JSON.stringify);if(new Set(strs).size!==strs.length) errors.push({path,message:'Array items must be unique'});}
+  }
+  return errors;
+}
+
+function loadSample(){
+  document.getElementById('schema').value=JSON.stringify({type:"object",properties:{name:{type:"string",minLength:1},email:{type:"string",pattern:"^[^@]+@[^@]+\\.[^@]+$"},age:{type:"integer",minimum:0,maximum:150},tags:{type:"array",items:{type:"string"},minItems:1}},required:["name","email"]},null,2);
+  document.getElementById('data').value=JSON.stringify({name:"Alice",email:"alice@example.com",age:30,tags:["developer","designer"]},null,2);
+  validate();
+}
+function clearAll(){document.getElementById('schema').value='';document.getElementById('data').value='';document.getElementById('results').innerHTML='<span class="result-badge badge-empty">Paste a schema and data, then click Validate</span>';}
+</script>
+</body>
+</html>

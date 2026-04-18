@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Color Contrast Checker — WCAG Accessibility Tool | DeskTools</title>
+<meta name="description" content="Check color contrast ratios for WCAG 2.1 AA and AAA compliance. Enter foreground and background colors, see pass/fail instantly."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/contrast-checker"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Color Contrast Checker — DeskTools"/><meta property="og:description" content="Check color contrast ratios for WCAG AA and AAA compliance."/><meta property="og:url" content="https://desktools.dev/contrast-checker"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Color Contrast Checker — DeskTools"/><meta name="twitter:description" content="Check color contrast ratios for WCAG AA and AAA compliance."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Color Contrast Checker","description":"Check color contrast ratios for WCAG 2.1 AA and AAA compliance.","url":"https://desktools.dev/contrast-checker","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+.color-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.color-row input[type=color]{width:48px;height:40px;border:1px solid var(--border);border-radius:8px;background:var(--bg3);cursor:pointer;padding:2px;flex-shrink:0}
+.color-row input[type=text]{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.9rem;padding:.55rem .8rem;outline:none;transition:border-color .2s}
+.color-row input[type=text]:focus{border-color:var(--accent)}
+.swap-btn{background:none;border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:1rem}
+.swap-btn:hover{border-color:var(--accent);color:var(--accent)}
+.preview{border-radius:12px;padding:2rem;text-align:center;margin-bottom:1.25rem;border:1px solid var(--border);transition:all .2s}
+.preview-large{font-size:2rem;font-weight:700;margin-bottom:.25rem}
+.preview-small{font-size:.9rem}
+.ratio-display{text-align:center;margin-bottom:1.25rem}
+.ratio-num{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;color:var(--accent)}
+.ratio-label{font-size:.85rem;color:var(--muted);margin-top:.25rem}
+.results{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.result-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.result-level{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;font-size:.85rem}
+.result-label{color:var(--muted)}
+.badge-pass{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#00d4aa;background:rgba(0,212,170,0.12);padding:.2rem .5rem;border-radius:4px}
+.badge-fail{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#ff6b6b;background:rgba(255,107,107,0.12);padding:.2rem .5rem;border-radius:4px}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check if two colors meet WCAG contrast requirements?","acceptedAnswer":{"@type":"Answer","text":"Enter your foreground (text) color and background color. The contrast ratio and WCAG pass/fail results appear instantly. AA Large, AA Normal, AAA Large, and AAA Normal each have their own thresholds, all checked at once."}},{"@type":"Question","name":"What are the WCAG contrast ratio requirements?","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 AA requires 4.5:1 for normal text, 3:1 for large text (18pt+, or 14pt+ bold). WCAG 2.1 AAA requires 7:1 for normal text, 4.5:1 for large text. AA is the legal baseline in most jurisdictions; AAA is best practice for content meant for broad audiences."}},{"@type":"Question","name":"What counts as large text in the WCAG guidelines?","acceptedAnswer":{"@type":"Answer","text":"Large text is 18pt (24px) or larger, or 14pt (18.66px) bold or larger. Large text has a lower contrast requirement (3:1 AA, 4.5:1 AAA) because larger characters are inherently easier to read. Below those sizes, normal-text ratios apply."}},{"@type":"Question","name":"Why does my gray-on-white design fail WCAG contrast?","acceptedAnswer":{"@type":"Answer","text":"Light gray text on white is the most common contrast failure on the web. #999 on white is ~2.85:1. Fails AA at any size. #767676 is the lightest gray that passes 4.5:1 on white. When in doubt, go darker. Check the ratio here before committing to a gray."}},{"@type":"Question","name":"Does contrast checking apply to disabled buttons or placeholder text?","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 exempts disabled UI elements and pure decoration. Placeholder text is in a gray area. Technically exempt but users often mistake it for actual values. Best practice: meet at least 3:1 for placeholders, and never rely on placeholder alone to label a field."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Color Contrast Checker</h1>
+  <p class="sub">Check WCAG 2.1 contrast ratios. Ensure your text is readable for everyone.</p>
+
+  <div class="card">
+    <div class="card-title">Colors</div>
+    <label>Foreground (text)</label>
+    <div class="color-row">
+      <input type="color" id="fgColor" value="#e8e8f0" oninput="document.getElementById('fgHex').value=this.value;check()"/>
+      <input type="text" id="fgHex" value="#e8e8f0" oninput="syncColor('fg');check()" placeholder="#e8e8f0"/>
+    </div>
+    <div style="text-align:center;margin:-0.5rem 0 0.5rem">
+      <button class="swap-btn" onclick="swap()" title="Swap colors">&#x21C5;</button>
+    </div>
+    <label>Background</label>
+    <div class="color-row">
+      <input type="color" id="bgColor" value="#0a0a0f" oninput="document.getElementById('bgHex').value=this.value;check()"/>
+      <input type="text" id="bgHex" value="#0a0a0f" oninput="syncColor('bg');check()" placeholder="#0a0a0f"/>
+    </div>
+  </div>
+
+  <div class="preview" id="preview" style="background:#0a0a0f;color:#e8e8f0">
+    <div class="preview-large">Large Text (18pt+)</div>
+    <div class="preview-small">Normal body text at regular size — is this readable?</div>
+  </div>
+
+  <div class="ratio-display">
+    <div class="ratio-num" id="ratio">15.4:1</div>
+    <div class="ratio-label">Contrast Ratio</div>
+  </div>
+
+  <div class="results">
+    <div class="result-card">
+      <div class="result-level">WCAG AA</div>
+      <div class="result-row"><span class="result-label">Normal text</span><span id="aaNormal" class="badge-pass">PASS</span></div>
+      <div class="result-row"><span class="result-label">Large text</span><span id="aaLarge" class="badge-pass">PASS</span></div>
+      <div class="result-row"><span class="result-label">UI components</span><span id="aaUI" class="badge-pass">PASS</span></div>
+    </div>
+    <div class="result-card">
+      <div class="result-level">WCAG AAA</div>
+      <div class="result-row"><span class="result-label">Normal text</span><span id="aaaNormal" class="badge-pass">PASS</span></div>
+      <div class="result-row"><span class="result-label">Large text</span><span id="aaaLarge" class="badge-pass">PASS</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is WCAG color contrast?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>WCAG (Web Content Accessibility Guidelines)</strong> defines minimum contrast ratios to ensure text is readable for people with visual impairments, including color blindness and low vision. Contrast ratio ranges from 1:1 (no contrast, same color) to 21:1 (maximum, black on white).</p>
+<p><strong>WCAG AA</strong> requires a minimum ratio of <strong>4.5:1 for normal text</strong> and <strong>3:1 for large text</strong> (18pt / 24px or 14pt bold). <strong>WCAG AAA</strong> is stricter: <strong>7:1 for normal text</strong> and <strong>4.5:1 for large text</strong>. UI components and graphical objects need at least 3:1 against adjacent colors.</p>
+<p>The contrast ratio is calculated from the <strong>relative luminance</strong> of both colors using the formula defined in WCAG 2.1. Luminance accounts for how the human eye perceives different wavelengths — green appears brighter than blue at the same intensity. This tool calculates the exact ratio and checks against all WCAG levels so you can fix accessibility issues before shipping.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Vérificateur de contraste — WCAG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Verificador de contraste — WCAG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Farbkontrast-Prüfer — WCAG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Verificador de contraste — WCAG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>カラーコントラストチェッカー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>颜色对比度检查工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>색상 대비 검사기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مدقق تباين الألوان</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I check if two colors meet WCAG contrast requirements?</summary>
+    <div class="faq-body">
+      <p>Enter your foreground (text) color and background color &mdash; the contrast ratio and WCAG pass/fail results appear instantly. <strong>AA Large</strong>, <strong>AA Normal</strong>, <strong>AAA Large</strong>, and <strong>AAA Normal</strong> each have their own thresholds, all checked at once.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the WCAG contrast ratio requirements?</summary>
+    <div class="faq-body">
+      <p><strong>WCAG 2.1 AA</strong> requires 4.5:1 for normal text, 3:1 for large text (18pt+, or 14pt+ bold). <strong>WCAG 2.1 AAA</strong> requires 7:1 for normal text, 4.5:1 for large text. AA is the legal baseline in most jurisdictions; AAA is best practice for content meant for broad audiences.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What counts as large text in the WCAG guidelines?</summary>
+    <div class="faq-body">
+      <p><strong>Large text</strong> is 18pt (~24px) or larger, <em>or</em> 14pt (~18.66px) bold or larger. Large text has a lower contrast requirement (3:1 AA, 4.5:1 AAA) because larger characters are inherently easier to read. Below those sizes, normal-text ratios apply.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why does my gray-on-white design fail WCAG contrast?</summary>
+    <div class="faq-body">
+      <p>Light gray text on white is the most common contrast failure on the web. <code>#999</code> on white is ~2.85:1 &mdash; fails AA at any size. <code>#767676</code> is the lightest gray that passes 4.5:1 on white. When in doubt, go darker. Check the ratio here before committing to a gray.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does contrast checking apply to disabled buttons or placeholder text?</summary>
+    <div class="faq-body">
+      <p>WCAG 2.1 exempts disabled UI elements and pure decoration. Placeholder text is in a gray area (pun intended) &mdash; technically exempt but users often mistake it for actual values. Best practice: meet at least 3:1 for placeholders, and never rely on placeholder alone to label a field.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function hexToRgb(hex){
+  hex=hex.replace('#','');
+  if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  return [parseInt(hex.substr(0,2),16),parseInt(hex.substr(2,2),16),parseInt(hex.substr(4,2),16)];
+}
+function luminance(r,g,b){
+  var a=[r,g,b].map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2];
+}
+function contrastRatio(fg,bg){
+  var l1=luminance(fg[0],fg[1],fg[2]);
+  var l2=luminance(bg[0],bg[1],bg[2]);
+  var lighter=Math.max(l1,l2);
+  var darker=Math.min(l1,l2);
+  return (lighter+0.05)/(darker+0.05);
+}
+function syncColor(which){
+  var hex=document.getElementById(which+'Hex').value;
+  if(/^#[0-9a-f]{6}$/i.test(hex)){document.getElementById(which+'Color').value=hex;}
+}
+function swap(){
+  var fg=document.getElementById('fgHex').value;
+  var bg=document.getElementById('bgHex').value;
+  document.getElementById('fgHex').value=bg;document.getElementById('fgColor').value=bg;
+  document.getElementById('bgHex').value=fg;document.getElementById('bgColor').value=fg;
+  check();
+}
+function badge(pass){return pass?'<span class="badge-pass">PASS</span>':'<span class="badge-fail">FAIL</span>';}
+function check(){
+  var fg=document.getElementById('fgColor').value;
+  var bg=document.getElementById('bgColor').value;
+  var fgRgb=hexToRgb(fg);
+  var bgRgb=hexToRgb(bg);
+  var ratio=contrastRatio(fgRgb,bgRgb);
+  var r=Math.round(ratio*10)/10;
+  document.getElementById('ratio').textContent=r+':1';
+  document.getElementById('ratio').style.color=ratio>=4.5?'#00d4aa':ratio>=3?'#ffa94d':'#ff6b6b';
+  document.getElementById('preview').style.background=bg;
+  document.getElementById('preview').style.color=fg;
+  document.getElementById('aaNormal').innerHTML=badge(ratio>=4.5);
+  document.getElementById('aaLarge').innerHTML=badge(ratio>=3);
+  document.getElementById('aaUI').innerHTML=badge(ratio>=3);
+  document.getElementById('aaaNormal').innerHTML=badge(ratio>=7);
+  document.getElementById('aaaLarge').innerHTML=badge(ratio>=4.5);
+}
+check();
+</script>
+</body>
+</html>

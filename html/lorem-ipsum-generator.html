@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator — Free Placeholder Text | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free lorem ipsum generator. Generate placeholder text by paragraphs, sentences, or words. Copy with one click. Perfect for mockups and prototypes.">
+    <meta name="keywords" content="lorem ipsum generator, placeholder text, dummy text, lorem ipsum, filler text, lipsum generator">
+    <meta property="og:title" content="Lorem Ipsum Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/lorem-ipsum-generator">
+    <link rel="canonical" href="https://desktools.dev/lorem-ipsum-generator">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Lorem Ipsum Generator","description":"Free lorem ipsum generator. Generate placeholder text by paragraphs, sentences, or words. Copy with one click. Perfect for mockups and prototypes.","url":"https://desktools.dev/lorem-ipsum-generator","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"lorem ipsum generator, placeholder text, dummy text"}</script>
+<meta name="twitter:title" content="Lorem Ipsum Generator — Free Placeholder Text | DeskTools"/>
+<meta name="twitter:description" content="Free lorem ipsum generator. Generate placeholder text by paragraphs, sentences, or words. Copy with one click. Perfect for mockups and prototypes."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate lorem ipsum placeholder text?","acceptedAnswer":{"@type":"Answer","text":"Pick the unit (Paragraphs, Sentences, or Words), set the count, and click Generate. Copy the output with one click. Works for mockups, wireframes, and UI prototypes where you need filler text."}},{"@type":"Question","name":"What is lorem ipsum and why is it used?","acceptedAnswer":{"@type":"Answer","text":"Lorem ipsum is scrambled Latin text that's been used as placeholder copy since the 1500s. Designers use it because it looks like real text (proper word lengths, sentence structure) but is meaningless, so reviewers focus on the design rather than reading the content."}},{"@type":"Question","name":"How much lorem ipsum should I use for a design mockup?","acceptedAnswer":{"@type":"Answer","text":"Enough to approximate the real content's length. A blog post mockup: 3-5 paragraphs. A product card: 2-3 sentences. A paragraph of body text: 50-100 words. Getting the length right helps the mockup reveal spacing and overflow issues you'd miss with a single short sentence."}},{"@type":"Question","name":"Is lorem ipsum Latin? What does it actually mean?","acceptedAnswer":{"@type":"Answer","text":"It's derived from a 1st-century BC Cicero text (De Finibus Bonorum et Malorum), but scrambled and modified so it's not translatable. The common first line Lorem ipsum dolor sit amet comes from a fragment of the original, cut mid-word. It means nothing as a coherent passage."}},{"@type":"Question","name":"Should I ship lorem ipsum to production?","acceptedAnswer":{"@type":"Answer","text":"Never. Real designs need real content. Placeholder text hides many layout problems (too-long actual copy, localization issues, overflow). Also: clients occasionally approve mockups thinking the lorem is the real content. Always replace before launch."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Lorem Ipsum Generator</h1>
+        <p class="desc">Generate placeholder text — paragraphs, sentences, or words.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" onclick="generateLorem()">Generate</button>
+                <button onclick="copyOutput('lorem-output')">Copy</button>
+            </div>
+            <div class="toolbar-group" style="gap:12px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Count:</label>
+                    <input type="number" id="lorem-count" value="3" min="1" max="50" style="width:56px;padding:6px 8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;">
+                </div>
+                <div class="toolbar-group transform-buttons">
+                    <button class="active" id="lorem-para" onclick="setLoremMode('paragraphs',this)">Paragraphs</button>
+                    <button id="lorem-sent" onclick="setLoremMode('sentences',this)">Sentences</button>
+                    <button id="lorem-word" onclick="setLoremMode('words',this)">Words</button>
+                </div>
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="lorem-start" checked style="accent-color:var(--accent);"> Start with "Lorem ipsum..."</label>
+            </div>
+        </div>
+        <div style="padding:0;"><textarea class="tool-input" id="lorem-output" readonly style="min-height:400px;line-height:1.8;color:var(--text-primary);"></textarea></div>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is Lorem Ipsum?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Lorem Ipsum</strong> is placeholder text used in design and typesetting since the 1500s. It's derived from a passage by Cicero written in 45 BC, deliberately scrambled so readers focus on visual layout rather than reading the content. The standard passage begins with "Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><p>Designers use placeholder text to fill layouts during prototyping when final copy isn't ready. Real text can distract from design decisions about typography, spacing, and visual hierarchy. Lorem Ipsum has a roughly natural distribution of letter frequencies and word lengths, making it look more realistic than repeating "text here" or "asdf."</p><p>This tool generates Lorem Ipsum by paragraphs, sentences, or word count. For web design mockups, 2-3 paragraphs per section is typical. For testing text overflow, long paragraphs stress-test your CSS. Some developers prefer using real content from day one — but for quick wireframes, Lorem Ipsum remains the industry standard.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de Lorem Ipsum</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de Lorem Ipsum</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Lorem-Ipsum-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de Lorem Ipsum</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>ダミーテキストジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Lorem Ipsum 占位文本生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>로렘 입숨 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد نص Lorem Ipsum</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate lorem ipsum placeholder text?</summary>
+    <div class="faq-body">
+      <p>Pick the unit (<strong>Paragraphs</strong>, <strong>Sentences</strong>, or <strong>Words</strong>), set the count, and click <strong>Generate</strong>. Copy the output with one click. Works for mockups, wireframes, and UI prototypes where you need filler text.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is lorem ipsum and why is it used?</summary>
+    <div class="faq-body">
+      <p>Lorem ipsum is scrambled Latin text that's been used as placeholder copy since the 1500s. Designers use it because it looks like real text (proper word lengths, sentence structure) but is meaningless, so reviewers focus on the design rather than reading the content.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much lorem ipsum should I use for a design mockup?</summary>
+    <div class="faq-body">
+      <p>Enough to approximate the real content's length. A blog post mockup: 3-5 paragraphs. A product card: 2-3 sentences. A paragraph of body text: 50-100 words. Getting the length right helps the mockup reveal spacing and overflow issues you'd miss with a single short sentence.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is lorem ipsum Latin? What does it actually mean?</summary>
+    <div class="faq-body">
+      <p>It's derived from a 1st-century BC Cicero text (<em>De Finibus Bonorum et Malorum</em>), but scrambled and modified so it's not translatable. The common first line "Lorem ipsum dolor sit amet" comes from a fragment of the original, cut mid-word. It means nothing as a coherent passage.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I ship lorem ipsum to production?</summary>
+    <div class="faq-body">
+      <p>Never. Real designs need real content &mdash; placeholder text hides many layout problems (too-long actual copy, localization issues, overflow). Also: clients occasionally approve mockups thinking the lorem is the real content. Always replace before launch.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    const LOREM_WORDS='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem'.split(' ');
+    let loremMode='paragraphs';
+    function setLoremMode(mode,btn){loremMode=mode;document.querySelectorAll('#lorem-para,#lorem-sent,#lorem-word').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+    function getLoremSentence(startWithLorem,idx){const len=8+Math.floor(Math.random()*12);let words=[];for(let i=0;i<len;i++)words.push(LOREM_WORDS[Math.floor(Math.random()*LOREM_WORDS.length)]);if(startWithLorem&&idx===0){words[0]='lorem';words[1]='ipsum';words[2]='dolor';words[3]='sit';words[4]='amet';}words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);return words.join(' ')+'.';}
+    function getLoremParagraph(startWithLorem,idx){const count=4+Math.floor(Math.random()*4);let sentences=[];for(let i=0;i<count;i++)sentences.push(getLoremSentence(startWithLorem&&idx===0,i));return sentences.join(' ');}
+    function generateLorem(){const count=parseInt(document.getElementById('lorem-count').value)||3;const startWith=document.getElementById('lorem-start').checked;const output=document.getElementById('lorem-output');let result='';if(loremMode==='paragraphs'){let p=[];for(let i=0;i<count;i++)p.push(getLoremParagraph(startWith,i));result=p.join('\n\n');}else if(loremMode==='sentences'){let s=[];for(let i=0;i<count;i++)s.push(getLoremSentence(startWith,i));result=s.join(' ');}else{let w=[];if(startWith)w.push('Lorem','ipsum','dolor','sit','amet');while(w.length<count)w.push(LOREM_WORDS[Math.floor(Math.random()*LOREM_WORDS.length)]);result=w.slice(0,count).join(' ');result=result.charAt(0).toUpperCase()+result.slice(1);}output.value=result;}
+    generateLorem();
+</script>
+</body>
+</html>

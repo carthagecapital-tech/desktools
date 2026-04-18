@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID Generator — Free Online UUID/GUID Generator | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online UUID generator. Generate v4 UUIDs instantly. Bulk generate up to 100 UUIDs at once. Copy with one click. No signup required.">
+    <meta name="keywords" content="UUID generator, GUID generator, UUID v4, random UUID, generate UUID online, bulk UUID generator">
+    <meta property="og:title" content="UUID Generator — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/uuid-generator">
+    <link rel="canonical" href="https://desktools.dev/uuid-generator">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UUID Generator","description":"Free online UUID generator. Generate v4 UUIDs instantly. Bulk generate up to 100 UUIDs at once. Copy with one click. No signup required.","url":"https://desktools.dev/uuid-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"UUID generator, GUID generator, unique ID"}</script>
+<meta name="twitter:title" content="UUID Generator — Free Online UUID/GUID Generator | DeskTools"/>
+<meta name="twitter:description" content="Free online UUID generator. Generate v4 UUIDs instantly. Bulk generate up to 100 UUIDs at once. Copy with one click. No signup required."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate a UUID v4 online?","acceptedAnswer":{"@type":"Answer","text":"Click Generate and a cryptographically random UUID v4 appears instantly. Click Copy to grab it. Use the Count control to generate up to 100 UUIDs at once, useful for seeding databases or test data."}},{"@type":"Question","name":"What formatting options does this UUID generator support?","acceptedAnswer":{"@type":"Answer","text":"Four formats: Standard (xxxxxxxx-xxxx-...), No Dashes (compact 32 characters), UPPERCASE, and {Braces} (wrapped in curly braces, common in .NET). Pick the format that matches your database or framework convention."}},{"@type":"Question","name":"What is the difference between UUID v1, v4, and v7?","acceptedAnswer":{"@type":"Answer","text":"v1 is timestamp-based and includes the MAC address (privacy leak). v4 is fully random (122 bits of entropy, essentially zero collision risk). v7 is time-ordered and sortable &mdash; better for database primary keys. This tool generates v4, the most widely used version for general-purpose unique IDs."}},{"@type":"Question","name":"Are these UUIDs cryptographically secure?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser's built-in crypto.getRandomValues() API, which produces cryptographically strong random numbers. The output is suitable for session tokens, database keys, and other security-adjacent use cases."}},{"@type":"Question","name":"Can I generate UUIDs in bulk for test data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set the Count to any number up to 100 and click Generate &mdash; you get a list of unique UUIDs. Use Copy All to grab them as a newline-separated list, ready to paste into a SQL INSERT or a test fixture."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>UUID Generator</h1>
+        <p class="desc">Generate random v4 UUIDs — cryptographically secure, RFC 4122 compliant.</p>
+    </div>
+    <div class="workspace">
+        <div class="color-workspace">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+                <input type="text" id="uuid-output" readonly style="flex:1;padding:18px 20px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:1.2rem;letter-spacing:1px;text-align:center;">
+                <button class="copy-btn" onclick="copyText(document.getElementById('uuid-output').value)" style="padding:18px 20px;">Copy</button>
+                <button class="copy-btn" onclick="generateUUID()" style="padding:18px 20px;border-color:var(--accent);color:var(--accent);">↻</button>
+            </div>
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;">Format:</label>
+                    <div class="toolbar-group transform-buttons">
+                        <button class="active" id="fmt-default" onclick="setFormat('default',this)">Standard</button>
+                        <button id="fmt-upper" onclick="setFormat('upper',this)">UPPERCASE</button>
+                        <button id="fmt-nodash" onclick="setFormat('nodash',this)">No Dashes</button>
+                        <button id="fmt-braces" onclick="setFormat('braces',this)">{Braces}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="palette-section">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                    <h4 style="margin:0;">Bulk Generate</h4>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <label style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Count:</label>
+                        <input type="number" id="uuid-count" value="10" min="1" max="100" style="width:60px;padding:6px 8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;">
+                        <button class="copy-btn" onclick="bulkUUID()" style="border-color:var(--accent);color:var(--accent);">Generate</button>
+                        <button class="copy-btn" onclick="copyText(document.getElementById('uuid-bulk').value)">Copy All</button>
+                    </div>
+                </div>
+                <textarea id="uuid-bulk" readonly style="width:100%;min-height:200px;padding:16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:0.8rem;line-height:2;resize:vertical;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is a UUID?</button><div class="deep-dive-body"><div class="deep-dive-content"><p>A <strong>UUID (Universally Unique Identifier)</strong> is a 128-bit number formatted as 32 hexadecimal characters in 5 groups: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. UUIDs are designed to be globally unique without requiring a central authority — the probability of generating two identical UUIDs is astronomically low.</p><p><strong>Version 4 UUIDs</strong> (which this tool generates) use cryptographically secure random numbers for all bits except the version indicator (<code>4</code>) and the variant bits. This makes them ideal for database primary keys, session IDs, file names, and distributed system identifiers.</p><p>This tool uses the browser's <code>crypto.getRandomValues()</code> API, which provides cryptographically strong randomness — the same source used for encryption keys. Unlike sequential IDs, UUIDs reveal no information about creation order or count, making them suitable for security-sensitive contexts.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur d'UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>UUID / GUID Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de UUID / GUID</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>UUID / GUIDジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>UUID / GUID 生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>UUID / GUID 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد UUID / GUID</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate a UUID v4 online?</summary>
+    <div class="faq-body">
+      <p>Click <strong>Generate</strong> and a cryptographically random UUID v4 appears instantly. Click <strong>Copy</strong> to grab it. Use the <strong>Count</strong> control to generate up to 100 UUIDs at once, useful for seeding databases or test data.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What formatting options does this UUID generator support?</summary>
+    <div class="faq-body">
+      <p>Four formats: <strong>Standard</strong> (<code>xxxxxxxx-xxxx-...</code>), <strong>No Dashes</strong> (compact 32 characters), <strong>UPPERCASE</strong>, and <strong>{Braces}</strong> (wrapped in curly braces, common in .NET). Pick the format that matches your database or framework convention.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between UUID v1, v4, and v7?</summary>
+    <div class="faq-body">
+      <p><strong>v1</strong> is timestamp-based and includes the MAC address (privacy leak). <strong>v4</strong> is fully random (122 bits of entropy, essentially zero collision risk). <strong>v7</strong> is time-ordered and sortable &mdash; better for database primary keys. This tool generates v4, the most widely used version for general-purpose unique IDs.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are these UUIDs cryptographically secure?</summary>
+    <div class="faq-body">
+      <p>Yes. The tool uses the browser's built-in <code>crypto.getRandomValues()</code> API, which produces cryptographically strong random numbers. The output is suitable for session tokens, database keys, and other security-adjacent use cases.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I generate UUIDs in bulk for test data?</summary>
+    <div class="faq-body">
+      <p>Yes. Set the <strong>Count</strong> to any number up to 100 and click Generate &mdash; you get a list of unique UUIDs. Use <strong>Copy All</strong> to grab them as a newline-separated list, ready to paste into a SQL INSERT or a test fixture.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    let uuidFormat = 'default';
+
+    function generateRawUUID() {
+        const bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        bytes[6] = (bytes[6] & 0x0f) | 0x40; // v4
+        bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant
+        const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+        return hex.slice(0,8) + '-' + hex.slice(8,12) + '-' + hex.slice(12,16) + '-' + hex.slice(16,20) + '-' + hex.slice(20);
+    }
+
+    function formatUUID(uuid) {
+        switch (uuidFormat) {
+            case 'upper': return uuid.toUpperCase();
+            case 'nodash': return uuid.replace(/-/g, '');
+            case 'braces': return '{' + uuid + '}';
+            default: return uuid;
+        }
+    }
+
+    function generateUUID() {
+        document.getElementById('uuid-output').value = formatUUID(generateRawUUID());
+    }
+
+    function setFormat(fmt, btn) {
+        uuidFormat = fmt;
+        document.querySelectorAll('.transform-buttons button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        generateUUID();
+        // Re-format bulk if exists
+        const bulk = document.getElementById('uuid-bulk').value;
+        if (bulk) bulkUUID();
+    }
+
+    function bulkUUID() {
+        const count = Math.min(100, Math.max(1, parseInt(document.getElementById('uuid-count').value) || 10));
+        const uuids = [];
+        for (let i = 0; i < count; i++) uuids.push(formatUUID(generateRawUUID()));
+        document.getElementById('uuid-bulk').value = uuids.join('\n');
+    }
+
+    generateUUID();
+</script>
+</body>
+</html>

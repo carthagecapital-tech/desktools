@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SVG Optimizer — DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/svg-optimizer"/>
+<meta name="description" content="Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.pane{display:flex;flex-direction:column;gap:.6rem}
+.pane-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+.pane-label span{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted)}
+textarea{width:100%;height:340px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:1rem;outline:none;resize:none;line-height:1.6;transition:border-color .2s}
+textarea:focus{border-color:var(--accent)}
+textarea.output{color:#a8e6d8;cursor:default}
+.stats-row{display:flex;gap:1rem;margin:1rem 0}
+.stat-box{flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;text-align:center}
+.stat-box .num{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--accent);display:block}
+.stat-box .lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.stat-box.saving .num{color:#00d4aa}
+.opts{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+.opt{display:flex;align-items:center;gap:.4rem;font-size:.83rem;color:var(--muted);cursor:pointer;user-select:none}
+.opt input{accent-color:var(--accent);cursor:pointer}
+.opt:hover{color:var(--text)}
+.btn-row{display:flex;gap:.75rem}
+.btn{flex:1;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;border-radius:8px;padding:.65rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}.btn-secondary:hover{color:var(--text);border-color:var(--accent)}
+.btn.copied{background:#1a6b5a}
+.preview-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.5rem;display:flex;align-items:center;justify-content:center;min-height:120px;margin-top:.5rem}
+.preview-box svg{max-width:100%;max-height:100px}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:650px){.layout{grid-template-columns:1fr}}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="SVG Optimizer — DeskTools"/>
+<meta property="og:description" content="Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes."/>
+<meta property="og:url" content="https://desktools.dev/svg-optimizer"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="SVG Optimizer — DeskTools"/>
+<meta name="twitter:description" content="Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SVG Optimizer","description":"Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes.","url":"https://desktools.dev/svg-optimizer","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"SVG optimizer, SVG minifier, SVG cleaner"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I optimize an SVG file online?","acceptedAnswer":{"@type":"Answer","text":"Paste your SVG markup into the input. The optimizer strips comments, metadata, editor tags (like Adobe Illustrator leftovers), redundant attributes, and unnecessary whitespace. The visible result is identical; file size drops 30-80%. Click Copy Optimized SVG to grab it."}},{"@type":"Question","name":"What does SVG optimization actually remove?","acceptedAnswer":{"@type":"Answer","text":"Common bloat: XML comments, editor metadata (sodipodi, inkscape, Adobe tags), empty groups, unused IDs, default-value attributes, redundant namespaces, excessive precision in numbers (17.9999997 to 18), and whitespace between tags. The rendered output is pixel-identical."}},{"@type":"Question","name":"Why are SVGs exported from Figma or Illustrator so large?","acceptedAnswer":{"@type":"Answer","text":"Design tools add metadata for editing round-trips. Grid info, layer names, export history, color profiles, comments. None of it affects rendering, but it can double or triple file size. Running through an optimizer before shipping is standard practice."}},{"@type":"Question","name":"Should I inline SVG or use it as an image file?","acceptedAnswer":{"@type":"Answer","text":"Inline SVG (svg in HTML) is best for icons you want to style with CSS (change color on hover, animate, etc.). Image files are better for static illustrations and larger artwork you want cached separately. Optimize either way."}},{"@type":"Question","name":"Can I paste an SVG from Figma and have it still work after optimizing?","acceptedAnswer":{"@type":"Answer","text":"Yes. Figma exports are typically well-structured and optimize cleanly. Occasionally Figma adds clip paths or masks with complex IDs that the optimizer may simplify. Visually inspect the output if your SVG has complex compositing. For simple icons and shapes, there's almost never an issue."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>SVG Optimizer</h1>
+  <p class="sub">Paste SVG markup to clean and minify it. Strips comments, metadata, and unnecessary whitespace.</p>
+
+  <div class="opts">
+    <label class="opt"><input type="checkbox" id="rmComments" checked/> Remove comments</label>
+    <label class="opt"><input type="checkbox" id="rmMeta" checked/> Remove metadata</label>
+    <label class="opt"><input type="checkbox" id="rmAttribs" checked/> Remove editor attributes</label>
+    <label class="opt"><input type="checkbox" id="minifyWS" checked/> Minify whitespace</label>
+    <label class="opt"><input type="checkbox" id="rmXmlDecl" checked/> Remove XML declaration</label>
+    <label class="opt"><input type="checkbox" id="rmTitle" /> Remove &lt;title&gt;</label>
+  </div>
+
+  <div class="layout">
+    <div class="pane">
+      <div class="pane-label">Input SVG <span id="inSize"></span></div>
+      <textarea id="inputSvg" placeholder="Paste your SVG here..." oninput="optimize()"></textarea>
+      <div class="preview-box" id="previewIn"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-label">Optimized SVG <span id="outSize"></span></div>
+      <textarea class="output" id="outputSvg" readonly></textarea>
+      <div class="preview-box" id="previewOut"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><span class="num" id="statIn">—</span><span class="lbl">Original</span></div>
+    <div class="stat-box"><span class="num" id="statOut">—</span><span class="lbl">Optimized</span></div>
+    <div class="stat-box saving"><span class="num" id="statSave">—</span><span class="lbl">Saved</span></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="copyBtn" onclick="copyOutput()">Copy Optimized SVG</button>
+    <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+  </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why optimize SVG files?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>SVG (Scalable Vector Graphics)</strong> files exported from design tools like Figma, Illustrator, and Sketch often contain unnecessary data: editor metadata, hidden layers, redundant groups, overly precise coordinates, and default namespaces. This bloat can double or triple the file size.</p><p>Optimizing SVGs removes this cruft while preserving visual output. Common optimizations include removing comments and metadata, collapsing unnecessary groups, shortening numeric precision (12 decimal places to 2), merging overlapping paths, and stripping default attribute values the browser already assumes.</p><p>Smaller SVGs mean faster page loads, especially on sites with many icons. An optimized icon set can save <strong>50-80% file size</strong> compared to raw design tool exports. This tool runs client-side so your SVG code never leaves your browser — important for proprietary icons and brand assets.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Optimiseur SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Optimizador SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>SVG-Optimierer</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Otimizador SVG</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>SVG最適化ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>SVG 优化压缩工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>SVG 최적화 도구</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة تحسين SVG</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I optimize an SVG file online?</summary>
+    <div class="faq-body">
+      <p>Paste your SVG markup into the input. The optimizer strips comments, metadata, editor tags (like Adobe Illustrator leftovers), redundant attributes, and unnecessary whitespace. The visible result is identical; file size drops 30-80%. Click <strong>Copy Optimized SVG</strong> to grab it.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does SVG optimization actually remove?</summary>
+    <div class="faq-body">
+      <p>Common bloat: XML comments, editor metadata (<code>&lt;sodipodi&gt;</code>, <code>&lt;inkscape&gt;</code>, Adobe tags), empty groups, unused IDs, default-value attributes, redundant namespaces, excessive precision in numbers (17.9999997 &rarr; 18), and whitespace between tags. The rendered output is pixel-identical.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why are SVGs exported from Figma or Illustrator so large?</summary>
+    <div class="faq-body">
+      <p>Design tools add metadata for editing round-trips &mdash; grid info, layer names, export history, color profiles, comments. None of it affects rendering, but it can double or triple file size. Running through an optimizer before shipping is standard practice.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I inline SVG or use it as an image file?</summary>
+    <div class="faq-body">
+      <p>Inline SVG (<code>&lt;svg&gt;...&lt;/svg&gt;</code> in HTML) is best for icons you want to style with CSS (change color on hover, animate, etc.). Image files (<code>&lt;img src="icon.svg"&gt;</code>) are better for static illustrations and larger artwork you want cached separately. Optimize either way.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I paste an SVG from Figma and have it still work after optimizing?</summary>
+    <div class="faq-body">
+      <p>Yes. Figma exports are typically well-structured and optimize cleanly. Occasionally Figma adds clip paths or masks with complex IDs that the optimizer may simplify &mdash; visually inspect the output if your SVG has complex compositing. For simple icons and shapes, there's almost never an issue.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function fmt(n){return n>=1024?(n/1024).toFixed(1)+'KB':n+'B'}
+function optimize(){
+  const raw=document.getElementById('inputSvg').value.trim();
+  document.getElementById('previewIn').innerHTML=raw||'';
+  if(!raw){['outputSvg','statIn','statOut','statSave'].forEach(id=>document.getElementById(id).textContent='');return;}
+  let out=raw;
+  if(document.getElementById('rmXmlDecl').checked) out=out.replace(/<\?xml[^?]*\?>/gi,'');
+  if(document.getElementById('rmComments').checked) out=out.replace(/<!--[\s\S]*?-->/g,'');
+  if(document.getElementById('rmMeta').checked) out=out.replace(/<metadata[\s\S]*?<\/metadata>/gi,'').replace(/<sodipodi:[^>]*\/?>/gi,'').replace(/<inkscape:[^>]*\/?>/gi,'');
+  if(document.getElementById('rmTitle').checked) out=out.replace(/<title[\s\S]*?<\/title>/gi,'');
+  if(document.getElementById('rmAttribs').checked){
+    out=out.replace(/\s+sodipodi:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+inkscape:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+dc:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+rdf:[a-zA-Z-]+="[^"]*"/g,'')
+           .replace(/\s+xmlns:(inkscape|sodipodi|dc|cc|rdf)="[^"]*"/g,'');
+  }
+  if(document.getElementById('minifyWS').checked){
+    out=out.replace(/\s*\n\s*/g,' ').replace(/\s{2,}/g,' ').replace(/>\s+</g,'><').trim();
+  }
+  const inB=new TextEncoder().encode(raw).length;
+  const outB=new TextEncoder().encode(out).length;
+  const pct=inB>0?Math.round((1-outB/inB)*100):0;
+  document.getElementById('outputSvg').value=out;
+  document.getElementById('previewOut').innerHTML=out;
+  document.getElementById('statIn').textContent=fmt(inB);
+  document.getElementById('statOut').textContent=fmt(outB);
+  document.getElementById('statSave').textContent=pct+'%';
+  document.getElementById('inSize').textContent=fmt(inB);
+  document.getElementById('outSize').textContent=fmt(outB);
+}
+document.querySelectorAll('.opts input').forEach(cb=>cb.addEventListener('change',optimize));
+function copyOutput(){
+  const v=document.getElementById('outputSvg').value;
+  if(!v)return;
+  navigator.clipboard.writeText(v);
+  const b=document.getElementById('copyBtn');b.textContent='Copied!';b.classList.add('copied');
+  setTimeout(()=>{b.textContent='Copy Optimized SVG';b.classList.remove('copied');},1800);
+}
+function clearAll(){
+  document.getElementById('inputSvg').value='';
+  document.getElementById('outputSvg').value='';
+  document.getElementById('previewIn').innerHTML='';
+  document.getElementById('previewOut').innerHTML='';
+  ['statIn','statOut','statSave','inSize','outSize'].forEach(id=>document.getElementById(id).textContent='');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Entity Encoder & Decoder — Free Online Tool | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online HTML entity encoder and decoder. Convert special characters to HTML entities or decode entities back to readable text. Supports named and numeric entities.">
+    <meta name="keywords" content="HTML entity encoder, HTML entity decoder, HTML encode, HTML decode, special characters, HTML entities converter">
+    <meta property="og:title" content="HTML Entity Encoder & Decoder — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/html-entity-encoder">
+    <link rel="canonical" href="https://desktools.dev/html-entity-encoder">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"HTML Entity Encoder & Decoder","description":"Free online HTML entity encoder and decoder. Convert special characters to HTML entities or decode entities back to readable text. Supports named and numeric entities.","url":"https://desktools.dev/html-entity-encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"HTML entity encoder, HTML entity decoder, special characters"}</script>
+<meta name="twitter:title" content="HTML Entity Encoder & Decoder — Free Online Tool | DeskTools"/>
+<meta name="twitter:description" content="Free online HTML entity encoder and decoder. Convert special characters to HTML entities or decode entities back to readable text. Supports named and numeric entities."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I encode HTML entities online?","acceptedAnswer":{"@type":"Answer","text":"Paste your text in the input box and click Encode. Characters like less-than, greater-than, ampersand, and quote are converted to their HTML entity equivalents, making text safe to embed in HTML."}},{"@type":"Question","name":"What is the difference between named entities and numeric entities?","acceptedAnswer":{"@type":"Answer","text":"Named entities use a readable name (&amp; for &, &copy; for ©). Numeric entities use a Unicode code point (&#38; or &#x26;). Numeric entities work for any character; named entities only exist for a subset. This tool supports both encoding and decoding."}},{"@type":"Question","name":"How do I decode HTML entities back to plain text?","acceptedAnswer":{"@type":"Answer","text":"Paste text containing entities (named or numeric) into the input and click Decode. Useful for reading scraped HTML, debugging CMS exports, or checking what entities a rich text editor produced."}},{"@type":"Question","name":"When should I HTML-encode text?","acceptedAnswer":{"@type":"Answer","text":"Any time user-generated content is rendered inside HTML. Unencoded script tags in user input = cross-site scripting (XSS) vulnerability. Most modern frameworks (React, Vue, Angular) encode by default, but if you're building raw HTML strings or using innerHTML, you need to encode manually."}},{"@type":"Question","name":"Does HTML encoding prevent all XSS attacks?","acceptedAnswer":{"@type":"Answer","text":"It prevents injection in HTML body context, but not in every context. Attributes, JavaScript strings, URLs, and CSS each require different escaping. Full XSS prevention requires context-aware encoding &mdash; use your framework's built-in escaping rather than manual entity encoding for security-critical code."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>HTML Entity Encoder / Decoder</h1>
+        <p class="desc">Convert special characters to HTML entities or decode them back.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="he-encode-btn" onclick="doHtmlEntity('encode')">Encode →</button>
+                <button id="he-decode-btn" onclick="doHtmlEntity('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="he-all" style="accent-color:var(--accent);"> Encode all characters</label>
+                <button onclick="copyOutput('he-output')">Copy</button>
+                <button onclick="swapHe()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="he-input" placeholder='<div class="hello">Tom & Jerry © 2026</div>'></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="he-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);">
+        <span>Common entities: </span>
+        <span style="color:var(--text-secondary);">&amp;amp; → &amp; &nbsp; &amp;lt; → &lt; &nbsp; &amp;gt; → &gt; &nbsp; &amp;quot; → " &nbsp; &amp;apos; → ' &nbsp; &amp;nbsp; → (space) &nbsp; &amp;copy; → © &nbsp; &amp;mdash; → —</span>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What are HTML entities?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>HTML entities</strong> are special codes that represent characters which have reserved meaning in HTML. The angle brackets <code>&lt;</code> and <code>&gt;</code> define HTML tags, so to display them as literal text you must encode them as <code>&amp;lt;</code> and <code>&amp;gt;</code>. The ampersand <code>&amp;</code> itself becomes <code>&amp;amp;</code>.</p><p>Beyond reserved characters, entities are also used for characters not available on a standard keyboard — like <code>&amp;copy;</code> (©), <code>&amp;mdash;</code> (—), <code>&amp;euro;</code> (€), and Unicode characters like <code>&amp;#9829;</code> (♥). Named entities are easier to read; numeric entities (<code>&amp;#60;</code>) work for any Unicode code point.</p><p>Proper encoding prevents <strong>XSS (Cross-Site Scripting) attacks</strong> where malicious <code>&lt;script&gt;</code> tags are injected into user-generated content. Any user input displayed in HTML should always be entity-encoded first. This tool handles both encoding and decoding for quick reference and testing.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Encodeur d'entités HTML</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Codificador de entidades HTML</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>HTML-Entity Encoder</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Codificador de entidades HTML</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>HTMLエンティティエンコーダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>HTML 实体编码工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>HTML 엔티티 인코더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مشفر كيانات HTML</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I encode HTML entities online?</summary>
+    <div class="faq-body">
+      <p>Paste your text in the input box and click <strong>Encode &rarr;</strong>. Characters like <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, and <code>&quot;</code> are converted to their HTML entity equivalents (<code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code>, <code>&amp;quot;</code>), making text safe to embed in HTML.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between named entities and numeric entities?</summary>
+    <div class="faq-body">
+      <p>Named entities use a readable name (<code>&amp;amp;</code> for &amp;, <code>&amp;copy;</code> for &copy;). Numeric entities use a Unicode code point (<code>&amp;#38;</code> or <code>&amp;#x26;</code>). Numeric entities work for any character; named entities only exist for a subset. This tool supports both encoding and decoding.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I decode HTML entities back to plain text?</summary>
+    <div class="faq-body">
+      <p>Paste text containing entities (named or numeric) into the input and click <strong>&larr; Decode</strong>. Useful for reading scraped HTML, debugging CMS exports, or checking what entities a rich text editor produced.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I HTML-encode text?</summary>
+    <div class="faq-body">
+      <p>Any time user-generated content is rendered inside HTML. Unencoded <code>&lt;script&gt;</code> tags in user input = cross-site scripting (XSS) vulnerability. Most modern frameworks (React, Vue, Angular) encode by default, but if you're building raw HTML strings or using <code>innerHTML</code>, you need to encode manually.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does HTML encoding prevent all XSS attacks?</summary>
+    <div class="faq-body">
+      <p>It prevents injection in HTML body context, but not in every context. Attributes, JavaScript strings, URLs, and CSS each require different escaping. Full XSS prevention requires context-aware encoding &mdash; use your framework's built-in escaping rather than manual entity encoding for security-critical code.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    function doHtmlEntity(mode) {
+        const input = document.getElementById('he-input').value;
+        const output = document.getElementById('he-output');
+        const encodeAll = document.getElementById('he-all').checked;
+        if (mode === 'encode') {
+            if (encodeAll) {
+                output.value = Array.from(input).map(c => '&#' + c.charCodeAt(0) + ';').join('');
+            } else {
+                output.value = input
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+            document.getElementById('he-encode-btn').classList.add('primary');
+            document.getElementById('he-decode-btn').classList.remove('primary');
+        } else {
+            const el = document.createElement('textarea');
+            el.innerHTML = input;
+            output.value = el.value;
+            document.getElementById('he-decode-btn').classList.add('primary');
+            document.getElementById('he-encode-btn').classList.remove('primary');
+        }
+    }
+    function swapHe() {
+        const i = document.getElementById('he-input');
+        const o = document.getElementById('he-output');
+        const t = i.value; i.value = o.value; o.value = t;
+    }
+</script>
+</body>
+</html>

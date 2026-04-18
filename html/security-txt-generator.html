@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Security.txt Generator — Build Your Security Policy | DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/security-txt-generator"/>
+<meta name="description" content="Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=url],input[type=email],input[type=date],textarea,select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer}
+textarea{min-height:60px;resize:vertical;line-height:1.5}
+.field{margin-bottom:1rem}
+.field:last-child{margin-bottom:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.check-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;cursor:pointer;font-size:.88rem}
+.check-row input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.outputs{display:grid;gap:1.25rem}
+.output-block{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.output-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--border)}
+.output-name{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.output-name code{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.78rem}
+.copy-btn{background:var(--accent);color:#0a0a0f;border:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;padding:.35rem .7rem;border-radius:5px;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:var(--accent2)}
+.output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-all;max-height:250px;overflow-y:auto}
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Security.txt Generator — Build Your Security Policy | DeskTools"/>
+<meta property="og:description" content="Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side."/>
+<meta property="og:url" content="https://desktools.dev/security-txt-generator"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Security.txt Generator — Build Your Security Policy | DeskTools"/>
+<meta name="twitter:description" content="Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Security.txt Generator","description":"Generate security.txt, robots.txt privacy rules, and security meta tags for your site. One form, all outputs. 100% client-side.","url":"https://desktools.dev/security-txt-generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"security.txt generator, robots.txt, security policy"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a security.txt file for my website?","acceptedAnswer":{"@type":"Answer","text":"Fill in your security contact email, optional contact URL, PGP encryption URL, acknowledgments URL, policy expiry date, and preferred languages. The tool generates a compliant security.txt file ready to deploy at /.well-known/security.txt."}},{"@type":"Question","name":"What is security.txt and why should I have one?","acceptedAnswer":{"@type":"Answer","text":"Security.txt (RFC 9116) is a standardized plain-text file that tells security researchers how to responsibly report vulnerabilities. Without it, researchers either give up or try random contact forms. With it, legitimate security reports reach you quickly. You avoid unreported bugs becoming public exploits."}},{"@type":"Question","name":"Where do I put the security.txt file?","acceptedAnswer":{"@type":"Answer","text":"At the well-known location: https://yourdomain.com/.well-known/security.txt. Some older sites also serve it at /security.txt (the root) for compatibility with tools that check both. Serve it with Content-Type: text/plain; charset=utf-8."}},{"@type":"Question","name":"Does security.txt have to be signed?","acceptedAnswer":{"@type":"Answer","text":"It's recommended but not required. Signing with your PGP key proves the file hasn't been tampered with (an attacker could otherwise replace it with their own email to divert reports). For high-security sites, sign with PGP and publish the signature in the same location."}},{"@type":"Question","name":"What should I put in the Expires field?","acceptedAnswer":{"@type":"Answer","text":"A date up to one year in the future. The field exists so researchers know the file is current. Set a reminder to regenerate before expiry. An expired security.txt may be ignored or treated as abandoned. Annual renewal is typical."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Security.txt Generator</h1>
+  <p class="sub">Generate security.txt, privacy meta tags, and robots.txt rules for your site.</p>
+
+  <div class="card">
+    <div class="card-title">Your Details</div>
+    <div class="field">
+      <label>Security contact email</label>
+      <input type="email" id="contactEmail" placeholder="security@example.com" oninput="generate()"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Contact URL (optional)</label>
+        <input type="url" id="contactUrl" placeholder="https://example.com/security" oninput="generate()"/>
+      </div>
+      <div class="field">
+        <label>Policy expiry date</label>
+        <input type="date" id="expires" oninput="generate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Preferred languages</label>
+      <input type="text" id="languages" placeholder="en, es, fr" value="en" oninput="generate()"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Encryption (PGP key URL)</label>
+        <input type="url" id="encryption" placeholder="https://example.com/pgp-key.txt" oninput="generate()"/>
+      </div>
+      <div class="field">
+        <label>Acknowledgments URL</label>
+        <input type="url" id="acknowledgments" placeholder="https://example.com/thanks" oninput="generate()"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Bug bounty / hiring URL (optional)</label>
+      <input type="url" id="hiring" placeholder="https://example.com/careers" oninput="generate()"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Privacy Options</div>
+    <label class="check-row"><input type="checkbox" id="optReferrer" checked onchange="generate()"/> Add referrer-policy meta tag</label>
+    <label class="check-row"><input type="checkbox" id="optPermissions" checked onchange="generate()"/> Add permissions-policy meta tag</label>
+    <label class="check-row"><input type="checkbox" id="optRobots" checked onchange="generate()"/> Generate privacy-focused robots.txt</label>
+    <label class="check-row"><input type="checkbox" id="optDnt" onchange="generate()"/> Block known AI scrapers in robots.txt</label>
+  </div>
+
+  <div class="outputs" id="outputs"></div>
+
+</div>
+
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is security.txt?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>security.txt</strong> is a proposed standard (RFC 9116) that tells security researchers how to report vulnerabilities in your website. It's a plain text file placed at <code>/.well-known/security.txt</code> containing your security contact email, PGP key, and disclosure policy.</p><p>Without a security.txt, researchers who find vulnerabilities in your site have no clear way to report them. They might try generic emails like info@ or support@, post publicly on social media, or simply give up. A security.txt file takes 2 minutes to create and can prevent a public disclosure disaster.</p><p>Major companies including Google, Facebook, GitHub, and Dropbox all publish security.txt files. The <code>Expires</code> field ensures the contact information stays current — set it to one year from now and update annually. This tool also generates privacy-focused <code>robots.txt</code> rules and security-related meta tags for your HTML head.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de security.txt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de security.txt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Security.txt Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de security.txt</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Security.txt ジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Security.txt 生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Security.txt 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد ملف security.txt</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a security.txt file for my website?</summary>
+    <div class="faq-body">
+      <p>Fill in your security contact email, optional contact URL, PGP encryption URL, acknowledgments URL, policy expiry date, and preferred languages. The tool generates a compliant <code>security.txt</code> file ready to deploy at <code>/.well-known/security.txt</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is security.txt and why should I have one?</summary>
+    <div class="faq-body">
+      <p>Security.txt (RFC 9116) is a standardized plain-text file that tells security researchers how to responsibly report vulnerabilities. Without it, researchers either give up or try random contact forms. With it, legitimate security reports reach you quickly &mdash; and you avoid unreported bugs becoming public exploits.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where do I put the security.txt file?</summary>
+    <div class="faq-body">
+      <p>At the well-known location: <code>https://yourdomain.com/.well-known/security.txt</code>. Some older sites also serve it at <code>/security.txt</code> (the root) for compatibility with tools that check both. Serve it with <code>Content-Type: text/plain; charset=utf-8</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does security.txt have to be signed?</summary>
+    <div class="faq-body">
+      <p>It's recommended but not required. Signing with your PGP key proves the file hasn't been tampered with (an attacker could otherwise replace it with their own email to divert reports). For high-security sites, sign with PGP and publish the signature in the same location.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What should I put in the Expires field?</summary>
+    <div class="faq-body">
+      <p>A date up to one year in the future. The field exists so researchers know the file is current. Set a reminder to regenerate before expiry &mdash; an expired security.txt may be ignored or treated as abandoned. Annual renewal is typical.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+// Set default expiry to 1 year from now
+const d=new Date();d.setFullYear(d.getFullYear()+1);
+document.getElementById('expires').value=d.toISOString().split('T')[0];
+
+function generate(){
+  const email=document.getElementById('contactEmail').value.trim();
+  const contactUrl=document.getElementById('contactUrl').value.trim();
+  const expires=document.getElementById('expires').value;
+  const langs=document.getElementById('languages').value.trim();
+  const encryption=document.getElementById('encryption').value.trim();
+  const ack=document.getElementById('acknowledgments').value.trim();
+  const hiring=document.getElementById('hiring').value.trim();
+  const optReferrer=document.getElementById('optReferrer').checked;
+  const optPermissions=document.getElementById('optPermissions').checked;
+  const optRobots=document.getElementById('optRobots').checked;
+  const optDnt=document.getElementById('optDnt').checked;
+
+  const outputs=document.getElementById('outputs');
+  outputs.innerHTML='';
+
+  // 1. security.txt
+  let secTxt='# Security Policy\n# https://securitytxt.org/\n\n';
+  if(email) secTxt+='Contact: mailto:'+email+'\n';
+  if(contactUrl) secTxt+='Contact: '+contactUrl+'\n';
+  if(!email&&!contactUrl) secTxt+='Contact: mailto:security@example.com\n';
+  if(expires) secTxt+='Expires: '+new Date(expires+'T00:00:00Z').toISOString()+'\n';
+  if(encryption) secTxt+='Encryption: '+encryption+'\n';
+  if(ack) secTxt+='Acknowledgments: '+ack+'\n';
+  if(langs) secTxt+='Preferred-Languages: '+langs+'\n';
+  if(hiring) secTxt+='Hiring: '+hiring+'\n';
+  secTxt+='\n# Place this file at /.well-known/security.txt';
+
+  addOutput(outputs,'security.txt','/.well-known/security.txt',secTxt);
+
+  // 2. Meta tags
+  let metaTags='';
+  if(optReferrer){
+    metaTags+='<!-- Referrer Policy -->\n<meta name="referrer" content="strict-origin-when-cross-origin"/>\n\n';
+  }
+  if(optPermissions){
+    metaTags+='<!-- Permissions Policy -->\n<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()"/>\n\n';
+  }
+  metaTags+='<!-- Security Headers (add via HTTP headers or meta) -->\n';
+  metaTags+='<meta http-equiv="X-Content-Type-Options" content="nosniff"/>\n';
+  metaTags+='<meta http-equiv="X-Frame-Options" content="DENY"/>';
+
+  addOutput(outputs,'Privacy Meta Tags','Add to &lt;head&gt;',metaTags);
+
+  // 3. Robots.txt
+  if(optRobots){
+    let robots='# Robots.txt — privacy-focused configuration\n\nUser-agent: *\nAllow: /\n';
+    robots+='Disallow: /api/\nDisallow: /admin/\nDisallow: /private/\n';
+    if(optDnt){
+      robots+='\n# Block known AI scrapers\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: Google-Extended\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n';
+    }
+    addOutput(outputs,'robots.txt','/robots.txt',robots);
+  }
+}
+
+function addOutput(container,title,path,content){
+  const block=document.createElement('div');
+  block.className='output-block';
+  const id='out-'+Math.random().toString(36).substr(2,6);
+  block.innerHTML=
+    '<div class="output-header">'+
+    '  <span class="output-name">'+title+' <code>'+path+'</code></span>'+
+    '  <button class="copy-btn" onclick="copyBlock(\''+id+'\')">Copy</button>'+
+    '</div>'+
+    '<div class="output-code" id="'+id+'"></div>';
+  container.appendChild(block);
+  document.getElementById(id).textContent=content;
+}
+
+function copyBlock(id){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text);
+  if(typeof showToast==='function') showToast('Copied!');
+}
+
+generate();
+</script>
+</body>
+</html>

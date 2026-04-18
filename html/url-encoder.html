@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Encoder & Decoder — Free Online Tool | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings. Supports encodeURI and encodeURIComponent modes.">
+    <meta name="keywords" content="URL encoder, URL decoder, percent encoding, encodeURIComponent, URL encode online, decode URL">
+    <meta property="og:title" content="URL Encoder & Decoder — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/url-encoder">
+    <link rel="canonical" href="https://desktools.dev/url-encoder">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder & Decoder","description":"Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings. Supports encodeURI and encodeURIComponent modes.","url":"https://desktools.dev/url-encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"URL encoder, URL decoder, percent encoding"}</script>
+<meta name="twitter:title" content="URL Encoder & Decoder — Free Online Tool | DeskTools"/>
+<meta name="twitter:description" content="Free online URL encoder and decoder. Encode special characters for URLs or decode percent-encoded strings. Supports encodeURI and encodeURIComponent modes."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I URL-encode a string online?","acceptedAnswer":{"@type":"Answer","text":"Paste the text into the input box and click Encode. Special characters like spaces, ?, &, /, and Unicode characters are replaced with their percent-encoded equivalents (e.g. space becomes %20). Click Copy to grab the result."}},{"@type":"Question","name":"What is the difference between encodeURI and encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserves characters that have special meaning in a full URL (like : / ? &) &mdash; use it when encoding a complete URL. encodeURIComponent encodes those too &mdash; use it for individual query string values or path segments. This tool supports both modes."}},{"@type":"Question","name":"How do I decode a URL-encoded string?","acceptedAnswer":{"@type":"Answer","text":"Paste the percent-encoded string into the input and click Decode. Sequences like %20, %3F, and %C3%A9 are converted back to their original characters (space, ?, é). Works for both encodeURI and encodeURIComponent output."}},{"@type":"Question","name":"Why do I see %20 or + for spaces in URLs?","acceptedAnswer":{"@type":"Answer","text":"Both represent a space. %20 is the standard percent-encoding used in URL paths. + is used in application/x-www-form-urlencoded query strings (HTML form submissions). Modern URLs generally use %20 everywhere, which is what this tool produces."}},{"@type":"Question","name":"Do I need to URL-encode query parameters manually?","acceptedAnswer":{"@type":"Answer","text":"If you're building URLs programmatically, most languages have built-in functions (encodeURIComponent in JS, urllib.parse.quote in Python, URLEncoder in Java). This tool is for quick one-off encoding &mdash; debugging API calls, building test URLs, or inspecting what a parameter looks like after encoding."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>URL Encoder / Decoder</h1>
+        <p class="desc">Encode special characters for URLs or decode percent-encoded strings.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="url-encode-btn" onclick="doUrl('encode')">Encode →</button>
+                <button id="url-decode-btn" onclick="doUrl('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="url-component" checked style="accent-color:var(--accent);"> Component mode</label>
+                <button onclick="copyOutput('url-output')">Copy</button>
+                <button onclick="swapUrl()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="url-input" placeholder="Enter URL or text to encode/decode..."></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="url-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);display:flex;gap:20px;flex-wrap:wrap;">
+        <span>Quick test: </span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='https://desktools.dev/search?q=hello world&lang=en&special=a+b=c';doUrl('encode')">URL with spaces</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='https%3A%2F%2Fdesktools.dev%2Fsearch%3Fq%3Dhello%20world%26lang%3Den';doUrl('decode')">Encoded URL</span>
+        <span style="cursor:pointer;color:var(--text-secondary);" onclick="document.getElementById('url-input').value='name=John Doe&city=New York&filter=type=premium';doUrl('encode')">Query string</span>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why do URLs need encoding?</button><div class="deep-dive-body"><div class="deep-dive-content"><p>URLs can only contain a limited set of ASCII characters. Special characters like spaces, ampersands, question marks, and non-ASCII characters (accented letters, emoji, CJK characters) must be <strong>percent-encoded</strong> — replaced with <code>%</code> followed by their hexadecimal byte value.</p><p>For example, a space becomes <code>%20</code>, an ampersand becomes <code>%26</code>, and the Japanese character あ becomes <code>%E3%81%82</code> (its UTF-8 bytes). Without encoding, these characters would break URL parsing — a <code>&</code> would be interpreted as a query parameter separator instead of a literal character.</p><p>This tool uses JavaScript's <code>encodeURIComponent()</code> for encoding and <code>decodeURIComponent()</code> for decoding. These functions handle the full Unicode range and are the standard way to prepare values for URL query strings, form submissions, and API requests.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Encodeur et décodeur d'URL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Codificador y decodificador de URL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>URL-Encoder und Decoder</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Codificador e decodificador de URL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>URLエンコーダー＆デコーダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>URL 编码解码工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>URL 인코더 및 디코더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مشفر ومفكك عناوين URL</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I URL-encode a string online?</summary>
+    <div class="faq-body">
+      <p>Paste the text into the input box and click <strong>Encode &rarr;</strong>. Special characters like spaces, <code>?</code>, <code>&amp;</code>, <code>/</code>, and Unicode characters are replaced with their percent-encoded equivalents (e.g. space becomes <code>%20</code>). Click <strong>Copy</strong> to grab the result.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between encodeURI and encodeURIComponent?</summary>
+    <div class="faq-body">
+      <p><strong>encodeURI</strong> preserves characters that have special meaning in a full URL (like <code>:</code>, <code>/</code>, <code>?</code>, <code>&amp;</code>) &mdash; use it when encoding a complete URL. <strong>encodeURIComponent</strong> encodes those too &mdash; use it for individual query string values or path segments. This tool supports both modes.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I decode a URL-encoded string?</summary>
+    <div class="faq-body">
+      <p>Paste the percent-encoded string into the input and click <strong>&larr; Decode</strong>. Sequences like <code>%20</code>, <code>%3F</code>, and <code>%C3%A9</code> are converted back to their original characters (space, ?, &eacute;). Works for both encodeURI and encodeURIComponent output.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why do I see %20 or + for spaces in URLs?</summary>
+    <div class="faq-body">
+      <p>Both represent a space. <code>%20</code> is the standard percent-encoding used in URL paths. <code>+</code> is used in <code>application/x-www-form-urlencoded</code> query strings (HTML form submissions). Modern URLs generally use <code>%20</code> everywhere, which is what this tool produces.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do I need to URL-encode query parameters manually?</summary>
+    <div class="faq-body">
+      <p>If you're building URLs programmatically, most languages have built-in functions (<code>encodeURIComponent</code> in JS, <code>urllib.parse.quote</code> in Python, <code>URLEncoder</code> in Java). This tool is for quick one-off encoding &mdash; debugging API calls, building test URLs, or inspecting what a parameter looks like after encoding.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    function doUrl(mode){const input=document.getElementById('url-input').value;const output=document.getElementById('url-output');const component=document.getElementById('url-component').checked;try{let result;if(mode==='encode'){result=component?encodeURIComponent(input):encodeURI(input);document.getElementById('url-encode-btn').classList.add('primary');document.getElementById('url-decode-btn').classList.remove('primary');}else{result=component?decodeURIComponent(input):decodeURI(input);document.getElementById('url-decode-btn').classList.add('primary');document.getElementById('url-encode-btn').classList.remove('primary');}output.value=result;}catch(e){output.value='Error: '+e.message;}}
+    function swapUrl(){const i=document.getElementById('url-input');const o=document.getElementById('url-output');const t=i.value;i.value=o.value;o.value=t;}
+</script>
+</body>
+</html>

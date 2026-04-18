@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSS Clamp Calculator — Fluid Typography & Spacing Generator | DeskTools</title>
+<meta name="description" content="Generate CSS clamp() values for fluid typography and responsive spacing. Free online tool with live preview. Perfect for modern responsive design."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/css-clamp-calculator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="CSS Clamp Calculator — DeskTools"/><meta property="og:description" content="Generate fluid clamp() values for responsive design."/><meta property="og:url" content="https://desktools.dev/css-clamp-calculator"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="CSS Clamp Calculator — DeskTools"/><meta name="twitter:description" content="Generate fluid clamp() values for responsive design."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Clamp Calculator","description":"Generate CSS clamp() values for fluid typography.","url":"https://desktools.dev/css-clamp-calculator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=number]{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:1rem;padding:.6rem .75rem;outline:none;transition:border-color .2s}
+input[type=number]:focus{border-color:var(--accent)}
+.unit-toggle{display:flex;gap:.5rem;margin-bottom:1rem}
+.unit-toggle button{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.5rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.8rem;cursor:pointer;transition:all .2s}
+.unit-toggle button.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.output-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--accent);display:flex;align-items:center;justify-content:space-between;gap:.75rem;word-break:break-all}
+.output-text{flex:1}
+.copy-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.35rem .65rem;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.preview{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center;margin-top:1rem}
+.preview-text{color:var(--text);font-weight:600;line-height:1.2}
+.preview-label{color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;margin-top:.5rem}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does CSS clamp() work for fluid typography?","acceptedAnswer":{"@type":"Answer","text":"clamp(min, preferred, max) sets a value that scales between a minimum and maximum based on viewport size. Example: clamp(1rem, 2vw + 0.5rem, 1.5rem). Text is 1rem on small screens, grows with viewport, caps at 1.5rem on large screens. This tool calculates the middle value for you."}},{"@type":"Question","name":"Why use clamp() instead of media queries?","acceptedAnswer":{"@type":"Answer","text":"Media queries jump at breakpoints. Text is 18px at 767px and suddenly 24px at 768px. clamp() scales smoothly across the whole range, which looks more polished and handles every screen size without writing explicit breakpoints."}},{"@type":"Question","name":"What viewport sizes should I use for min and max?","acceptedAnswer":{"@type":"Answer","text":"Common defaults: min viewport = 320px (smallest phone), max viewport = 1200-1440px (typical desktop cap). For content-focused sites, cap earlier (1024px) so text doesn't scale too large on wide monitors. Adjust to match where your audience actually views the site."}},{"@type":"Question","name":"Can I use clamp() for padding, margins, and gaps, not just font size?","acceptedAnswer":{"@type":"Answer","text":"Yes. clamp() works anywhere you use a length value: padding: clamp(1rem, 4vw, 3rem), margin, gap, width, max-width. Fluid spacing makes whole layouts feel cohesive across viewports without extra breakpoints."}},{"@type":"Question","name":"Should I use rem or px for clamp min and max values?","acceptedAnswer":{"@type":"Answer","text":"Prefer rem for anything related to text (font-size, line-height, vertical rhythm). It respects user browser font-size preferences (accessibility). Use px or rem for layout spacing; px is fine when you want exact pixel values regardless of user zoom."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>CSS Clamp Calculator</h1>
+  <p class="sub">Fluid typography and spacing for responsive design. Live preview.</p>
+
+  <div class="card">
+    <div class="card-title">Size range</div>
+    <div class="unit-toggle">
+      <button id="unitRem" class="active" onclick="setUnit('rem')">rem</button>
+      <button id="unitPx" onclick="setUnit('px')">px</button>
+    </div>
+    <div class="row">
+      <div><label>Min size</label><input type="number" id="minSize" value="1" step="0.125" oninput="calc()"/></div>
+      <div><label>Max size</label><input type="number" id="maxSize" value="2" step="0.125" oninput="calc()"/></div>
+    </div>
+    <div class="card-title" style="margin-top:1.25rem">Viewport range (px)</div>
+    <div class="row">
+      <div><label>Min viewport</label><input type="number" id="minVw" value="320" step="10" oninput="calc()"/></div>
+      <div><label>Max viewport</label><input type="number" id="maxVw" value="1200" step="10" oninput="calc()"/></div>
+    </div>
+  </div>
+
+  <div class="output-box">
+    <span class="output-text" id="output">font-size: clamp(...);</span>
+    <button class="copy-btn" onclick="copyResult()">Copy</button>
+  </div>
+
+  <div class="preview">
+    <div class="preview-text" id="previewText" style="font-size:1.5rem">The quick brown fox</div>
+    <div class="preview-label" id="previewLabel">Scales with viewport width</div>
+  </div>
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem;margin:0 auto">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is CSS clamp() and fluid typography?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>The CSS <code>clamp()</code> function takes three values: a minimum, a preferred, and a maximum. It outputs whichever fits: <code>clamp(MIN, PREFERRED, MAX)</code>. For responsive design, the preferred value is usually a formula that scales with viewport width, producing <strong>fluid typography</strong> that grows smoothly between breakpoints without media queries.</p>
+<p>The math: given a min size at a min viewport and a max size at a max viewport, the preferred value is a linear equation: <code>slope * 100vw + intercept</code>. This calculator solves that equation automatically and outputs a single clamp() value you can drop into any CSS property &mdash; font-size, padding, margin, gap, or even width.</p>
+<p>Why fluid over media queries? Fluid values scale continuously, avoiding abrupt jumps at breakpoints. They reduce CSS bloat and handle any screen size gracefully. Using rem units (instead of px) also respects user zoom and accessibility settings &mdash; critical for WCAG compliance.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Calculateur CSS clamp</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Calculadora CSS clamp</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>CSS clamp Rechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Calculadora CSS clamp</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>CSS clamp 計算ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>CSS clamp 计算器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>CSS clamp 계산기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة CSS clamp</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How does CSS clamp() work for fluid typography?</summary>
+    <div class="faq-body">
+      <p><code>clamp(min, preferred, max)</code> sets a value that scales between a minimum and maximum based on viewport size. Example: <code>clamp(1rem, 2vw + 0.5rem, 1.5rem)</code> &mdash; text is 1rem on small screens, grows with viewport, caps at 1.5rem on large screens. This tool calculates the middle value for you.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why use clamp() instead of media queries?</summary>
+    <div class="faq-body">
+      <p>Media queries jump at breakpoints &mdash; text is 18px at 767px and suddenly 24px at 768px. <code>clamp()</code> scales smoothly across the whole range, which looks more polished and handles every screen size without writing explicit breakpoints.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What viewport sizes should I use for min and max?</summary>
+    <div class="faq-body">
+      <p>Common defaults: <strong>min viewport</strong> = 320px (smallest phone), <strong>max viewport</strong> = 1200-1440px (typical desktop cap). For content-focused sites, cap earlier (1024px) so text doesn't scale too large on wide monitors. Adjust to match where your audience actually views the site.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use clamp() for padding, margins, and gaps, not just font size?</summary>
+    <div class="faq-body">
+      <p>Yes. <code>clamp()</code> works anywhere you use a length value: <code>padding: clamp(1rem, 4vw, 3rem)</code>, <code>margin</code>, <code>gap</code>, <code>width</code>, <code>max-width</code>. Fluid spacing makes whole layouts feel cohesive across viewports without extra breakpoints.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I use rem or px for clamp min and max values?</summary>
+    <div class="faq-body">
+      <p>Prefer <strong>rem</strong> for anything related to text (font-size, line-height, vertical rhythm) &mdash; it respects user browser font-size preferences (accessibility). Use <strong>px</strong> or <strong>rem</strong> for layout spacing; px is fine when you want exact pixel values regardless of user zoom.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+var unit='rem';
+function setUnit(u){
+  unit=u;
+  document.getElementById('unitRem').classList.toggle('active',u==='rem');
+  document.getElementById('unitPx').classList.toggle('active',u==='px');
+  if(u==='px'){document.getElementById('minSize').value=16;document.getElementById('maxSize').value=32;}
+  else{document.getElementById('minSize').value=1;document.getElementById('maxSize').value=2;}
+  calc();
+}
+function calc(){
+  var minS=parseFloat(document.getElementById('minSize').value);
+  var maxS=parseFloat(document.getElementById('maxSize').value);
+  var minV=parseFloat(document.getElementById('minVw').value);
+  var maxV=parseFloat(document.getElementById('maxVw').value);
+  if(isNaN(minS)||isNaN(maxS)||isNaN(minV)||isNaN(maxV)||minV>=maxV){document.getElementById('output').textContent='Invalid input';return;}
+  var minPx=unit==='rem'?minS*16:minS;
+  var maxPx=unit==='rem'?maxS*16:maxS;
+  var slope=(maxPx-minPx)/(maxV-minV);
+  var intercept=minPx-slope*minV;
+  var slopeVw=(slope*100).toFixed(4);
+  var interceptRem=(intercept/16).toFixed(4);
+  var minOut=unit==='rem'?minS+'rem':minS+'px';
+  var maxOut=unit==='rem'?maxS+'rem':maxS+'px';
+  var pref=interceptRem+'rem + '+slopeVw+'vw';
+  var out='clamp('+minOut+', '+pref+', '+maxOut+')';
+  document.getElementById('output').textContent='font-size: '+out+';';
+  // Preview: use computed midpoint
+  var midPx=(minPx+maxPx)/2;
+  document.getElementById('previewText').style.fontSize=midPx+'px';
+  document.getElementById('previewLabel').textContent='Min '+minPx.toFixed(1)+'px @ '+minV+'px &rarr; Max '+maxPx.toFixed(1)+'px @ '+maxV+'px';
+  document.getElementById('previewLabel').innerHTML=document.getElementById('previewLabel').textContent;
+}
+function copyResult(){
+  navigator.clipboard.writeText(document.getElementById('output').textContent);
+  if(typeof showToast==='function')showToast('Copied!');
+}
+calc();
+</script>
+</body>
+</html>

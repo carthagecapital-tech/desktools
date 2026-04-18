@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder & Decoder — Free Online Tool | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 or decode Base64 back to text. Supports UTF-8 and URL-safe variants.">
+    <meta name="keywords" content="base64 encoder, base64 decoder, base64 converter, encode base64, decode base64, base64 online">
+    <meta property="og:title" content="Base64 Encoder & Decoder — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/base64-encoder">
+    <link rel="canonical" href="https://desktools.dev/base64-encoder">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder & Decoder","description":"Free online Base64 encoder and decoder. Convert text to Base64 or decode Base64 back to text. Supports UTF-8 and URL-safe variants.","url":"https://desktools.dev/base64-encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"base64 encoder, base64 decoder, base64 converter"}</script>
+<meta name="twitter:title" content="Base64 Encoder & Decoder — Free Online Tool | DeskTools"/>
+<meta name="twitter:description" content="Free online Base64 encoder and decoder. Convert text to Base64 or decode Base64 back to text. Supports UTF-8 and URL-safe variants."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I encode text to Base64 online?","acceptedAnswer":{"@type":"Answer","text":"Paste or type your text in the input area and click Encode. The Base64 output appears instantly in the output box. Click Copy Output to copy it. Supports Unicode (emoji, non-Latin characters) via UTF-8."}},{"@type":"Question","name":"How do I decode Base64 back to text?","acceptedAnswer":{"@type":"Answer","text":"Paste your Base64 string into the input and click Decode. If the input is valid Base64, the decoded text appears instantly. Invalid input (bad padding, non-Base64 characters) will show an error so you can spot corrupted strings."}},{"@type":"Question","name":"What is the difference between Base64 and URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses + and /, which have special meanings in URLs. URL-safe Base64 replaces them with - and _ and often omits padding (=). Use URL-safe Base64 for query strings, JWTs, and file paths."}},{"@type":"Question","name":"Is Base64 encryption?","acceptedAnswer":{"@type":"Answer","text":"No. Base64 is an encoding, not encryption. Anyone can decode a Base64 string in seconds and it provides zero security. Base64 exists to represent binary data as ASCII text (for emails, URLs, JSON payloads), not to hide it. For actual security, use the Text Encryptor with a password."}},{"@type":"Question","name":"Can I encode a file or image to Base64?","acceptedAnswer":{"@type":"Answer","text":"For images, use the dedicated Image to Base64 tool. It handles the binary-to-Base64 conversion and gives you a ready-to-paste data URI for CSS or HTML."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Base64 Encode / Decode</h1>
+        <p class="desc">Encode text to Base64 or decode Base64 back to plain text.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group">
+                <button class="primary" id="b64-encode-btn" onclick="doBase64('encode')">Encode →</button>
+                <button id="b64-decode-btn" onclick="doBase64('decode')">← Decode</button>
+            </div>
+            <div class="toolbar-group">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;cursor:pointer;"><input type="checkbox" id="b64-urlsafe" style="accent-color:var(--accent);"> URL-safe</label>
+                <button onclick="copyOutput('b64-output')">Copy Output</button>
+                <button onclick="swapBase64()">⇄ Swap</button>
+            </div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="b64-input" placeholder="Enter text to encode or Base64 to decode..."></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="b64-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);display:flex;gap:24px;">
+        <span>Input: <span id="b64-input-size">0</span> bytes</span>
+        <span>Output: <span id="b64-output-size">0</span> bytes</span>
+    </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is Base64 encoding?</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Base64</strong> encodes binary data into a text-safe format using 64 ASCII characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code>, and <code>/</code>. It's used whenever binary data needs to travel through text-only channels — email attachments (MIME), data URIs in CSS/HTML, JSON payloads, and API authentication headers.</p><p>The encoding works by taking 3 bytes (24 bits) of input and splitting them into 4 groups of 6 bits, each mapped to one of the 64 characters. This means Base64 output is roughly <strong>33% larger</strong> than the original data. The <code>=</code> padding character fills in when the input length isn't divisible by 3.</p><p><strong>URL-safe Base64</strong> replaces <code>+</code> with <code>-</code> and <code>/</code> with <code>_</code> to avoid conflicts with URL query parameters. This tool supports both standard and URL-safe variants, and processes everything client-side using the browser's <code>btoa()</code> and <code>atob()</code> functions.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Encodeur et décodeur Base64</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Codificador y decodificador Base64</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Base64-Encoder und Decoder</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Codificador e decodificador Base64</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>Base64エンコーダー＆デコーダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Base64 编码解码工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Base64 인코더 및 디코더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مشفر ومفكك Base64</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I encode text to Base64 online?</summary>
+    <div class="faq-body">
+      <p>Paste or type your text in the input area and click <strong>Encode &rarr;</strong>. The Base64 output appears instantly in the output box. Click <strong>Copy Output</strong> to copy it. Supports Unicode (emoji, non-Latin characters) via UTF-8.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I decode Base64 back to text?</summary>
+    <div class="faq-body">
+      <p>Paste your Base64 string into the input and click <strong>&larr; Decode</strong>. If the input is valid Base64, the decoded text appears instantly. Invalid input (bad padding, non-Base64 characters) will show an error so you can spot corrupted strings.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between Base64 and URL-safe Base64?</summary>
+    <div class="faq-body">
+      <p>Standard Base64 uses <code>+</code> and <code>/</code>, which have special meanings in URLs. URL-safe Base64 replaces them with <code>-</code> and <code>_</code> and often omits padding (<code>=</code>). Use URL-safe Base64 for query strings, JWTs, and file paths.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is Base64 encryption?</summary>
+    <div class="faq-body">
+      <p>No. Base64 is an <strong>encoding</strong>, not encryption. Anyone can decode a Base64 string in seconds &mdash; it provides zero security. Base64 exists to represent binary data as ASCII text (for emails, URLs, JSON payloads), not to hide it. For actual security, use the <a href="/text-encryptor">Text Encryptor</a> with a password.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I encode a file or image to Base64?</summary>
+    <div class="faq-body">
+      <p>For images, use the dedicated <a href="/image-to-base64">Image to Base64</a> tool &mdash; it handles the binary-to-Base64 conversion and gives you a ready-to-paste data URI for CSS or HTML.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    function doBase64(mode){const input=document.getElementById('b64-input').value;const output=document.getElementById('b64-output');const urlSafe=document.getElementById('b64-urlsafe').checked;try{let result;if(mode==='encode'){result=btoa(unescape(encodeURIComponent(input)));if(urlSafe)result=result.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');document.getElementById('b64-encode-btn').classList.add('primary');document.getElementById('b64-decode-btn').classList.remove('primary');}else{let b64=input;if(urlSafe)b64=b64.replace(/-/g,'+').replace(/_/g,'/');while(b64.length%4)b64+='=';result=decodeURIComponent(escape(atob(b64)));document.getElementById('b64-decode-btn').classList.add('primary');document.getElementById('b64-encode-btn').classList.remove('primary');}output.value=result;document.getElementById('b64-input-size').textContent=new Blob([input]).size;document.getElementById('b64-output-size').textContent=new Blob([result]).size;}catch(e){output.value='Error: '+e.message;}}
+    function swapBase64(){const i=document.getElementById('b64-input');const o=document.getElementById('b64-output');const t=i.value;i.value=o.value;o.value=t;}
+</script>
+</body>
+</html>

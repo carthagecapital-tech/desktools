@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Regex Cheat Sheet — Interactive Regular Expression Reference | DeskTools</title>
+<meta name="description" content="Interactive regex cheat sheet. Search patterns, see examples, test live. Covers character classes, quantifiers, anchors, groups, and lookaheads."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/regex-cheat-sheet"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Regex Cheat Sheet — DeskTools"/><meta property="og:description" content="Interactive regex cheat sheet with live examples and search."/><meta property="og:url" content="https://desktools.dev/regex-cheat-sheet"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Regex Cheat Sheet — DeskTools"/><meta name="twitter:description" content="Interactive regex cheat sheet with live examples and search."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Cheat Sheet","description":"Interactive regex cheat sheet. Search patterns, see examples, test live.","url":"https://desktools.dev/regex-cheat-sheet","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:720px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:1.5rem}
+.search-box{display:flex;align-items:center;gap:.6rem;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.65rem 1rem;margin-bottom:1.5rem;transition:border-color .2s}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{color:var(--muted);flex-shrink:0}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;width:100%}
+.search-box input::placeholder{color:var(--muted)}
+.section{margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:600;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.entry{display:grid;grid-template-columns:100px 1fr;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:baseline;font-size:.88rem}
+.entry:last-child{border-bottom:none}
+.pattern{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:.88rem}
+.desc{color:var(--text)}
+.desc .ex{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted);display:block;margin-top:.2rem}
+.hidden{display:none}
+.no-results{text-align:center;padding:3rem;color:var(--muted)}
+.try-link{font-size:.75rem;color:var(--accent);text-decoration:none;opacity:.7;transition:opacity .15s;margin-left:.5rem}
+.try-link:hover{opacity:1}
+@media(max-width:600px){.entry{grid-template-columns:80px 1fr;font-size:.82rem}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I use this regex cheat sheet?","acceptedAnswer":{"@type":"Answer","text":"Search by pattern or concept (e.g. email, lookahead, \\d). Each entry shows the pattern, what it matches, and a live example. Use it as a quick reference while building patterns in the Regex Tester."}},{"@type":"Question","name":"What are the most common regex character classes?","acceptedAnswer":{"@type":"Answer","text":"\\d matches any digit, \\w matches word characters (letters, digits, underscore), \\s matches whitespace (space, tab, newline). Uppercase versions (\\D, \\W, \\S) are the negations. [a-z] defines custom character ranges."}},{"@type":"Question","name":"What is the difference between * and + in regex?","acceptedAnswer":{"@type":"Answer","text":"* matches the preceding element zero or more times. + matches it one or more times. So a* matches an empty string, aa, aaa... while a+ requires at least one a. Both are greedy by default &mdash; add ? to make them lazy."}},{"@type":"Question","name":"What are lookahead and lookbehind in regex?","acceptedAnswer":{"@type":"Answer","text":"Lookahead (?=...) checks if something follows without consuming it. Negative lookahead (?!...) checks it doesn't follow. Lookbehind (?&lt;=...) and negative lookbehind (?&lt;!...) do the same backwards. Useful for validating passwords, finding words not preceded by something, etc."}},{"@type":"Question","name":"How do I match a whole word in regex?","acceptedAnswer":{"@type":"Answer","text":"Use word boundaries: \\bword\\b matches word as a standalone word, not inside password or keyword. \\b is a zero-width assertion that marks the position between a word character and a non-word character."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Regex Cheat Sheet</h1>
+  <p class="sub">Quick reference for regular expressions. Search any pattern or concept.</p>
+
+  <div class="search-box">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Search... (e.g. email, digit, lookahead)" oninput="filter()" autocomplete="off"/>
+  </div>
+
+  <div id="content"></div>
+  <div class="no-results hidden" id="noResults">No matches found.</div>
+
+</div>
+
+<div class="deep-dive" style="max-width:720px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Learning regular expressions</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Regular expressions (regex)</strong> are one of the most powerful tools in a developer's toolkit, but they have a reputation for being cryptic. The key is to learn them in layers: start with literal characters, add character classes (<code>\d</code>, <code>\w</code>), then quantifiers (<code>*</code>, <code>+</code>, <code>{n}</code>), and finally groups and lookaheads.</p>
+<p>The most common mistake is writing overly complex patterns when simple ones would work. For example, validating an email doesn't need a 500-character RFC-compliant regex — <code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code> covers 99.9% of real-world emails. Start simple, test with real data, and add complexity only when needed.</p>
+<p>Performance matters for regex in production code. <strong>Catastrophic backtracking</strong> occurs when a pattern has nested quantifiers that can match the same input in exponentially many ways — like <code>(a+)+</code> on a string of a's. Use atomic groups or possessive quantifiers when available, and always test your patterns against edge cases and long inputs.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Aide-mémoire regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Hoja de referencia regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Regex-Spickzettel</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Folha de referência regex</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>正規表現チートシート</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>正则表达式速查表</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>정규식 치트 시트</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>ورقة مرجعية للتعبيرات النمطية</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I use this regex cheat sheet?</summary>
+    <div class="faq-body">
+      <p>Search by pattern or concept (e.g. <code>email</code>, <code>lookahead</code>, <code>\d</code>). Each entry shows the pattern, what it matches, and a live example. Use it as a quick reference while building patterns in the <a href="/regex-tester">Regex Tester</a>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the most common regex character classes?</summary>
+    <div class="faq-body">
+      <p><code>\d</code> matches any digit, <code>\w</code> matches word characters (letters, digits, underscore), <code>\s</code> matches whitespace (space, tab, newline). Uppercase versions (<code>\D</code>, <code>\W</code>, <code>\S</code>) are the negations. <code>[a-z]</code> defines custom character ranges.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between * and + in regex?</summary>
+    <div class="faq-body">
+      <p><code>*</code> matches the preceding element <strong>zero or more</strong> times. <code>+</code> matches it <strong>one or more</strong> times. So <code>a*</code> matches an empty string, <code>aa</code>, <code>aaa</code>... while <code>a+</code> requires at least one <code>a</code>. Both are greedy by default &mdash; add <code>?</code> to make them lazy.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are lookahead and lookbehind in regex?</summary>
+    <div class="faq-body">
+      <p><strong>Lookahead</strong> <code>(?=...)</code> checks if something follows without consuming it. <strong>Negative lookahead</strong> <code>(?!...)</code> checks it doesn't follow. <strong>Lookbehind</strong> <code>(?&lt;=...)</code> and <strong>negative lookbehind</strong> <code>(?&lt;!...)</code> do the same backwards. Useful for validating passwords, finding words not preceded by something, etc.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I match a whole word in regex?</summary>
+    <div class="faq-body">
+      <p>Use word boundaries: <code>\bword\b</code> matches <code>word</code> as a standalone word, not inside <code>password</code> or <code>keyword</code>. <code>\b</code> is a zero-width assertion that marks the position between a word character and a non-word character.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+var DATA=[
+{cat:'Characters',items:[
+{p:'.',d:'Any character except newline',ex:'/a.c/ matches "abc", "a1c"'},
+{p:'\\d',d:'Any digit (0-9)',ex:'/\\d+/ matches "123" in "abc123"'},
+{p:'\\D',d:'Any non-digit',ex:'/\\D+/ matches "abc" in "abc123"'},
+{p:'\\w',d:'Word character (a-z, A-Z, 0-9, _)',ex:'/\\w+/ matches "hello_world"'},
+{p:'\\W',d:'Non-word character',ex:'/\\W/ matches "@" in "a@b"'},
+{p:'\\s',d:'Whitespace (space, tab, newline)',ex:'/\\s+/ matches spaces between words'},
+{p:'\\S',d:'Non-whitespace',ex:'/\\S+/ matches each word'},
+{p:'\\b',d:'Word boundary',ex:'/\\bcat\\b/ matches "cat" but not "catch"'},
+{p:'\\t',d:'Tab character',ex:'Matches literal tab characters'},
+{p:'\\n',d:'Newline character',ex:'Matches line breaks'},
+]},
+{cat:'Character Classes',items:[
+{p:'[abc]',d:'Any of a, b, or c',ex:'/[aeiou]/ matches vowels'},
+{p:'[^abc]',d:'Not a, b, or c',ex:'/[^0-9]/ matches non-digits'},
+{p:'[a-z]',d:'Range: any lowercase letter',ex:'/[a-zA-Z]/ matches any letter'},
+{p:'[0-9]',d:'Range: any digit',ex:'Same as \\d'},
+]},
+{cat:'Quantifiers',items:[
+{p:'*',d:'Zero or more',ex:'/ab*c/ matches "ac", "abc", "abbc"'},
+{p:'+',d:'One or more',ex:'/ab+c/ matches "abc", "abbc" but not "ac"'},
+{p:'?',d:'Zero or one (optional)',ex:'/colou?r/ matches "color" and "colour"'},
+{p:'{n}',d:'Exactly n times',ex:'/\\d{3}/ matches "123" (3 digits)'},
+{p:'{n,}',d:'n or more times',ex:'/\\d{2,}/ matches 2+ digits'},
+{p:'{n,m}',d:'Between n and m times',ex:'/\\d{2,4}/ matches 2 to 4 digits'},
+{p:'*?',d:'Zero or more (lazy/non-greedy)',ex:'/<.*?>/ matches first tag only'},
+{p:'+?',d:'One or more (lazy)',ex:'Matches as few as possible'},
+]},
+{cat:'Anchors',items:[
+{p:'^',d:'Start of string (or line with m flag)',ex:'/^Hello/ matches "Hello world"'},
+{p:'$',d:'End of string (or line with m flag)',ex:'/world$/ matches "Hello world"'},
+{p:'\\b',d:'Word boundary',ex:'/\\bword\\b/ matches whole word only'},
+{p:'\\B',d:'Non-word boundary',ex:'/\\Bword/ matches "sword" but not "word"'},
+]},
+{cat:'Groups & References',items:[
+{p:'(abc)',d:'Capturing group',ex:'/(\\d{3})-(\\d{4})/ captures area and number'},
+{p:'(?:abc)',d:'Non-capturing group',ex:'Groups without creating a backreference'},
+{p:'\\1',d:'Backreference to group 1',ex:'/(\\w+)\\s\\1/ matches "the the" (repeated word)'},
+{p:'(?<name>)',d:'Named capturing group',ex:'/(?<year>\\d{4})/ captures as "year"'},
+]},
+{cat:'Lookahead & Lookbehind',items:[
+{p:'(?=abc)',d:'Positive lookahead',ex:'/\\d+(?=px)/ matches "12" in "12px"'},
+{p:'(?!abc)',d:'Negative lookahead',ex:'/\\d+(?!px)/ matches "12" in "12em"'},
+{p:'(?<=abc)',d:'Positive lookbehind',ex:'/(?<=\\$)\\d+/ matches "50" in "$50"'},
+{p:'(?<!abc)',d:'Negative lookbehind',ex:'/(?<!\\$)\\d+/ matches "50" in "EUR50"'},
+]},
+{cat:'Flags',items:[
+{p:'g',d:'Global — find all matches',ex:'/\\d/g finds all digits, not just first'},
+{p:'i',d:'Case-insensitive',ex:'/hello/i matches "Hello", "HELLO"'},
+{p:'m',d:'Multiline — ^ and $ match line boundaries',ex:'Useful for multi-line text'},
+{p:'s',d:'Dotall — . matches newlines too',ex:'Useful for matching across lines'},
+{p:'u',d:'Unicode support',ex:'Correctly handles emoji and non-Latin chars'},
+]},
+{cat:'Common Patterns',items:[
+{p:'Email',d:'/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/',ex:'Simple email validation'},
+{p:'URL',d:'/https?:\\/\\/[\\w.-]+\\.[a-z]{2,}[\\/\\w.-]*/i',ex:'Match http/https URLs'},
+{p:'IP Address',d:'/^(\\d{1,3}\\.){3}\\d{1,3}$/',ex:'Basic IPv4 validation'},
+{p:'Phone',d:'/^\\+?[\\d\\s()-]{7,15}$/',ex:'Flexible phone number format'},
+{p:'Hex Color',d:'/^#([0-9a-f]{3}|[0-9a-f]{6})$/i',ex:'Match #fff or #ffffff'},
+{p:'Date',d:'/^\\d{4}-\\d{2}-\\d{2}$/',ex:'ISO date format YYYY-MM-DD'},
+]},
+];
+
+function render(){
+  var el=document.getElementById('content');
+  var html='';
+  DATA.forEach(function(section){
+    html+='<div class="section" data-cat="'+section.cat+'"><div class="section-title">'+section.cat+'</div>';
+    section.items.forEach(function(item){
+      var tryUrl='/regex-tester';
+      html+='<div class="entry" data-search="'+item.p.toLowerCase()+' '+item.d.toLowerCase()+' '+(item.ex||'').toLowerCase()+'">'+
+        '<span class="pattern">'+esc(item.p)+'</span>'+
+        '<span class="desc">'+esc(item.d)+(item.ex?'<span class="ex">'+esc(item.ex)+'</span>':'')+'</span>'+
+        '</div>';
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function filter(){
+  var q=document.getElementById('search').value.toLowerCase();
+  var any=false;
+  document.querySelectorAll('.entry').forEach(function(el){
+    var match=!q||el.dataset.search.indexOf(q)!==-1;
+    el.classList.toggle('hidden',!match);
+    if(match)any=true;
+  });
+  document.querySelectorAll('.section').forEach(function(el){
+    var hasVisible=el.querySelector('.entry:not(.hidden)');
+    el.classList.toggle('hidden',!hasVisible);
+  });
+  document.getElementById('noResults').classList.toggle('hidden',any);
+}
+render();
+</script>
+</body>
+</html>

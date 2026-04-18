@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Gradient Generator — DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/gradient-generator"/>
+<meta name="description" content="Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.preview{border-radius:14px;height:260px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.preview-label{position:absolute;bottom:.75rem;right:.75rem;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border-radius:6px;padding:.25rem .6rem;font-size:.72rem;color:rgba(255,255,255,.7);font-family:'JetBrains Mono',monospace}
+.controls{display:flex;flex-direction:column;gap:1rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card label{font-size:.78rem;font-weight:500;color:var(--muted);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.04em}
+.seg{display:flex;gap:.4rem;background:var(--bg3);border-radius:8px;padding:.25rem}
+.seg button{flex:1;background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;padding:.35rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.seg button.active{background:var(--accent);color:#0a0a0f}
+.angle-row{display:flex;align-items:center;gap:.75rem}
+.angle-row input[type=range]{flex:1;accent-color:var(--accent)}
+.angle-val{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--accent);min-width:3ch;text-align:right}
+.stops{display:flex;flex-direction:column;gap:.6rem}
+.stop-row{display:flex;align-items:center;gap:.6rem}
+.stop-row input[type=color]{width:36px;height:36px;border:1px solid var(--border);border-radius:6px;background:none;cursor:pointer;padding:2px}
+.stop-row input[type=range]{flex:1;accent-color:var(--accent)}
+.stop-pos{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted);min-width:3ch}
+.stop-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;padding:.1rem .3rem;border-radius:4px;transition:color .15s}
+.stop-del:hover{color:#ff6b6b}
+.add-stop{background:none;border:1px dashed var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.83rem;padding:.45rem;border-radius:8px;cursor:pointer;width:100%;transition:all .2s;margin-top:.25rem}
+.add-stop:hover{border-color:var(--accent);color:var(--accent)}
+.css-out{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);word-break:break-all;line-height:1.6;margin-top:.75rem;cursor:pointer;transition:border-color .2s}
+.css-out:hover{border-color:var(--accent)}
+.copy-btn{width:100%;background:var(--accent);color:#0a0a0f;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;border-radius:8px;padding:.6rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.copy-btn:hover{background:var(--accent2)}
+.copy-btn.copied{background:#1a6b5a}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){.layout{grid-template-columns:1fr}.preview{height:180px}}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Gradient Generator — DeskTools"/>
+<meta property="og:description" content="Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients."/>
+<meta property="og:url" content="https://desktools.dev/gradient-generator"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Gradient Generator — DeskTools"/>
+<meta name="twitter:description" content="Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Gradient Generator","description":"Build beautiful CSS gradients visually. Copy ready-to-use CSS linear, radial, or conic gradients.","url":"https://desktools.dev/gradient-generator","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"CSS gradient generator, gradient maker, linear radial gradient"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a CSS linear gradient online for free?","acceptedAnswer":{"@type":"Answer","text":"Pick the Linear type, drag the angle slider to set direction (0 degrees points up, 90 degrees points right, 180 degrees points down), and add as many color stops as you need. The linear-gradient() CSS is generated instantly below the preview. Click Copy CSS and paste it into your stylesheet. No signup, no watermark, runs entirely in your browser."}},{"@type":"Question","name":"What is the difference between linear, radial, and conic gradients?","acceptedAnswer":{"@type":"Answer","text":"Linear gradients transition colors along a straight line at a chosen angle, useful for backgrounds and buttons. Radial gradients radiate outward from a center point in a circle or ellipse, good for spotlights and soft glows. Conic gradients sweep colors around a center point like a pie chart or color wheel, used for loaders, pie charts, and hue pickers. This generator supports all three with a single click."}},{"@type":"Question","name":"How do I make a CSS gradient with more than two colors?","acceptedAnswer":{"@type":"Answer","text":"Click + Add stop under the Color Stops section. Each stop takes a color and a position from 0 to 100 percent. You can add as many stops as you need to build multi-color gradients, rainbows, or smooth blends. Drag the position slider on each stop to control where that color peaks."}},{"@type":"Question","name":"Can I use these CSS gradients with Tailwind CSS?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy the generated background: linear-gradient(...) value and use it in Tailwind's arbitrary-value syntax, for example bg-[linear-gradient(135deg,#00d4aa_0%,#7c3aed_100%)]. For cleaner code, add it to your tailwind.config.js under backgroundImage and reference it as a utility class like bg-brand-gradient."}},{"@type":"Question","name":"How do I create a conic gradient for a pie chart or loading spinner?","acceptedAnswer":{"@type":"Answer","text":"Select the Conic type, then add color stops at specific percentages to define each slice. For a pie chart with three equal sections, use stops at 0%, 33%, 33%, 66%, 66%, and 100% with hard transitions. Using the same position for adjacent stops creates a sharp edge. Adjust the starting angle with the Angle slider."}},{"@type":"Question","name":"Are CSS gradients better than background images for performance?","acceptedAnswer":{"@type":"Answer","text":"Yes, in most cases. CSS gradients are rendered by the browser with zero network requests, no file size cost, and scale perfectly to any resolution or screen density. A background image is a separate HTTP request and can blur on high-DPI displays. Gradients are also easily animated with CSS transitions, which is difficult with raster images."}},{"@type":"Question","name":"Does this gradient generator work offline and keep my data private?","acceptedAnswer":{"@type":"Answer","text":"Yes. DeskTools runs 100% in your browser. No data is ever sent to a server. Once the page is loaded, the gradient generator works fully offline. Nothing you create is logged, tracked, or stored outside your own device."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>Gradient Generator</h1>
+  <p class="sub">Build CSS gradients visually — linear, radial, or conic. Copy the CSS instantly.</p>
+  <div class="layout">
+    <div>
+      <div class="preview" id="preview">
+        <div class="preview-label" id="previewLabel">linear</div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="card">
+        <label>Type</label>
+        <div class="seg" id="typeSeg">
+          <button class="active" onclick="setType('linear',this)">Linear</button>
+          <button onclick="setType('radial',this)">Radial</button>
+          <button onclick="setType('conic',this)">Conic</button>
+        </div>
+      </div>
+      <div class="card" id="angleCard">
+        <label>Angle</label>
+        <div class="angle-row">
+          <input type="range" id="angleRange" min="0" max="360" value="135" oninput="update()"/>
+          <span class="angle-val" id="angleVal">135°</span>
+        </div>
+      </div>
+      <div class="card">
+        <label>Color Stops</label>
+        <div class="stops" id="stops"></div>
+        <button class="add-stop" onclick="addStop()">+ Add stop</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.5rem">
+    <label>CSS Output</label>
+    <div class="css-out" id="cssOut" onclick="copyCSS()" title="Click to copy"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyCSS()">Copy CSS</button>
+  </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> CSS gradients explained</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>CSS gradients</strong> create smooth transitions between colors without using images. <code>linear-gradient()</code> transitions along a straight line at any angle, <code>radial-gradient()</code> radiates from a center point, and <code>conic-gradient()</code> sweeps around a center like a color wheel.</p><p>Each gradient takes <strong>color stops</strong> — the colors and optional positions where they appear. Two stops create a simple fade; multiple stops create complex patterns. Stops can overlap (creating hard lines) or be spread apart (creating smooth blends). You can layer multiple gradients using comma separation for advanced effects.</p><p>Gradients are resolution-independent (they scale perfectly to any size), file-size free (no image download), and easily animated with CSS transitions. They're used for backgrounds, overlays, text effects, progress bars, and decorative elements. This tool lets you build gradients visually and copy the exact CSS.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de dégradés CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de gradientes CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>CSS-Farbverlauf-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de gradientes CSS</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>CSSグラデーションジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>CSS 渐变生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>CSS 그라디언트 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد التدرجات CSS</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a CSS linear gradient online for free?</summary>
+    <div class="faq-body">
+      <p>Pick the <strong>Linear</strong> type above, drag the angle slider to set direction (0&deg; points up, 90&deg; points right, 180&deg; points down), and add as many color stops as you need. The <code>linear-gradient()</code> CSS is generated instantly below the preview &mdash; click <strong>Copy CSS</strong> and paste it into your stylesheet. No signup, no watermark, runs entirely in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between linear, radial, and conic gradients?</summary>
+    <div class="faq-body">
+      <p><strong>Linear gradients</strong> transition colors along a straight line at a chosen angle &mdash; useful for backgrounds and buttons. <strong>Radial gradients</strong> radiate outward from a center point in a circle or ellipse &mdash; good for spotlights and soft glows. <strong>Conic gradients</strong> sweep colors around a center point like a pie chart or color wheel &mdash; used for loaders, pie charts, and hue pickers. This generator supports all three with a single click.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I make a CSS gradient with more than two colors?</summary>
+    <div class="faq-body">
+      <p>Click <strong>+ Add stop</strong> under the Color Stops section. Each stop takes a color and a position (0&ndash;100%). You can add as many stops as you need to build multi-color gradients, rainbows, or smooth blends. Drag the position slider on each stop to control where that color peaks.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use these CSS gradients with Tailwind CSS?</summary>
+    <div class="faq-body">
+      <p>Yes. Copy the generated <code>background: linear-gradient(...)</code> value and use it in Tailwind's arbitrary-value syntax: <code>bg-[linear-gradient(135deg,#00d4aa_0%,#7c3aed_100%)]</code>. For cleaner code, add it to your <code>tailwind.config.js</code> under <code>backgroundImage</code> and reference it as a utility class like <code>bg-brand-gradient</code>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I create a conic gradient for a pie chart or loading spinner?</summary>
+    <div class="faq-body">
+      <p>Select the <strong>Conic</strong> type, then add color stops at specific percentages to define each slice. For a pie chart with three equal sections, use stops at 0%, 33%, 33%, 66%, 66%, and 100% with hard transitions (same position for adjacent stops creates a sharp edge). Adjust the starting angle with the Angle slider.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are CSS gradients better than background images for performance?</summary>
+    <div class="faq-body">
+      <p>Yes, in most cases. CSS gradients are rendered by the browser with zero network requests, no file size cost, and scale perfectly to any resolution or screen density. A background image is a separate HTTP request and can blur on high-DPI displays. Gradients are also easily animated with CSS transitions, which is difficult with raster images.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does this gradient generator work offline and keep my data private?</summary>
+    <div class="faq-body">
+      <p>Yes. DeskTools runs 100% in your browser &mdash; no data is ever sent to a server. Once the page is loaded, the gradient generator works fully offline. Nothing you create is logged, tracked, or stored outside your own device.</p>
+    </div>
+  </details>
+</section>
+
+<script src="/shared.js"></script>
+<script>
+let type='linear', stops=[{color:'#00d4aa',pos:0},{color:'#7c3aed',pos:100}];
+function setType(t,btn){
+  type=t;
+  document.querySelectorAll('#typeSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('angleCard').style.display=(t==='radial')?'none':'';
+  update();
+}
+function renderStops(){
+  const el=document.getElementById('stops'); el.innerHTML='';
+  stops.forEach((s,i)=>{
+    const row=document.createElement('div'); row.className='stop-row';
+    row.innerHTML=`<input type="color" value="${s.color}" oninput="stops[${i}].color=this.value;update()"/>
+      <input type="range" min="0" max="100" value="${s.pos}" oninput="stops[${i}].pos=+this.value;update()"/>
+      <span class="stop-pos">${s.pos}%</span>
+      ${stops.length>2?`<button class="stop-del" onclick="removeStop(${i})">&#x2715;</button>`:''}`;
+    el.appendChild(row);
+  });
+}
+function addStop(){stops.push({color:'#ff6b6b',pos:50});stops.sort((a,b)=>a.pos-b.pos);renderStops();update();}
+function removeStop(i){if(stops.length<=2)return;stops.splice(i,1);renderStops();update();}
+function update(){
+  const angle=document.getElementById('angleRange').value;
+  document.getElementById('angleVal').textContent=angle+'°';
+  const sorted=[...stops].sort((a,b)=>a.pos-b.pos);
+  const sc=sorted.map(s=>`${s.color} ${s.pos}%`).join(', ');
+  let grad='';
+  if(type==='linear') grad=`linear-gradient(${angle}deg, ${sc})`;
+  else if(type==='radial') grad=`radial-gradient(circle, ${sc})`;
+  else grad=`conic-gradient(from ${angle}deg, ${sc})`;
+  document.getElementById('preview').style.background=grad;
+  document.getElementById('previewLabel').textContent=type;
+  document.getElementById('cssOut').textContent=`background: ${grad};`;
+  renderStops();
+}
+function copyCSS(){
+  const css=document.getElementById('cssOut').textContent;
+  navigator.clipboard.writeText(css);
+  const btn=document.getElementById('copyBtn'); btn.textContent='Copied!'; btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copy CSS';btn.classList.remove('copied');},1800);
+}
+update();
+</script>
+</body>
+</html>

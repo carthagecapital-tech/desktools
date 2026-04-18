@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Unit Converter — DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/unit-converter"/>
+<meta name="description" content="Convert between common units — length, weight, temperature, area, speed, and more."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:700px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.cats{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem}
+.cat-btn{background:var(--bg3);border:1px solid var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;padding:.35rem .85rem;border-radius:7px;cursor:pointer;transition:all .2s}
+.cat-btn:hover{color:var(--text);border-color:var(--border-hover)}
+.cat-btn.active{background:rgba(0,212,170,0.1);border-color:var(--accent);color:var(--accent)}
+.conv-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.5rem}
+.conv-row{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:end;margin-bottom:1.5rem}
+.field label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-wrap input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:1.4rem;padding:.65rem .85rem;outline:none;transition:border-color .2s}
+.input-wrap input:focus{border-color:var(--accent)}
+.input-wrap select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.83rem;padding:.4rem .6rem;outline:none;margin-top:.4rem;cursor:pointer}
+.swap-btn{background:none;border:1px solid var(--border);color:var(--muted);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-bottom:2rem}
+.swap-btn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(180deg)}
+.all-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem}
+.result-row{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.75rem 1rem;cursor:pointer;transition:border-color .2s}
+.result-row:hover{border-color:var(--accent)}
+.result-val{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--accent);display:block}
+.result-unit{font-size:.75rem;color:var(--muted)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Unit Converter — DeskTools"/>
+<meta property="og:description" content="Convert between common units — length, weight, temperature, area, speed, and more."/>
+<meta property="og:url" content="https://desktools.dev/unit-converter"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Unit Converter — DeskTools"/>
+<meta name="twitter:description" content="Convert between common units — length, weight, temperature, area, speed, and more."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Unit Converter","description":"Convert between common units \u2014 length, weight, temperature, area, speed, and more.","url":"https://desktools.dev/unit-converter","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"unit converter, measurement converter, metric imperial"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert units online quickly?","acceptedAnswer":{"@type":"Answer","text":"Pick the category (length, weight, temperature, area, speed, volume, etc.), select the from and to units, and enter a value. The converted result appears instantly. Click the swap icon to reverse direction. No signup, runs in your browser."}},{"@type":"Question","name":"What units does this converter support?","acceptedAnswer":{"@type":"Answer","text":"Length (meters, feet, inches, miles, km), weight/mass (grams, kg, pounds, ounces), temperature (Celsius, Fahrenheit, Kelvin), area (square meters, acres, hectares), speed (km/h, mph, knots, m/s), volume (liters, gallons, cups, ml), and more. Each category includes the most common international and US units."}},{"@type":"Question","name":"How do I convert Celsius to Fahrenheit?","acceptedAnswer":{"@type":"Answer","text":"The formula is F = C x 9/5 + 32. So 20C is 68F, 100C is 212F, and -40C equals -40F (the only point where they match). This tool handles the conversion automatically. Just pick temperature category and the two units."}},{"@type":"Question","name":"What's the difference between a US gallon and a UK (imperial) gallon?","acceptedAnswer":{"@type":"Answer","text":"A UK imperial gallon is about 20% larger: 4.546 liters vs 3.785 liters for US gallons. This affects everything from gas mileage (MPG is not comparable across US/UK) to recipe measurements. The converter has both available. Pick the right one for your context."}},{"@type":"Question","name":"Why do I sometimes see tiny rounding differences in conversions?","acceptedAnswer":{"@type":"Answer","text":"Most unit conversions involve irrational or long-decimal ratios (1 inch = 25.4 mm exactly, but 1 mile = 1.609344 km). The tool rounds to a reasonable number of decimal places for display. For engineering work requiring high precision, use specialized software with explicit precision control."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>Unit Converter</h1>
+  <p class="sub">Convert between length, weight, temperature, area, speed, and more.</p>
+
+  <div class="cats" id="cats"></div>
+
+  <div class="conv-card">
+    <div class="conv-row">
+      <div class="field">
+        <label>From</label>
+        <div class="input-wrap">
+          <input type="number" id="fromVal" value="1" oninput="convert('from')"/>
+          <select id="fromUnit" onchange="convert('from')"></select>
+        </div>
+      </div>
+      <button class="swap-btn" onclick="swapUnits()">&#8646;</button>
+      <div class="field">
+        <label>To</label>
+        <div class="input-wrap">
+          <input type="number" id="toVal" readonly style="color:var(--accent)"/>
+          <select id="toUnit" onchange="convert('from')"></select>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.75rem">All conversions</div>
+    <div class="all-results" id="allResults"></div>
+  </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why unit conversion matters</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Unit conversion</strong> is translating a measurement from one unit system to another. The world uses two main systems: <strong>metric</strong> (meters, kilograms, Celsius) used by most countries, and <strong>imperial</strong> (feet, pounds, Fahrenheit) used primarily in the United States. International work constantly requires converting between them.</p><p>Common conversions include length (inches to centimeters), weight (pounds to kilograms), temperature (Fahrenheit to Celsius), volume (gallons to liters), and speed (mph to km/h). Temperature is the trickiest because it uses different formulas rather than simple multiplication — <code>°C = (°F - 32) × 5/9</code>.</p><p>This tool covers the most-used categories: length, weight, temperature, area, volume, and speed. Each conversion uses precise conversion factors and handles decimal precision automatically. Useful for cooking, travel, engineering, fitness tracking, and any cross-border collaboration.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur d'unités</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor de unidades</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Einheitenrechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor de unidades</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>単位変換ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>单位换算工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>단위 변환기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول الوحدات</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert units online quickly?</summary>
+    <div class="faq-body">
+      <p>Pick the category (length, weight, temperature, area, speed, volume, etc.), select the "from" and "to" units, and enter a value. The converted result appears instantly. Click the swap icon to reverse direction. No signup, runs in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What units does this converter support?</summary>
+    <div class="faq-body">
+      <p><strong>Length</strong> (meters, feet, inches, miles, km), <strong>weight/mass</strong> (grams, kg, pounds, ounces), <strong>temperature</strong> (Celsius, Fahrenheit, Kelvin), <strong>area</strong> (square meters, acres, hectares), <strong>speed</strong> (km/h, mph, knots, m/s), <strong>volume</strong> (liters, gallons, cups, ml), and more. Each category includes the most common international and US units.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I convert Celsius to Fahrenheit?</summary>
+    <div class="faq-body">
+      <p>The formula is <code>F = C &times; 9/5 + 32</code>. So 20&deg;C is 68&deg;F, 100&deg;C is 212&deg;F, and -40&deg;C equals -40&deg;F (the only point where they match). This tool handles the conversion automatically &mdash; just pick temperature category and the two units.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between a US gallon and a UK (imperial) gallon?</summary>
+    <div class="faq-body">
+      <p>A UK imperial gallon is about 20% larger: 4.546 liters vs 3.785 liters for US gallons. This affects everything from gas mileage (MPG is not comparable across US/UK) to recipe measurements. The converter has both available &mdash; pick the right one for your context.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why do I sometimes see tiny rounding differences in conversions?</summary>
+    <div class="faq-body">
+      <p>Most unit conversions involve irrational or long-decimal ratios (1 inch = 25.4 mm exactly, but 1 mile = 1.609344 km). The tool rounds to a reasonable number of decimal places for display. For engineering work requiring high precision, use specialized software with explicit precision control.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+const CATS={
+  Length:{units:{Meter:1,Kilometer:0.001,Centimeter:100,Millimeter:1000,Mile:0.000621371,Yard:1.09361,Foot:3.28084,Inch:39.3701,'Nautical Mile':0.000539957},fmt:n=>+n.toPrecision(6)},
+  Weight:{units:{Kilogram:1,Gram:1000,Milligram:1e6,Pound:2.20462,Ounce:35.274,Tonne:0.001,Stone:0.157473},fmt:n=>+n.toPrecision(6)},
+  Temperature:{
+    toBase:{Celsius:v=>v,Fahrenheit:v=>(v-32)*5/9,Kelvin:v=>v-273.15},
+    fromBase:{Celsius:v=>v,Fahrenheit:v=>v*9/5+32,Kelvin:v=>v+273.15},
+    units:['Celsius','Fahrenheit','Kelvin'],fmt:n=>+n.toFixed(4)
+  },
+  Area:{units:{Sq_Meter:1,Sq_Kilometer:1e-6,Sq_Mile:3.861e-7,Sq_Foot:10.7639,Sq_Inch:1550,Acre:0.000247105,Hectare:0.0001},fmt:n=>+n.toPrecision(6)},
+  Speed:{units:{'m/s':1,'km/h':3.6,'mph':2.23694,'knot':1.94384,'ft/s':3.28084},fmt:n=>+n.toPrecision(6)},
+  Volume:{units:{Liter:1,Milliliter:1000,'Cubic Meter':0.001,Gallon_US:0.264172,'Fl Oz':33.814,Pint_US:2.11338,Cup_US:4.22675,Tablespoon:67.628,Teaspoon:202.884},fmt:n=>+n.toPrecision(6)},
+  Data:{units:{Byte:1,Kilobyte:1/1024,Megabyte:1/1048576,Gigabyte:1/1073741824,Terabyte:1/1099511627776,Bit:8},fmt:n=>+n.toPrecision(6)},
+};
+let cat='Length';
+function buildCats(){
+  const el=document.getElementById('cats'); el.innerHTML='';
+  Object.keys(CATS).forEach(k=>{
+    const b=document.createElement('button'); b.className='cat-btn'+(k===cat?' active':'');
+    b.textContent=k; b.onclick=()=>{cat=k;buildCats();buildUnits();convert('from');};
+    el.appendChild(b);
+  });
+}
+function unitList(){const c=CATS[cat];return Array.isArray(c.units)?c.units:Object.keys(c.units);}
+function buildUnits(){
+  const ul=unitList();
+  ['fromUnit','toUnit'].forEach((id,i)=>{
+    const sel=document.getElementById(id); sel.innerHTML='';
+    ul.forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=u.replace(/_/g,' ');sel.appendChild(o);});
+    sel.value=ul[i===0?0:1];
+  });
+}
+function toBase(val,unit){
+  const c=CATS[cat];
+  if(c.toBase) return c.toBase[unit](val);
+  return val/c.units[unit];
+}
+function fromBase(base,unit){
+  const c=CATS[cat];
+  if(c.fromBase) return c.fromBase[unit](base);
+  return base*c.units[unit];
+}
+function convert(dir){
+  const fv=+document.getElementById('fromVal').value;
+  const fu=document.getElementById('fromUnit').value;
+  const tu=document.getElementById('toUnit').value;
+  const c=CATS[cat];
+  const base=toBase(fv,fu);
+  const res=fromBase(base,tu);
+  document.getElementById('toVal').value=isFinite(res)?c.fmt(res):'—';
+  const el=document.getElementById('allResults'); el.innerHTML='';
+  unitList().forEach(u=>{
+    const v=fromBase(base,u);
+    const d=document.createElement('div'); d.className='result-row';
+    d.innerHTML=`<span class="result-val">${isFinite(v)?c.fmt(v):'—'}</span><span class="result-unit">${u.replace(/_/g,' ')}</span>`;
+    d.onclick=()=>{document.getElementById('toUnit').value=u;convert('from');};
+    el.appendChild(d);
+  });
+}
+function swapUnits(){
+  const f=document.getElementById('fromUnit').value;
+  const t=document.getElementById('toUnit').value;
+  document.getElementById('fromUnit').value=t;
+  document.getElementById('toUnit').value=f;
+  convert('from');
+}
+buildCats(); buildUnits(); convert('from');
+</script>
+</body>
+</html>

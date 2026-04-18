@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Case Converter & Transformer — Free Online Tool | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online text case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more. Count words, sort lines, remove duplicates.">
+    <meta name="keywords" content="text case converter, uppercase converter, lowercase converter, camelCase converter, snake_case, word counter, text transformer">
+    <meta property="og:title" content="Text Case Converter & Transformer — DeskTools">
+    <meta property="og:description" content="Convert text between cases, count words, sort lines, remove duplicates — all in your browser.">
+    <meta property="og:url" content="https://desktools.dev/text-transformer">
+    <link rel="canonical" href="https://desktools.dev/text-transformer">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text Case Converter & Transformer","description":"Free online text case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more. Count words, sort lines, remove duplicates.","url":"https://desktools.dev/text-transformer","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"text transformer, case converter, uppercase lowercase"}</script>
+<meta name="twitter:title" content="Text Case Converter & Transformer — Free Online Tool | DeskTools"/>
+<meta name="twitter:description" content="Free online text case converter. Transform text to uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and more. Count words, sort lines, remove duplicates."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I change text case online?","acceptedAnswer":{"@type":"Answer","text":"Paste your text in the input box and click any transformation: UPPER, lower, Title Case, Sentence case, camelCase, snake_case, or kebab-case. The result appears instantly. Click Copy to grab it."}},{"@type":"Question","name":"What is the difference between camelCase, snake_case, and kebab-case?","acceptedAnswer":{"@type":"Answer","text":"camelCase joins words with capitals (userName) - common in JavaScript/Java. snake_case uses underscores (user_name) - Python, Ruby, databases. kebab-case uses hyphens (user-name) - URLs, CSS, HTML attributes. PascalCase is like camelCase but capitalizes the first letter too (UserName) - class names."}},{"@type":"Question","name":"How do I remove duplicate lines from text?","acceptedAnswer":{"@type":"Answer","text":"Paste your text (one item per line) and click Dedupe. Duplicate lines are removed and the output preserves the original order of first occurrence. Useful for cleaning email lists, removing duplicate URLs, or deduplicating log entries."}},{"@type":"Question","name":"How do I sort lines alphabetically online?","acceptedAnswer":{"@type":"Answer","text":"Paste your list (one item per line) and click Sort Lines. Items are sorted A-Z, case-sensitive by default (uppercase letters sort before lowercase). Combine with Dedupe to sort and remove duplicates in one pass."}},{"@type":"Question","name":"What does the Trim button do?","acceptedAnswer":{"@type":"Answer","text":"Trim removes leading and trailing whitespace from each line. Useful when pasting data that has inconsistent spacing. To remove internal whitespace (between words), you'd need a different transformation or regex."}},{"@type":"Question","name":"Can I reverse the order of text?","acceptedAnswer":{"@type":"Answer","text":"Yes. Reverse flips the characters. Hello becomes olleh. To reverse the order of lines instead, no dedicated button yet; workaround: paste into a spreadsheet, sort descending, paste back."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Text Transformer</h1>
+        <p class="desc">Transform, clean, and convert text instantly.</p>
+    </div>
+    <div class="workspace">
+        <div class="workspace-toolbar">
+            <div class="toolbar-group transform-buttons">
+                <button class="active" onclick="transformText('upper', this)">UPPER</button>
+                <button onclick="transformText('lower', this)">lower</button>
+                <button onclick="transformText('title', this)">Title Case</button>
+                <button onclick="transformText('sentence', this)">Sentence</button>
+                <button onclick="transformText('camel', this)">camelCase</button>
+                <button onclick="transformText('snake', this)">snake_case</button>
+                <button onclick="transformText('kebab', this)">kebab-case</button>
+                <button onclick="transformText('reverse', this)">Reverse</button>
+                <button onclick="transformText('sort', this)">Sort Lines</button>
+                <button onclick="transformText('dedupe', this)">Dedupe</button>
+                <button onclick="transformText('trim', this)">Trim</button>
+            </div>
+            <div class="toolbar-group"><button onclick="copyOutput('text-output')">Copy</button></div>
+        </div>
+        <div class="split-workspace">
+            <div><span class="pane-label">Input</span><textarea class="tool-input" id="text-input" placeholder="Paste your text here..." oninput="autoTransformText()"></textarea></div>
+            <div><span class="pane-label">Output</span><textarea class="tool-input" id="text-output" readonly style="color:var(--accent);background:transparent;"></textarea></div>
+        </div>
+    </div>
+    <div style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);display:flex;gap:24px;">
+        <span>Words: <span id="word-count">0</span></span>
+        <span>Characters: <span id="char-count">0</span></span>
+        <span>Lines: <span id="line-count">0</span></span>
+    </div>
+
+</div>
+
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Common text transformations explained</button><div class="deep-dive-body"><div class="deep-dive-content"><p><strong>Case conversion</strong> is one of the most frequent text operations in development and content creation. <code>UPPERCASE</code> is used for constants, headings, and emphasis. <code>lowercase</code> normalizes user input for comparison. <code>Title Case</code> capitalizes the first letter of each word for headlines.</p><p><strong>camelCase</strong> and <strong>snake_case</strong> are naming conventions in programming. JavaScript and Java use camelCase for variables (<code>firstName</code>), while Python and Ruby prefer snake_case (<code>first_name</code>). CSS uses kebab-case (<code>font-size</code>). Converting between these is tedious by hand, especially for long variable lists.</p><p>Beyond case conversion, this tool also counts words and characters, removes duplicate lines, sorts lines alphabetically, and reverses text. These operations are useful for cleaning data, preparing content for databases, formatting code, and processing text files — all without installing a text editor extension.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur de casse de texte</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor de mayúsculas y minúsculas</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Text-Konverter</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor de maiúsculas e minúsculas</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>テキスト変換ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>文本大小写转换工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>텍스트 대소문자 변환기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول حالة النص</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I change text case online?</summary>
+    <div class="faq-body">
+      <p>Paste your text in the input box and click any transformation: <strong>UPPER</strong>, <strong>lower</strong>, <strong>Title Case</strong>, <strong>Sentence case</strong>, <strong>camelCase</strong>, <strong>snake_case</strong>, or <strong>kebab-case</strong>. The result appears instantly &mdash; click <strong>Copy</strong> to grab it.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between camelCase, snake_case, and kebab-case?</summary>
+    <div class="faq-body">
+      <p><strong>camelCase</strong> joins words with capitals (<code>userName</code>) &mdash; common in JavaScript/Java. <strong>snake_case</strong> uses underscores (<code>user_name</code>) &mdash; Python, Ruby, databases. <strong>kebab-case</strong> uses hyphens (<code>user-name</code>) &mdash; URLs, CSS, HTML attributes. <strong>PascalCase</strong> is like camelCase but capitalizes the first letter too (<code>UserName</code>) &mdash; class names.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I remove duplicate lines from text?</summary>
+    <div class="faq-body">
+      <p>Paste your text (one item per line) and click <strong>Dedupe</strong>. Duplicate lines are removed and the output preserves the original order of first occurrence. Useful for cleaning email lists, removing duplicate URLs, or deduplicating log entries.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I sort lines alphabetically online?</summary>
+    <div class="faq-body">
+      <p>Paste your list (one item per line) and click <strong>Sort Lines</strong>. Items are sorted A-Z, case-sensitive by default (uppercase letters sort before lowercase). Combine with <strong>Dedupe</strong> to sort and remove duplicates in one pass.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does the Trim button do?</summary>
+    <div class="faq-body">
+      <p><strong>Trim</strong> removes leading and trailing whitespace from each line &mdash; useful when pasting data that has inconsistent spacing. To remove internal whitespace (between words), you'd need a different transformation or regex.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I reverse the order of text?</summary>
+    <div class="faq-body">
+      <p>Yes. <strong>Reverse</strong> flips the characters &mdash; <code>hello</code> becomes <code>olleh</code>. To reverse the order of lines instead, no dedicated button yet; workaround: paste into a spreadsheet, sort descending, paste back.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    let currentTransform = 'upper';
+    function transformText(type, btn) {
+        currentTransform = type;
+        if (btn) { document.querySelectorAll('.transform-buttons button').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+        autoTransformText();
+    }
+    function autoTransformText() {
+        const input = document.getElementById('text-input').value;
+        const output = document.getElementById('text-output');
+        const words = input.trim() ? input.trim().split(/\s+/).length : 0;
+        document.getElementById('word-count').textContent = words;
+        document.getElementById('char-count').textContent = input.length;
+        document.getElementById('line-count').textContent = input ? input.split('\n').length : 0;
+        let result = input;
+        switch (currentTransform) {
+            case 'upper': result = input.toUpperCase(); break;
+            case 'lower': result = input.toLowerCase(); break;
+            case 'title': result = input.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()); break;
+            case 'sentence': result = input.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, c => c.toUpperCase()); break;
+            case 'camel': result = input.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase()); break;
+            case 'snake': result = input.toLowerCase().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, ''); break;
+            case 'kebab': result = input.toLowerCase().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, ''); break;
+            case 'reverse': result = input.split('').reverse().join(''); break;
+            case 'sort': result = input.split('\n').sort().join('\n'); break;
+            case 'dedupe': result = [...new Set(input.split('\n'))].join('\n'); break;
+            case 'trim': result = input.split('\n').map(l => l.trim()).filter(l => l).join('\n'); break;
+        }
+        output.value = result;
+    }
+</script>
+</body>
+</html>

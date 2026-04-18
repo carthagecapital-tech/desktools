@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Favicon Generator — Free Multi-Size Favicon Creator | DeskTools</title>
+<meta name="description" content="Upload an image, get favicons in all sizes (16x16 to 512x512) plus the HTML meta tags. Download as PNG or copy the code."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/favicon-generator"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Favicon Generator — DeskTools"/><meta property="og:description" content="Upload an image, get favicons in all sizes plus the HTML meta tags."/><meta property="og:url" content="https://desktools.dev/favicon-generator"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Favicon Generator — DeskTools"/><meta name="twitter:description" content="Upload an image, get favicons in all sizes plus the HTML meta tags."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Favicon Generator","description":"Upload an image, get favicons in all sizes plus the HTML meta tags.","url":"https://desktools.dev/favicon-generator","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:border-color .2s}
+.upload-zone:hover{border-color:var(--accent)}
+.upload-zone.active{border-color:var(--accent);background:rgba(0,212,170,0.03)}
+.upload-icon{font-size:2rem;margin-bottom:.5rem}
+.upload-text{color:var(--muted);font-size:.9rem}
+.upload-text span{color:var(--accent);text-decoration:underline;cursor:pointer}
+input[type=file]{display:none}
+.preview-row{display:flex;align-items:flex-end;gap:1.25rem;flex-wrap:wrap;margin-top:1rem}
+.preview-item{text-align:center}
+.preview-item canvas{border:1px solid var(--border);border-radius:6px;background:var(--bg3);image-rendering:pixelated}
+.preview-size{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);margin-top:.35rem}
+.download-btn{display:inline-block;margin-top:.4rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);text-decoration:none;transition:opacity .2s}
+.download-btn:hover{opacity:.7}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-all;position:relative;max-height:250px;overflow-y:auto}
+.copy-code{position:absolute;top:.6rem;right:.6rem;background:var(--card-bg);border:1px solid var(--border);color:var(--muted);font-size:.7rem;font-family:'JetBrains Mono',monospace;padding:.25rem .5rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.copy-code:hover{border-color:var(--accent);color:var(--accent)}
+.hidden{display:none}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate a favicon from an image?","acceptedAnswer":{"@type":"Answer","text":"Upload your source image (ideally a square PNG, 512x512 or larger). The tool generates favicons in every size needed (16, 32, 48, 180, 192, 512 pixels) plus the HTML meta tags to drop into your head. Everything runs in your browser."}},{"@type":"Question","name":"What favicon sizes do I actually need in 2026?","acceptedAnswer":{"@type":"Answer","text":"Essentials: 16x16 and 32x32 for browser tabs, 180x180 for Apple touch icon (iOS), 192x192 and 512x512 for Android Chrome and PWA. Older formats like favicon.ico are still recommended for IE/Edge legacy support but matter less each year."}},{"@type":"Question","name":"Where do I put the favicon HTML tags?","acceptedAnswer":{"@type":"Answer","text":"Inside your head, ideally near the top. The generator outputs ready-to-paste link rel=icon and link rel=apple-touch-icon tags. Just paste them in. The favicon images themselves go at your site root (/favicon-32.png, etc.)."}},{"@type":"Question","name":"Why is my favicon not showing up?","acceptedAnswer":{"@type":"Answer","text":"Most common causes: browser cache (hard-refresh with Ctrl+Shift+R), wrong file path in the link tag, or the image isn't square (browsers may skip it). Also check your server returns the correct MIME type (image/png for PNG favicons)."}},{"@type":"Question","name":"Can I use a transparent or dark-mode-aware favicon?","acceptedAnswer":{"@type":"Answer","text":"Transparent PNG favicons work everywhere. Browsers render them against the tab background, which adapts to dark/light mode. For fully dynamic favicons that change based on system preference, you need a link rel=icon media=prefers-color-scheme: dark tag with a separate dark-mode icon."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>Favicon Generator</h1>
+  <p class="sub">Upload an image, get all favicon sizes + the HTML tags. Everything runs locally.</p>
+
+  <div class="card">
+    <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <div class="upload-icon"><svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="upload-text"><span>Choose an image</span> or drag & drop<br/>PNG, JPG, SVG — square works best</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])"/>
+  </div>
+
+  <div class="card hidden" id="resultsCard">
+    <div class="card-title">Generated Favicons</div>
+    <div class="preview-row" id="previews"></div>
+  </div>
+
+  <div class="card hidden" id="codeCard">
+    <div class="card-title">HTML Code</div>
+    <div class="code-block" id="codeBlock"><button class="copy-code" onclick="copyCode()">Copy</button></div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:640px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What sizes do you need for favicons?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p>A <strong>favicon</strong> (short for "favorite icon") is the small icon shown in browser tabs, bookmarks, and search results. Modern browsers and devices require multiple sizes: <code>16×16</code> for browser tabs, <code>32×32</code> for taskbars, <code>180×180</code> for Apple touch icons, and <code>192×192</code> / <code>512×512</code> for Android home screens and PWA manifests.</p>
+<p>The traditional <code>.ico</code> format bundles multiple sizes in one file, but modern best practice is to use <strong>PNG files</strong> at each size with the appropriate <code>&lt;link&gt;</code> tags. SVG favicons are also supported in modern browsers via <code>&lt;link rel="icon" type="image/svg+xml"&gt;</code> and scale perfectly to any size.</p>
+<p>For the best result, start with a <strong>square image at least 512×512 pixels</strong>. Simple, high-contrast designs work best since the icon will often be displayed at just 16×16 pixels. Avoid fine text or detailed illustrations — they become illegible at small sizes. This tool generates all common sizes from a single upload and gives you the HTML to paste into your <code>&lt;head&gt;</code>.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Générateur de favicon</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Generador de favicon</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Favicon-Generator</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Gerador de favicon</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>ファビコンジェネレーター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>网站图标生成器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>파비콘 생성기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد أيقونة الموقع</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate a favicon from an image?</summary>
+    <div class="faq-body">
+      <p>Upload your source image (ideally a square PNG, 512&times;512 or larger). The tool generates favicons in every size needed (16, 32, 48, 180, 192, 512 pixels) plus the HTML meta tags to drop into your <code>&lt;head&gt;</code>. Everything runs in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What favicon sizes do I actually need in 2026?</summary>
+    <div class="faq-body">
+      <p>Essentials: <strong>16&times;16</strong> and <strong>32&times;32</strong> (browser tabs), <strong>180&times;180</strong> (Apple touch icon for iOS), <strong>192&times;192</strong> and <strong>512&times;512</strong> (Android Chrome, PWA). Older formats like <code>favicon.ico</code> are still recommended for IE/Edge legacy support but matter less each year.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where do I put the favicon HTML tags?</summary>
+    <div class="faq-body">
+      <p>Inside your <code>&lt;head&gt;</code>, ideally near the top. The generator outputs ready-to-paste <code>&lt;link rel="icon"&gt;</code> and <code>&lt;link rel="apple-touch-icon"&gt;</code> tags &mdash; just paste them in. The favicon images themselves go at your site root (<code>/favicon-32.png</code>, etc.).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is my favicon not showing up?</summary>
+    <div class="faq-body">
+      <p>Most common causes: browser cache (hard-refresh with Ctrl+Shift+R), wrong file path in the <code>&lt;link&gt;</code> tag, or the image isn't square (browsers may skip it). Also check your server returns the correct MIME type (<code>image/png</code> for PNG favicons).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use a transparent or dark-mode-aware favicon?</summary>
+    <div class="faq-body">
+      <p>Transparent PNG favicons work everywhere &mdash; browsers render them against the tab background, which adapts to dark/light mode. For fully dynamic favicons that change based on system preference, you need a <code>&lt;link rel="icon" media="(prefers-color-scheme: dark)"&gt;</code> tag with a separate dark-mode icon.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+const SIZES=[16,32,48,64,128,180,192,512];
+const dropZone=document.getElementById('dropZone');
+dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('active');});
+dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('active'));
+dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('active');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0]);});
+
+function handleFile(file){
+  if(!file||!file.type.startsWith('image/')) return;
+  const img=new Image();
+  img.onload=()=>generate(img);
+  img.src=URL.createObjectURL(file);
+}
+
+function generate(img){
+  document.getElementById('resultsCard').classList.remove('hidden');
+  document.getElementById('codeCard').classList.remove('hidden');
+  const previews=document.getElementById('previews');
+  previews.innerHTML='';
+  const displaySizes=[16,32,64,180,192,512];
+  SIZES.forEach(size=>{
+    const canvas=document.createElement('canvas');
+    canvas.width=size;canvas.height=size;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,size,size);
+    if(displaySizes.includes(size)){
+      const item=document.createElement('div');
+      item.className='preview-item';
+      const display=document.createElement('canvas');
+      const ds=Math.max(size,48);
+      display.width=ds;display.height=ds;display.style.width=ds+'px';display.style.height=ds+'px';
+      display.getContext('2d').drawImage(canvas,0,0,ds,ds);
+      item.appendChild(display);
+      item.innerHTML+='<div class="preview-size">'+size+'×'+size+'</div>';
+      const a=document.createElement('a');
+      a.className='download-btn';a.download='favicon-'+size+'x'+size+'.png';
+      a.href=canvas.toDataURL('image/png');a.textContent='Download';
+      item.appendChild(a);
+      previews.appendChild(item);
+    }
+  });
+  // HTML code
+  const code='<!-- Favicon -->\n'+
+    '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>\n'+
+    '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>\n'+
+    '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>\n'+
+    '<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"/>\n'+
+    '<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png"/>\n'+
+    '\n<!-- For manifest.json (PWA) -->\n'+
+    '{\n  "icons": [\n'+
+    '    {"src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png"},\n'+
+    '    {"src": "/favicon-512x512.png", "sizes": "512x512", "type": "image/png"}\n'+
+    '  ]\n}';
+  document.getElementById('codeBlock').innerHTML='<button class="copy-code" onclick="copyCode()">Copy</button>'+code;
+}
+function copyCode(){
+  const text=document.getElementById('codeBlock').textContent.replace('Copy','').trim();
+  navigator.clipboard.writeText(text);
+  if(typeof showToast==='function') showToast('Copied!');
+}
+</script>
+</body>
+</html>

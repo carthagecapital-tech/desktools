@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tools for Freelancers & Designers — DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/freelancers"/>
+<meta name="description" content="Creative tools to speed up your workflow and impress clients."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
+      --accent: #00d4aa; --accent2: #00b894;
+      --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 58px;
+    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 1rem; }
+    .nav-links a { color: var(--muted); font-size: 0.9rem; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-request { background: var(--accent); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; border: none; border-radius: 8px; padding: 0.45rem 1rem; cursor: pointer; transition: background .2s; white-space: nowrap; }
+    .btn-request:hover { background: var(--accent2); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.75rem 2rem; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; width: 100%; max-width: 420px; position: relative; animation: modalIn .2s ease; }
+    @keyframes modalIn { from { opacity:0; transform: translateY(12px) scale(.97); } to { opacity:1; transform: none; } }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.2rem; }
+    .modal h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: .4rem; }
+    .modal p { font-size: .85rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .modal-field { margin-bottom: 1rem; }
+    .modal-field label { font-size: .8rem; font-weight: 500; color: var(--muted); display: block; margin-bottom: .4rem; }
+    .modal-field input, .modal-field textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem; padding: .6rem .85rem; outline: none; transition: border-color .2s; resize: vertical; }
+    .modal-field input:focus, .modal-field textarea:focus { border-color: var(--accent); }
+    .modal-submit { width: 100%; background: var(--accent); color: #0a0a0f; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: .95rem; border: none; border-radius: 8px; padding: .7rem; cursor: pointer; transition: background .2s; margin-top: .5rem; }
+    .modal-submit:hover { background: var(--accent2); }
+    .modal-success { text-align: center; padding: 1rem 0; display: none; }
+    .modal-success.show { display: block; }
+    .modal-success .check { font-size: 2rem; margin-bottom: .5rem; }
+
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+    .page-head { margin-bottom: 2rem; }
+    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .5rem; }
+    .page-head p { color: var(--muted); font-size: 1rem; max-width: 520px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .tool-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.3rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: .6rem; transition: border-color .2s, transform .15s, background .2s; position: relative; overflow: hidden; }
+    .tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); opacity:0; transition:opacity .2s; }
+    .tool-card:hover { border-color: var(--border-hover); transform: translateY(-2px); background: #13131c; }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 700; color: var(--accent); background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.15); padding: .3rem .55rem; border-radius: 6px; width: fit-content; }
+    .tool-name { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+    .tool-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; flex: 1; }
+    .tool-tag { font-size: .7rem; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--border); padding: .15rem .45rem; border-radius: 4px; width: fit-content; }
+    @media(max-width:600px) { .page-wrap{padding:1.5rem 1.25rem 4rem} .tool-grid{grid-template-columns:1fr 1fr} }
+    @media(max-width:400px) { .tool-grid{grid-template-columns:1fr} }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Tools for Freelancers & Designers — DeskTools"/>
+<meta property="og:description" content="Creative tools to speed up your workflow and impress clients."/>
+<meta property="og:url" content="https://desktools.dev/freelancers"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Tools for Freelancers & Designers — DeskTools"/>
+<meta name="twitter:description" content="Creative tools to speed up your workflow and impress clients."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Freelancer & Design Tools \u2014 DeskTools","description":"Creative tools for freelancers and designers. Color picker, gradient generator, font pairer, and more.","url":"https://desktools.dev/freelancers","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"}}</script>
+</head>
+<body><a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page-wrap">
+  <div class="page-head">
+    <h1>Tools for Freelancers & Designers</h1>
+    <p>Creative tools to speed up your workflow and impress clients.</p>
+  </div>
+  <div class="tool-grid"><a class="tool-card" href="/color-picker" data-name="color picker + palette pick any color, convert between hex/rgb/hsl, generate palettes.">
+  <span class="tool-icon">&ofcir;</span>
+  <div class="tool-name">Color Picker + Palette</div>
+  <div class="tool-desc">Pick any color, convert between HEX/RGB/HSL, generate palettes.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/qr-code-generator" data-name="qr code generator generate qr codes for urls, text, email, wifi. download as png.">
+  <span class="tool-icon">QR</span>
+  <div class="tool-name">QR Code Generator</div>
+  <div class="tool-desc">Generate QR codes for URLs, text, email, WiFi. Download as PNG.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/aspect-ratio-calculator" data-name="aspect ratio calculator calculate ratios, resize proportionally, presets for video and social.">
+  <span class="tool-icon">16:9</span>
+  <div class="tool-name">Aspect Ratio Calculator</div>
+  <div class="tool-desc">Calculate ratios, resize proportionally, presets for video and social.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/lorem-ipsum-generator" data-name="lorem ipsum generator generate placeholder text by paragraphs, sentences, or words.">
+  <span class="tool-icon">&para;</span>
+  <div class="tool-name">Lorem Ipsum Generator</div>
+  <div class="tool-desc">Generate placeholder text by paragraphs, sentences, or words.</div>
+  <span class="tool-tag">Text</span>
+</a>
+<a class="tool-card" href="/image-to-base64" data-name="image to base64 upload an image, get base64, html tag, and css background string.">
+  <span class="tool-icon">IMG</span>
+  <div class="tool-name">Image to Base64</div>
+  <div class="tool-desc">Upload an image, get Base64, HTML tag, and CSS background string.</div>
+  <span class="tool-tag">Dev</span>
+</a>
+<a class="tool-card" href="/text-transformer" data-name="text transformer convert text between cases, count words, remove duplicates, sort lines.">
+  <span class="tool-icon">Aa</span>
+  <div class="tool-name">Text Transformer</div>
+  <div class="tool-desc">Convert text between cases, count words, remove duplicates, sort lines.</div>
+  <span class="tool-tag">Text</span>
+</a>
+<a class="tool-card" href="/gradient-generator" data-name="gradient generator build css gradients visually — linear, radial, or conic. copy the css.">
+  <span class="tool-icon">&#9652;</span>
+  <div class="tool-name">Gradient Generator</div>
+  <div class="tool-desc">Build CSS gradients visually — linear, radial, or conic. Copy the CSS.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/svg-optimizer" data-name="svg optimizer paste svg markup and get a clean, minified version instantly.">
+  <span class="tool-icon">SVG</span>
+  <div class="tool-name">SVG Optimizer</div>
+  <div class="tool-desc">Paste SVG markup and get a clean, minified version instantly.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/font-pairer" data-name="font pairer browse and pair google fonts visually. copy the css import.">
+  <span class="tool-icon">Tt</span>
+  <div class="tool-name">Font Pairer</div>
+  <div class="tool-desc">Browse and pair Google Fonts visually. Copy the CSS import.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/html-entity-encoder" data-name="html entity encoder convert special characters to html entities or decode them back.">
+  <span class="tool-icon">&amp;</span>
+  <div class="tool-name">HTML Entity Encoder</div>
+  <div class="tool-desc">Convert special characters to HTML entities or decode them back.</div>
+  <span class="tool-tag">Dev</span>
+</a>
+<a class="tool-card" href="/favicon-generator" data-name="favicon generator upload an image, get all favicon sizes plus html meta tags.">
+  <span class="tool-icon">ICO</span>
+  <div class="tool-name">Favicon Generator</div>
+  <div class="tool-desc">Upload an image, get favicons in all sizes plus the HTML meta tags.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/og-previewer" data-name="og image previewer see how your page looks when shared on twitter linkedin slack discord.">
+  <span class="tool-icon">OG</span>
+  <div class="tool-name">OG Image Previewer</div>
+  <div class="tool-desc">See how your page looks when shared on Twitter, LinkedIn, Slack, and Discord.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/box-shadow-generator" data-name="css box shadow generator build css box-shadow visually with multiple layers.">
+  <span class="tool-icon">&#x25A3;</span>
+  <div class="tool-name">Box Shadow Generator</div>
+  <div class="tool-desc">Build CSS box-shadow visually with multiple layers. Copy the CSS instantly.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/contrast-checker" data-name="color contrast checker wcag aa aaa accessibility.">
+  <span class="tool-icon">AA</span>
+  <div class="tool-name">Contrast Checker</div>
+  <div class="tool-desc">Check WCAG 2.1 contrast ratios. Ensure your text is readable for everyone.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/tailwind-colors" data-name="tailwind css colors palette shades hex rgb class names.">
+  <span class="tool-icon">TW</span>
+  <div class="tool-name">Tailwind Colors</div>
+  <div class="tool-desc">Browse all Tailwind CSS colors. Click to copy class names or hex values.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/meta-tag-generator" data-name="meta tag generator seo open graph twitter cards.">
+  <span class="tool-icon">&lt;&gt;</span>
+  <div class="tool-name">Meta Tag Generator</div>
+  <div class="tool-desc">Generate SEO meta tags, Open Graph, and Twitter Cards for your pages.</div>
+  <span class="tool-tag">Dev</span>
+</a>
+<a class="tool-card" href="/css-clamp-calculator" data-name="css clamp calculator fluid typography responsive.">
+  <span class="tool-icon">[ ]</span>
+  <div class="tool-name">CSS Clamp Calculator</div>
+  <div class="tool-desc">Generate fluid clamp() values for responsive typography and spacing.</div>
+  <span class="tool-tag">Design</span>
+</a>
+<a class="tool-card" href="/image-compressor" data-name="image compressor jpg png webp reduce file size.">
+  <span class="tool-icon">IMG</span>
+  <div class="tool-name">Image Compressor</div>
+  <div class="tool-desc">Compress JPG, PNG, WebP images in your browser. Nothing uploaded.</div>
+  <span class="tool-tag">Design</span>
+</a></div>
+</div>
+<script src="/shared.js"></script>
+</body>
+</html>

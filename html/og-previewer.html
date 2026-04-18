@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Open Graph Previewer — Social Media Share Preview | DeskTools</title>
+<meta name="description" content="See how your website looks when shared on Twitter/X, LinkedIn, Slack, and Discord. Preview Open Graph meta tags instantly."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/og-previewer"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="Open Graph Previewer — DeskTools"/><meta property="og:description" content="See how your website looks when shared on Twitter, LinkedIn, Slack, and Discord."/><meta property="og:url" content="https://desktools.dev/og-previewer"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Open Graph Previewer — DeskTools"/><meta name="twitter:description" content="See how your website looks when shared on Twitter, LinkedIn, Slack, and Discord."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Open Graph Previewer","description":"See how your website looks when shared on Twitter/X, LinkedIn, Slack, and Discord.","url":"https://desktools.dev/og-previewer","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=url],textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:60px;line-height:1.5;font-family:'Outfit',sans-serif}
+.field{margin-bottom:1rem}
+.hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.previews{display:grid;gap:1.5rem}
+.preview-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.preview-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding:.6rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.4rem}
+/* Twitter style */
+.tw-card{padding:0}
+.tw-img{width:100%;height:200px;background:var(--bg2);background-size:cover;background-position:center}
+.tw-body{padding:.75rem 1rem}
+.tw-domain{font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-bottom:.15rem}
+.tw-title{font-size:.9rem;font-weight:600;color:#e7e9ea;line-height:1.3;margin-bottom:.2rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tw-desc{font-size:.82rem;color:#8899a6;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* LinkedIn style */
+.li-card{background:#1b1f23}
+.li-img{width:100%;height:180px;background:var(--bg2);background-size:cover;background-position:center}
+.li-body{padding:.7rem .9rem}
+.li-title{font-size:.88rem;font-weight:600;color:#e8e8e8;margin-bottom:.2rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.li-domain{font-size:.72rem;color:#8c8c8c}
+/* Slack style */
+.sl-card{display:flex;border-left:4px solid var(--accent)}
+.sl-body{padding:.75rem 1rem;flex:1;min-width:0}
+.sl-domain{font-size:.72rem;color:var(--muted);font-weight:600;margin-bottom:.3rem}
+.sl-title{font-size:.88rem;font-weight:600;color:#1d9bd1;margin-bottom:.2rem}
+.sl-desc{font-size:.82rem;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sl-thumb{width:100px;height:100px;background:var(--bg2);background-size:cover;background-position:center;flex-shrink:0}
+.no-img{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I preview Open Graph tags before publishing?","acceptedAnswer":{"@type":"Answer","text":"Fill in your page title, description, URL, and OG image URL. The tool renders how your link will appear when shared on Twitter/X, LinkedIn, Slack, and Discord. Each platform has different crop ratios and layout, all shown side by side."}},{"@type":"Question","name":"What is an Open Graph image and what size should it be?","acceptedAnswer":{"@type":"Answer","text":"An OG image is the picture that appears when your page is shared on social media. The standard is 1200x630 pixels (1.91:1 ratio). Keep critical content away from edges. Some platforms crop to 1:1 (square) for thumbnails. Under 5MB file size."}},{"@type":"Question","name":"Why isn't my OG image showing when I share my link?","acceptedAnswer":{"@type":"Answer","text":"Common causes: (1) Cached preview. Social platforms cache OG data. Use Facebook's Sharing Debugger, Twitter's Card Validator, or LinkedIn's Post Inspector to force a re-scrape. (2) Missing absolute URL. OG images must be full URLs (https://example.com/og.jpg), not relative paths. (3) Image too small. Under 600px wide often fails."}},{"@type":"Question","name":"What's the difference between og:image and twitter:image?","acceptedAnswer":{"@type":"Answer","text":"og:image is the Open Graph standard. Used by Facebook, LinkedIn, Slack, Discord, and most others. twitter:image is Twitter-specific and overrides og:image on Twitter/X. If you want a different image on Twitter (say, because their crop is different), set both."}},{"@type":"Question","name":"Do I need separate Twitter Card tags or will Open Graph work?","acceptedAnswer":{"@type":"Answer","text":"Twitter falls back to Open Graph tags if no Twitter-specific tags are set, which works for most cases. For the richest experience (summary_large_image cards, creator attribution), add twitter:card, twitter:site, and twitter:creator tags. The Meta Tag Generator builds all of these."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>OG Image Previewer</h1>
+  <p class="sub">See how your page looks when shared on Twitter, LinkedIn, Slack, and Discord.</p>
+
+  <div class="card">
+    <div class="card-title">Open Graph Data</div>
+    <div class="field">
+      <label>Page Title (og:title)</label>
+      <input type="text" id="ogTitle" placeholder="My Awesome Page" oninput="render()"/>
+    </div>
+    <div class="field">
+      <label>Description (og:description)</label>
+      <textarea id="ogDesc" rows="2" placeholder="A brief description of the page content..." oninput="render()"></textarea>
+    </div>
+    <div class="field">
+      <label>Image URL (og:image)</label>
+      <input type="url" id="ogImage" placeholder="https://example.com/image.jpg" oninput="render()"/>
+      <div class="hint">Recommended: 1200×630px for best display across platforms</div>
+    </div>
+    <div class="field">
+      <label>Site URL</label>
+      <input type="url" id="ogUrl" placeholder="https://example.com/page" oninput="render()"/>
+    </div>
+  </div>
+
+  <div class="previews" id="previews">
+    <div class="preview-card">
+      <div class="preview-label">&#x1D54F; Twitter / X</div>
+      <div class="tw-card" id="twCard">
+        <div class="tw-img no-img" id="twImg">No image</div>
+        <div class="tw-body">
+          <div class="tw-domain" id="twDomain">example.com</div>
+          <div class="tw-title" id="twTitle">Page title</div>
+          <div class="tw-desc" id="twDesc">Page description</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-card">
+      <div class="preview-label">LinkedIn</div>
+      <div class="li-card">
+        <div class="li-img no-img" id="liImg">No image</div>
+        <div class="li-body">
+          <div class="li-title" id="liTitle">Page title</div>
+          <div class="li-domain" id="liDomain">example.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-card">
+      <div class="preview-label">Slack / Discord</div>
+      <div class="sl-card">
+        <div class="sl-body">
+          <div class="sl-domain" id="slDomain">example.com</div>
+          <div class="sl-title" id="slTitle">Page title</div>
+          <div class="sl-desc" id="slDesc">Page description</div>
+        </div>
+        <div class="sl-thumb no-img" id="slImg">No img</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:680px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> What is Open Graph and why does it matter?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>Open Graph (OG)</strong> is a protocol created by Facebook that controls how URLs appear when shared on social media, messaging apps, and collaboration tools. When someone shares a link on Twitter, LinkedIn, Slack, or Discord, those platforms scrape the page's <code>&lt;meta&gt;</code> tags to build a rich preview card with a title, description, and image.</p>
+<p>The four essential OG tags are <code>og:title</code>, <code>og:description</code>, <code>og:image</code>, and <code>og:url</code>. The image is by far the most impactful — posts with images get <strong>2-3× more engagement</strong> than text-only links. The recommended image size is <strong>1200×630 pixels</strong> for a full-width card, or 600×600 for square thumbnails.</p>
+<p>Twitter/X also supports its own <code>twitter:card</code> tags which override OG for Twitter-specific displays. Setting <code>twitter:card</code> to <code>summary_large_image</code> gives you the full-width image card instead of a small thumbnail. This tool lets you preview exactly how your page will appear on each platform before you publish — so you can optimize the title, description, and image for maximum click-through.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Prévisualiseur Open Graph</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Previsualizador Open Graph</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Open-Graph-Vorschau</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Previsualizador Open Graph</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>OGPプレビューツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>Open Graph 预览工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>Open Graph 미리보기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>معاينة Open Graph</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I preview Open Graph tags before publishing?</summary>
+    <div class="faq-body">
+      <p>Fill in your page title, description, URL, and OG image URL. The tool renders how your link will appear when shared on <strong>Twitter/X</strong>, <strong>LinkedIn</strong>, <strong>Slack</strong>, and <strong>Discord</strong> &mdash; each platform has different crop ratios and layout, all shown side by side.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is an Open Graph image and what size should it be?</summary>
+    <div class="faq-body">
+      <p>An OG image is the picture that appears when your page is shared on social media. The standard is <strong>1200&times;630 pixels</strong> (1.91:1 ratio). Keep critical content away from edges &mdash; some platforms crop to 1:1 (square) for thumbnails. Under 5MB file size.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why isn't my OG image showing when I share my link?</summary>
+    <div class="faq-body">
+      <p>Common causes: (1) <strong>Cached preview</strong> &mdash; social platforms cache OG data. Use Facebook's Sharing Debugger, Twitter's Card Validator, or LinkedIn's Post Inspector to force a re-scrape. (2) <strong>Missing absolute URL</strong> &mdash; OG images must be full URLs (<code>https://example.com/og.jpg</code>), not relative paths. (3) <strong>Image too small</strong> &mdash; under 600px wide often fails.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between og:image and twitter:image?</summary>
+    <div class="faq-body">
+      <p><code>og:image</code> is the Open Graph standard &mdash; used by Facebook, LinkedIn, Slack, Discord, and most others. <code>twitter:image</code> is Twitter-specific and overrides <code>og:image</code> on Twitter/X. If you want a different image on Twitter (say, because their crop is different), set both.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do I need separate Twitter Card tags or will Open Graph work?</summary>
+    <div class="faq-body">
+      <p>Twitter falls back to Open Graph tags if no Twitter-specific tags are set, which works for most cases. For the richest experience (summary_large_image cards, creator attribution), add <code>twitter:card</code>, <code>twitter:site</code>, and <code>twitter:creator</code> tags. The <a href="/meta-tag-generator">Meta Tag Generator</a> builds all of these.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+function render(){
+  const title=document.getElementById('ogTitle').value||'Page title';
+  const desc=document.getElementById('ogDesc').value||'Page description';
+  const img=document.getElementById('ogImage').value;
+  const url=document.getElementById('ogUrl').value||'https://example.com';
+  let domain;
+  try{domain=new URL(url).hostname;}catch(e){domain='example.com';}
+
+  // Twitter
+  document.getElementById('twTitle').textContent=title;
+  document.getElementById('twDesc').textContent=desc;
+  document.getElementById('twDomain').textContent=domain;
+  const twImg=document.getElementById('twImg');
+  if(img){twImg.style.backgroundImage='url('+img+')';twImg.textContent='';twImg.classList.remove('no-img');}
+  else{twImg.style.backgroundImage='';twImg.textContent='No image';twImg.classList.add('no-img');}
+
+  // LinkedIn
+  document.getElementById('liTitle').textContent=title;
+  document.getElementById('liDomain').textContent=domain;
+  const liImg=document.getElementById('liImg');
+  if(img){liImg.style.backgroundImage='url('+img+')';liImg.textContent='';liImg.classList.remove('no-img');}
+  else{liImg.style.backgroundImage='';liImg.textContent='No image';liImg.classList.add('no-img');}
+
+  // Slack
+  document.getElementById('slTitle').textContent=title;
+  document.getElementById('slDesc').textContent=desc;
+  document.getElementById('slDomain').textContent=domain;
+  const slImg=document.getElementById('slImg');
+  if(img){slImg.style.backgroundImage='url('+img+')';slImg.textContent='';slImg.classList.remove('no-img');}
+  else{slImg.style.backgroundImage='';slImg.textContent='No img';slImg.classList.add('no-img');}
+}
+render();
+</script>
+</body>
+</html>

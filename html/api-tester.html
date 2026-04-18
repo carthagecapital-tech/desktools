@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>API Request Builder — Free Online HTTP Client | DeskTools</title>
+<meta name="description" content="Build and send HTTP requests from your browser. Test REST APIs with GET, POST, PUT, DELETE. See response headers, status, and body."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/api-tester"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="API Request Builder — DeskTools"/><meta property="og:description" content="Build and send HTTP requests from your browser. Test REST APIs instantly."/><meta property="og:url" content="https://desktools.dev/api-tester"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="API Request Builder — DeskTools"/><meta name="twitter:description" content="Build and send HTTP requests from your browser. Test REST APIs instantly."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"API Request Builder","description":"Build and send HTTP requests from your browser. Test REST APIs with GET, POST, PUT, DELETE.","url":"https://desktools.dev/api-tester","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:760px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1rem}
+label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font-weight:500}
+input[type=text],input[type=url],textarea,select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer}
+textarea{resize:vertical;min-height:80px;line-height:1.5}
+.field{margin-bottom:1rem}
+.url-row{display:flex;gap:.5rem}
+.method-select{width:110px;flex-shrink:0;font-weight:700;text-transform:uppercase}
+.url-input{flex:1}
+.send-btn{background:var(--accent);color:#0a0a0f;border:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.9rem;padding:.65rem 1.5rem;border-radius:8px;cursor:pointer;transition:background .2s;white-space:nowrap;flex-shrink:0}
+.send-btn:hover{background:var(--accent2)}
+.send-btn:disabled{opacity:.5;cursor:not-allowed}
+.header-row{display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center}
+.header-row input{flex:1}
+.del-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:0 .3rem;transition:color .15s}
+.del-btn:hover{color:#ff6b6b}
+.add-btn{background:none;border:1px dashed var(--border);color:var(--muted);font-size:.82rem;padding:.4rem;border-radius:7px;cursor:pointer;width:100%;transition:all .2s;font-family:'Outfit',sans-serif}
+.add-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tabs{display:flex;gap:0;background:var(--bg3);border-radius:8px;padding:2px;border:1px solid var(--border);margin-bottom:1rem}
+.tab{flex:1;text-align:center;padding:.45rem;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;border-radius:6px;transition:all .2s;border:none;background:none;font-family:'Outfit',sans-serif}
+.tab.active{background:var(--accent);color:#0a0a0f}
+.resp-status{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.status-badge{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;padding:.3rem .7rem;border-radius:6px}
+.status-2xx{background:rgba(0,212,170,0.15);color:var(--accent)}
+.status-3xx{background:rgba(0,150,255,0.15);color:#4da6ff}
+.status-4xx{background:rgba(255,170,77,0.15);color:#ffa94d}
+.status-5xx{background:rgba(255,107,107,0.15);color:#ff6b6b}
+.resp-time{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted)}
+.resp-body{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text);max-height:400px;overflow:auto;white-space:pre-wrap;word-break:break-all;line-height:1.6}
+.resp-empty{color:var(--muted);text-align:center;padding:3rem 1rem;font-size:.9rem}
+.copy-resp{background:none;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.copy-resp:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I test a REST API online without Postman?","acceptedAnswer":{"@type":"Answer","text":"Enter the URL, pick a method (GET, POST, PUT, DELETE, PATCH), optionally add headers, auth, or a JSON body, then click Send. You get the full response: status code, headers, and body. No install, no account, no import/export of collections."}},{"@type":"Question","name":"What HTTP methods does this API tester support?","acceptedAnswer":{"@type":"Answer","text":"GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS. For each method, you can add custom headers, an Authorization header (Bearer, Basic, API key), and a request body in JSON, form-urlencoded, or plain text."}},{"@type":"Question","name":"How do I add a Bearer token to my API request?","acceptedAnswer":{"@type":"Answer","text":"Click the Auth tab and paste your Bearer token. The tool sets the Authorization: Bearer header automatically. For API keys in custom headers, add them via the Headers tab instead."}},{"@type":"Question","name":"Why am I getting a CORS error when calling an API?","acceptedAnswer":{"@type":"Answer","text":"Browsers block cross-origin requests unless the API allows your origin in its CORS headers. If the API doesn't set Access-Control-Allow-Origin, requests from this tool (or any browser-based tool) will fail. Use a desktop tool like curl, Postman, or your backend to call CORS-restricted APIs."}},{"@type":"Question","name":"Is it safe to test APIs with auth tokens in this tool?","acceptedAnswer":{"@type":"Answer","text":"Requests are sent directly from your browser to the target API. Nothing passes through DeskTools' servers. Tokens aren't logged or stored. That said, for production credentials, prefer a tool you control (Postman desktop, curl, your own scripts)."}},{"@type":"Question","name":"How do I send a POST request with a JSON body?","acceptedAnswer":{"@type":"Answer","text":"Select POST, click the Body tab, choose application/json as Content-Type, and paste your JSON. The Content-Type header is set automatically. Click Send and you'll see the response in the panel below."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>API Request Builder</h1>
+  <p class="sub">Build and send HTTP requests. Test REST APIs directly from your browser.</p>
+
+  <div class="card">
+    <div class="url-row">
+      <select id="method" class="method-select">
+        <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option><option>HEAD</option><option>OPTIONS</option>
+      </select>
+      <input type="url" id="url" class="url-input" placeholder="https://jsonplaceholder.typicode.com/posts/1"/>
+      <button class="send-btn" id="sendBtn" onclick="sendReq()">Send</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('headers',this)">Headers</button>
+      <button class="tab" onclick="showTab('body',this)">Body</button>
+      <button class="tab" onclick="showTab('auth',this)">Auth</button>
+    </div>
+    <div id="panel-headers">
+      <div id="headersList"></div>
+      <button class="add-btn" onclick="addHeader()">+ Add header</button>
+    </div>
+    <div id="panel-body" style="display:none">
+      <div class="field">
+        <label>Content-Type</label>
+        <select id="contentType">
+          <option value="application/json">application/json</option>
+          <option value="application/x-www-form-urlencoded">x-www-form-urlencoded</option>
+          <option value="text/plain">text/plain</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Request Body</label>
+        <textarea id="reqBody" placeholder='{"key": "value"}'></textarea>
+      </div>
+    </div>
+    <div id="panel-auth" style="display:none">
+      <div class="field">
+        <label>Authorization Header</label>
+        <input type="text" id="authHeader" placeholder="Bearer your-token-here"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div class="card-title" style="margin:0">Response</div>
+      <button class="copy-resp" onclick="copyResp()">Copy body</button>
+    </div>
+    <div class="resp-status" id="respStatus" style="display:none"></div>
+    <div class="tabs" id="respTabs" style="display:none">
+      <button class="tab active" onclick="showRespTab('rbody',this)">Body</button>
+      <button class="tab" onclick="showRespTab('rheaders',this)">Headers</button>
+    </div>
+    <div id="respContent">
+      <div class="resp-empty">Send a request to see the response</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:760px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> How do HTTP requests work?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>HTTP (HyperText Transfer Protocol)</strong> is the foundation of data exchange on the web. Every time you load a page, submit a form, or call an API, your browser sends an HTTP request to a server and receives a response. A request consists of a <strong>method</strong> (GET, POST, etc.), a <strong>URL</strong>, <strong>headers</strong> (metadata), and optionally a <strong>body</strong> (data payload).</p>
+<p>The most common methods are <code>GET</code> (retrieve data), <code>POST</code> (create), <code>PUT</code> (replace), <code>PATCH</code> (partial update), and <code>DELETE</code> (remove). Response status codes tell you the outcome: <strong>2xx</strong> means success, <strong>3xx</strong> means redirect, <strong>4xx</strong> means client error (like 404 Not Found), and <strong>5xx</strong> means server error.</p>
+<p>This tool sends real HTTP requests from your browser using the Fetch API. Note that <strong>CORS (Cross-Origin Resource Sharing)</strong> restrictions may block requests to APIs that don't allow browser-based access. Public APIs like JSONPlaceholder, httpbin.org, and most REST APIs with CORS headers enabled will work perfectly. For APIs behind CORS restrictions, you'd need a backend proxy or a tool like Postman.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Constructeur de requêtes API</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Constructor de solicitudes API</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>API-Anfrage-Builder</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Construtor de requisições API</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>APIリクエストビルダー</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>API 请求构建工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>API 요청 빌더</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>منشئ طلبات API</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I test a REST API online without Postman?</summary>
+    <div class="faq-body">
+      <p>Enter the URL, pick a method (GET, POST, PUT, DELETE, PATCH), optionally add headers, auth, or a JSON body, then click <strong>Send</strong>. You get the full response: status code, headers, and body. No install, no account, no import/export of collections.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What HTTP methods does this API tester support?</summary>
+    <div class="faq-body">
+      <p>GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS. For each method, you can add custom headers, an Authorization header (Bearer, Basic, API key), and a request body in JSON, form-urlencoded, or plain text.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I add a Bearer token to my API request?</summary>
+    <div class="faq-body">
+      <p>Click the <strong>Auth</strong> tab and paste your Bearer token. The tool sets the <code>Authorization: Bearer &lt;token&gt;</code> header automatically. For API keys in custom headers, add them via the <strong>Headers</strong> tab instead.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why am I getting a CORS error when calling an API?</summary>
+    <div class="faq-body">
+      <p>Browsers block cross-origin requests unless the API allows your origin in its CORS headers. If the API doesn't set <code>Access-Control-Allow-Origin</code>, requests from this tool (or any browser-based tool) will fail. Use a desktop tool like curl, Postman, or your backend to call CORS-restricted APIs.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to test APIs with auth tokens in this tool?</summary>
+    <div class="faq-body">
+      <p>Requests are sent directly from your browser to the target API &mdash; nothing passes through DeskTools' servers. Tokens aren't logged or stored. That said, for production credentials, prefer a tool you control (Postman desktop, curl, your own scripts).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I send a POST request with a JSON body?</summary>
+    <div class="faq-body">
+      <p>Select <strong>POST</strong>, click the <strong>Body</strong> tab, choose <strong>application/json</strong> as Content-Type, and paste your JSON. The Content-Type header is set automatically. Click Send and you'll see the response in the panel below.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+let respBody='',respHeaders='';
+function showTab(name,btn){
+  document.querySelectorAll('[id^="panel-"]').forEach(p=>p.style.display='none');
+  document.getElementById('panel-'+name).style.display='';
+  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function showRespTab(name,btn){
+  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const el=document.getElementById('respContent');
+  if(name==='rbody') el.innerHTML='<div class="resp-body">'+escHtml(respBody)+'</div>';
+  else el.innerHTML='<div class="resp-body">'+escHtml(respHeaders)+'</div>';
+}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function addHeader(k,v){
+  const div=document.createElement('div');div.className='header-row';
+  div.innerHTML='<input type="text" placeholder="Header name" value="'+(k||'')+'"/><input type="text" placeholder="Value" value="'+(v||'')+'"/><button class="del-btn" onclick="this.parentElement.remove()">&times;</button>';
+  document.getElementById('headersList').appendChild(div);
+}
+addHeader('Accept','application/json');
+
+async function sendReq(){
+  const url=document.getElementById('url').value.trim();
+  if(!url){document.getElementById('url').focus();return;}
+  const method=document.getElementById('method').value;
+  const btn=document.getElementById('sendBtn');
+  btn.disabled=true;btn.textContent='Sending...';
+  const headers={};
+  document.querySelectorAll('#headersList .header-row').forEach(row=>{
+    const inputs=row.querySelectorAll('input');
+    const k=inputs[0].value.trim(),v=inputs[1].value.trim();
+    if(k) headers[k]=v;
+  });
+  const auth=document.getElementById('authHeader').value.trim();
+  if(auth) headers['Authorization']=auth;
+  const opts={method,headers};
+  if(['POST','PUT','PATCH'].includes(method)){
+    const body=document.getElementById('reqBody').value;
+    if(body){
+      headers['Content-Type']=document.getElementById('contentType').value;
+      opts.body=body;
+    }
+  }
+  const start=performance.now();
+  try{
+    const res=await fetch(url,opts);
+    const elapsed=Math.round(performance.now()-start);
+    const statusClass=res.status<300?'2xx':res.status<400?'3xx':res.status<500?'4xx':'5xx';
+    document.getElementById('respStatus').style.display='flex';
+    document.getElementById('respStatus').innerHTML='<span class="status-badge status-'+statusClass+'">'+res.status+' '+res.statusText+'</span><span class="resp-time">'+elapsed+'ms</span>';
+    respHeaders='';
+    res.headers.forEach((v,k)=>{respHeaders+=k+': '+v+'\n';});
+    try{
+      const text=await res.text();
+      try{respBody=JSON.stringify(JSON.parse(text),null,2);}catch(e){respBody=text;}
+    }catch(e){respBody='(unable to read body)';}
+    document.getElementById('respTabs').style.display='flex';
+    document.getElementById('respContent').innerHTML='<div class="resp-body">'+escHtml(respBody)+'</div>';
+  }catch(e){
+    document.getElementById('respStatus').style.display='flex';
+    document.getElementById('respStatus').innerHTML='<span class="status-badge status-5xx">Error</span>';
+    document.getElementById('respContent').innerHTML='<div class="resp-body" style="color:#ff6b6b">'+escHtml(e.message+'\n\nThis may be caused by CORS restrictions. The target API must allow browser-based requests.')+'</div>';
+    respBody=e.message;
+  }
+  btn.disabled=false;btn.textContent='Send';
+}
+function copyResp(){
+  if(respBody){navigator.clipboard.writeText(respBody);if(typeof showToast==='function') showToast('Copied!');}
+}
+</script>
+</body>
+</html>

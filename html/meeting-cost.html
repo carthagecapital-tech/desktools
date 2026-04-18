@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Meeting Cost Calculator — DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/meeting-cost"/>
+<meta name="description" content="Enter attendee count, hourly rates, and duration. See the real cost of your meeting."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent)}
+.back{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s}.back:hover{color:var(--accent)}
+.page{max-width:660px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:1.1rem}
+.field{margin-bottom:1rem}
+.field label{font-size:.82rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.field label span{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=number]{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.95rem;padding:.45rem .75rem;outline:none;width:100%;transition:border-color .2s}
+input[type=number]:focus{border-color:var(--accent)}
+select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.45rem .75rem;outline:none;cursor:pointer}
+.attendees-grid{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.attendee-row{display:grid;grid-template-columns:1fr 130px 32px;gap:.6rem;align-items:center}
+.attendee-role{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;padding:.4rem .7rem;outline:none;width:100%;transition:border-color .2s}
+.attendee-role:focus{border-color:var(--accent)}
+.del-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;padding:.2rem .3rem;border-radius:4px;transition:color .15s}
+.del-btn:hover{color:#ff6b6b}
+.add-att{background:none;border:1px dashed var(--border);color:var(--muted);font-family:'Outfit',sans-serif;font-size:.82rem;padding:.4rem;border-radius:8px;cursor:pointer;width:100%;margin-top:.5rem;transition:all .2s}
+.add-att:hover{border-color:var(--accent);color:var(--accent)}
+.cost-display{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center;margin-bottom:1.25rem}
+.cost-main{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;color:var(--accent);line-height:1}
+.cost-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.4rem}
+.cost-ticker{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--muted);margin-top:.75rem}
+.breakdown{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1.25rem}
+.bk-box{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.9rem;text-align:center}
+.bk-num{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--text);display:block}
+.bk-lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.btn-row{display:flex;gap:.75rem}
+.btn{flex:1;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;border-radius:8px;padding:.65rem;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0a0a0f}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}.btn-secondary:hover{color:var(--text)}
+.btn.copied{background:#1a6b5a;color:var(--text)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:58px; }
+    .nav-logo { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-0.02em; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--muted); font-size:.9rem; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .btn-request { background:var(--accent); color:#0a0a0f; font-family:'Outfit',sans-serif; font-weight:600; font-size:.85rem; border:none; border-radius:8px; padding:.45rem 1rem; cursor:pointer; transition:background .2s; }
+    .btn-request:hover { background:var(--accent2); }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; text-decoration:none; padding:.75rem 2rem; transition:color .2s; }
+    .back-link:hover { color:var(--accent); }
+
+    /* Dropdown */
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-search { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:.4rem .75rem; width:190px; transition:border-color .2s,width .3s; }
+    .nav-search:focus-within { border-color:var(--accent); width:230px; }
+    .nav-search svg { color:var(--muted); flex-shrink:0; }
+    .nav-search input { background:none; border:none; outline:none; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; width:100%; }
+    .nav-search input::placeholder { color:var(--muted); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-btn { display:flex; align-items:center; gap:.5rem; background:var(--bg3); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; cursor:pointer; padding:.45rem .9rem; transition:border-color .2s,background .2s; white-space:nowrap; }
+    .nav-dropdown-btn:hover { border-color:var(--border-hover); }
+    .nav-dropdown-btn.open { border-color:var(--accent); background:rgba(0,212,170,0.06); }
+    .nav-dropdown-btn .chev { transition:transform .2s; color:var(--muted); }
+    .nav-dropdown-btn.open .chev { transform:rotate(180deg); }
+    .dropdown-menu { position:absolute; top:calc(100% + 10px); right:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:.5rem; min-width:230px; opacity:0; pointer-events:none; transform:translateY(-8px) scale(.98); transform-origin:top right; transition:opacity .18s,transform .18s; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .dropdown-menu.open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+    .dropdown-label { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:.4rem .75rem .2rem; display:block; }
+    .dropdown-item { display:flex; align-items:center; gap:.7rem; padding:.6rem .75rem; border-radius:8px; text-decoration:none; color:var(--text); font-size:.88rem; font-weight:500; transition:background .15s; }
+    .dropdown-item:hover { background:var(--bg3); }
+    .dropdown-item:hover .di-icon { border-color:rgba(0,212,170,0.4); background:rgba(0,212,170,0.12); }
+    .di-icon { width:30px; height:30px; background:rgba(0,212,170,0.07); border:1px solid rgba(0,212,170,0.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; transition:background .15s,border-color .15s; }
+    .di-text { flex:1; }
+    .di-name { display:block; line-height:1.2; }
+    .di-sub { display:block; font-size:.72rem; color:var(--muted); font-weight:400; }
+    .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
+
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Meeting Cost Calculator — DeskTools"/>
+<meta property="og:description" content="Enter attendee count, hourly rates, and duration. See the real cost of your meeting."/>
+<meta property="og:url" content="https://desktools.dev/meeting-cost"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="Meeting Cost Calculator — DeskTools"/>
+<meta name="twitter:description" content="Enter attendee count, hourly rates, and duration. See the real cost of your meeting."/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Meeting Cost Calculator","description":"Enter attendee count, hourly rates, and duration. See the real cost of your meeting.","url":"https://desktools.dev/meeting-cost","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"meeting cost calculator, meeting expense, time cost"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate the cost of a meeting?","acceptedAnswer":{"@type":"Answer","text":"Add each attendee with their hourly rate, set the meeting duration in minutes, and the total cost updates live. Click + Add attendee for larger meetings. Copy the report for sharing or post-meeting justification."}},{"@type":"Question","name":"How do I estimate an employee's hourly rate from their annual salary?","acceptedAnswer":{"@type":"Answer","text":"Divide annual salary by 2,080 (40 hours x 52 weeks) for a rough hourly cost. For fully-loaded cost (including benefits, taxes, overhead), multiply by 1.25 to 1.4. A $120k/year engineer costs ~$58/hour in raw salary but ~$75-82/hour fully loaded. Use fully loaded for honest meeting-cost estimates."}},{"@type":"Question","name":"Why should I calculate meeting costs?","acceptedAnswer":{"@type":"Answer","text":"A one-hour meeting with eight mid-level engineers can easily cost $800-1,200 in salary-equivalent time. Many meetings that cost this much produce nothing that couldn't have been a document or Slack thread. Seeing the number often changes behavior. Attendees leave meetings that don't need them, organizers tighten agendas."}},{"@type":"Question","name":"Does meeting cost include time lost to context-switching?","acceptedAnswer":{"@type":"Answer","text":"This calculator counts only the meeting itself. In reality, meetings fragment focused work time. A 30-minute meeting in the middle of a two-hour coding block often costs closer to 90 minutes of productive output. For rough true-cost estimates, multiply the calculator's number by 1.3-1.5x."}},{"@type":"Question","name":"How can I reduce meeting costs without cancelling meetings?","acceptedAnswer":{"@type":"Answer","text":"Invite fewer people (smaller meetings move faster). Set a strict time limit (15-30 minutes instead of 60). Send a pre-read so everyone arrives prepped. End as soon as the goal is met. Skip the meeting entirely when a document, async update, or quick Slack thread would work. These four habits together typically halve meeting costs."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
+  <h1>Meeting Cost Calculator</h1>
+  <p class="sub">See the real cost of a meeting in real time. Is it worth it?</p>
+
+  <div class="card">
+    <div class="card-title">Attendees</div>
+    <div class="attendees-grid" id="attendeesGrid"></div>
+    <button class="add-att" onclick="addAttendee()">+ Add attendee</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Meeting Details</div>
+    <div class="field">
+      <label>Duration <span id="durLabel">60 min</span></label>
+      <input type="range" id="duration" min="5" max="240" step="5" value="60" oninput="calc()"/>
+    </div>
+    <div class="field">
+      <label>Currency</label>
+      <select id="currency" onchange="calc()">
+        <option value="$">USD ($)</option><option value="€">EUR (€)</option><option value="£">GBP (£)</option>
+        <option value="CA$">CAD (CA$)</option><option value="AED">AED</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="cost-display">
+    <div class="cost-main" id="costMain">$0.00</div>
+    <div class="cost-label">Total meeting cost</div>
+    <div class="cost-ticker" id="costTicker">$0.00 / minute</div>
+  </div>
+
+  <div class="breakdown">
+    <div class="bk-box"><span class="bk-num" id="bkAttend">0</span><span class="bk-lbl">Attendees</span></div>
+    <div class="bk-box"><span class="bk-num" id="bkDur">0 min</span><span class="bk-lbl">Duration</span></div>
+    <div class="bk-box"><span class="bk-num" id="bkPerMin">$0</span><span class="bk-lbl">Per Minute</span></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="copyBtn" onclick="copyReport()">Copy Report</button>
+    <button class="btn btn-secondary" onclick="resetAll()">Reset</button>
+  </div>
+
+</div>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why calculate meeting costs?</button><div class="deep-dive-body"><div class="deep-dive-content"><p>Meetings are one of the largest hidden costs in organizations. A <strong>one-hour meeting with 8 people</strong> who earn $50/hour costs $400 in direct labor — and that doesn't account for the opportunity cost of what those people could have been building instead.</p><p>Studies consistently show that <strong>unnecessary meetings</strong> are the top productivity complaint among knowledge workers. Shopify famously calculated that a 30-minute meeting with 3 people doesn't cost 30 minutes — it costs 90 minutes of productive time, plus context-switching overhead before and after.</p><p>This tool makes the cost visible in real time as you add attendees and set the duration. Sharing the output with your team before scheduling can help justify whether a meeting is worth it, encourage shorter meetings, reduce attendee lists, and shift more communication to async channels like Slack or email.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Calculateur du coût des réunions</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Calculadora de costo de reuniones</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Meeting-Kosten-Rechner</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Calculadora de custo de reunião</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>会議コスト計算ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>会议成本计算器</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>회의 비용 계산기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة تكلفة الاجتماعات</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I calculate the cost of a meeting?</summary>
+    <div class="faq-body">
+      <p>Add each attendee with their hourly rate, set the meeting duration in minutes, and the total cost updates live. Click <strong>+ Add attendee</strong> for larger meetings. Copy the report for sharing or post-meeting justification.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I estimate an employee's hourly rate from their annual salary?</summary>
+    <div class="faq-body">
+      <p>Divide annual salary by 2,080 (40 hours &times; 52 weeks) for a rough hourly cost. For fully-loaded cost (including benefits, taxes, overhead), multiply by 1.25 to 1.4. A $120k/year engineer costs ~$58/hour in raw salary but ~$75-82/hour fully loaded &mdash; use fully loaded for honest meeting-cost estimates.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why should I calculate meeting costs?</summary>
+    <div class="faq-body">
+      <p>A one-hour meeting with eight mid-level engineers can easily cost $800-1,200 in salary-equivalent time. Many meetings that cost this much produce nothing that couldn't have been a document or Slack thread. Seeing the number often changes behavior &mdash; attendees leave meetings that don't need them, organizers tighten agendas.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does meeting cost include time lost to context-switching?</summary>
+    <div class="faq-body">
+      <p>This calculator counts only the meeting itself. In reality, meetings fragment focused work time &mdash; a 30-minute meeting in the middle of a two-hour coding block often costs closer to 90 minutes of productive output. For rough true-cost estimates, multiply the calculator's number by 1.3-1.5x.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How can I reduce meeting costs without cancelling meetings?</summary>
+    <div class="faq-body">
+      <p>Invite fewer people (smaller meetings move faster). Set a strict time limit (15-30 minutes instead of 60). Send a pre-read so everyone arrives prepped. End as soon as the goal is met. Skip the meeting entirely when a document, async update, or quick Slack thread would work. These four habits together typically halve meeting costs.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+let attendees=[{role:'Developer',rate:80},{role:'Designer',rate:65},{role:'Manager',rate:90}];
+function renderAttendees(){
+  const el=document.getElementById('attendeesGrid'); el.innerHTML='';
+  attendees.forEach((a,i)=>{
+    const r=document.createElement('div'); r.className='attendee-row';
+    r.innerHTML=`<input class="attendee-role" type="text" value="${a.role}" placeholder="Role/Name" oninput="attendees[${i}].role=this.value"/>
+      <input type="number" min="0" step="1" value="${a.rate}" placeholder="$/hr" oninput="attendees[${i}].rate=+this.value;calc()"/>
+      ${attendees.length>1?`<button class="del-btn" onclick="removeAtt(${i})">&#x2715;</button>`:'<span></span>'}`;
+    el.appendChild(r);
+  });
+  calc();
+}
+function addAttendee(){attendees.push({role:'Attendee',rate:60});renderAttendees();}
+function removeAtt(i){attendees.splice(i,1);renderAttendees();}
+function calc(){
+  const dur=+document.getElementById('duration').value;
+  const c=document.getElementById('currency').value;
+  const totalHourly=attendees.reduce((s,a)=>s+a.rate,0);
+  const perMin=totalHourly/60;
+  const total=perMin*dur;
+  document.getElementById('durLabel').textContent=dur+' min';
+  document.getElementById('costMain').textContent=c+total.toFixed(2);
+  document.getElementById('costTicker').textContent=c+perMin.toFixed(2)+' / minute';
+  document.getElementById('bkAttend').textContent=attendees.length;
+  document.getElementById('bkDur').textContent=dur+' min';
+  document.getElementById('bkPerMin').textContent=c+perMin.toFixed(2);
+}
+function copyReport(){
+  const dur=+document.getElementById('duration').value;
+  const c=document.getElementById('currency').value;
+  const totalHourly=attendees.reduce((s,a)=>s+a.rate,0);
+  const total=(totalHourly/60)*dur;
+  let txt='MEETING COST REPORT\n'+'—'.repeat(28)+'\n';
+  attendees.forEach(a=>txt+=`${a.role.padEnd(20)} ${c}${a.rate}/hr\n`);
+  txt+='\n'+'—'.repeat(28)+'\n';
+  txt+=`Duration:  ${dur} minutes\nTotal:     ${c}${total.toFixed(2)}\nPer min:   ${c}${(totalHourly/60).toFixed(2)}`;
+  navigator.clipboard.writeText(txt);
+  const b=document.getElementById('copyBtn');b.textContent='Copied!';b.classList.add('copied');
+  setTimeout(()=>{b.textContent='Copy Report';b.classList.remove('copied');},1800);
+}
+function resetAll(){attendees=[{role:'Developer',rate:80},{role:'Designer',rate:65},{role:'Manager',rate:90}];document.getElementById('duration').value=60;renderAttendees();}
+renderAttendees();
+</script>
+</body>
+</html>

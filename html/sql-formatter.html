@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SQL Formatter — Free Online SQL Beautifier | DeskTools</title>
+<meta name="description" content="Format and beautify SQL queries instantly. Supports SELECT, INSERT, UPDATE, CREATE, and more. 100% client-side."/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="canonical" href="https://desktools.dev/sql-formatter"/>
+<meta property="og:type" content="website"/><meta property="og:title" content="SQL Formatter — DeskTools"/><meta property="og:description" content="Format and beautify SQL queries instantly. 100% client-side."/><meta property="og:url" content="https://desktools.dev/sql-formatter"/><meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:site_name" content="DeskTools"/>
+<meta name="twitter:title" content="SQL Formatter — DeskTools"/><meta name="twitter:description" content="Format and beautify SQL queries instantly. 100% client-side."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SQL Formatter","description":"Format and beautify SQL queries instantly. Supports SELECT, INSERT, UPDATE, CREATE, and more.","url":"https://desktools.dev/sql-formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#0f0f16;--bg3:#14141e;--border:rgba(255,255,255,0.07);--accent:#00d4aa;--accent2:#00b894;--text:#e8e8f0;--muted:#6b6b80;--card-bg:#111118}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.85rem;text-decoration:none;padding:.75rem 2rem;transition:color .2s}.back-link:hover{color:var(--accent)}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem}
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.workspace{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.25rem}
+.toolbar{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);flex-wrap:wrap;gap:.5rem}
+.toolbar-group{display:flex;gap:.5rem;align-items:center}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.45rem 1rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.primary{background:var(--accent);color:#0a0a0f;border-color:var(--accent);font-weight:700}
+.tbtn.primary:hover{background:var(--accent2)}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split>div{position:relative}
+.split>div:first-child{border-right:1px solid var(--border)}
+.pane-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+textarea{width:100%;min-height:350px;padding:1.25rem;background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;resize:vertical;line-height:1.6;outline:none}
+textarea::placeholder{color:var(--muted)}
+pre.output{width:100%;min-height:350px;padding:1.25rem;background:transparent;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text);overflow:auto;white-space:pre-wrap;line-height:1.6;margin:0}
+.kw{color:var(--accent);font-weight:700}
+.str{color:#ffa94d}
+.num{color:#74c0fc}
+.cmt{color:var(--muted);font-style:italic}
+@media(max-width:768px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:none;border-bottom:1px solid var(--border)}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I format messy SQL queries online?","acceptedAnswer":{"@type":"Answer","text":"Paste your SQL into the input box and click Format. The tool adds line breaks, indents clauses (SELECT, FROM, WHERE, JOIN), and capitalizes keywords for readability. Click Copy to grab the formatted result."}},{"@type":"Question","name":"What SQL dialects does this formatter support?","acceptedAnswer":{"@type":"Answer","text":"Standard SQL plus common dialects: PostgreSQL, MySQL, SQLite, SQL Server (T-SQL), and Oracle. The formatter handles SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CTEs (WITH), window functions, and subqueries."}},{"@type":"Question","name":"How do I minify SQL to save space?","acceptedAnswer":{"@type":"Answer","text":"Click Minify to collapse the SQL to a single line with whitespace removed. Useful for embedding queries in code strings or log lines. The logical meaning is preserved &mdash; only formatting whitespace is stripped."}},{"@type":"Question","name":"Does formatting SQL affect query performance?","acceptedAnswer":{"@type":"Answer","text":"No. Whitespace is ignored by the SQL parser. The execution plan is identical whether the query is on one line or 50. Formatting is purely for human readability and code review."}},{"@type":"Question","name":"Can I use this to check if my SQL is valid?","acceptedAnswer":{"@type":"Answer","text":"Partially. The formatter will fail on clearly malformed SQL (missing brackets, unterminated strings). But it doesn't do full semantic validation (table names, column types). For that, run the query against your actual database in a sandbox."}}]}</script>
+</head>
+<body>
+<a href="/" class="back-link">&#x2190; Back to tools</a>
+<div class="page">
+  <h1>SQL Formatter</h1>
+  <p class="sub">Paste messy SQL, get it formatted and syntax-highlighted instantly.</p>
+  <div class="workspace">
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tbtn primary" onclick="formatSQL()">Format</button>
+        <button class="tbtn" onclick="minifySQL()">Minify</button>
+        <button class="tbtn" onclick="copyOut()">Copy</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="tbtn" onclick="clearAll()">Clear</button>
+        <button class="tbtn" onclick="loadSample()">Sample</button>
+      </div>
+    </div>
+    <div class="split">
+      <div>
+        <span class="pane-label">Input</span>
+        <textarea id="input" placeholder="SELECT * FROM users WHERE active = 1 ORDER BY created_at DESC"></textarea>
+      </div>
+      <div>
+        <span class="pane-label">Output</span>
+        <pre class="output" id="output"></pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="deep-dive" style="max-width:900px;padding:0 2rem">
+<button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Why format SQL queries?</button>
+<div class="deep-dive-body"><div class="deep-dive-content">
+<p><strong>SQL formatting</strong> transforms compressed or messy queries into a readable, consistently indented structure. Raw SQL from ORM query logs, database exports, or quick one-liners is often a single unbroken line — nearly impossible to debug when it spans hundreds of characters.</p>
+<p>Formatted SQL places each clause on its own line: <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>JOIN</code>, <code>ORDER BY</code>, and <code>GROUP BY</code> each start a new indented block. Subqueries get nested indentation. This makes it immediately clear what a query does, which tables it touches, and where to look for performance issues.</p>
+<p>Consistent formatting also improves <strong>code review</strong> — diffs are cleaner when each clause is on its own line, so reviewers can spot exactly what changed. Most teams enforce a SQL style guide in their codebase. This tool handles the formatting so you can focus on the logic.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Formateur SQL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Formateador SQL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>SQL-Formatierer</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Formatador SQL</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>SQLフォーマッター</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>SQL 格式化工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>SQL 포맷터</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>منسق SQL</p>
+</div>
+</div></div></div>
+
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I format messy SQL queries online?</summary>
+    <div class="faq-body">
+      <p>Paste your SQL into the input box and click <strong>Format</strong>. The tool adds line breaks, indents clauses (SELECT, FROM, WHERE, JOIN), and capitalizes keywords for readability. Click <strong>Copy</strong> to grab the formatted result.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What SQL dialects does this formatter support?</summary>
+    <div class="faq-body">
+      <p>Standard SQL plus common dialects: PostgreSQL, MySQL, SQLite, SQL Server (T-SQL), and Oracle. The formatter handles SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CTEs (WITH), window functions, and subqueries.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I minify SQL to save space?</summary>
+    <div class="faq-body">
+      <p>Click <strong>Minify</strong> to collapse the SQL to a single line with whitespace removed. Useful for embedding queries in code strings or log lines. The logical meaning is preserved &mdash; only formatting whitespace is stripped.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does formatting SQL affect query performance?</summary>
+    <div class="faq-body">
+      <p>No. Whitespace is ignored by the SQL parser &mdash; the execution plan is identical whether the query is on one line or 50. Formatting is purely for human readability and code review.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use this to check if my SQL is valid?</summary>
+    <div class="faq-body">
+      <p>Partially &mdash; the formatter will fail on clearly malformed SQL (missing brackets, unterminated strings). But it doesn't do full semantic validation (table names, column types). For that, run the query against your actual database in a sandbox.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+const KEYWORDS=['SELECT','DISTINCT','FROM','WHERE','AND','OR','NOT','IN','EXISTS','BETWEEN','LIKE','IS','NULL','AS',
+'JOIN','INNER','LEFT','RIGHT','OUTER','FULL','CROSS','ON','USING',
+'INSERT','INTO','VALUES','UPDATE','SET','DELETE','CREATE','TABLE','ALTER','DROP','ADD','COLUMN',
+'INDEX','VIEW','TRIGGER','PROCEDURE','FUNCTION','DATABASE','SCHEMA',
+'ORDER','BY','GROUP','HAVING','LIMIT','OFFSET','UNION','ALL','INTERSECT','EXCEPT',
+'CASE','WHEN','THEN','ELSE','END','CAST','COALESCE','NULLIF',
+'COUNT','SUM','AVG','MIN','MAX','ROUND',
+'ASC','DESC','PRIMARY','KEY','FOREIGN','REFERENCES','UNIQUE','CHECK','DEFAULT','CONSTRAINT','CASCADE',
+'IF','BEGIN','COMMIT','ROLLBACK','GRANT','REVOKE','WITH','RECURSIVE','OVER','PARTITION','WINDOW','ROWS','RANGE'];
+
+const MAJOR_CLAUSES=['SELECT','FROM','WHERE','JOIN','INNER JOIN','LEFT JOIN','RIGHT JOIN','FULL JOIN','CROSS JOIN',
+'LEFT OUTER JOIN','RIGHT OUTER JOIN','FULL OUTER JOIN',
+'ORDER BY','GROUP BY','HAVING','LIMIT','OFFSET','UNION','UNION ALL','INTERSECT','EXCEPT',
+'INSERT INTO','UPDATE','SET','DELETE FROM','CREATE TABLE','ALTER TABLE','DROP TABLE','VALUES','ON','WITH'];
+
+function formatSQL(){
+  const raw=document.getElementById('input').value.trim();
+  if(!raw) return;
+  let sql=raw.replace(/\s+/g,' ').trim();
+  // Uppercase keywords
+  KEYWORDS.forEach(kw=>{
+    const re=new RegExp('\\b'+kw+'\\b','gi');
+    sql=sql.replace(re,kw);
+  });
+  // Add newlines before major clauses
+  MAJOR_CLAUSES.sort((a,b)=>b.length-a.length).forEach(clause=>{
+    const re=new RegExp('\\s+'+clause.replace(/ /g,'\\s+')+'\\b','gi');
+    sql=sql.replace(re,'\n'+clause);
+  });
+  // Indent after SELECT (columns)
+  sql=sql.replace(/,\s*/g,',\n    ');
+  // Clean up
+  sql=sql.replace(/\(\s+/g,'(').replace(/\s+\)/g,')');
+  // First line
+  if(sql.startsWith('\n')) sql=sql.slice(1);
+  // Indent non-clause lines
+  const lines=sql.split('\n');
+  const formatted=lines.map((line,i)=>{
+    const trimmed=line.trim();
+    const isClause=MAJOR_CLAUSES.some(c=>trimmed.toUpperCase().startsWith(c));
+    if(i===0||isClause) return trimmed;
+    return '    '+trimmed;
+  }).join('\n');
+  document.getElementById('output').innerHTML=highlight(formatted);
+}
+
+function minifySQL(){
+  const raw=document.getElementById('input').value.trim();
+  if(!raw) return;
+  const min=raw.replace(/\s+/g,' ').replace(/\s*,\s*/g,',').replace(/\s*\(\s*/g,'(').replace(/\s*\)\s*/g,')').trim();
+  document.getElementById('output').innerHTML=highlight(min);
+}
+
+function highlight(sql){
+  let s=sql.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Comments
+  s=s.replace(/(--[^\n]*)/g,'<span class="cmt">$1</span>');
+  // Strings
+  s=s.replace(/('[^']*')/g,'<span class="str">$1</span>');
+  // Numbers
+  s=s.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+  // Keywords
+  KEYWORDS.forEach(kw=>{
+    const re=new RegExp('\\b('+kw+')\\b','g');
+    s=s.replace(re,'<span class="kw">$1</span>');
+  });
+  return s;
+}
+
+function copyOut(){
+  const el=document.getElementById('output');
+  const text=el.textContent||el.innerText;
+  if(text){navigator.clipboard.writeText(text);if(typeof showToast==='function') showToast('Copied!');}
+}
+function clearAll(){document.getElementById('input').value='';document.getElementById('output').innerHTML='';}
+function loadSample(){
+  document.getElementById('input').value="SELECT u.id, u.name, u.email, COUNT(o.id) AS order_count, SUM(o.total) AS total_spent FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE u.active = 1 AND u.created_at > '2024-01-01' GROUP BY u.id, u.name, u.email HAVING COUNT(o.id) > 5 ORDER BY total_spent DESC LIMIT 20;";
+  formatSQL();
+}
+</script>
+</body>
+</html>

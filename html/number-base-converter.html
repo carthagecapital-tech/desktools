@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Base Converter — Binary, Decimal, Hex, Octal | DeskTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="description" content="Free online number base converter. Convert between binary, decimal, hexadecimal, and octal instantly. Supports large numbers. Real-time conversion as you type.">
+    <meta name="keywords" content="number base converter, binary converter, hex converter, decimal to binary, binary to hex, octal converter, base converter">
+    <meta property="og:title" content="Number Base Converter — DeskTools">
+    <meta property="og:url" content="https://desktools.dev/number-base-converter">
+    <link rel="canonical" href="https://desktools.dev/number-base-converter">
+    <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Number Base Converter","description":"Free online number base converter. Convert between binary, decimal, hexadecimal, and octal instantly. Supports large numbers. Real-time conversion as you type.","url":"https://desktools.dev/number-base-converter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"number base converter, binary decimal hex octal"}</script>
+<meta name="twitter:title" content="Number Base Converter — Binary, Decimal, Hex, Octal | DeskTools"/>
+<meta name="twitter:description" content="Free online number base converter. Convert between binary, decimal, hexadecimal, and octal instantly. Supports large numbers. Real-time conversion as you type."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert between binary, decimal, hex, and octal?","acceptedAnswer":{"@type":"Answer","text":"Type a number in any of the four input boxes and all the others update in real-time. Type 255 in decimal and you'll see FF (hex), 11111111 (binary), and 377 (octal). No button clicks needed."}},{"@type":"Question","name":"What is the maximum number this converter supports?","acceptedAnswer":{"@type":"Answer","text":"The tool uses JavaScript's native number handling with BigInt support, so very large numbers work fine. Preset buttons include common boundaries: 255 (8-bit), 65535 (16-bit), 16777215 (24-bit color), and MAX_INT32 (2147483647)."}},{"@type":"Question","name":"Why do developers use hexadecimal so often?","acceptedAnswer":{"@type":"Answer","text":"Hex is compact (one digit represents 4 bits) and maps cleanly to binary. A byte = two hex digits, a 32-bit value = 8 hex digits. Colors, memory addresses, and character codes all use hex because it's dense and easy to read at a glance."}},{"@type":"Question","name":"How do I convert a hex color to RGB decimal values?","acceptedAnswer":{"@type":"Answer","text":"Split the 6-digit hex color into pairs: #FF0080 is FF, 00, 80. Paste each pair into the hex input to get decimal: 255, 0, 128. That's your RGB value."}},{"@type":"Question","name":"What are the common uses of octal in modern computing?","acceptedAnswer":{"@type":"Answer","text":"Mostly Unix file permissions (chmod 755 is octal). Each digit represents read/write/execute bits for owner, group, and world. For that specific use case, the Chmod Calculator has a visual checkbox interface."}}]}</script>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://desktools.dev/og-image.png"/>
+</head>
+<body>
+<div class="tool-content">
+    <div class="tool-page-header">
+        <a href="/" class="back-link">← Back to tools</a>
+        <h1>Number Base Converter</h1>
+        <p class="desc">Convert between binary, decimal, hexadecimal, and octal — live as you type.</p>
+    </div>
+    <div class="workspace">
+        <div class="color-workspace">
+            <div class="base-row">
+                <div class="base-label"><span class="base-badge" style="background:var(--accent);color:var(--bg-deep);">10</span> Decimal</div>
+                <div class="base-input-wrap">
+                    <input type="text" id="base-dec" placeholder="0" oninput="convertFrom('dec')" style="flex:1;">
+                    <button class="copy-btn" onclick="copyText(document.getElementById('base-dec').value)">Copy</button>
+                </div>
+            </div>
+            <div class="base-row">
+                <div class="base-label"><span class="base-badge" style="background:#ff6b6b;color:var(--bg-deep);">2</span> Binary</div>
+                <div class="base-input-wrap">
+                    <input type="text" id="base-bin" placeholder="0" oninput="convertFrom('bin')" style="flex:1;">
+                    <button class="copy-btn" onclick="copyText(document.getElementById('base-bin').value)">Copy</button>
+                </div>
+            </div>
+            <div class="base-row">
+                <div class="base-label"><span class="base-badge" style="background:#ffd93d;color:var(--bg-deep);">16</span> Hexadecimal</div>
+                <div class="base-input-wrap">
+                    <input type="text" id="base-hex" placeholder="0" oninput="convertFrom('hex')" style="flex:1;">
+                    <button class="copy-btn" onclick="copyText(document.getElementById('base-hex').value)">Copy</button>
+                </div>
+            </div>
+            <div class="base-row">
+                <div class="base-label"><span class="base-badge" style="background:#8888a0;color:var(--bg-deep);">8</span> Octal</div>
+                <div class="base-input-wrap">
+                    <input type="text" id="base-oct" placeholder="0" oninput="convertFrom('oct')" style="flex:1;">
+                    <button class="copy-btn" onclick="copyText(document.getElementById('base-oct').value)">Copy</button>
+                </div>
+            </div>
+            <div class="palette-section">
+                <h4>Quick Values</h4>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="copy-btn" onclick="setDec('255')">255</button>
+                    <button class="copy-btn" onclick="setDec('256')">256</button>
+                    <button class="copy-btn" onclick="setDec('1024')">1024</button>
+                    <button class="copy-btn" onclick="setDec('65535')">65535</button>
+                    <button class="copy-btn" onclick="setDec('16777215')">16777215</button>
+                    <button class="copy-btn" onclick="setDec('2147483647')">MAX_INT32</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .base-row { display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+    .base-row:last-of-type { border-bottom:none; }
+    .base-label { width:140px; flex-shrink:0; display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-secondary); }
+    .base-badge { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; font-size:0.7rem; font-weight:700; }
+    .base-input-wrap { flex:1; display:flex; gap:8px; }
+    .base-input-wrap input { padding:12px 16px; background:var(--bg-surface); border:1px solid var(--border); border-radius:8px; color:var(--text-primary); font-family:'JetBrains Mono',monospace; font-size:1rem; letter-spacing:1px; }
+    .base-input-wrap input:focus { outline:none; border-color:var(--accent); }
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+
+<div class="deep-dive"><button class="deep-dive-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="dd-arrow">&#x25B8;</span> Understanding number bases</button><div class="deep-dive-body"><div class="deep-dive-content"><p>Humans count in <strong>base 10</strong> (decimal) using digits 0-9. Computers operate in <strong>base 2</strong> (binary) using only 0 and 1. Developers frequently work with <strong>base 16</strong> (hexadecimal, digits 0-9 plus A-F) because each hex digit maps neatly to 4 binary bits, making it a compact way to represent binary data.</p><p><strong>Octal</strong> (base 8) uses digits 0-7 and appears in Unix file permissions — <code>755</code> means owner can read/write/execute, while group and others can only read/execute. Hexadecimal is everywhere: CSS colors (<code>#FF5733</code>), memory addresses, MAC addresses, and byte-level debugging.</p><p>Converting between bases is straightforward mathematically but tedious by hand. This tool converts instantly between binary, decimal, hexadecimal, and octal, which is useful when debugging bitwise operations, reading hex dumps, setting file permissions, or working with color values.</p>
+<div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border,rgba(255,255,255,0.07))">
+<p style="margin-bottom:1.25rem"><strong>This tool in other languages:</strong></p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Français:</strong><br/>Convertisseur de base numérique</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Español:</strong><br/>Convertidor de base numérica</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Deutsch:</strong><br/>Zahlenbasis-Konverter</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>Português:</strong><br/>Conversor de base numérica</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>日本語:</strong><br/>基数変換ツール</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>中文:</strong><br/>进制转换工具</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>한국어:</strong><br/>진법 변환기</p>
+<p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول الأنظمة العددية</p>
+</div>
+</div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert between binary, decimal, hex, and octal?</summary>
+    <div class="faq-body">
+      <p>Type a number in any of the four input boxes and all the others update in real-time. Type <code>255</code> in decimal and you'll see <code>FF</code> (hex), <code>11111111</code> (binary), and <code>377</code> (octal). No button clicks needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the maximum number this converter supports?</summary>
+    <div class="faq-body">
+      <p>The tool uses JavaScript's native number handling with BigInt support, so very large numbers work fine. Preset buttons include common boundaries: 255 (8-bit), 65535 (16-bit), 16777215 (24-bit color), and MAX_INT32 (2147483647).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why do developers use hexadecimal so often?</summary>
+    <div class="faq-body">
+      <p>Hex is compact (one digit represents 4 bits) and maps cleanly to binary. A byte = two hex digits, a 32-bit value = 8 hex digits. Colors (#FF00AA), memory addresses (0x7fff8000), and character codes (U+2764) all use hex because it's dense and easy to read at a glance.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I convert a hex color to RGB decimal values?</summary>
+    <div class="faq-body">
+      <p>Split the 6-digit hex color into pairs: <code>#FF0080</code> is <code>FF</code>, <code>00</code>, <code>80</code>. Paste each pair into the hex input to get decimal: 255, 0, 128 &mdash; that's your RGB value.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the common uses of octal in modern computing?</summary>
+    <div class="faq-body">
+      <p>Mostly Unix file permissions (<code>chmod 755</code> is octal). Each digit represents read/write/execute bits for owner, group, and world. For that specific use case, the <a href="/chmod-calculator">Chmod Calculator</a> has a visual checkbox interface.</p>
+    </div>
+  </details>
+</section>
+<script src="/shared.js"></script>
+<script>
+    function convertFrom(source) {
+        let val;
+        try {
+            switch(source) {
+                case 'dec': val = parseInt(document.getElementById('base-dec').value, 10); break;
+                case 'bin': val = parseInt(document.getElementById('base-bin').value, 2); break;
+                case 'hex': val = parseInt(document.getElementById('base-hex').value, 16); break;
+                case 'oct': val = parseInt(document.getElementById('base-oct').value, 8); break;
+            }
+            if (isNaN(val)) { clearAll(source); return; }
+            if (source !== 'dec') document.getElementById('base-dec').value = val.toString(10);
+            if (source !== 'bin') document.getElementById('base-bin').value = val.toString(2);
+            if (source !== 'hex') document.getElementById('base-hex').value = val.toString(16).toUpperCase();
+            if (source !== 'oct') document.getElementById('base-oct').value = val.toString(8);
+        } catch(e) { clearAll(source); }
+    }
+    function clearAll(except) {
+        ['dec','bin','hex','oct'].forEach(b => { if (b !== except) document.getElementById('base-' + b).value = ''; });
+    }
+    function setDec(v) {
+        document.getElementById('base-dec').value = v;
+        convertFrom('dec');
+    }
+</script>
+</body>
+</html>
