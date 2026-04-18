@@ -92,6 +92,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -104,6 +122,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Score your email subject lines for open rate potential. Get instant tips to improve clarity and impact."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Email Subject Line Tester","description":"Score your email subject lines for open rate potential. Get instant tips to improve clarity and impact.","url":"https://desktools.dev/email-subject-tester","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"email subject tester, subject line scorer, open rate"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I score an email subject line for open rate potential?","acceptedAnswer":{"@type":"Answer","text":"Type or paste your subject line. The tool analyzes length, word count, power words, urgency markers, capitalization, emoji usage, spam triggers, and personalization. You get an overall score plus specific feedback on what to tweak to improve open rates."}},{"@type":"Question","name":"How long should an email subject line be?","acceptedAnswer":{"@type":"Answer","text":"30-50 characters is the sweet spot. Mobile clients truncate subjects around 40 characters. Longer subjects get cut off. Very short subjects (under 20 chars) often feel spammy or vague. Front-load the important words in case the rest gets truncated."}},{"@type":"Question","name":"What words trigger email spam filters?","acceptedAnswer":{"@type":"Answer","text":"Classic triggers: FREE in all caps, !!!, GUARANTEED, act now, limited time, money symbols ($$$), and excessive exclamation. Modern filters are smarter and consider the whole message, but subject lines heavy in these phrases still get flagged more often. Use urgency sparingly and honestly."}},{"@type":"Question","name":"Do emojis in email subject lines help or hurt open rates?","acceptedAnswer":{"@type":"Answer","text":"It depends on your audience. B2C/consumer emails often see 5-15% open rate lift from emojis. B2B/professional emails often see neutral or slightly negative response. Emojis can feel unprofessional. Test with your specific list. If you use emojis, one relevant one at the start or end is enough; strings of emojis look spammy."}},{"@type":"Question","name":"Does personalization in the subject (using the recipient's name) actually help?","acceptedAnswer":{"@type":"Answer","text":"First-name personalization shows modest lift (3-8% higher open rates) when it's done well. But personalization with no relevance feels creepy or spammy. Better: personalize with context (Ada, here's your Q3 report) rather than just a first name. Empty name-drops feel like mail merge."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -168,6 +187,45 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>اختبار سطر موضوع البريد الإلكتروني</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I score an email subject line for open rate potential?</summary>
+    <div class="faq-body">
+      <p>Type or paste your subject line. The tool analyzes length, word count, power words, urgency markers, capitalization, emoji usage, spam triggers, and personalization. You get an overall score plus specific feedback on what to tweak to improve open rates.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How long should an email subject line be?</summary>
+    <div class="faq-body">
+      <p><strong>30-50 characters</strong> is the sweet spot. Mobile clients truncate subjects around 40 characters &mdash; longer subjects get cut off. Very short subjects (under 20 chars) often feel spammy or vague. Front-load the important words in case the rest gets truncated.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What words trigger email spam filters?</summary>
+    <div class="faq-body">
+      <p>Classic triggers: <strong>FREE</strong> in all caps, <strong>!!!</strong>, <strong>GUARANTEED</strong>, <strong>act now</strong>, <strong>limited time</strong>, money symbols (<code>$$$</code>), and excessive exclamation. Modern filters are smarter and consider the whole message, but subject lines heavy in these phrases still get flagged more often. Use urgency sparingly and honestly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do emojis in email subject lines help or hurt open rates?</summary>
+    <div class="faq-body">
+      <p>It depends on your audience. B2C/consumer emails often see 5-15% open rate lift from emojis. B2B/professional emails often see neutral or slightly negative response &mdash; emojis can feel unprofessional. Test with your specific list. If you use emojis, one relevant one at the start or end is enough; strings of emojis look spammy.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does personalization in the subject (using the recipient's name) actually help?</summary>
+    <div class="faq-body">
+      <p>First-name personalization shows modest lift (3-8% higher open rates) when it's done well. But personalization with no relevance feels creepy or spammy. Better: personalize with context ("Ada, here's your Q3 report") rather than just a first name. Empty name-drops feel like mail merge.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const CIRC=2*Math.PI*37;

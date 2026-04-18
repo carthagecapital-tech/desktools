@@ -83,6 +83,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -95,6 +113,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Calculate invoice totals, taxes, and discounts instantly. Copy a clean breakdown."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Invoice Calculator","description":"Calculate invoice totals, taxes, and discounts instantly. Copy a clean breakdown.","url":"https://desktools.dev/invoice-calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"invoice calculator, tax calculator, invoice total"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate an invoice total with tax and discount online?","acceptedAnswer":{"@type":"Answer","text":"Add each line item with quantity, rate, and description. Set your tax percentage, discount percentage, and shipping cost. The subtotal, tax amount, discount amount, and final total update live as you edit. Click Copy Breakdown to grab a clean plain-text summary."}},{"@type":"Question","name":"How is sales tax calculated on an invoice?","acceptedAnswer":{"@type":"Answer","text":"Standard practice: apply the tax percentage to the subtotal after any discount. Example: $1,000 subtotal, 10% discount = $900 discounted subtotal, 8% tax = $72 tax, final $972. Some jurisdictions tax before discount. Check local rules. Shipping may or may not be taxable depending on your location."}},{"@type":"Question","name":"What currencies does this invoice calculator support?","acceptedAnswer":{"@type":"Answer","text":"USD, EUR, GBP, CAD, JPY, AED, and SAR. The selected currency is applied to all displayed amounts and the copied breakdown. For other currencies, the math is identical. Pick whichever is closest and manually replace the symbol in your output."}},{"@type":"Question","name":"Should I charge tax on freelance work?","acceptedAnswer":{"@type":"Answer","text":"Depends on jurisdiction. In the US, most states require sales tax on goods but not services (though software and digital products vary). In the UK/EU, freelancers over the VAT threshold must register and charge VAT. In Canada, GST/HST applies at a national level plus provincial. Consult a local accountant before setting up taxes for client invoicing."}},{"@type":"Question","name":"Is this a replacement for a full invoicing tool like QuickBooks or Stripe Invoicing?","acceptedAnswer":{"@type":"Answer","text":"No. It's for quick estimates and calculations. For actual client invoicing with proper formatting, invoice numbers, payment links, and bookkeeping integration, use a dedicated tool. This calculator is for estimating project totals before sending a formal invoice, checking freelance rate calculations, or doing quick budget math."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -166,6 +185,45 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة الفواتير</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I calculate an invoice total with tax and discount online?</summary>
+    <div class="faq-body">
+      <p>Add each line item with quantity, rate, and description. Set your tax percentage, discount percentage, and shipping cost. The subtotal, tax amount, discount amount, and final total update live as you edit. Click <strong>Copy Breakdown</strong> to grab a clean plain-text summary.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How is sales tax calculated on an invoice?</summary>
+    <div class="faq-body">
+      <p>Standard practice: apply the tax percentage to the subtotal <em>after</em> any discount. Example: $1,000 subtotal, 10% discount = $900 discounted subtotal, 8% tax = $72 tax, final $972. Some jurisdictions tax before discount &mdash; check local rules. Shipping may or may not be taxable depending on your location.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What currencies does this invoice calculator support?</summary>
+    <div class="faq-body">
+      <p>USD, EUR, GBP, CAD, JPY, AED, and SAR. The selected currency is applied to all displayed amounts and the copied breakdown. For other currencies, the math is identical &mdash; pick whichever is closest and manually replace the symbol in your output.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I charge tax on freelance work?</summary>
+    <div class="faq-body">
+      <p>Depends on jurisdiction. In the US, most states require sales tax on goods but not services (though software and digital products vary). In the UK/EU, freelancers over the VAT threshold must register and charge VAT. In Canada, GST/HST applies at a national level plus provincial. Consult a local accountant before setting up taxes for client invoicing.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is this a replacement for a full invoicing tool like QuickBooks or Stripe Invoicing?</summary>
+    <div class="faq-body">
+      <p>No &mdash; it's for quick estimates and calculations. For actual client invoicing with proper formatting, invoice numbers, payment links, and bookkeeping integration, use a dedicated tool. This calculator is for: estimating project totals before sending a formal invoice, checking freelance rate calculations, or doing quick budget math.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 let items=[{desc:'',qty:1,price:0}];
