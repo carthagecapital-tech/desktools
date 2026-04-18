@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Color Picker & Palette Generator — Free Online Tool | DeskTools"/>
 <meta name="twitter:description" content="Free online color picker with HEX, RGB, and HSL conversion. Generate complementary, analogous, and shade palettes instantly."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I pick a color online and get HEX, RGB, and HSL values?","acceptedAnswer":{"@type":"Answer","text":"Click or drag on the color picker to choose a color. The HEX, RGB, and HSL values update live. Click any value to copy it. The tool also generates a matching palette (complementary, analogous, shades) for the chosen color."}},{"@type":"Question","name":"What is the difference between HEX, RGB, and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX (#FF5733) is compact and universal in web design. RGB (rgb(255,87,51)) gives you each channel as a decimal 0-255. HSL (hsl(11,100%,60%)) uses hue, saturation, and lightness. More intuitive for tweaking shades and creating palettes. All three represent the same color."}},{"@type":"Question","name":"How do I generate a complementary color palette?","acceptedAnswer":{"@type":"Answer","text":"Pick your base color, and the tool automatically generates a complementary palette (opposite on the color wheel), analogous palette (adjacent colors), and shades (lighter and darker variants). Click any swatch to copy its value."}},{"@type":"Question","name":"What's the difference between a complementary, analogous, and triadic palette?","acceptedAnswer":{"@type":"Answer","text":"Complementary: two colors opposite on the wheel (red + green). High contrast, use sparingly. Analogous: three neighboring colors (red + orange + yellow). Harmonious, great for backgrounds. Triadic: three colors evenly spaced (red + yellow + blue). Vibrant but balanced. Each serves different design goals."}},{"@type":"Question","name":"How do I check if my color palette is accessible?","acceptedAnswer":{"@type":"Answer","text":"Use the Contrast Checker to verify your foreground and background colors meet WCAG contrast ratios. A color palette looks great in isolation but might fail accessibility when used for text."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -56,6 +76,45 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>منتقي الألوان</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I pick a color online and get HEX, RGB, and HSL values?</summary>
+    <div class="faq-body">
+      <p>Click or drag on the color picker to choose a color. The HEX, RGB, and HSL values update live. Click any value to copy it. The tool also generates a matching palette (complementary, analogous, shades) for the chosen color.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between HEX, RGB, and HSL?</summary>
+    <div class="faq-body">
+      <p><strong>HEX</strong> (<code>#FF5733</code>) is compact and universal in web design. <strong>RGB</strong> (<code>rgb(255,87,51)</code>) gives you each channel as a decimal 0-255. <strong>HSL</strong> (<code>hsl(11,100%,60%)</code>) uses hue, saturation, and lightness &mdash; more intuitive for tweaking shades and creating palettes. All three represent the same color.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I generate a complementary color palette?</summary>
+    <div class="faq-body">
+      <p>Pick your base color, and the tool automatically generates a complementary palette (opposite on the color wheel), analogous palette (adjacent colors), and shades (lighter and darker variants). Click any swatch to copy its value.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between a complementary, analogous, and triadic palette?</summary>
+    <div class="faq-body">
+      <p><strong>Complementary</strong>: two colors opposite on the wheel (red + green) &mdash; high contrast, use sparingly. <strong>Analogous</strong>: three neighboring colors (red + orange + yellow) &mdash; harmonious, great for backgrounds. <strong>Triadic</strong>: three colors evenly spaced (red + yellow + blue) &mdash; vibrant but balanced. Each serves different design goals.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I check if my color palette is accessible?</summary>
+    <div class="faq-body">
+      <p>Use the <a href="/contrast-checker">Contrast Checker</a> to verify your foreground and background colors meet WCAG contrast ratios. A color palette looks great in isolation but might fail accessibility when used for text.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function hexToRgb(hex){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');return{r:parseInt(hex.substr(0,2),16),g:parseInt(hex.substr(2,2),16),b:parseInt(hex.substr(4,2),16)};}

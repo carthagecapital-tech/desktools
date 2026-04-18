@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CSS Minifier — Free Online CSS Compressor | DeskTools"/>
 <meta name="twitter:description" content="Free online CSS minifier. Compress your CSS by removing whitespace, comments, and unnecessary characters. See the size reduction instantly."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I minify CSS online for free?","acceptedAnswer":{"@type":"Answer","text":"Paste your CSS into the input box and click Minify. Whitespace, comments, and redundant characters are stripped, giving you a production-ready CSS string. Click Copy to grab it. The tool also shows the size reduction as a percentage."}},{"@type":"Question","name":"What does minifying CSS actually do?","acceptedAnswer":{"@type":"Answer","text":"It removes every character the browser doesn't need: line breaks, indentation, spaces between selectors and properties, trailing semicolons on last declarations, and all comments. Shorthand values are collapsed where safe. The functional CSS is identical &mdash; only file size changes."}},{"@type":"Question","name":"How much can I expect to save by minifying CSS?","acceptedAnswer":{"@type":"Answer","text":"Typical savings are 20-40% for raw hand-written CSS, and 10-20% for already-tidy CSS (Prettier-formatted). Gzip compression on your server adds another 70-80% reduction on top of minification. The combination is why every production site serves minified, gzipped CSS."}},{"@type":"Question","name":"Should I manually minify CSS or use a build tool?","acceptedAnswer":{"@type":"Answer","text":"For any real project, use a build tool. Vite, Webpack, Parcel, and esbuild all minify CSS automatically during production builds. This tool is for quick one-offs: inspecting a minified file, minifying a small snippet for an inline style, or testing what your CSS looks like compressed."}},{"@type":"Question","name":"Can I reverse minified CSS back to readable format?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click Beautify to add proper indentation and line breaks back. Comments that were stripped can't be recovered (they're gone for good), but the structure becomes readable again, which is useful for inspecting a third-party minified stylesheet."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -58,6 +78,45 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة ضغط CSS</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I minify CSS online for free?</summary>
+    <div class="faq-body">
+      <p>Paste your CSS into the input box and click <strong>Minify</strong>. Whitespace, comments, and redundant characters are stripped, giving you a production-ready CSS string. Click <strong>Copy</strong> to grab it. The tool also shows the size reduction as a percentage.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does minifying CSS actually do?</summary>
+    <div class="faq-body">
+      <p>It removes every character the browser doesn't need: line breaks, indentation, spaces between selectors and properties, trailing semicolons on last declarations, and all comments. Shorthand values are collapsed where safe. The functional CSS is identical &mdash; only file size changes.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much can I expect to save by minifying CSS?</summary>
+    <div class="faq-body">
+      <p>Typical savings are 20-40% for raw hand-written CSS, and 10-20% for already-tidy CSS (Prettier-formatted). Gzip compression on your server adds another 70-80% reduction on top of minification. The combination is why every production site serves minified, gzipped CSS.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I manually minify CSS or use a build tool?</summary>
+    <div class="faq-body">
+      <p>For any real project, use a build tool &mdash; Vite, Webpack, Parcel, and esbuild all minify CSS automatically during production builds. This tool is for quick one-offs: inspecting a minified file, minifying a small snippet for an inline style, or testing what your CSS looks like compressed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I reverse minified CSS back to readable format?</summary>
+    <div class="faq-body">
+      <p>Yes &mdash; click <strong>Beautify</strong> to add proper indentation and line breaks back. Comments that were stripped can't be recovered (they're gone for good), but the structure becomes readable again, which is useful for inspecting a third-party minified stylesheet.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function minifyCSS() {

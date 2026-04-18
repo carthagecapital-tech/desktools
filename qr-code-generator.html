@@ -18,6 +18,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="QR Code Generator — Free Online QR Code Maker | DeskTools"/>
 <meta name="twitter:description" content="Free online QR code generator. Create QR codes for URLs, text, email, WiFi, and more. Download as PNG. No signup, no tracking."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a QR code online for free?","acceptedAnswer":{"@type":"Answer","text":"Pick a content type (URL, text, email, phone, SMS, WiFi), fill in the details, and the QR code generates instantly. Adjust size, foreground/background color, and error correction level, then click Download PNG. No signup, no watermark, no tracking."}},{"@type":"Question","name":"What types of data can I encode in a QR code?","acceptedAnswer":{"@type":"Answer","text":"This tool supports: URL (most common), plain text, email (opens mail app with recipient pre-filled), phone (triggers dial), SMS (opens messaging app), and WiFi (auto-joins the network when scanned on modern phones)."}},{"@type":"Question","name":"What is QR code error correction and which level should I use?","acceptedAnswer":{"@type":"Answer","text":"Error correction lets a QR code remain scannable even when partially damaged or obscured. Low (7%) for clean digital use. Medium (15%) balanced default. Quartile (25%) good for printed materials. High (30%) required if you're adding a logo overlay in the center."}},{"@type":"Question","name":"How do I make a QR code for my WiFi network?","acceptedAnswer":{"@type":"Answer","text":"Select the WiFi content type, enter your SSID, password, and encryption type (WPA/WPA2 is typical). When someone scans the QR code with a modern phone, their device auto-joins. No password typing. Great for guest networks at cafes, offices, and events."}},{"@type":"Question","name":"Can I use colored QR codes and still have them scannable?","acceptedAnswer":{"@type":"Answer","text":"Yes, but keep strong contrast between foreground and background (dark on light is safest). Light foreground on dark background works for some scanners but fails on older ones. Avoid reds on greens or other combos that look dim in grayscale. Most scanners read in grayscale first."}},{"@type":"Question","name":"Are QR codes free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"The QR code standard itself is patent-free and royalty-free for any use. The codes generated here are plain PNGs with no restrictions. Use them on business cards, posters, products, or anywhere else."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -103,6 +123,52 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>مولد رمز QR</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I create a QR code online for free?</summary>
+    <div class="faq-body">
+      <p>Pick a content type (URL, text, email, phone, SMS, WiFi), fill in the details, and the QR code generates instantly. Adjust size, foreground/background color, and error correction level, then click <strong>Download PNG</strong>. No signup, no watermark, no tracking.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What types of data can I encode in a QR code?</summary>
+    <div class="faq-body">
+      <p>This tool supports: <strong>URL</strong> (most common), <strong>plain text</strong>, <strong>email</strong> (opens mail app with recipient pre-filled), <strong>phone</strong> (triggers dial), <strong>SMS</strong> (opens messaging app), and <strong>WiFi</strong> (auto-joins the network when scanned on modern phones).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is QR code error correction and which level should I use?</summary>
+    <div class="faq-body">
+      <p>Error correction lets a QR code remain scannable even when partially damaged or obscured. <strong>Low (7%)</strong> &mdash; for clean digital use. <strong>Medium (15%)</strong> &mdash; balanced default. <strong>Quartile (25%)</strong> &mdash; good for printed materials. <strong>High (30%)</strong> &mdash; required if you're adding a logo overlay in the center.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I make a QR code for my WiFi network?</summary>
+    <div class="faq-body">
+      <p>Select the <strong>WiFi</strong> content type, enter your SSID, password, and encryption type (WPA/WPA2 is typical). When someone scans the QR code with a modern phone, their device auto-joins &mdash; no password typing. Great for guest networks at cafes, offices, and events.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use colored QR codes and still have them scannable?</summary>
+    <div class="faq-body">
+      <p>Yes, but keep strong contrast between foreground and background (dark on light is safest). Light foreground on dark background works for some scanners but fails on older ones. Avoid reds on greens or other combos that look dim in grayscale &mdash; most scanners read in grayscale first.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are QR codes free to use commercially?</summary>
+    <div class="faq-body">
+      <p>The QR code standard itself is patent-free and royalty-free for any use. The codes generated here are plain PNGs with no restrictions &mdash; use them on business cards, posters, products, or anywhere else.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     let qrInstance = null;

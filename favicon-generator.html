@@ -38,7 +38,26 @@ input[type=file]{display:none}
 .copy-code{position:absolute;top:.6rem;right:.6rem;background:var(--card-bg);border:1px solid var(--border);color:var(--muted);font-size:.7rem;font-family:'JetBrains Mono',monospace;padding:.25rem .5rem;border-radius:5px;cursor:pointer;transition:all .2s}
 .copy-code:hover{border-color:var(--accent);color:var(--accent)}
 .hidden{display:none}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate a favicon from an image?","acceptedAnswer":{"@type":"Answer","text":"Upload your source image (ideally a square PNG, 512x512 or larger). The tool generates favicons in every size needed (16, 32, 48, 180, 192, 512 pixels) plus the HTML meta tags to drop into your head. Everything runs in your browser."}},{"@type":"Question","name":"What favicon sizes do I actually need in 2026?","acceptedAnswer":{"@type":"Answer","text":"Essentials: 16x16 and 32x32 for browser tabs, 180x180 for Apple touch icon (iOS), 192x192 and 512x512 for Android Chrome and PWA. Older formats like favicon.ico are still recommended for IE/Edge legacy support but matter less each year."}},{"@type":"Question","name":"Where do I put the favicon HTML tags?","acceptedAnswer":{"@type":"Answer","text":"Inside your head, ideally near the top. The generator outputs ready-to-paste link rel=icon and link rel=apple-touch-icon tags. Just paste them in. The favicon images themselves go at your site root (/favicon-32.png, etc.)."}},{"@type":"Question","name":"Why is my favicon not showing up?","acceptedAnswer":{"@type":"Answer","text":"Most common causes: browser cache (hard-refresh with Ctrl+Shift+R), wrong file path in the link tag, or the image isn't square (browsers may skip it). Also check your server returns the correct MIME type (image/png for PNG favicons)."}},{"@type":"Question","name":"Can I use a transparent or dark-mode-aware favicon?","acceptedAnswer":{"@type":"Answer","text":"Transparent PNG favicons work everywhere. Browsers render them against the tab background, which adapts to dark/light mode. For fully dynamic favicons that change based on system preference, you need a link rel=icon media=prefers-color-scheme: dark tag with a separate dark-mode icon."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -85,6 +104,45 @@ input[type=file]{display:none}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate a favicon from an image?</summary>
+    <div class="faq-body">
+      <p>Upload your source image (ideally a square PNG, 512&times;512 or larger). The tool generates favicons in every size needed (16, 32, 48, 180, 192, 512 pixels) plus the HTML meta tags to drop into your <code>&lt;head&gt;</code>. Everything runs in your browser.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What favicon sizes do I actually need in 2026?</summary>
+    <div class="faq-body">
+      <p>Essentials: <strong>16&times;16</strong> and <strong>32&times;32</strong> (browser tabs), <strong>180&times;180</strong> (Apple touch icon for iOS), <strong>192&times;192</strong> and <strong>512&times;512</strong> (Android Chrome, PWA). Older formats like <code>favicon.ico</code> are still recommended for IE/Edge legacy support but matter less each year.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where do I put the favicon HTML tags?</summary>
+    <div class="faq-body">
+      <p>Inside your <code>&lt;head&gt;</code>, ideally near the top. The generator outputs ready-to-paste <code>&lt;link rel="icon"&gt;</code> and <code>&lt;link rel="apple-touch-icon"&gt;</code> tags &mdash; just paste them in. The favicon images themselves go at your site root (<code>/favicon-32.png</code>, etc.).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why is my favicon not showing up?</summary>
+    <div class="faq-body">
+      <p>Most common causes: browser cache (hard-refresh with Ctrl+Shift+R), wrong file path in the <code>&lt;link&gt;</code> tag, or the image isn't square (browsers may skip it). Also check your server returns the correct MIME type (<code>image/png</code> for PNG favicons).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use a transparent or dark-mode-aware favicon?</summary>
+    <div class="faq-body">
+      <p>Transparent PNG favicons work everywhere &mdash; browsers render them against the tab background, which adapts to dark/light mode. For fully dynamic favicons that change based on system preference, you need a <code>&lt;link rel="icon" media="(prefers-color-scheme: dark)"&gt;</code> tag with a separate dark-mode icon.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const SIZES=[16,32,48,64,128,180,192,512];

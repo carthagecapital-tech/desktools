@@ -36,7 +36,26 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 .selected-chip{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--bg3);border:1px solid var(--border);padding:.3rem .6rem;border-radius:5px;cursor:pointer;transition:all .15s;color:var(--text)}
 .selected-chip:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:600px){.shade{height:36px}.shades{gap:1px}}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find Tailwind CSS color class names?","acceptedAnswer":{"@type":"Answer","text":"Browse the full v3 palette on the page. Click any shade to copy either the class name (like bg-sky-500), the HEX value (#0ea5e9), or the RGB value. Use the toggle at the top to set your default copy format."}},{"@type":"Question","name":"What are the Tailwind CSS shade numbers (50, 100, 500, 900)?","acceptedAnswer":{"@type":"Answer","text":"Every color in Tailwind has 11 shades from 50 (lightest) to 950 (darkest), with 500 as the base shade. This gives you a predictable, consistent way to lighten and darken without manually calculating hex values. 50/100 for backgrounds, 500 for accents, 900/950 for dark text or backgrounds."}},{"@type":"Question","name":"How do I use Tailwind colors outside of a Tailwind project?","acceptedAnswer":{"@type":"Answer","text":"Copy the HEX or RGB values and use them in any CSS project. Tailwind's palette is just well-chosen colors. Nothing Tailwind-specific about the hex codes themselves. Many designers use the Tailwind palette as a starting point even in non-Tailwind projects because the progressions are carefully tuned."}},{"@type":"Question","name":"What's the difference between Tailwind v3 and v4 colors?","acceptedAnswer":{"@type":"Answer","text":"Tailwind v4 uses a new OKLCH color space for more uniform perceptual lightness across shades. The default palette hexes are similar but subtly different. This tool shows v3 values, which are still widely used. Any v3 hex works in v4 if you paste it directly."}},{"@type":"Question","name":"Which Tailwind color shades work well for body text?","acceptedAnswer":{"@type":"Answer","text":"For light backgrounds: slate-900, zinc-900, or neutral-900. Near-black with a hint of color for warmth. For dark backgrounds: slate-100, zinc-100. Off-white, easier on the eyes than pure white. Always verify with the Contrast Checker."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -78,6 +97,45 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.4rem}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I find Tailwind CSS color class names?</summary>
+    <div class="faq-body">
+      <p>Browse the full v3 palette on the page. Click any shade to copy either the <strong>class name</strong> (like <code>bg-sky-500</code>), the <strong>HEX</strong> value (<code>#0ea5e9</code>), or the <strong>RGB</strong> value. Use the toggle at the top to set your default copy format.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the Tailwind CSS shade numbers (50, 100, 500, 900)?</summary>
+    <div class="faq-body">
+      <p>Every color in Tailwind has 11 shades from <strong>50</strong> (lightest) to <strong>950</strong> (darkest), with 500 as the "base" shade. This gives you a predictable, consistent way to lighten and darken without manually calculating hex values. 50/100 for backgrounds, 500 for accents, 900/950 for dark text or backgrounds.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I use Tailwind colors outside of a Tailwind project?</summary>
+    <div class="faq-body">
+      <p>Copy the HEX or RGB values and use them in any CSS project. Tailwind's palette is just well-chosen colors &mdash; nothing Tailwind-specific about the hex codes themselves. Many designers use the Tailwind palette as a starting point even in non-Tailwind projects because the progressions are carefully tuned.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between Tailwind v3 and v4 colors?</summary>
+    <div class="faq-body">
+      <p>Tailwind v4 uses a new <strong>OKLCH</strong> color space for more uniform perceptual lightness across shades. The default palette hexes are similar but subtly different. This tool shows v3 values, which are still widely used &mdash; any v3 hex works in v4 if you paste it directly.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Which Tailwind color shades work well for body text?</summary>
+    <div class="faq-body">
+      <p>For light backgrounds: <code>slate-900</code>, <code>zinc-900</code>, or <code>neutral-900</code> &mdash; near-black with a hint of color for warmth. For dark backgrounds: <code>slate-100</code>, <code>zinc-100</code> &mdash; off-white, easier on the eyes than pure white. Always verify with the <a href="/contrast-checker">Contrast Checker</a>.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var COLORS={

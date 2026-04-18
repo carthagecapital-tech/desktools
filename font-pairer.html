@@ -82,6 +82,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -94,6 +112,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Browse and pair Google Fonts visually. Preview heading and body combinations."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Font Pairer","description":"Browse and pair Google Fonts visually. Preview heading and body combinations.","url":"https://desktools.dev/font-pairer","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"font pairer, Google Fonts pairing, font combination"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I pair Google Fonts for a website?","acceptedAnswer":{"@type":"Answer","text":"Pick a heading font and a body font from the dropdowns. The preview updates live with sample text. When you find a pairing you like, click Copy CSS Import to grab the Google Fonts link and ready-to-use font-family CSS."}},{"@type":"Question","name":"What makes a good font pairing?","acceptedAnswer":{"@type":"Answer","text":"Contrast is key. Pair a serif heading with a sans-serif body (or vice versa). Combine a display font with a clean neutral. Avoid two serifs or two sans-serifs that look too similar. They'll clash rather than complement. Weight contrast (bold headings + regular body) also helps."}},{"@type":"Question","name":"What are the best Google Fonts for headings and body text?","acceptedAnswer":{"@type":"Answer","text":"Reliable heading choices: Playfair Display, Montserrat, Oswald, Bebas Neue, Outfit. Reliable body choices: Inter, Roboto, Open Sans, Lora, Source Sans 3. These are well-hinted, load fast, and look good at small sizes."}},{"@type":"Question","name":"How many fonts should I use on one website?","acceptedAnswer":{"@type":"Answer","text":"Two is the sweet spot. One for headings, one for body. Three is acceptable if the third serves a specific role (monospace for code, a display font for accents). More than three starts to feel chaotic and hurts performance (every font is an HTTP request)."}},{"@type":"Question","name":"Are Google Fonts free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. All Google Fonts are released under open-source licenses (mostly SIL Open Font License or Apache 2.0) and are free to use in any project, personal or commercial, including client work and products you sell."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -148,6 +167,45 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة مطابقة الخطوط</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I pair Google Fonts for a website?</summary>
+    <div class="faq-body">
+      <p>Pick a heading font and a body font from the dropdowns &mdash; the preview updates live with sample text. When you find a pairing you like, click <strong>Copy CSS Import</strong> to grab the Google Fonts <code>&lt;link&gt;</code> and ready-to-use font-family CSS.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What makes a good font pairing?</summary>
+    <div class="faq-body">
+      <p>Contrast is key. Pair a serif heading with a sans-serif body (or vice versa). Combine a display font with a clean neutral. Avoid two serifs or two sans-serifs that look too similar &mdash; they'll clash rather than complement. Weight contrast (bold headings + regular body) also helps.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the best Google Fonts for headings and body text?</summary>
+    <div class="faq-body">
+      <p>Reliable heading choices: <strong>Playfair Display</strong>, <strong>Montserrat</strong>, <strong>Oswald</strong>, <strong>Bebas Neue</strong>, <strong>Outfit</strong>. Reliable body choices: <strong>Inter</strong>, <strong>Roboto</strong>, <strong>Open Sans</strong>, <strong>Lora</strong>, <strong>Source Sans 3</strong>. These are well-hinted, load fast, and look good at small sizes.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How many fonts should I use on one website?</summary>
+    <div class="faq-body">
+      <p>Two is the sweet spot &mdash; one for headings, one for body. Three is acceptable if the third serves a specific role (monospace for code, a display font for accents). More than three starts to feel chaotic and hurts performance (every font is an HTTP request).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Are Google Fonts free to use commercially?</summary>
+    <div class="faq-body">
+      <p>Yes. All Google Fonts are released under open-source licenses (mostly SIL Open Font License or Apache 2.0) and are free to use in any project, personal or commercial, including client work and products you sell.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 const FONTS = ['Playfair Display','Merriweather','Raleway','Oswald','Montserrat','Lora','Nunito','Poppins','Inter','Roboto Slab','Space Grotesk','DM Sans','Libre Baskerville','Cormorant Garamond','Fraunces','Syne','Plus Jakarta Sans','Lexend','Figtree','Spectral'];

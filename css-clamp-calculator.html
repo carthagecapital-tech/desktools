@@ -35,7 +35,26 @@ input[type=number]:focus{border-color:var(--accent)}
 .preview{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center;margin-top:1rem}
 .preview-text{color:var(--text);font-weight:600;line-height:1.2}
 .preview-label{color:var(--muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;margin-top:.5rem}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does CSS clamp() work for fluid typography?","acceptedAnswer":{"@type":"Answer","text":"clamp(min, preferred, max) sets a value that scales between a minimum and maximum based on viewport size. Example: clamp(1rem, 2vw + 0.5rem, 1.5rem). Text is 1rem on small screens, grows with viewport, caps at 1.5rem on large screens. This tool calculates the middle value for you."}},{"@type":"Question","name":"Why use clamp() instead of media queries?","acceptedAnswer":{"@type":"Answer","text":"Media queries jump at breakpoints. Text is 18px at 767px and suddenly 24px at 768px. clamp() scales smoothly across the whole range, which looks more polished and handles every screen size without writing explicit breakpoints."}},{"@type":"Question","name":"What viewport sizes should I use for min and max?","acceptedAnswer":{"@type":"Answer","text":"Common defaults: min viewport = 320px (smallest phone), max viewport = 1200-1440px (typical desktop cap). For content-focused sites, cap earlier (1024px) so text doesn't scale too large on wide monitors. Adjust to match where your audience actually views the site."}},{"@type":"Question","name":"Can I use clamp() for padding, margins, and gaps, not just font size?","acceptedAnswer":{"@type":"Answer","text":"Yes. clamp() works anywhere you use a length value: padding: clamp(1rem, 4vw, 3rem), margin, gap, width, max-width. Fluid spacing makes whole layouts feel cohesive across viewports without extra breakpoints."}},{"@type":"Question","name":"Should I use rem or px for clamp min and max values?","acceptedAnswer":{"@type":"Answer","text":"Prefer rem for anything related to text (font-size, line-height, vertical rhythm). It respects user browser font-size preferences (accessibility). Use px or rem for layout spacing; px is fine when you want exact pixel values regardless of user zoom."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -90,6 +109,45 @@ input[type=number]:focus{border-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How does CSS clamp() work for fluid typography?</summary>
+    <div class="faq-body">
+      <p><code>clamp(min, preferred, max)</code> sets a value that scales between a minimum and maximum based on viewport size. Example: <code>clamp(1rem, 2vw + 0.5rem, 1.5rem)</code> &mdash; text is 1rem on small screens, grows with viewport, caps at 1.5rem on large screens. This tool calculates the middle value for you.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why use clamp() instead of media queries?</summary>
+    <div class="faq-body">
+      <p>Media queries jump at breakpoints &mdash; text is 18px at 767px and suddenly 24px at 768px. <code>clamp()</code> scales smoothly across the whole range, which looks more polished and handles every screen size without writing explicit breakpoints.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What viewport sizes should I use for min and max?</summary>
+    <div class="faq-body">
+      <p>Common defaults: <strong>min viewport</strong> = 320px (smallest phone), <strong>max viewport</strong> = 1200-1440px (typical desktop cap). For content-focused sites, cap earlier (1024px) so text doesn't scale too large on wide monitors. Adjust to match where your audience actually views the site.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I use clamp() for padding, margins, and gaps, not just font size?</summary>
+    <div class="faq-body">
+      <p>Yes. <code>clamp()</code> works anywhere you use a length value: <code>padding: clamp(1rem, 4vw, 3rem)</code>, <code>margin</code>, <code>gap</code>, <code>width</code>, <code>max-width</code>. Fluid spacing makes whole layouts feel cohesive across viewports without extra breakpoints.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I use rem or px for clamp min and max values?</summary>
+    <div class="faq-body">
+      <p>Prefer <strong>rem</strong> for anything related to text (font-size, line-height, vertical rhythm) &mdash; it respects user browser font-size preferences (accessibility). Use <strong>px</strong> or <strong>rem</strong> for layout spacing; px is fine when you want exact pixel values regardless of user zoom.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var unit='rem';

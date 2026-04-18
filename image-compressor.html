@@ -41,7 +41,26 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .btn:hover{opacity:.85}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .preview-img{max-width:100%;max-height:200px;border-radius:8px;margin-top:1rem;display:block;margin-left:auto;margin-right:auto}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I compress an image online without uploading it?","acceptedAnswer":{"@type":"Answer","text":"Drag and drop a JPG, PNG, or WebP image onto the page. Compression happens entirely in your browser using the Canvas API. Nothing leaves your device. Pick output format, adjust quality, and download. Typical size reduction is 50-90% depending on the source image."}},{"@type":"Question","name":"What's the difference between JPEG, PNG, and WebP?","acceptedAnswer":{"@type":"Answer","text":"JPEG for photos. Lossy compression, no transparency, widely supported. PNG for graphics with sharp edges (logos, icons, screenshots). Lossless, supports transparency. WebP is newer, smaller than both for similar quality, supports transparency. Use WebP in modern browsers with JPEG fallback for old IE."}},{"@type":"Question","name":"What quality setting gives the best size-to-quality tradeoff?","acceptedAnswer":{"@type":"Answer","text":"For JPEG/WebP, 75-85% is the sweet spot. Visually indistinguishable from the original for most images, but 60-80% smaller. Below 60%, compression artifacts start showing. PNG is lossless by default, so quality doesn't apply. Savings come from color reduction and pixel optimization."}},{"@type":"Question","name":"Is it safe to compress confidential images online?","acceptedAnswer":{"@type":"Answer","text":"With this tool, yes. Compression is 100% client-side via the Canvas API. The image data never leaves your browser. You can safely compress screenshots with sensitive info, client work, or personal photos. Verify by checking your browser's network tab: no upload requests fire."}},{"@type":"Question","name":"Why does my compressed PNG look blurry or have artifacts?","acceptedAnswer":{"@type":"Answer","text":"PNG compression with color reduction can introduce banding on gradients. If the source is a photo, use JPEG or WebP instead. PNG is wrong for photos. If it's a screenshot with text and you need transparency, try a higher color depth or switch to WebP (supports transparency and is much smaller)."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -94,6 +113,45 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I compress an image online without uploading it?</summary>
+    <div class="faq-body">
+      <p>Drag and drop a JPG, PNG, or WebP image onto the page. Compression happens entirely in your browser using the Canvas API &mdash; nothing leaves your device. Pick output format, adjust quality, and download. Typical size reduction is 50-90% depending on the source image.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between JPEG, PNG, and WebP?</summary>
+    <div class="faq-body">
+      <p><strong>JPEG</strong> &mdash; best for photos. Lossy compression, no transparency, widely supported. <strong>PNG</strong> &mdash; best for graphics with sharp edges (logos, icons, screenshots). Lossless, supports transparency. <strong>WebP</strong> &mdash; newer format, smaller than both for similar quality, supports transparency. Use WebP in modern browsers with JPEG fallback for old IE.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What quality setting gives the best size-to-quality tradeoff?</summary>
+    <div class="faq-body">
+      <p>For JPEG/WebP, <strong>75-85%</strong> is the sweet spot &mdash; visually indistinguishable from the original for most images, but 60-80% smaller. Below 60%, compression artifacts start showing. PNG is lossless by default, so quality doesn't apply &mdash; savings come from color reduction and pixel optimization.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to compress confidential images online?</summary>
+    <div class="faq-body">
+      <p>With this tool, yes &mdash; compression is 100% client-side via the Canvas API. The image data never leaves your browser. You can safely compress screenshots with sensitive info, client work, or personal photos. Verify by checking your browser's network tab: no upload requests fire.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why does my compressed PNG look blurry or have artifacts?</summary>
+    <div class="faq-body">
+      <p>PNG compression with color reduction can introduce banding on gradients. If the source is a photo, use JPEG or WebP instead &mdash; PNG is wrong for photos. If it's a screenshot with text and you need transparency, try a higher color depth or switch to WebP (supports transparency and is much smaller).</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 var currentImg=null,currentFile=null,fmt='image/jpeg';

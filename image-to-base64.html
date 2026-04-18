@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Image to Base64 Converter — Free Online Tool | DeskTools"/>
 <meta name="twitter:description" content="Free online image to Base64 converter. Upload an image and get the Base64-encoded string instantly. Generate CSS background and HTML img tags. No upload to server."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert an image to Base64 online?","acceptedAnswer":{"@type":"Answer","text":"Drag and drop an image or click to upload. The Base64-encoded string is generated instantly along with ready-to-use CSS background-image and HTML img snippets. Click Copy to grab whichever you need. Nothing is uploaded to a server."}},{"@type":"Question","name":"When should I use a Base64-encoded image vs a regular image file?","acceptedAnswer":{"@type":"Answer","text":"Use Base64 for very small images (icons, tiny logos under ~5KB) to avoid an extra HTTP request. Use regular files for anything larger. Base64 makes files ~33% bigger and prevents the browser from caching them independently. For most photos and graphics, a linked file plus HTTP/2 is faster."}},{"@type":"Question","name":"What is a data URI and how do I use one in CSS?","acceptedAnswer":{"@type":"Answer","text":"A data URI embeds the file directly in the document: data:image/png;base64,iVBORw0... Use it in CSS as background-image: url(data:image/png;base64,...). The tool generates the full URI for you. Just copy and paste."}},{"@type":"Question","name":"Is it safe to convert private images using an online Base64 tool?","acceptedAnswer":{"@type":"Answer","text":"Yes with DeskTools. The conversion happens entirely in your browser using the FileReader API. Nothing is uploaded. You can safely encode screenshots with sensitive data, proprietary logos, or private photos."}},{"@type":"Question","name":"What image formats work for Base64 encoding?","acceptedAnswer":{"@type":"Answer","text":"Any format the browser can read: PNG, JPG, GIF, WebP, SVG, ICO. The encoded output includes the MIME type, so browsers render it correctly. SVG is a special case. Often better to paste the SVG source directly than Base64-encode it."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -84,6 +104,45 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>محول الصور إلى Base64</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I convert an image to Base64 online?</summary>
+    <div class="faq-body">
+      <p>Drag and drop an image or click to upload. The Base64-encoded string is generated instantly along with ready-to-use CSS <code>background-image</code> and HTML <code>&lt;img&gt;</code> snippets. Click <strong>Copy</strong> to grab whichever you need. Nothing is uploaded to a server.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>When should I use a Base64-encoded image vs a regular image file?</summary>
+    <div class="faq-body">
+      <p>Use Base64 for very small images (icons, tiny logos under ~5KB) to avoid an extra HTTP request. Use regular files for anything larger &mdash; Base64 makes files ~33% bigger and prevents the browser from caching them independently. For most photos and graphics, a linked file plus HTTP/2 is faster.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is a data URI and how do I use one in CSS?</summary>
+    <div class="faq-body">
+      <p>A data URI embeds the file directly in the document: <code>data:image/png;base64,iVBORw0...</code>. Use it in CSS as <code>background-image: url(data:image/png;base64,...)</code>. The tool generates the full URI for you &mdash; just copy and paste.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is it safe to convert private images using an online Base64 tool?</summary>
+    <div class="faq-body">
+      <p>Yes with DeskTools &mdash; the conversion happens entirely in your browser using the FileReader API. Nothing is uploaded. You can safely encode screenshots with sensitive data, proprietary logos, or private photos.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What image formats work for Base64 encoding?</summary>
+    <div class="faq-body">
+      <p>Any format the browser can read: PNG, JPG, GIF, WebP, SVG, ICO. The encoded output includes the MIME type, so browsers render it correctly. SVG is a special case &mdash; often better to paste the SVG source directly than Base64-encode it.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     const dropZone = document.getElementById('drop-zone');

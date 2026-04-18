@@ -82,6 +82,24 @@ footer a{color:var(--accent);text-decoration:none}
     .di-count { font-family:'JetBrains Mono',monospace; font-size:.7rem; background:rgba(0,212,170,0.1); color:var(--accent); padding:.1rem .4rem; border-radius:4px; white-space:nowrap; }
     .dropdown-divider { height:1px; background:var(--border); margin:.3rem .5rem; }
 
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
 
 <meta property="og:type" content="website"/>
@@ -94,6 +112,7 @@ footer a{color:var(--accent);text-decoration:none}
 <meta name="twitter:description" content="Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes."/>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SVG Optimizer","description":"Paste SVG markup and get a minified, clean version. Removes comments, metadata, and redundant attributes.","url":"https://desktools.dev/svg-optimizer","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"DeskTools","url":"https://desktools.dev"},"browserRequirements":"Requires a modern web browser","keywords":"SVG optimizer, SVG minifier, SVG cleaner"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I optimize an SVG file online?","acceptedAnswer":{"@type":"Answer","text":"Paste your SVG markup into the input. The optimizer strips comments, metadata, editor tags (like Adobe Illustrator leftovers), redundant attributes, and unnecessary whitespace. The visible result is identical; file size drops 30-80%. Click Copy Optimized SVG to grab it."}},{"@type":"Question","name":"What does SVG optimization actually remove?","acceptedAnswer":{"@type":"Answer","text":"Common bloat: XML comments, editor metadata (sodipodi, inkscape, Adobe tags), empty groups, unused IDs, default-value attributes, redundant namespaces, excessive precision in numbers (17.9999997 to 18), and whitespace between tags. The rendered output is pixel-identical."}},{"@type":"Question","name":"Why are SVGs exported from Figma or Illustrator so large?","acceptedAnswer":{"@type":"Answer","text":"Design tools add metadata for editing round-trips. Grid info, layer names, export history, color profiles, comments. None of it affects rendering, but it can double or triple file size. Running through an optimizer before shipping is standard practice."}},{"@type":"Question","name":"Should I inline SVG or use it as an image file?","acceptedAnswer":{"@type":"Answer","text":"Inline SVG (svg in HTML) is best for icons you want to style with CSS (change color on hover, animate, etc.). Image files are better for static illustrations and larger artwork you want cached separately. Optimize either way."}},{"@type":"Question","name":"Can I paste an SVG from Figma and have it still work after optimizing?","acceptedAnswer":{"@type":"Answer","text":"Yes. Figma exports are typically well-structured and optimize cleanly. Occasionally Figma adds clip paths or masks with complex IDs that the optimizer may simplify. Visually inspect the output if your SVG has complex compositing. For simple icons and shapes, there's almost never an issue."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a><div class="page">
@@ -148,6 +167,45 @@ footer a{color:var(--accent);text-decoration:none}
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>أداة تحسين SVG</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I optimize an SVG file online?</summary>
+    <div class="faq-body">
+      <p>Paste your SVG markup into the input. The optimizer strips comments, metadata, editor tags (like Adobe Illustrator leftovers), redundant attributes, and unnecessary whitespace. The visible result is identical; file size drops 30-80%. Click <strong>Copy Optimized SVG</strong> to grab it.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What does SVG optimization actually remove?</summary>
+    <div class="faq-body">
+      <p>Common bloat: XML comments, editor metadata (<code>&lt;sodipodi&gt;</code>, <code>&lt;inkscape&gt;</code>, Adobe tags), empty groups, unused IDs, default-value attributes, redundant namespaces, excessive precision in numbers (17.9999997 &rarr; 18), and whitespace between tags. The rendered output is pixel-identical.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why are SVGs exported from Figma or Illustrator so large?</summary>
+    <div class="faq-body">
+      <p>Design tools add metadata for editing round-trips &mdash; grid info, layer names, export history, color profiles, comments. None of it affects rendering, but it can double or triple file size. Running through an optimizer before shipping is standard practice.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Should I inline SVG or use it as an image file?</summary>
+    <div class="faq-body">
+      <p>Inline SVG (<code>&lt;svg&gt;...&lt;/svg&gt;</code> in HTML) is best for icons you want to style with CSS (change color on hover, animate, etc.). Image files (<code>&lt;img src="icon.svg"&gt;</code>) are better for static illustrations and larger artwork you want cached separately. Optimize either way.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I paste an SVG from Figma and have it still work after optimizing?</summary>
+    <div class="faq-body">
+      <p>Yes. Figma exports are typically well-structured and optimize cleanly. Occasionally Figma adds clip paths or masks with complex IDs that the optimizer may simplify &mdash; visually inspect the output if your SVG has complex compositing. For simple icons and shapes, there's almost never an issue.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function fmt(n){return n>=1024?(n/1024).toFixed(1)+'KB':n+'B'}

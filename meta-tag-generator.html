@@ -40,7 +40,26 @@ select{cursor:pointer}
 .copy-btn:hover{background:var(--accent2)}
 .output-code{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);line-height:1.8;white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto}
 .tag-kw{color:var(--accent)}.tag-attr{color:#ffa94d}.tag-val{color:#74c0fc}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate SEO meta tags for my website?","acceptedAnswer":{"@type":"Answer","text":"Fill in your page title, meta description, canonical URL, OG title/description/image, and site name. The tool outputs a complete block of HTML meta tags. Ready to paste into your page's head. Covers SEO basics, Open Graph (Facebook, LinkedIn, Slack), and Twitter Cards."}},{"@type":"Question","name":"What meta tags do I actually need for SEO in 2026?","acceptedAnswer":{"@type":"Answer","text":"Essentials: title (most important ranking signal), meta description (shown in search results), canonical URL (prevents duplicate-content issues), og:title, og:description, og:image (for social sharing), viewport (mobile rendering), and robots if you want to control indexing."}},{"@type":"Question","name":"How long should my title and meta description be?","acceptedAnswer":{"@type":"Answer","text":"Title: 50-60 characters. Longer titles get truncated in search results with ellipsis. Meta description: 150-160 characters. Doesn't directly affect ranking but impacts click-through rate from search results. Put the most important info first in case of truncation."}},{"@type":"Question","name":"What is a canonical URL and when do I need one?","acceptedAnswer":{"@type":"Answer","text":"A canonical URL tells search engines this is the original version of this page. Use it when the same content is accessible at multiple URLs (with/without www, http vs https, with tracking parameters). Without canonicals, Google may split ranking signals across duplicate URLs or penalize for duplicate content."}},{"@type":"Question","name":"Do I still need meta keywords in 2026?","acceptedAnswer":{"@type":"Answer","text":"No. Google has ignored the meta keywords tag since 2009. It has zero SEO value. Bing officially ignores it too. Leaving it out is fine; including it won't hurt but won't help. Focus your effort on title, description, and actual page content instead."}},{"@type":"Question","name":"How do I preview how my page will appear when shared on social media?","acceptedAnswer":{"@type":"Answer","text":"After generating your meta tags, plug them into the OG Previewer to see how the link will render on Twitter/X, LinkedIn, Slack, and Discord. Each platform has its own crop and layout."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -140,6 +159,52 @@ select{cursor:pointer}
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I generate SEO meta tags for my website?</summary>
+    <div class="faq-body">
+      <p>Fill in your page title, meta description, canonical URL, OG title/description/image, and site name. The tool outputs a complete block of HTML meta tags &mdash; ready to paste into your page's <code>&lt;head&gt;</code>. Covers SEO basics, Open Graph (Facebook, LinkedIn, Slack), and Twitter Cards.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What meta tags do I actually need for SEO in 2026?</summary>
+    <div class="faq-body">
+      <p>Essentials: <code>&lt;title&gt;</code> (most important ranking signal), <code>meta description</code> (shown in search results), <code>canonical</code> URL (prevents duplicate-content issues), <code>og:title</code>, <code>og:description</code>, <code>og:image</code> (for social sharing), <code>viewport</code> (mobile rendering), and <code>robots</code> if you want to control indexing.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How long should my title and meta description be?</summary>
+    <div class="faq-body">
+      <p><strong>Title</strong>: 50-60 characters. Longer titles get truncated in search results with "...". <strong>Meta description</strong>: 150-160 characters. Doesn't directly affect ranking but impacts click-through rate from search results. Put the most important info first in case of truncation.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is a canonical URL and when do I need one?</summary>
+    <div class="faq-body">
+      <p>A canonical URL tells search engines "this is the original version of this page". Use it when the same content is accessible at multiple URLs (with/without www, http vs https, with tracking parameters). Without canonicals, Google may split ranking signals across duplicate URLs or penalize for duplicate content.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do I still need meta keywords in 2026?</summary>
+    <div class="faq-body">
+      <p>No. Google has ignored the <code>meta keywords</code> tag since 2009 &mdash; it has zero SEO value. Bing officially ignores it too. Leaving it out is fine; including it won't hurt but won't help. Focus your effort on title, description, and actual page content instead.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I preview how my page will appear when shared on social media?</summary>
+    <div class="faq-body">
+      <p>After generating your meta tags, plug them into the <a href="/og-previewer">OG Previewer</a> to see how the link will render on Twitter/X, LinkedIn, Slack, and Discord &mdash; each platform has its own crop and layout.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function countChars(id,max){

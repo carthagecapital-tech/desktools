@@ -51,7 +51,26 @@ textarea{resize:vertical;min-height:60px;line-height:1.5;font-family:'Outfit',sa
 .sl-desc{font-size:.82rem;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .sl-thumb{width:100px;height:100px;background:var(--bg2);background-size:cover;background-position:center;flex-shrink:0}
 .no-img{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I preview Open Graph tags before publishing?","acceptedAnswer":{"@type":"Answer","text":"Fill in your page title, description, URL, and OG image URL. The tool renders how your link will appear when shared on Twitter/X, LinkedIn, Slack, and Discord. Each platform has different crop ratios and layout, all shown side by side."}},{"@type":"Question","name":"What is an Open Graph image and what size should it be?","acceptedAnswer":{"@type":"Answer","text":"An OG image is the picture that appears when your page is shared on social media. The standard is 1200x630 pixels (1.91:1 ratio). Keep critical content away from edges. Some platforms crop to 1:1 (square) for thumbnails. Under 5MB file size."}},{"@type":"Question","name":"Why isn't my OG image showing when I share my link?","acceptedAnswer":{"@type":"Answer","text":"Common causes: (1) Cached preview. Social platforms cache OG data. Use Facebook's Sharing Debugger, Twitter's Card Validator, or LinkedIn's Post Inspector to force a re-scrape. (2) Missing absolute URL. OG images must be full URLs (https://example.com/og.jpg), not relative paths. (3) Image too small. Under 600px wide often fails."}},{"@type":"Question","name":"What's the difference between og:image and twitter:image?","acceptedAnswer":{"@type":"Answer","text":"og:image is the Open Graph standard. Used by Facebook, LinkedIn, Slack, Discord, and most others. twitter:image is Twitter-specific and overrides og:image on Twitter/X. If you want a different image on Twitter (say, because their crop is different), set both."}},{"@type":"Question","name":"Do I need separate Twitter Card tags or will Open Graph work?","acceptedAnswer":{"@type":"Answer","text":"Twitter falls back to Open Graph tags if no Twitter-specific tags are set, which works for most cases. For the richest experience (summary_large_image cards, creator attribution), add twitter:card, twitter:site, and twitter:creator tags. The Meta Tag Generator builds all of these."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -136,6 +155,45 @@ textarea{resize:vertical;min-height:60px;line-height:1.5;font-family:'Outfit',sa
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I preview Open Graph tags before publishing?</summary>
+    <div class="faq-body">
+      <p>Fill in your page title, description, URL, and OG image URL. The tool renders how your link will appear when shared on <strong>Twitter/X</strong>, <strong>LinkedIn</strong>, <strong>Slack</strong>, and <strong>Discord</strong> &mdash; each platform has different crop ratios and layout, all shown side by side.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is an Open Graph image and what size should it be?</summary>
+    <div class="faq-body">
+      <p>An OG image is the picture that appears when your page is shared on social media. The standard is <strong>1200&times;630 pixels</strong> (1.91:1 ratio). Keep critical content away from edges &mdash; some platforms crop to 1:1 (square) for thumbnails. Under 5MB file size.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why isn't my OG image showing when I share my link?</summary>
+    <div class="faq-body">
+      <p>Common causes: (1) <strong>Cached preview</strong> &mdash; social platforms cache OG data. Use Facebook's Sharing Debugger, Twitter's Card Validator, or LinkedIn's Post Inspector to force a re-scrape. (2) <strong>Missing absolute URL</strong> &mdash; OG images must be full URLs (<code>https://example.com/og.jpg</code>), not relative paths. (3) <strong>Image too small</strong> &mdash; under 600px wide often fails.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between og:image and twitter:image?</summary>
+    <div class="faq-body">
+      <p><code>og:image</code> is the Open Graph standard &mdash; used by Facebook, LinkedIn, Slack, Discord, and most others. <code>twitter:image</code> is Twitter-specific and overrides <code>og:image</code> on Twitter/X. If you want a different image on Twitter (say, because their crop is different), set both.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do I need separate Twitter Card tags or will Open Graph work?</summary>
+    <div class="faq-body">
+      <p>Twitter falls back to Open Graph tags if no Twitter-specific tags are set, which works for most cases. For the richest experience (summary_large_image cards, creator attribution), add <code>twitter:card</code>, <code>twitter:site</code>, and <code>twitter:creator</code> tags. The <a href="/meta-tag-generator">Meta Tag Generator</a> builds all of these.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function render(){

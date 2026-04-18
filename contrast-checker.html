@@ -41,7 +41,26 @@ label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font
 .result-label{color:var(--muted)}
 .badge-pass{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#00d4aa;background:rgba(0,212,170,0.12);padding:.2rem .5rem;border-radius:4px}
 .badge-fail{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#ff6b6b;background:rgba(255,107,107,0.12);padding:.2rem .5rem;border-radius:4px}
+
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check if two colors meet WCAG contrast requirements?","acceptedAnswer":{"@type":"Answer","text":"Enter your foreground (text) color and background color. The contrast ratio and WCAG pass/fail results appear instantly. AA Large, AA Normal, AAA Large, and AAA Normal each have their own thresholds, all checked at once."}},{"@type":"Question","name":"What are the WCAG contrast ratio requirements?","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 AA requires 4.5:1 for normal text, 3:1 for large text (18pt+, or 14pt+ bold). WCAG 2.1 AAA requires 7:1 for normal text, 4.5:1 for large text. AA is the legal baseline in most jurisdictions; AAA is best practice for content meant for broad audiences."}},{"@type":"Question","name":"What counts as large text in the WCAG guidelines?","acceptedAnswer":{"@type":"Answer","text":"Large text is 18pt (24px) or larger, or 14pt (18.66px) bold or larger. Large text has a lower contrast requirement (3:1 AA, 4.5:1 AAA) because larger characters are inherently easier to read. Below those sizes, normal-text ratios apply."}},{"@type":"Question","name":"Why does my gray-on-white design fail WCAG contrast?","acceptedAnswer":{"@type":"Answer","text":"Light gray text on white is the most common contrast failure on the web. #999 on white is ~2.85:1. Fails AA at any size. #767676 is the lightest gray that passes 4.5:1 on white. When in doubt, go darker. Check the ratio here before committing to a gray."}},{"@type":"Question","name":"Does contrast checking apply to disabled buttons or placeholder text?","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 exempts disabled UI elements and pure decoration. Placeholder text is in a gray area. Technically exempt but users often mistake it for actual values. Best practice: meet at least 3:1 for placeholders, and never rely on placeholder alone to label a field."}}]}</script>
 </head>
 <body>
 <a href="/" class="back-link">&#x2190; Back to tools</a>
@@ -111,6 +130,45 @@ label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.35rem;font
 </div>
 </div></div></div>
 
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I check if two colors meet WCAG contrast requirements?</summary>
+    <div class="faq-body">
+      <p>Enter your foreground (text) color and background color &mdash; the contrast ratio and WCAG pass/fail results appear instantly. <strong>AA Large</strong>, <strong>AA Normal</strong>, <strong>AAA Large</strong>, and <strong>AAA Normal</strong> each have their own thresholds, all checked at once.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the WCAG contrast ratio requirements?</summary>
+    <div class="faq-body">
+      <p><strong>WCAG 2.1 AA</strong> requires 4.5:1 for normal text, 3:1 for large text (18pt+, or 14pt+ bold). <strong>WCAG 2.1 AAA</strong> requires 7:1 for normal text, 4.5:1 for large text. AA is the legal baseline in most jurisdictions; AAA is best practice for content meant for broad audiences.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What counts as large text in the WCAG guidelines?</summary>
+    <div class="faq-body">
+      <p><strong>Large text</strong> is 18pt (~24px) or larger, <em>or</em> 14pt (~18.66px) bold or larger. Large text has a lower contrast requirement (3:1 AA, 4.5:1 AAA) because larger characters are inherently easier to read. Below those sizes, normal-text ratios apply.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Why does my gray-on-white design fail WCAG contrast?</summary>
+    <div class="faq-body">
+      <p>Light gray text on white is the most common contrast failure on the web. <code>#999</code> on white is ~2.85:1 &mdash; fails AA at any size. <code>#767676</code> is the lightest gray that passes 4.5:1 on white. When in doubt, go darker. Check the ratio here before committing to a gray.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does contrast checking apply to disabled buttons or placeholder text?</summary>
+    <div class="faq-body">
+      <p>WCAG 2.1 exempts disabled UI elements and pure decoration. Placeholder text is in a gray area (pun intended) &mdash; technically exempt but users often mistake it for actual values. Best practice: meet at least 3:1 for placeholders, and never rely on placeholder alone to label a field.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
 function hexToRgb(hex){

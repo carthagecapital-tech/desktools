@@ -17,6 +17,26 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Aspect Ratio Calculator — Free Online Tool | DeskTools"/>
 <meta name="twitter:description" content="Free online aspect ratio calculator. Enter width and height to find the ratio, or lock a ratio and calculate missing dimensions. Common presets included."/>
+<style>
+    /* FAQ */
+    .faq-section{max-width:900px;margin:3rem auto 0;padding:2rem 2rem 0;border-top:1px solid var(--border)}
+    .faq-heading{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .faq-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .2s}
+    .faq-item[open]{border-color:rgba(0,212,170,0.3)}
+    .faq-item summary{cursor:pointer;padding:1rem 1.25rem;font-size:.95rem;font-weight:500;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:1.15rem;transition:transform .2s;flex-shrink:0}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-body{padding:0 1.25rem 1.1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+    .faq-body p{margin-bottom:.6rem}
+    .faq-body p:last-child{margin-bottom:0}
+    .faq-body strong{color:var(--text)}
+    .faq-body a{color:var(--accent);text-decoration:none}
+    .faq-body a:hover{text-decoration:underline}
+    .faq-body code{background:var(--bg3);padding:.1rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent)}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate an aspect ratio from width and height?","acceptedAnswer":{"@type":"Answer","text":"Enter your current width and height. The ratio shows instantly. To resize, change either dimension and the other updates to maintain the ratio. Common presets (16:9, 4:3, 1:1, 21:9, IG Story, 4K, OG Image) are one click away."}},{"@type":"Question","name":"What are the most common aspect ratios and where are they used?","acceptedAnswer":{"@type":"Answer","text":"16:9 for modern video, YouTube, TVs. 4:3 for older TVs, iPad, some photography. 1:1 for Instagram posts, profile photos. 9:16 for Stories, TikTok, Reels. 21:9 for ultrawide monitors and cinematic video. 3:2 for DSLR photography, prints."}},{"@type":"Question","name":"What aspect ratio should I use for an Open Graph social media image?","acceptedAnswer":{"@type":"Answer","text":"1.91:1 is the standard for Open Graph images (Twitter/X, Facebook, LinkedIn share cards). At 1200x630 pixels, it renders well across all major platforms. Use the OG Image preset to lock this ratio, then verify in the OG Previewer."}},{"@type":"Question","name":"How do I resize an image while keeping its aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Enter the original width and height to capture the current ratio. Then update either the new width or new height. The other dimension fills in automatically to preserve the ratio. Useful when you need a specific width but don't want to distort the image."}},{"@type":"Question","name":"What's the difference between aspect ratio and resolution?","acceptedAnswer":{"@type":"Answer","text":"Aspect ratio is the shape (16:9, 4:3) regardless of size. Resolution is the actual pixel dimensions (1920x1080, 3840x2160). 1920x1080 and 1280x720 have the same aspect ratio (16:9) but different resolutions. Ratio matters for layout; resolution matters for sharpness."}}]}</script>
 </head>
 <body>
 <div class="tool-content">
@@ -102,6 +122,45 @@
 <p style="margin-bottom:.85rem;line-height:1.6"><strong>العربية:</strong><br/>حاسبة نسبة العرض إلى الارتفاع</p>
 </div>
 </div></div></div>
+
+<section class="faq-section">
+  <h2 class="faq-heading">Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>How do I calculate an aspect ratio from width and height?</summary>
+    <div class="faq-body">
+      <p>Enter your current width and height &mdash; the ratio shows instantly. To resize, change either dimension and the other updates to maintain the ratio. Common presets (16:9, 4:3, 1:1, 21:9, IG Story, 4K, OG Image) are one click away.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What are the most common aspect ratios and where are they used?</summary>
+    <div class="faq-body">
+      <p><strong>16:9</strong> &mdash; modern video, YouTube, TVs. <strong>4:3</strong> &mdash; older TVs, iPad, some photography. <strong>1:1</strong> &mdash; Instagram posts, profile photos. <strong>9:16</strong> &mdash; Stories, TikTok, Reels. <strong>21:9</strong> &mdash; ultrawide monitors and cinematic video. <strong>3:2</strong> &mdash; DSLR photography, prints.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What aspect ratio should I use for an Open Graph social media image?</summary>
+    <div class="faq-body">
+      <p>1.91:1 is the standard for Open Graph images (Twitter/X, Facebook, LinkedIn share cards). At 1200&times;630 pixels, it renders well across all major platforms. Use the <strong>OG Image</strong> preset to lock this ratio, then verify in the <a href="/og-previewer">OG Previewer</a>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I resize an image while keeping its aspect ratio?</summary>
+    <div class="faq-body">
+      <p>Enter the original width and height to capture the current ratio. Then update either the new width or new height &mdash; the other dimension fills in automatically to preserve the ratio. Useful when you need a specific width but don't want to distort the image.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What's the difference between aspect ratio and resolution?</summary>
+    <div class="faq-body">
+      <p><strong>Aspect ratio</strong> is the shape (16:9, 4:3) regardless of size. <strong>Resolution</strong> is the actual pixel dimensions (1920&times;1080, 3840&times;2160). 1920&times;1080 and 1280&times;720 have the same aspect ratio (16:9) but different resolutions. Ratio matters for layout; resolution matters for sharpness.</p>
+    </div>
+  </details>
+</section>
 <script src="/shared.js"></script>
 <script>
     function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
