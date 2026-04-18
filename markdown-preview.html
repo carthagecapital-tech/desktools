@@ -127,9 +127,9 @@
     function renderMarkdown(){const input=document.getElementById('md-input').value;const output=document.getElementById('md-output');let html=input;
     html=html.replace(/```(\w*)\n([\s\S]*?)```/g,'<pre style="background:var(--bg-surface);padding:16px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;margin:12px 0;"><code>$2</code></pre>');
     html=html.replace(/^(\|.+\|)\n(\|[-:\s|]+\|)\n((?:\|.+\|\n?)*)/gm,(match,header,sep,body)=>{const ths=header.split('|').filter(c=>c.trim()).map(c=>'<th style="padding:8px 12px;border:1px solid var(--border);background:var(--bg-surface);">'+c.trim()+'</th>').join('');const rows=body.trim().split('\n').map(r=>{const tds=r.split('|').filter(c=>c.trim()).map(c=>'<td style="padding:8px 12px;border:1px solid var(--border);">'+c.trim()+'</td>').join('');return'<tr>'+tds+'</tr>';}).join('');return'<table style="border-collapse:collapse;width:100%;margin:12px 0;"><thead><tr>'+ths+'</tr></thead><tbody>'+rows+'</tbody></table>';});
-    html=html.replace(/^### (.+)$/gm,'<h3 style="font-size:1.1rem;margin:16px 0 8px;color:var(--text-primary);">$1</h3>');
-    html=html.replace(/^## (.+)$/gm,'<h2 style="font-size:1.3rem;margin:20px 0 10px;color:var(--text-primary);">$1</h2>');
-    html=html.replace(/^# (.+)$/gm,'<h1 style="font-size:1.6rem;margin:24px 0 12px;color:var(--text-primary);">$1</h1>');
+    html=html.replace(/^### (.+)$/gm,'<'+'h3 style="font-size:1.1rem;margin:16px 0 8px;color:var(--text-primary);">$1</'+'h3>');
+    html=html.replace(/^## (.+)$/gm,'<'+'h2 style="font-size:1.3rem;margin:20px 0 10px;color:var(--text-primary);">$1</'+'h2>');
+    html=html.replace(/^# (.+)$/gm,'<'+'h1 style="font-size:1.6rem;margin:24px 0 12px;color:var(--text-primary);">$1</'+'h1>');
     html=html.replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">');
     html=html.replace(/^> (.+)$/gm,'<blockquote style="border-left:3px solid var(--accent);padding:8px 16px;margin:12px 0;color:var(--text-secondary);background:var(--accent-dim);border-radius:0 6px 6px 0;">$1</blockquote>');
     html=html.replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--text-primary);">$1</strong>');
