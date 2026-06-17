@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pro Tools for Lawn Care Businesses — Apps & Demos | DeskTools</title>
+<link rel="canonical" href="https://desktools.dev/pro-tools/lawn-care"/>
+<meta name="description" content="Professional-grade, single-file HTML apps for solo landscapers and small lawn care businesses. Try the live demo in your browser, then buy the full version on Etsy. No account, no subscription, all data stays local."/>
+<meta name="robots" content="index, follow"/>
+<meta name="keywords" content="lawn care app, lawn care quote, lawn care contract, lawn care schedule, lawn care software, landscaping business app"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Pro Tools for Lawn Care Businesses — DeskTools"/>
+<meta property="og:description" content="Pro-grade single-file HTML apps for lawn care businesses. Try the live demo, then buy on Etsy. Local-first, no subscription."/>
+<meta property="og:url" content="https://desktools.dev/pro-tools/lawn-care"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Pro Tools for Lawn Care — DeskTools"/>
+<meta name="twitter:description" content="Pro-grade single-file HTML apps for lawn care businesses. Try the live demo, then buy on Etsy."/>
+<meta property="og:site_name" content="DeskTools"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
+      --accent: #00d4aa; --accent2: #00b894;
+      --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.75rem 2rem; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+    .page-head { margin-bottom: 2rem; }
+    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .5rem; }
+    .page-head p { color: var(--muted); font-size: 1rem; max-width: 620px; }
+    .pro-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.25);
+      color: var(--accent); font-size: 0.72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .pro-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .pro-card {
+      --app-color: #00d4aa;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: border-color .2s, transform .15s, background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pro-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 2px;
+      background: var(--app-color);
+      opacity: 0.7;
+    }
+    .pro-card:hover { border-color: var(--app-color); transform: translateY(-2px); background: #13131c; }
+    .pro-card-head { display: flex; align-items: center; gap: 12px; }
+    .pro-icon {
+      width: 40px; height: 40px;
+      border-radius: 9px;
+      background: var(--app-color);
+      color: #fff;
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .pro-title-block { min-width: 0; flex: 1; }
+    .pro-name { font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
+    .pro-tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .pro-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .pro-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 0.6rem; border-top: 1px solid var(--border);
+      margin-top: 0.3rem;
+    }
+    .pro-price { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .pro-price-suffix { font-family: 'Outfit', sans-serif; font-size: 0.7rem; color: var(--muted); font-weight: 500; margin-left: 4px; }
+    .pro-cta {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--accent); font-size: 0.78rem; font-weight: 600; text-decoration: none;
+    }
+    .pro-cta svg { width: 12px; height: 12px; }
+    .pro-cta-banner {
+      display: block; margin-top: 3rem; padding: 1.5rem 1.8rem;
+      background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(0,212,170,0.02));
+      border: 1px solid rgba(0,212,170,0.2);
+      border-radius: 14px; text-align: center;
+    }
+    .pro-cta-banner h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+    .pro-cta-banner p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .pro-cta-banner a {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0a0a0f;
+      font-weight: 600; font-size: 0.95rem;
+      padding: 0.7rem 1.4rem; border-radius: 10px; text-decoration: none; transition: background .2s;
+    }
+    .pro-cta-banner a:hover { background: var(--accent2); }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); margin-top: 3rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media(max-width:600px) { .tool-grid { grid-template-columns: 1fr; } }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Pro Tools for Lawn Care Businesses","description":"Pro-grade single-file HTML apps for solo landscapers and small lawn care businesses.","url":"https://desktools.dev/pro-tools/lawn-care","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"},"publisher":{"@type":"Organization","name":"CreatifTools","url":"https://creatif.tools"}}</script>
+</head>
+<body>
+<a href="/pro-tools" class="back-link">&#x2190; All Pro Tools</a>
+<div class="page-wrap">
+  <div class="page-head">
+    <span class="pro-badge">Pro Tools &middot; Lawn Care</span>
+    <h1>Pro Tools for Lawn Care Businesses</h1>
+    <p>Professional-grade, single-file HTML apps for solo landscapers and small lawn care businesses. Try the live demo in your browser, then buy the full version on Etsy. All data stays local — no account, no subscription, no tracking.</p>
+  </div>
+
+  <div class="tool-grid">
+
+    <a class="pro-card" href="https://creatif.tools/#lawn-care" data-name="lawnquote pro lawn care estimator" style="--app-color: #2D6A3E;">
+      <div class="pro-card-head">
+        <div class="pro-icon">L</div>
+        <div class="pro-title-block">
+          <div class="pro-name">LawnQuote Pro</div>
+          <div class="pro-tag">Lawn Care Estimator</div>
+        </div>
+      </div>
+      <div class="pro-desc">Build professional lawn care estimates in under a minute. Line items, taxes, discounts — all automatic.</div>
+      <div class="pro-foot">
+        <div class="pro-price">$39<span class="pro-price-suffix">one-time</span></div>
+        <span class="pro-cta">View on CreatifTools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </div>
+    </a>
+
+    <a class="pro-card" href="https://creatif.tools/#lawn-care" data-name="lawnforms pro contract templates" style="--app-color: #1F5F5B;">
+      <div class="pro-card-head">
+        <div class="pro-icon">F</div>
+        <div class="pro-title-block">
+          <div class="pro-name">LawnForms Pro</div>
+          <div class="pro-tag">Contract Templates</div>
+        </div>
+      </div>
+      <div class="pro-desc">A library of contract templates for lawn care service businesses. Pick a template, fill in the details, sign and print.</div>
+      <div class="pro-foot">
+        <div class="pro-price">$19<span class="pro-price-suffix">one-time</span></div>
+        <span class="pro-cta">View on CreatifTools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </div>
+    </a>
+
+    <a class="pro-card" href="https://creatif.tools/#lawn-care" data-name="lawnschedule pro job scheduler" style="--app-color: #B8862E;">
+      <div class="pro-card-head">
+        <div class="pro-icon">S</div>
+        <div class="pro-title-block">
+          <div class="pro-name">LawnSchedule Pro</div>
+          <div class="pro-tag">Job Scheduler</div>
+        </div>
+      </div>
+      <div class="pro-desc">Schedule one-time and recurring lawn care jobs, keep a service log per visit, print the daily route as a PDF.</div>
+      <div class="pro-foot">
+        <div class="pro-price">$19<span class="pro-price-suffix">one-time</span></div>
+        <span class="pro-cta">View on CreatifTools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="pro-cta-banner">
+    <h3>How demos work</h3>
+    <p>Click any app above to open the live demo in your browser. No install, no signup. After 90 seconds, you'll get a taste-it-then-buy-it prompt — buy the full version on Etsy and own it forever, with no subscription.</p>
+    <a href="https://creatif.tools/#lawn-care">
+      Browse all lawn care apps on CreatifTools
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+    </a>
+  </div>
+
+</div>
+
+<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="/pro-tools">All Pro Tools</a> &nbsp;&middot;&nbsp; <a href="https://creatif.tools">CreatifTools</a></footer>
+
+<script src="/shared.js"></script>
+</body>
+</html>

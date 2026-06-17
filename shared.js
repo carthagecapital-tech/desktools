@@ -58,13 +58,13 @@
     '        </a>' +
     '      </div>' +
     '    </div>' +
-    '    <a class="nav-pro-link" href="/pro-tools/cleaning" style="display:inline-flex;align-items:center;gap:.35rem;color:var(--accent);font-size:.85rem;font-weight:600;text-decoration:none;padding:.45rem .85rem;border:1px solid var(--accent-line,rgba(0,212,170,0.25));border-radius:8px;background:rgba(0,212,170,0.06);transition:background .2s,border-color .2s;" onmouseover="this.style.background=\'rgba(0,212,170,0.12)\'" onmouseout="this.style.background=\'rgba(0,212,170,0.06)\'">★ Pro Tools</a>' +
+    '    <a class="nav-pro-link" href="/pro-tools" style="display:inline-flex;align-items:center;gap:.35rem;color:var(--accent);font-size:.85rem;font-weight:600;text-decoration:none;padding:.45rem .85rem;border:1px solid var(--accent-line,rgba(0,212,170,0.25));border-radius:8px;background:rgba(0,212,170,0.06);transition:background .2s,border-color .2s;" onmouseover="this.style.background=\'rgba(0,212,170,0.12)\'" onmouseout="this.style.background=\'rgba(0,212,170,0.06)\'">★ Pro Tools</a>' +
     '    <button class="btn-request" onclick="openModal()">Request a Tool</button>' +
     '  </div>' +
     '</nav>';
 
   /* ---------- FOOTER ---------- */
-  var footerHTML = '<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="/pro-tools/cleaning">Pro Tools for Cleaning</a> &nbsp;&middot;&nbsp; <a href="https://creatif.tools">CreatifTools</a> &nbsp;&middot;&nbsp; <a href="https://desktools.dev">desktools.dev</a></footer>';
+  var footerHTML = '<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="/pro-tools">Pro Tools</a> &nbsp;&middot;&nbsp; <a href="https://creatif.tools">CreatifTools</a> &nbsp;&middot;&nbsp; <a href="https://desktools.dev">desktools.dev</a></footer>';
 
   /* ---------- MODAL ---------- */
   var modalHTML =
