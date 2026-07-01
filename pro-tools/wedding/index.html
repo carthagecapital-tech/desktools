@@ -7,9 +7,9 @@
 <meta name="description" content="Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://desktools.dev/pro-tools/wedding"/>
-<meta name="keywords" content="wedding apps, wedding business, single file html app, local-first, wedding software"/>
+<meta name="keywords" content="wedding apps, wedding business, single file html app, local-first"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Pro Tools for Wedding — DeskTools"/>
+<meta property="og:title" content="Pro Tools for Wedding — 1 app | DeskTools"/>
 <meta property="og:description" content="Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding."/>
 <meta property="og:url" content="https://desktools.dev/pro-tools/wedding"/>
 <meta property="og:image" content="https://desktools.dev/og-image.png"/>
@@ -20,14 +20,12 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="shortcut icon" href="/favicon.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-<!-- Plausible Analytics -->
 <script async src="https://plausible.io/js/pa-AjVqr2icdV_VPRQDlx4SD.js"></script>
 <script>
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
 </script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Pro Tools for Wedding","description":"Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding.","url":"https://desktools.dev/pro-tools/wedding","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"},"publisher":{"@type":"Organization","name":"CreatifTools","url":"https://creatif.tools"},"mainEntity":{"@type":"ItemList","numberOfItems":1,"itemListElement":[{"@type":"ListItem","position":1,"name":"Vow & Plan Pro","url":"https://creatif.tools/vow-and-plan/"}]}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://desktools.dev/"},{"@type":"ListItem","position":2,"name":"Pro Tools","item":"https://desktools.dev/pro-tools/"},{"@type":"ListItem","position":3,"name":"Wedding","item":"https://desktools.dev/pro-tools/wedding/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Pro Tools for Wedding", "description": "Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding.", "url": "https://desktools.dev/pro-tools/wedding", "isPartOf": {"@type": "WebSite", "name": "DeskTools", "url": "https://desktools.dev"}, "publisher": {"@type": "Organization", "name": "CreatifTools", "url": "https://creatif.tools"}, "mainEntity": {"@type": "ItemList", "numberOfItems": 1, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Vow & Plan Pro", "url": "https://creatif.tools/vow-and-plan/"}]}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -36,9 +34,11 @@
 body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
 a { color: var(--accent); text-decoration: none; } a:hover { color: var(--accent2); }
 nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
 .nav-logo-mark { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0a0a0f; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
-.nav-links { display: flex; align-items: center; gap: 1.5rem; } .nav-links a { color: var(--muted); font-size: 0.9rem; } .nav-links a:hover { color: var(--text); }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
 .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.85rem 2rem 0; transition: color .2s; }
 .back-link:hover { color: var(--accent); }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -47,7 +47,7 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); b
 .breadcrumb a { color: var(--muted); } .breadcrumb a:hover { color: var(--accent); }
 .niche-badge { display: inline-block; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
 h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 0.85rem; }
-.lead { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin-bottom: 0; }
+.lead { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin: 0; }
 .section { margin-bottom: 3rem; }
 .section-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
 .pro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1rem; }
@@ -88,6 +88,7 @@ footer a { color: var(--accent); }
   </a>
   <div class="nav-links">
     <a href="/pro-tools/">Pro Tools</a>
+    <a href="/tools/">Free Tools</a>
     <a href="https://creatif.tools/blog/">Blog</a>
     <a href="https://creatif.tools">Creatif Tools ↗</a>
   </div>
@@ -106,7 +107,7 @@ footer a { color: var(--accent); }
   <div class="section">
     <div class="section-title">Apps in this niche</div>
     <div class="pro-grid">
-    <a class="pro-card" href="https://creatif.tools/vow-and-plan/" data-name="vow & plan pro" style="--app-color: #BE185D;">
+    <a class="pro-card" href="https://creatif.tools/vow-and-plan/" style="--app-color: #BE185D;">
       <div class="pro-card-head">
         <div class="pro-icon">V&P</div>
         <div class="pro-title-block">
