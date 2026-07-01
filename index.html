@@ -111,6 +111,21 @@ footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--b
 footer a { color: var(--accent); }
 @media (max-width: 600px) { .hero { padding: 3.5rem 1.5rem 2rem; } .main { padding: 0 1.25rem 4rem; } .niche-grid { grid-template-columns: 1fr 1fr; } .stats-row { gap: 1.5rem; } }
 @media (max-width: 400px) { .niche-grid { grid-template-columns: 1fr; } }
+
+.blog-list{display:flex;flex-direction:column;gap:0.85rem;margin:1.75rem 0}
+.blog-list-card{--bc:#00d4aa;background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--bc);border-radius:12px;padding:1.4rem 1.65rem;text-decoration:none;color:inherit;display:grid;grid-template-columns:56px 1fr auto;gap:1.4rem;align-items:center;transition:border-color .2s,transform .15s,background .2s}
+.blog-list-card:hover{border-color:var(--bc);background:#13131c;transform:translateY(-1px);text-decoration:none}
+.blog-list-card:hover .blc-title{color:var(--bc)}
+.blc-icon{width:56px;height:56px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:1rem;color:#fff;background:var(--bc);flex-shrink:0;letter-spacing:-0.02em}
+.blc-content{min-width:0;flex:1}
+.blc-meta{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.45rem;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+.blc-cat{color:var(--bc)}
+.blc-dot{color:rgba(255,255,255,0.18)}
+.blc-title{font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.35rem;color:#fff;line-height:1.25}
+.blc-desc{color:var(--muted);font-size:0.9rem;line-height:1.5}
+.blc-cta{color:var(--bc);font-weight:600;font-size:0.85rem;display:inline-flex;align-items:center;gap:0.3rem;white-space:nowrap}
+.blc-cta svg{width:13px;height:13px}
+@media (max-width:600px){.blog-list-card{grid-template-columns:44px 1fr;gap:1rem;padding:1.2rem 1.35rem}.blc-icon{width:44px;height:44px;font-size:0.85rem}.blc-cta{grid-column:2;font-size:0.8rem;padding-top:0.25rem}.blc-title{font-size:1rem}.blc-desc{font-size:0.85rem}}
 </style>
 </head>
 <body>
@@ -408,65 +423,45 @@ footer a { color: var(--accent); }
       </div>
       <a href="https://creatif.tools/blog/" class="section-link">All posts →</a>
     </div>
-    <div class="featured-grid">
-      <a class="featured-card" href="https://creatif.tools/blog/cleaning-business-pricing-guide/" style="--app-color: #2C4A7C;">
-        <div class="fc-head">
-          <div class="fc-icon" style="background: #2C4A7C;">CB</div>
-          <div>
-            <div class="fc-name">Cleaning Business Pricing Guide</div>
-            <div class="fc-tag">Pillar guide · 11 min</div>
-          </div>
+    <div class="blog-list">
+      <a class="blog-list-card" href="https://creatif.tools/blog/cleaning-business-pricing-guide/" style="--bc: #2C4A7C;">
+        <div class="blc-icon">CB</div>
+        <div class="blc-content">
+          <div class="blc-meta"><span class="blc-cat">Cleaning Business</span><span class="blc-dot">·</span><span>Pillar guide</span><span class="blc-dot">·</span><span>11 min</span></div>
+          <div class="blc-title">Cleaning Business Pricing Guide</div>
+          <div class="blc-desc">The exact formulas, the math, and the decision framework working cleaning businesses use to set rates that pay them well.</div>
         </div>
-        <p class="fc-desc">The exact formulas, the math, and the decision framework working cleaning businesses use to set rates that pay them well.</p>
-        <div class="fc-foot">
-          <div class="fc-price">Pillar</div>
-          <span class="fc-cta">Read →</span>
-        </div>
+        <span class="blc-cta">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
 
-      <a class="featured-card" href="https://creatif.tools/blog/how-to-price-a-house-cleaning-job/" style="--app-color: #6B4A6E;">
-        <div class="fc-head">
-          <div class="fc-icon" style="background: #6B4A6E;">PH</div>
-          <div>
-            <div class="fc-name">How to Price a House Cleaning Job</div>
-            <div class="fc-tag">Deep dive · 9 min</div>
-          </div>
+      <a class="blog-list-card" href="https://creatif.tools/blog/how-to-price-a-house-cleaning-job/" style="--bc: #6B4A6E;">
+        <div class="blc-icon">PH</div>
+        <div class="blc-content">
+          <div class="blc-meta"><span class="blc-cat">Cleaning Business</span><span class="blc-dot">·</span><span>Pricing</span><span class="blc-dot">·</span><span>9 min</span></div>
+          <div class="blc-title">How to Price a House Cleaning Job</div>
+          <div class="blc-desc">A practical, no-fluff formula for residential house cleaning. Real numbers by home size, frequency, and job type.</div>
         </div>
-        <p class="fc-desc">A practical, no-fluff formula for residential house cleaning. Real numbers by home size, frequency, and job type.</p>
-        <div class="fc-foot">
-          <div class="fc-price">Pricing</div>
-          <span class="fc-cta">Read →</span>
-        </div>
+        <span class="blc-cta">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
 
-      <a class="featured-card" href="https://creatif.tools/blog/how-to-get-your-first-10-cleaning-clients/" style="--app-color: #047857;">
-        <div class="fc-head">
-          <div class="fc-icon" style="background: #047857;">10</div>
-          <div>
-            <div class="fc-name">How to Get Your First 10 Cleaning Clients</div>
-            <div class="fc-tag">90-day plan · 10 min</div>
-          </div>
+      <a class="blog-list-card" href="https://creatif.tools/blog/how-to-get-your-first-10-cleaning-clients/" style="--bc: #047857;">
+        <div class="blc-icon">10</div>
+        <div class="blc-content">
+          <div class="blc-meta"><span class="blc-cat">Cleaning Business</span><span class="blc-dot">·</span><span>Marketing</span><span class="blc-dot">·</span><span>10 min</span></div>
+          <div class="blc-title">How to Get Your First 10 Cleaning Clients</div>
+          <div class="blc-desc">A channel-by-channel playbook with exact scripts. Real examples of what works (referrals, GBP) and what doesn't (Google Ads too early).</div>
         </div>
-        <p class="fc-desc">A channel-by-channel playbook with exact scripts. Real examples of what works (referrals, GBP) and what doesn't (Google Ads too early).</p>
-        <div class="fc-foot">
-          <div class="fc-price">Marketing</div>
-          <span class="fc-cta">Read →</span>
-        </div>
+        <span class="blc-cta">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
 
-      <a class="featured-card" href="https://creatif.tools/blog/google-business-profile-for-cleaning-companies/" style="--app-color: #0891B2;">
-        <div class="fc-head">
-          <div class="fc-icon" style="background: #0891B2;">GBP</div>
-          <div>
-            <div class="fc-name">Google Business Profile for Cleaning Companies</div>
-            <div class="fc-tag">Local SEO · 11 min</div>
-          </div>
+      <a class="blog-list-card" href="https://creatif.tools/blog/google-business-profile-for-cleaning-companies/" style="--bc: #0891B2;">
+        <div class="blc-icon">GBP</div>
+        <div class="blc-content">
+          <div class="blc-meta"><span class="blc-cat">Cleaning Business</span><span class="blc-dot">·</span><span>Local SEO</span><span class="blc-dot">·</span><span>11 min</span></div>
+          <div class="blc-title">Google Business Profile for Cleaning Companies</div>
+          <div class="blc-desc">Step-by-step setup guide to rank in "cleaning service near me." HowTo schema, 27-item checklist, and 3 review response templates.</div>
         </div>
-        <p class="fc-desc">Step-by-step setup guide to rank in "cleaning service near me." HowTo schema, 27-item checklist, and 3 review response templates.</p>
-        <div class="fc-foot">
-          <div class="fc-price">Local SEO</div>
-          <span class="fc-cta">Read →</span>
-        </div>
+        <span class="blc-cta">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
     </div>
   </section>
