@@ -3,423 +3,457 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Pro Tools for Service Businesses &amp; Resellers — Apps &amp; Demos | DeskTools</title>
-<link rel="canonical" href="https://desktools.dev/pro-tools"/>
-<meta name="description" content="Pro-grade single-file HTML apps for solo operators, small service businesses, and resellers. Browse by niche: cleaning, lawn care, reselling, budgeting, food business, personal finance, personal habits, pets, health, home services, nursing, wedding, car wash, pest control, pool cleaning, legal. Try the live demo, then buy on Etsy."/>
+<title>Creatif Tools — Apps for Service Businesses &amp; Resellers | DeskTools</title>
+<meta name="description" content="Single-file HTML apps for cleaning, lawn care, reselling, nursing, weddings, and more. Local-first, no subscription, no account. Try the live demo, buy on Etsy."/>
 <meta name="robots" content="index, follow"/>
-<meta name="keywords" content="cleaning business app, lawn care app, car wash app, pest control app, pool cleaning app, reseller app, reselling app, inventory tracker, profit tracker, service business software, single file html app"/>
+<link rel="canonical" href="https://desktools.dev/"/>
+<meta name="keywords" content="cleaning business app, lawn care app, reseller app, nursing app, wedding app, single file html app, local-first, service business software"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Pro Tools for Service Businesses &amp; Resellers — DeskTools"/>
-<meta property="og:description" content="Pro-grade single-file HTML apps for solo operators and resellers. Browse by niche, try the live demo, buy on Etsy."/>
-<meta property="og:url" content="https://desktools.dev/pro-tools"/>
+<meta property="og:title" content="Creatif Tools — Apps for Service Businesses &amp; Resellers"/>
+<meta property="og:description" content="Single-file HTML apps for service businesses and resellers. Try the live demo, buy on Etsy. Local-first, no subscription, no account."/>
+<meta property="og:url" content="https://desktools.dev/"/>
 <meta property="og:image" content="https://desktools.dev/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Pro Tools for Service Businesses — DeskTools"/>
-<meta name="twitter:description" content="Pro-grade single-file HTML apps for solo operators. Browse by niche, try the live demo, buy on Etsy."/>
 <meta property="og:site_name" content="DeskTools"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<!-- Plausible Analytics -->
+<script async src="https://plausible.io/js/pa-AjVqr2icdV_VPRQDlx4SD.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<!-- Schema.org -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DeskTools","url":"https://desktools.dev","description":"Single-file HTML apps for service businesses, resellers, and personal use. Local-first, no subscription, no account."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Creatif Tools — Apps for Service Businesses & Resellers","description":"Browse 37 single-file HTML apps across 16 niches. Try the live demo, then buy the full version on Etsy.","url":"https://desktools.dev/","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"},"publisher":{"@type":"Organization","name":"CreatifTools","url":"https://creatif.tools"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
-      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
-      --accent: #00d4aa; --accent2: #00b894;
-      --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.75rem 2rem; transition: color .2s; }
-    .back-link:hover { color: var(--accent); }
-    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-    .page-head { text-align: center; margin-bottom: 2.5rem; }
-    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .5rem; }
-    .page-head p { color: var(--muted); font-size: 1rem; max-width: 620px; margin: 0 auto; }
-    .pro-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.25);
-      color: var(--accent); font-size: 0.72rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 0.3rem 0.7rem; border-radius: 100px;
-      margin-bottom: 1rem;
-    }
-    .pro-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-    .niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-    .niche-card {
-      --niche-color: var(--accent);
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem 1.4rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      transition: border-color .2s, transform .15s, background .2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .niche-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 3px;
-      background: var(--niche-color);
-      opacity: 0.7;
-    }
-    .niche-card:hover {
-      border-color: var(--niche-color);
-      transform: translateY(-3px);
-      background: #13131c;
-    }
-    .niche-card-head { display: flex; align-items: center; gap: 12px; }
-    .niche-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: var(--niche-color);
-      color: #fff;
-      display: grid; place-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .niche-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-      margin: 0;
-    }
-    .niche-meta {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-    .niche-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .niche-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.8rem;
-      border-top: 1px solid var(--border);
-    }
-    .niche-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-    }
-    .niche-count strong { color: var(--text); font-size: 1.05rem; margin-right: 4px; }
-    .niche-cta {
-      display: inline-flex; align-items: center; gap: 4px;
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .niche-cta svg { width: 12px; height: 12px; }
-    .niche-cta.coming { color: var(--muted); }
-    .pro-cta-banner {
-      display: block;
-      margin-top: 3rem;
-      padding: 1.5rem 1.8rem;
-      background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(0,212,170,0.02));
-      border: 1px solid rgba(0,212,170,0.2);
-      border-radius: 14px;
-      text-align: center;
-    }
-    .pro-cta-banner h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
-    .pro-cta-banner p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
-    .pro-cta-banner a {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #0a0a0f;
-      font-weight: 600; font-size: 0.95rem;
-      padding: 0.7rem 1.4rem; border-radius: 10px;
-      text-decoration: none; transition: background .2s;
-    }
-    .pro-cta-banner a:hover { background: var(--accent2); }
-    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); margin-top: 3rem; }
-    footer a { color: var(--accent); text-decoration: none; }
-    @media(max-width:600px) { .niche-grid { grid-template-columns: 1fr; } }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
+  --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
+  --accent: #00d4aa; --accent2: #00b894;
+  --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }
+.nav-logo-mark { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0a0a0f; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--accent); color: #0a0a0f !important; padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 600; transition: background .2s; }
+.nav-cta:hover { background: var(--accent2); color: #0a0a0f !important; }
+.hero { text-align: center; padding: 5rem 2rem 3rem; position: relative; }
+.hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at center, rgba(0,212,170,0.1) 0%, transparent 70%); pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); color: var(--accent); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem; }
+.hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+.hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), #4ECDC4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 580px; margin: 0 auto 2rem; }
+.hero-cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; font-family: inherit; }
+.btn-primary { background: var(--accent); color: #0a0a0f; }
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.stats-row { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-num { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 700; color: var(--accent); display: block; }
+.stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+.main { max-width: 1180px; margin: 0 auto; padding: 0 2rem 5rem; }
+.section { margin-bottom: 4rem; }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); gap: 1rem; flex-wrap: wrap; }
+.section-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+.section-desc { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+.section-link { color: var(--accent); font-size: 0.88rem; font-weight: 500; }
+.featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.featured-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; text-decoration: none; color: inherit; display: block; transition: all 0.2s; position: relative; overflow: hidden; }
+.featured-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--app-color); opacity: 0.6; }
+.featured-card:hover { border-color: var(--app-color); transform: translateY(-2px); }
+.fc-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.85rem; }
+.fc-icon { width: 44px; height: 44px; border-radius: 9px; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: 0.95rem; flex-shrink: 0; }
+.fc-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 2px; }
+.fc-tag { font-size: 0.78rem; color: var(--muted); }
+.fc-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.85rem; }
+.fc-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 1px solid var(--border); }
+.fc-price { font-weight: 700; font-size: 0.95rem; }
+.fc-price-sub { font-weight: 500; color: var(--muted); font-size: 0.78rem; margin-left: 0.25rem; }
+.fc-cta { color: var(--accent); font-size: 0.85rem; font-weight: 500; }
+.niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.85rem; }
+.niche-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.6rem; transition: border-color .2s, transform .15s; }
+.niche-card:hover { border-color: var(--niche-color); transform: translateY(-2px); }
+.niche-card-head { display: flex; align-items: center; gap: 0.7rem; }
+.niche-icon { width: 32px; height: 32px; border-radius: 7px; display: grid; place-items: center; font-weight: 700; font-size: 0.8rem; color: #fff; background: var(--niche-color); flex-shrink: 0; }
+.niche-name { font-weight: 600; font-size: 0.95rem; }
+.niche-meta { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.niche-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.45; flex: 1; }
+.niche-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 0.6rem; border-top: 1px solid var(--border); font-size: 0.8rem; }
+.niche-count { color: var(--muted); }
+.niche-count strong { color: var(--text); margin-right: 0.2rem; }
+.niche-cta { color: var(--accent); font-weight: 500; }
+.niche-cta.coming { color: var(--muted); }
+.cta-box { background: linear-gradient(135deg, rgba(0,212,170,0.06), rgba(0,212,170,0.02)); border: 1px solid rgba(0,212,170,0.18); border-radius: 14px; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.cta-text { flex: 1; min-width: 240px; }
+.cta-text h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+.cta-text p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+.dev-tools-link { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem 1.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-decoration: none; color: inherit; flex-wrap: wrap; transition: border-color .2s; }
+.dev-tools-link:hover { border-color: var(--accent); }
+.dev-tools-info h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+.dev-tools-info p { color: var(--muted); font-size: 0.85rem; margin: 0; }
+footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+footer a { color: var(--accent); }
+@media (max-width: 600px) { .hero { padding: 3.5rem 1.5rem 2rem; } .main { padding: 0 1.25rem 4rem; } .niche-grid { grid-template-columns: 1fr 1fr; } .stats-row { gap: 1.5rem; } }
+@media (max-width: 400px) { .niche-grid { grid-template-columns: 1fr; } }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Pro Tools for Service Businesses","description":"Pro-grade single-file HTML apps for solo operators and small service businesses, organized by niche.","url":"https://desktools.dev/pro-tools","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"},"publisher":{"@type":"Organization","name":"CreatifTools","url":"https://creatif.tools"}}</script>
 </head>
 <body>
-<a href="/" class="back-link">&#x2190; Back to tools</a>
-<div class="page-wrap">
-  <div class="page-head">
-    <span class="pro-badge">Pro Tools</span>
-    <h1>Pro Tools for Service Businesses &amp; Resellers</h1>
-    <p>Pro-grade, single-file HTML apps for solo operators, small service businesses, and resellers. Pick a niche below to see what's available, try the live demo in your browser, then buy the full version on Etsy. No account, no subscription, all data stays local.</p>
-
-    <a class="niche-card" href="/pro-tools/legal" style="--niche-color: #1E3A5F;">
-      <div class="niche-card-head">
-        <div class="niche-icon">B</div>
-        <div>
-          <h2 class="niche-name">Legal</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">State-aware bill of sale generator for vehicle sales — car, motorcycle, trailer, boat, RV, horse, and equipment. Includes federal odometer disclosure and state-specific disclosures.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-mark">ct</span>
+    <span>DeskTools</span>
+  </a>
+  <div class="nav-links">
+    <a href="#apps">Apps</a>
+    <a href="#niches">Niches</a>
+    <a href="https://creatif.tools/blog/">Blog</a>
+    <a href="/pro-tools/" class="nav-cta">Browse all</a>
   </div>
+</nav>
 
-  <div class="niche-grid">
-
-    <a class="niche-card" href="/pro-tools/cleaning" style="--niche-color: #2C4A7C;">
-      <div class="niche-card-head">
-        <div class="niche-icon">C</div>
-        <div>
-          <h2 class="niche-name">Cleaning</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Quote builders, route planners, inspection checklists, forms, schedulers, and CRMs — built for solo cleaners and small cleaning businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>7</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/lawn-care" style="--niche-color: #2D6A3E;">
-      <div class="niche-card-head">
-        <div class="niche-icon">L</div>
-        <div>
-          <h2 class="niche-name">Lawn Care</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Estimators, contract templates, and schedulers — built for solo landscapers and small lawn care businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>3</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/reselling" style="--niche-color: #1E5C3A;">
-      <div class="niche-card-head">
-        <div class="niche-icon">R</div>
-        <div>
-          <h2 class="niche-name">Reselling</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Inventory and profit trackers for eBay, Etsy, Poshmark, and Mercari resellers. Calculate per-item profit after fees and shipping.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>6</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/budgeting" style="--niche-color: #0EA5E9;">
-      <div class="niche-card-head">
-        <div class="niche-icon">CB</div>
-        <div>
-          <h2 class="niche-name">Budgeting</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Bill splitters and shared-expense trackers for couples and households.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/food-business" style="--niche-color: #DC2626;">
-      <div class="niche-card-head">
-        <div class="niche-icon">F</div>
-        <div>
-          <h2 class="niche-name">Food Business</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Recipe cost calculators and menu pricing tools for food businesses, bakeries, and food trucks.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/personal-finance" style="--niche-color: #047857;">
-      <div class="niche-card-head">
-        <div class="niche-icon">$</div>
-        <div>
-          <h2 class="niche-name">Personal Finance</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Debt payoff, net worth, and precious metals trackers for managing your money.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>3</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/personal-habits" style="--niche-color: #A21CAF;">
-      <div class="niche-card-head">
-        <div class="niche-icon">LW</div>
-        <div>
-          <h2 class="niche-name">Personal Habits</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Habit trackers, life balance wheels, and 75 Hard challenge journals.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>2</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/pets" style="--niche-color: #65A30D;">
-      <div class="niche-card-head">
-        <div class="niche-icon">P</div>
-        <div>
-          <h2 class="niche-name">Pets</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Dog meal formula calculators and pet medication trackers.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>2</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/health" style="--niche-color: #0891B2;">
-      <div class="niche-card-head">
-        <div class="niche-icon">H</div>
-        <div>
-          <h2 class="niche-name">Health</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Lab results journal and medical health trackers.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/home-services" style="--niche-color: #B45309;">
-      <div class="niche-card-head">
-        <div class="niche-icon">HS</div>
-        <div>
-          <h2 class="niche-name">Home Services</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Quote builders for handyman, junk removal, and other home service businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>2</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    
-    <a class="niche-card" href="/pro-tools/nursing" style="--niche-color: #DC2626;">
-      <div class="niche-card-head">
-        <div class="niche-icon">N</div>
-        <div>
-          <h2 class="niche-name">Nursing</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Charting apps for ER, ICU, and Med-Surg nurses. Patient tracking, vitals, handoff templates, 30+ forms.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>3</strong>apps available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/wedding" style="--niche-color: #BE185D;">
-      <div class="niche-card-head">
-        <div class="niche-icon">V&amp;P</div>
-        <div>
-          <h2 class="niche-name">Wedding</h2>
-          <div class="niche-meta">Available now</div>
-        </div>
-      </div>
-      <div class="niche-desc">Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app available</div>
-        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/car-wash" style="--niche-color: #3B82F6;">
-      <div class="niche-card-head">
-        <div class="niche-icon">CW</div>
-        <div>
-          <h2 class="niche-name">Car Wash</h2>
-          <div class="niche-meta">Coming soon</div>
-        </div>
-      </div>
-      <div class="niche-desc">Estimators and service tools for mobile car wash and auto detailing businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app in development</div>
-        <span class="niche-cta coming">Notify me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/pest-control" style="--niche-color: #B91C1C;">
-      <div class="niche-card-head">
-        <div class="niche-icon">PE</div>
-        <div>
-          <h2 class="niche-name">Pest Control</h2>
-          <div class="niche-meta">Coming soon</div>
-        </div>
-      </div>
-      <div class="niche-desc">Estimators and service tools for pest control businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app in development</div>
-        <span class="niche-cta coming">Notify me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
-    <a class="niche-card" href="/pro-tools/pool-cleaning" style="--niche-color: #0891B2;">
-      <div class="niche-card-head">
-        <div class="niche-icon">PL</div>
-        <div>
-          <h2 class="niche-name">Pool Cleaning</h2>
-          <div class="niche-meta">Coming soon</div>
-        </div>
-      </div>
-      <div class="niche-desc">Estimators and service tools for pool cleaning and maintenance businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app in development</div>
-        <span class="niche-cta coming">Notify me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
+<section class="hero">
+  <div class="hero-badge">Creatif Tools · Local-first apps</div>
+  <h1>Apps for <em>Service Businesses</em> &amp; Resellers</h1>
+  <p>Single-file HTML apps for cleaning, lawn care, reselling, nursing, weddings, and more. Try the live demo in your browser, then buy on Etsy. No subscription, no account, your data stays on your device.</p>
+  <div class="hero-cta-row">
+    <a href="#apps" class="btn btn-primary">Browse 37 apps →</a>
+    <a href="https://creatif.tools" class="btn btn-secondary">Visit Creatif Tools ↗</a>
   </div>
-
-  <div class="pro-cta-banner">
-    <h3>How demos work</h3>
-    <p>Click any app card to open the live demo in your browser. No install, no signup. After 90 seconds, you'll get a taste-it-then-buy-it prompt — buy the full version on Etsy and own it forever, with no subscription.</p>
-    <a href="https://creatif.tools/#apps">
-      Browse all apps on CreatifTools
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-    </a>
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">37</span><div class="stat-label">Apps</div></div>
+    <div class="stat"><span class="stat-num">16</span><div class="stat-label">Niches</div></div>
+    <div class="stat"><span class="stat-num">50</span><div class="stat-label">States + DC</div></div>
+    <div class="stat"><span class="stat-num">$15</span><div class="stat-label">Starting at</div></div>
   </div>
+</section>
 
-</div>
+<main class="main">
+  <section class="section" id="apps">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Featured apps</h2>
+        <p class="section-desc">A few standouts across the collection. Browse the full set by niche below.</p>
+      </div>
+      <a href="/pro-tools/" class="section-link">Browse all 37 apps →</a>
+    </div>
+    <div class="featured-grid">
+      <a class="featured-card" href="https://creatif.tools/cleanquote-pro/" style="--app-color: #6B4A6E;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #6B4A6E;">C</div>
+          <div>
+            <div class="fc-name">CleanQuote Pro</div>
+            <div class="fc-tag">Quote Calculator</div>
+          </div>
+        </div>
+        <p class="fc-desc">Quote a cleaning job in under a minute. Property type, size, add-ons — auto-generates a professional PDF quote.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$29 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
 
-<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="/pro-tools">Pro Tools</a> &nbsp;&middot;&nbsp; <a href="https://creatif.tools">CreatifTools</a></footer>
+      <a class="featured-card" href="https://creatif.tools/resellpro/" style="--app-color: #1E5C3A;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #1E5C3A;">R</div>
+          <div>
+            <div class="fc-name">ResellPro</div>
+            <div class="fc-tag">Inventory &amp; Profit Tracker</div>
+          </div>
+        </div>
+        <p class="fc-desc">Track per-item profit after fees and shipping across eBay, Etsy, Poshmark, and Mercari. Multi-platform.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$19 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
 
-<script src="/shared.js"></script>
+      <a class="featured-card" href="https://creatif.tools/bill-of-sale/" style="--app-color: #1E3A5F;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #1E3A5F;">B</div>
+          <div>
+            <div class="fc-name">Bill of Sale Pro</div>
+            <div class="fc-tag">Vehicle Bill of Sale</div>
+          </div>
+        </div>
+        <p class="fc-desc">State-aware bill of sale generator. Car, motorcycle, trailer, boat, RV, horse, and equipment. All 50 states + DC.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$15 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
+
+      <a class="featured-card" href="https://creatif.tools/vow-and-plan/" style="--app-color: #BE185D;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #BE185D;">V&amp;P</div>
+          <div>
+            <div class="fc-name">Vow &amp; Plan Pro</div>
+            <div class="fc-tag">Offline Wedding Planner</div>
+          </div>
+        </div>
+        <p class="fc-desc">Drag-and-drop seating chart, multi-vendor budget tracker, auto-PDF printables. Plan your wedding without SaaS.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$29 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
+
+      <a class="featured-card" href="https://creatif.tools/er-nurse-desk/" style="--app-color: #DC2626;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #DC2626;">ER</div>
+          <div>
+            <div class="fc-name">ER NurseDesk Pro</div>
+            <div class="fc-tag">ER Nurse Charting</div>
+          </div>
+        </div>
+        <p class="fc-desc">Patient tracking, vitals, handoff templates, and 30+ nursing forms. Built for ER, ICU, and Med-Surg nurses.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$25 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
+
+      <a class="featured-card" href="https://creatif.tools/handyquote-pro/" style="--app-color: #B45309;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #B45309;">HQ</div>
+          <div>
+            <div class="fc-name">HandyQuote Pro</div>
+            <div class="fc-tag">Handyman Quote Builder</div>
+          </div>
+        </div>
+        <p class="fc-desc">Quote handyman jobs in minutes. Hourly or flat-rate, materials, profit margin. Print or PDF.</p>
+        <div class="fc-foot">
+          <div class="fc-price">$15 <span class="fc-price-sub">one-time</span></div>
+          <span class="fc-cta">View →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="niches">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Browse by niche</h2>
+        <p class="section-desc">16 collections, 37 apps total. Pick the niche that fits your business.</p>
+      </div>
+      <a href="/pro-tools/" class="section-link">Full showcase →</a>
+    </div>
+    <div class="niche-grid">
+      <a class="niche-card" href="/pro-tools/cleaning" style="--niche-color: #2C4A7C;">
+        <div class="niche-card-head">
+          <div class="niche-icon">C</div>
+          <div><div class="niche-name">Cleaning</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Quote builders, route planners, inspection checklists, forms, schedulers, and CRMs.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>7</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/lawn-care" style="--niche-color: #2D6A3E;">
+        <div class="niche-card-head">
+          <div class="niche-icon">L</div>
+          <div><div class="niche-name">Lawn Care</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Estimators, contract templates, and schedulers for solo landscapers.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>3</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/reselling" style="--niche-color: #1E5C3A;">
+        <div class="niche-card-head">
+          <div class="niche-icon">R</div>
+          <div><div class="niche-name">Reselling</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Inventory and profit trackers for eBay, Etsy, Poshmark, and Mercari resellers.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>7</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/budgeting" style="--niche-color: #0EA5E9;">
+        <div class="niche-card-head">
+          <div class="niche-icon">CB</div>
+          <div><div class="niche-name">Budgeting</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Bill splitters and shared-expense trackers for couples and households.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>app</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/food-business" style="--niche-color: #DC2626;">
+        <div class="niche-card-head">
+          <div class="niche-icon">F</div>
+          <div><div class="niche-name">Food Business</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Recipe cost calculators and menu pricing tools for food businesses.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>app</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/personal-finance" style="--niche-color: #047857;">
+        <div class="niche-card-head">
+          <div class="niche-icon">$</div>
+          <div><div class="niche-name">Personal Finance</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Debt payoff, net worth, and precious metals trackers.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>3</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/personal-habits" style="--niche-color: #A21CAF;">
+        <div class="niche-card-head">
+          <div class="niche-icon">LW</div>
+          <div><div class="niche-name">Personal Habits</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Habit trackers, life balance wheels, and 75 Hard challenge journals.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>2</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/pets" style="--niche-color: #65A30D;">
+        <div class="niche-card-head">
+          <div class="niche-icon">P</div>
+          <div><div class="niche-name">Pets</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Dog meal formula calculators and pet medication trackers.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>2</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/health" style="--niche-color: #0891B2;">
+        <div class="niche-card-head">
+          <div class="niche-icon">H</div>
+          <div><div class="niche-name">Health</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Lab results journal and medical health trackers.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>app</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/home-services" style="--niche-color: #B45309;">
+        <div class="niche-card-head">
+          <div class="niche-icon">HS</div>
+          <div><div class="niche-name">Home Services</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Quote builders for handyman, junk removal, and other home service businesses.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>2</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/nursing" style="--niche-color: #DC2626;">
+        <div class="niche-card-head">
+          <div class="niche-icon">N</div>
+          <div><div class="niche-name">Nursing</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Charting apps for ER, ICU, and Med-Surg nurses. Patient tracking, vitals, handoff templates.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>3</strong>apps</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/wedding" style="--niche-color: #BE185D;">
+        <div class="niche-card-head">
+          <div class="niche-icon">V&amp;P</div>
+          <div><div class="niche-name">Wedding</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">Drag-and-drop seating, multi-vendor budget, and PDF printables for couples.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>app</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/legal" style="--niche-color: #1E3A5F;">
+        <div class="niche-card-head">
+          <div class="niche-icon">B</div>
+          <div><div class="niche-name">Legal</div><div class="niche-meta">Available now</div></div>
+        </div>
+        <div class="niche-desc">State-aware bill of sale generator for vehicle sales. All 50 states + DC.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>app</span><span class="niche-cta">Browse →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/car-wash" style="--niche-color: #3B82F6;">
+        <div class="niche-card-head">
+          <div class="niche-icon">CW</div>
+          <div><div class="niche-name">Car Wash</div><div class="niche-meta">Coming soon</div></div>
+        </div>
+        <div class="niche-desc">Estimators and service tools for mobile car wash and auto detailing.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>in dev</span><span class="niche-cta coming">Notify →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/pest-control" style="--niche-color: #B91C1C;">
+        <div class="niche-card-head">
+          <div class="niche-icon">PE</div>
+          <div><div class="niche-name">Pest Control</div><div class="niche-meta">Coming soon</div></div>
+        </div>
+        <div class="niche-desc">Estimators and service tools for pest control businesses.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>in dev</span><span class="niche-cta coming">Notify →</span></div>
+      </a>
+
+      <a class="niche-card" href="/pro-tools/pool-cleaning" style="--niche-color: #0891B2;">
+        <div class="niche-card-head">
+          <div class="niche-icon">PL</div>
+          <div><div class="niche-name">Pool Cleaning</div><div class="niche-meta">Coming soon</div></div>
+        </div>
+        <div class="niche-desc">Estimators and service tools for pool cleaning businesses.</div>
+        <div class="niche-foot"><span class="niche-count"><strong>1</strong>in dev</span><span class="niche-cta coming">Notify →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">From the Creatif Tools blog</h2>
+        <p class="section-desc">Pricing guides, business playbooks, and how-tos for service business owners.</p>
+      </div>
+      <a href="https://creatif.tools/blog/" class="section-link">All posts →</a>
+    </div>
+    <div class="featured-grid">
+      <a class="featured-card" href="https://creatif.tools/blog/cleaning-business-pricing-guide/" style="--app-color: #2C4A7C;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #2C4A7C;">CB</div>
+          <div>
+            <div class="fc-name">Cleaning Business Pricing Guide</div>
+            <div class="fc-tag">Pillar guide · 11 min read</div>
+          </div>
+        </div>
+        <p class="fc-desc">The exact formulas, the math, and the decision framework working cleaning businesses use to set rates that pay them well.</p>
+        <div class="fc-foot">
+          <div class="fc-price">Pillar</div>
+          <span class="fc-cta">Read →</span>
+        </div>
+      </a>
+
+      <a class="featured-card" href="https://creatif.tools/blog/how-to-price-a-house-cleaning-job/" style="--app-color: #6B4A6E;">
+        <div class="fc-head">
+          <div class="fc-icon" style="background: #6B4A6E;">PH</div>
+          <div>
+            <div class="fc-name">How to Price a House Cleaning Job</div>
+            <div class="fc-tag">Deep dive · 9 min read</div>
+          </div>
+        </div>
+        <p class="fc-desc">A practical, no-fluff formula for residential house cleaning. Real numbers by home size, frequency, and job type.</p>
+        <div class="fc-foot">
+          <div class="fc-price">Cluster</div>
+          <span class="fc-cta">Read →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <a class="dev-tools-link" href="/tools/">
+      <div class="dev-tools-info">
+        <h3>Looking for developer tools?</h3>
+        <p>60+ free browser-based utilities for developers, designers, and freelancers. JSON formatter, regex tester, base64, color picker, and more.</p>
+      </div>
+      <span class="btn btn-secondary">Browse developer tools →</span>
+    </a>
+  </section>
+</main>
+
+<footer>
+  DeskTools — built for people who ship. &nbsp;·&nbsp; <a href="/pro-tools/">Pro Tools</a> &nbsp;·&nbsp; <a href="/tools/">Developer Tools</a> &nbsp;·&nbsp; <a href="https://creatif.tools">Creatif Tools</a>
+</footer>
 </body>
 </html>

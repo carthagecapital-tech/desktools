@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Developer Tools — Free Browser-Based Utilities | DeskTools</title>
+<meta name="description" content="60+ free browser-based tools for developers, designers, freelancers, and business users. JSON formatter, regex tester, base64 encoder, color picker, and more. No installs, no signups, no tracking."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://desktools.dev/tools/"/>
+<meta name="keywords" content="json formatter, regex tester, base64 encoder, color picker, css gradient generator, qr code generator, password generator, free developer tools"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Developer Tools — Free Browser-Based Utilities | DeskTools"/>
+<meta property="og:description" content="60+ free browser-based tools for developers, designers, freelancers, and business users. No installs, no signups, no tracking."/>
+<meta property="og:url" content="https://desktools.dev/tools/"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:site_name" content="DeskTools"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<!-- Plausible Analytics -->
+<script async src="https://plausible.io/js/pa-AjVqr2icdV_VPRQDlx4SD.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DeskTools Developer Tools","description":"Free browser-based tools for developers, designers, and freelancers.","url":"https://desktools.dev/tools/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e; --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3); --accent: #00d4aa; --accent2: #00b894; --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }
+.nav-logo-mark { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0a0a0f; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--accent); color: #0a0a0f !important; padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 600; }
+.nav-cta:hover { background: var(--accent2); color: #0a0a0f !important; }
+.hero { padding: 4rem 2rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); color: var(--accent); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.25rem; }
+.hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 0.85rem; }
+.hero p { color: var(--muted); font-size: 1.05rem; max-width: 640px; }
+.main { max-width: 1180px; margin: 0 auto; padding: 0 2rem 4rem; }
+.section { margin-bottom: 3rem; }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); gap: 1rem; flex-wrap: wrap; }
+.section-title { font-size: 1.25rem; font-weight: 700; }
+.section-desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.85rem; }
+.tool-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.4rem; transition: border-color .2s, transform .15s; }
+.tool-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tool-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--accent); background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.15); padding: 0.25rem 0.55rem; border-radius: 5px; width: fit-content; }
+.tool-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }
+.tool-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+.notice { background: var(--card-bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+.notice h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+.notice p { color: var(--muted); font-size: 0.9rem; }
+.notice a { color: var(--accent); font-weight: 600; }
+footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+footer a { color: var(--accent); }
+@media (max-width: 600px) { .hero { padding: 3rem 1.5rem 1.5rem; } .main { padding: 0 1.25rem 3rem; } .tool-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 400px) { .tool-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-mark">ct</span>
+    <span>DeskTools</span>
+  </a>
+  <div class="nav-links">
+    <a href="/pro-tools/">Pro Tools</a>
+    <a href="/tools/">Developer Tools</a>
+    <a href="https://creatif.tools">Creatif Tools ↗</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Free · No install · No signup</div>
+  <h1>Developer Tools</h1>
+  <p>60+ free browser-based utilities for developers, designers, freelancers, and business users. Instant, private, yours.</p>
+</section>
+
+<main class="main">
+  <div class="notice">
+    <h3>Looking for the Creatif Tools apps?</h3>
+    <p>The Developer Tools below are the original DeskTools collection. The newer <a href="/pro-tools/">Creatif Tools apps for service businesses &amp; resellers</a> live in a separate section — 37 apps across 16 niches.</p>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Formatters &amp; validators</h2>
+        <p class="section-desc">JSON, regex, base64, HTML entities, SQL — the formatting tools you reach for daily.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/json-formatter.html"><span class="tool-icon">JSON</span><div class="tool-name">JSON Formatter</div><div class="tool-desc">Format, validate, and minify JSON.</div></a>
+      <a class="tool-card" href="/regex-tester.html"><span class="tool-icon">RE</span><div class="tool-name">Regex Tester</div><div class="tool-desc">Test regex patterns with live highlighting.</div></a>
+      <a class="tool-card" href="/base64-encoder.html"><span class="tool-icon">B64</span><div class="tool-name">Base64 Encoder</div><div class="tool-desc">Encode/decode Base64 strings.</div></a>
+      <a class="tool-card" href="/html-entity-encoder.html"><span class="tool-icon">HE</span><div class="tool-name">HTML Entity Encoder</div><div class="tool-desc">Encode/decode HTML entities.</div></a>
+      <a class="tool-card" href="/sql-formatter.html"><span class="tool-icon">SQL</span><div class="tool-name">SQL Formatter</div><div class="tool-desc">Format and beautify SQL queries.</div></a>
+      <a class="tool-card" href="/json-schema-validator.html"><span class="tool-icon">JSV</span><div class="tool-name">JSON Schema Validator</div><div class="tool-desc">Validate JSON against a schema.</div></a>
+      <a class="tool-card" href="/csv-to-json.html"><span class="tool-icon">C2J</span><div class="tool-name">CSV to JSON</div><div class="tool-desc">Convert CSV to JSON objects.</div></a>
+      <a class="tool-card" href="/yaml-json-converter.html"><span class="tool-icon">YJ</span><div class="tool-name">YAML ↔ JSON</div><div class="tool-desc">Convert between YAML and JSON.</div></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Generators &amp; encoders</h2>
+        <p class="section-desc">UUIDs, passwords, hashes, QR codes — generation tools.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/uuid-generator.html"><span class="tool-icon">UUID</span><div class="tool-name">UUID Generator</div><div class="tool-desc">Generate UUIDs v1, v4, v7.</div></a>
+      <a class="tool-card" href="/password-generator.html"><span class="tool-icon">PWD</span><div class="tool-name">Password Generator</div><div class="tool-desc">Strong passwords with custom rules.</div></a>
+      <a class="tool-card" href="/hash-generator.html"><span class="tool-icon">HSH</span><div class="tool-name">Hash Generator</div><div class="tool-desc">MD5, SHA-1, SHA-256, SHA-512.</div></a>
+      <a class="tool-card" href="/qr-code-generator.html"><span class="tool-icon">QR</span><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate and download QR codes.</div></a>
+      <a class="tool-card" href="/lorem-ipsum-generator.html"><span class="tool-icon">LI</span><div class="tool-name">Lorem Ipsum Generator</div><div class="tool-desc">Generate placeholder text.</div></a>
+      <a class="tool-card" href="/slug-generator.html"><span class="tool-icon">SLG</span><div class="tool-name">Slug Generator</div><div class="tool-desc">Convert text to URL slugs.</div></a>
+      <a class="tool-card" href="/jwt-decoder.html"><span class="tool-icon">JWT</span><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JWT tokens.</div></a>
+      <a class="tool-card" href="/totp-generator.html"><span class="tool-icon">OTP</span><div class="tool-name">TOTP Generator</div><div class="tool-desc">Generate time-based OTP codes.</div></a>
+      <a class="tool-card" href="/csp-generator.html"><span class="tool-icon">CSP</span><div class="tool-name">CSP Header Generator</div><div class="tool-desc">Build Content-Security-Policy headers.</div></a>
+      <a class="tool-card" href="/meta-tag-generator.html"><span class="tool-icon">MT</span><div class="tool-name">Meta Tag Generator</div><div class="tool-desc">Generate meta tags for HTML pages.</div></a>
+      <a class="tool-card" href="/og-previewer.html"><span class="tool-icon">OG</span><div class="tool-name">Open Graph Previewer</div><div class="tool-desc">Preview Open Graph tags in social.</div></a>
+      <a class="tool-card" href="/favicon-generator.html"><span class="tool-icon">FV</span><div class="tool-name">Favicon Generator</div><div class="tool-desc">Generate favicons from text or image.</div></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Converters &amp; calculators</h2>
+        <p class="section-desc">Unit, color, time, image — conversion tools.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/color-picker.html"><span class="tool-icon">CLR</span><div class="tool-name">Color Picker</div><div class="tool-desc">Pick colors, build palettes.</div></a>
+      <a class="tool-card" href="/contrast-checker.html"><span class="tool-icon">WCAG</span><div class="tool-name">Contrast Checker</div><div class="tool-desc">WCAG color contrast ratio.</div></a>
+      <a class="tool-card" href="/unit-converter.html"><span class="tool-icon">UNT</span><div class="tool-name">Unit Converter</div><div class="tool-desc">Length, weight, temperature, etc.</div></a>
+      <a class="tool-card" href="/timestamp-converter.html"><span class="tool-icon">TS</span><div class="tool-name">Timestamp Converter</div><div class="tool-desc">Unix timestamps to human dates.</div></a>
+      <a class="tool-card" href="/timezone-converter.html"><span class="tool-icon">TZ</span><div class="tool-name">Time Zone Converter</div><div class="tool-desc">Convert between time zones.</div></a>
+      <a class="tool-card" href="/number-base-converter.html"><span class="tool-icon">BIN</span><div class="tool-name">Number Base Converter</div><div class="tool-desc">Binary, octal, decimal, hex.</div></a>
+      <a class="tool-card" href="/image-to-base64.html"><span class="tool-icon">IMG</span><div class="tool-name">Image to Base64</div><div class="tool-desc">Convert images to Base64 strings.</div></a>
+      <a class="tool-card" href="/image-compressor.html"><span class="tool-icon">COMP</span><div class="tool-name">Image Compressor</div><div class="tool-desc">Compress JPG/PNG/WebP images.</div></a>
+      <a class="tool-card" href="/aspect-ratio-calculator.html"><span class="tool-icon">AR</span><div class="tool-name">Aspect Ratio Calculator</div><div class="tool-desc">Calculate aspect ratios.</div></a>
+      <a class="tool-card" href="/chmod-calculator.html"><span class="tool-icon">CHM</span><div class="tool-name">Chmod Calculator</div><div class="tool-desc">Calculate file permissions.</div></a>
+      <a class="tool-card" href="/invoice-calculator.html"><span class="tool-icon">INV</span><div class="tool-name">Invoice Calculator</div><div class="tool-desc">Build simple invoices.</div></a>
+      <a class="tool-card" href="/meeting-cost.html"><span class="tool-icon">MTG</span><div class="tool-name">Meeting Cost Calculator</div><div class="tool-desc">Calculate the real cost of meetings.</div></a>
+      <a class="tool-card" href="/pomodoro-timer.html"><span class="tool-icon">POM</span><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">25/5 productivity timer.</div></a>
+      <a class="tool-card" href="/word-counter.html"><span class="tool-icon">WCT</span><div class="tool-name">Word Counter</div><div class="tool-desc">Count words, chars, sentences.</div></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">CSS &amp; design</h2>
+        <p class="section-desc">Gradient, shadow, clamp, font pairer — visual design tools.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/gradient-generator.html"><span class="tool-icon">GRD</span><div class="tool-name">CSS Gradient Generator</div><div class="tool-desc">Build CSS gradients visually.</div></a>
+      <a class="tool-card" href="/box-shadow-generator.html"><span class="tool-icon">BSH</span><div class="tool-name">Box Shadow Generator</div><div class="tool-desc">Build CSS box-shadows visually.</div></a>
+      <a class="tool-card" href="/css-clamp-calculator.html"><span class="tool-icon">CLP</span><div class="tool-name">CSS Clamp Calculator</div><div class="tool-desc">Generate clamp() values for fluid type.</div></a>
+      <a class="tool-card" href="/tailwind-colors.html"><span class="tool-icon">TW</span><div class="tool-name">Tailwind Colors</div><div class="tool-desc">Browse the Tailwind color palette.</div></a>
+      <a class="tool-card" href="/svg-optimizer.html"><span class="tool-icon">SVG</span><div class="tool-name">SVG Optimizer</div><div class="tool-desc">Minify and optimize SVG files.</div></a>
+      <a class="tool-card" href="/font-pairer.html"><span class="tool-icon">FNT</span><div class="tool-name">Font Pairer</div><div class="tool-desc">Find good font combinations.</div></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">API &amp; data</h2>
+        <p class="section-desc">API testing, cron, JWT, env files — data tools.</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="/api-tester.html"><span class="tool-icon">API</span><div class="tool-name">API Tester</div><div class="tool-desc">Test HTTP requests with custom headers.</div></a>
+      <a class="tool-card" href="/cron-builder.html"><span class="tool-icon">CRN</span><div class="tool-name">Cron Builder</div><div class="tool-desc">Build cron expressions visually.</div></a>
+      <a class="tool-card" href="/json-to-table.html"><span class="tool-icon">J2T</span><div class="tool-name">JSON to Table</div><div class="tool-desc">Convert JSON to HTML tables.</div></a>
+      <a class="tool-card" href="/json-to-csv.html"><span class="tool-icon">J2C</span><div class="tool-name">JSON to CSV</div><div class="tool-desc">Convert JSON arrays to CSV.</div></a>
+      <a class="tool-card" href="/markdown-preview.html"><span class="tool-icon">MD</span><div class="tool-name">Markdown Preview</div><div class="tool-desc">Live Markdown preview and export.</div></a>
+      <a class="tool-card" href="/markdown-to-html.html"><span class="tool-icon">M2H</span><div class="tool-name">Markdown to HTML</div><div class="tool-desc">Convert Markdown to HTML.</div></a>
+      <a class="tool-card" href="/markdown-table-generator.html"><span class="tool-icon">MDT</span><div class="tool-name">Markdown Table Generator</div><div class="tool-desc">Build Markdown tables visually.</div></a>
+      <a class="tool-card" href="/diff-checker.html"><span class="tool-icon">DIF</span><div class="tool-name">Diff Checker</div><div class="tool-desc">Compare two text blocks.</div></a>
+      <a class="tool-card" href="/url-encoder.html"><span class="tool-icon">URL</span><div class="tool-name">URL Encoder</div><div class="tool-desc">Encode/decode URLs.</div></a>
+      <a class="tool-card" href="/text-encryptor.html"><span class="tool-icon">ENC</span><div class="tool-name">Text Encryptor (AES-256)</div><div class="tool-desc">Encrypt/decrypt text with AES-256.</div></a>
+      <a class="tool-card" href="/bcrypt-generator.html"><span class="tool-icon">BCR</span><div class="tool-name">Bcrypt Generator</div><div class="tool-desc">Hash passwords with bcrypt.</div></a>
+      <a class="tool-card" href="/case-converter.html"><span class="tool-icon">CSE</span><div class="tool-name">Case Converter</div><div class="tool-desc">camelCase, snake_case, kebab-case.</div></a>
+      <a class="tool-card" href="/text-transformer.html"><span class="tool-icon">TXT</span><div class="tool-name">Text Transformer</div><div class="tool-desc">Sort, dedupe, trim, and more.</div></a>
+      <a class="tool-card" href="/email-subject-tester.html"><span class="tool-icon">EML</span><div class="tool-name">Email Subject Tester</div><div class="tool-desc">Score your email subject lines.</div></a>
+      <a class="tool-card" href="/password-strength.html"><span class="tool-icon">PSW</span><div class="tool-name">Password Strength Checker</div><div class="tool-desc">Test password entropy and strength.</div></a>
+      <a class="tool-card" href="/security-txt-generator.html"><span class="tool-icon">SEC</span><div class="tool-name">Security.txt Generator</div><div class="tool-desc">Build security.txt files.</div></a>
+      <a class="tool-card" href="/env-generator.html"><span class="tool-icon">ENV</span><div class="tool-name">.ENV File Generator</div><div class="tool-desc">Generate .env files with secrets.</div></a>
+      <a class="tool-card" href="/css-minifier.html"><span class="tool-icon">MIN</span><div class="tool-name">CSS Minifier</div><div class="tool-desc">Minify and compress CSS.</div></a>
+      <a class="tool-card" href="/http-status-codes.html"><span class="tool-icon">HTTP</span><div class="tool-name">HTTP Status Codes</div><div class="tool-desc">Reference for all HTTP status codes.</div></a>
+      <a class="tool-card" href="/regex-cheat-sheet.html"><span class="tool-icon">RXS</span><div class="tool-name">Regex Cheat Sheet</div><div class="tool-desc">Quick regex reference.</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  DeskTools — built for people who ship. &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; <a href="/pro-tools/">Pro Tools</a> &nbsp;·&nbsp; <a href="https://creatif.tools">Creatif Tools</a>
+</footer>
+</body>
+</html>
