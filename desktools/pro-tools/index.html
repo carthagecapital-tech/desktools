@@ -3,167 +3,102 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Pro Tools for Service Businesses &amp; Resellers — Apps &amp; Demos | DeskTools</title>
-<link rel="canonical" href="https://desktools.dev/pro-tools"/>
-<meta name="description" content="Pro-grade single-file HTML apps for solo operators, small service businesses, and resellers. Browse by niche: cleaning, lawn care, reselling, budgeting, food business, car wash, pest control, pool cleaning. Try the live demo, then buy on Etsy."/>
+<title>Pro Tools for Service Businesses & Resellers — Apps & Demos | DeskTools</title>
+<meta name="description" content="Pro-grade single-file HTML apps for solo operators, small service businesses, and resellers. Browse by niche: cleaning, lawn care, reselling, nursing, wedding, legal, and more. Try the live demo, then buy on Etsy."/>
 <meta name="robots" content="index, follow"/>
-<meta name="keywords" content="cleaning business app, lawn care app, car wash app, pest control app, pool cleaning app, reseller app, reselling app, inventory tracker, profit tracker, service business software, single file html app"/>
+<link rel="canonical" href="https://desktools.dev/pro-tools/"/>
+<meta name="keywords" content=" apps,  business, single file html app, local-first"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Pro Tools for Service Businesses &amp; Resellers — DeskTools"/>
+<meta property="og:title" content="Pro Tools for Service Businesses & Resellers — Apps & Demos | DeskTools"/>
 <meta property="og:description" content="Pro-grade single-file HTML apps for solo operators and resellers. Browse by niche, try the live demo, buy on Etsy."/>
-<meta property="og:url" content="https://desktools.dev/pro-tools"/>
+<meta property="og:url" content="https://desktools.dev/pro-tools/"/>
 <meta property="og:image" content="https://desktools.dev/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Pro Tools for Service Businesses — DeskTools"/>
-<meta name="twitter:description" content="Pro-grade single-file HTML apps for solo operators. Browse by niche, try the live demo, buy on Etsy."/>
 <meta property="og:site_name" content="DeskTools"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<script async src="https://plausible.io/js/pa-AjVqr2icdV_VPRQDlx4SD.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Pro Tools for Service Businesses", "description": "Pro-grade single-file HTML apps for solo operators and small service businesses, organized by niche.", "url": "https://desktools.dev/pro-tools", "isPartOf": {"@type": "WebSite", "name": "DeskTools", "url": "https://desktools.dev"}, "publisher": {"@type": "Organization", "name": "CreatifTools", "url": "https://creatif.tools"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e;
-      --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3);
-      --accent: #00d4aa; --accent2: #00b894;
-      --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.75rem 2rem; transition: color .2s; }
-    .back-link:hover { color: var(--accent); }
-    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-    .page-head { text-align: center; margin-bottom: 2.5rem; }
-    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .5rem; }
-    .page-head p { color: var(--muted); font-size: 1rem; max-width: 620px; margin: 0 auto; }
-    .pro-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.25);
-      color: var(--accent); font-size: 0.72rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 0.3rem 0.7rem; border-radius: 100px;
-      margin-bottom: 1rem;
-    }
-    .pro-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-    .niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-    .niche-card {
-      --niche-color: var(--accent);
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem 1.4rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      transition: border-color .2s, transform .15s, background .2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .niche-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 3px;
-      background: var(--niche-color);
-      opacity: 0.7;
-    }
-    .niche-card:hover {
-      border-color: var(--niche-color);
-      transform: translateY(-3px);
-      background: #13131c;
-    }
-    .niche-card-head { display: flex; align-items: center; gap: 12px; }
-    .niche-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: var(--niche-color);
-      color: #fff;
-      display: grid; place-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .niche-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-      margin: 0;
-    }
-    .niche-meta {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-    .niche-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .niche-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.8rem;
-      border-top: 1px solid var(--border);
-    }
-    .niche-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-    }
-    .niche-count strong { color: var(--text); font-size: 1.05rem; margin-right: 4px; }
-    .niche-cta {
-      display: inline-flex; align-items: center; gap: 4px;
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .niche-cta svg { width: 12px; height: 12px; }
-    .niche-cta.coming { color: var(--muted); }
-    .pro-cta-banner {
-      display: block;
-      margin-top: 3rem;
-      padding: 1.5rem 1.8rem;
-      background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(0,212,170,0.02));
-      border: 1px solid rgba(0,212,170,0.2);
-      border-radius: 14px;
-      text-align: center;
-    }
-    .pro-cta-banner h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
-    .pro-cta-banner p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
-    .pro-cta-banner a {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #0a0a0f;
-      font-weight: 600; font-size: 0.95rem;
-      padding: 0.7rem 1.4rem; border-radius: 10px;
-      text-decoration: none; transition: background .2s;
-    }
-    .pro-cta-banner a:hover { background: var(--accent2); }
-    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); margin-top: 3rem; }
-    footer a { color: var(--accent); text-decoration: none; }
-    @media(max-width:600px) { .niche-grid { grid-template-columns: 1fr; } }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e; --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3); --accent: #00d4aa; --accent2: #00b894; --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+a { color: var(--accent); text-decoration: none; } a:hover { color: var(--accent2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.nav-logo-mark { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0a0a0f; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.85rem 2rem 0; transition: color .2s; }
+.back-link:hover { color: var(--accent); }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2rem 4rem; }
+.hero { padding: 3rem 0 2rem; }
+.breadcrumb { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.85rem; }
+.breadcrumb a { color: var(--muted); } .breadcrumb a:hover { color: var(--accent); }
+h1 { font-size: clamp(2rem, 5vw, 2.6rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 0.85rem; }
+.lead { color: var(--muted); font-size: 1.05rem; max-width: 720px; }
+.section { margin-bottom: 2.5rem; }
+.section-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+.niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.niche-card { --niche-color: var(--accent); background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.4rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.7rem; transition: border-color .2s, transform .15s, background .2s; position: relative; overflow: hidden; }
+.niche-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--niche-color); opacity: 0.6; }
+.niche-card:hover { border-color: var(--niche-color); transform: translateY(-2px); background: #13131c; }
+.niche-card-head { display: flex; align-items: center; gap: 0.75rem; }
+.niche-icon { width: 38px; height: 38px; border-radius: 8px; display: grid; place-items: center; font-weight: 700; font-size: 0.85rem; color: #fff; background: var(--niche-color); flex-shrink: 0; }
+.niche-name { font-weight: 700; font-size: 1rem; line-height: 1.2; }
+.niche-meta { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1px; }
+.niche-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; flex: 1; }
+.niche-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+.niche-count { font-size: 0.82rem; color: var(--muted); }
+.niche-count strong { color: var(--text); font-size: 1.05rem; margin-right: 0.25rem; }
+.niche-cta { color: var(--accent); font-size: 0.82rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; }
+.niche-cta svg { width: 12px; height: 12px; }
+.niche-cta.coming { color: var(--muted); }
+.cta { background: linear-gradient(135deg, rgba(0,212,170,0.06), rgba(0,212,170,0.02)); border: 1px solid rgba(0,212,170,0.18); border-radius: 12px; padding: 1.75rem; text-align: center; margin-top: 2rem; }
+.cta h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+.cta p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; }
+.btn { display: inline-block; background: var(--accent); color: #0a0a0f; padding: 0.7rem 1.4rem; border-radius: 8px; font-weight: 600; }
+footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+footer a { color: var(--accent); }
+@media (max-width: 600px) { .hero { padding: 2rem 1.5rem 1rem; } .container { padding: 0 1.25rem 3rem; } .niche-grid { grid-template-columns: 1fr; } }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Pro Tools for Service Businesses","description":"Pro-grade single-file HTML apps for solo operators and small service businesses, organized by niche.","url":"https://desktools.dev/pro-tools","isPartOf":{"@type":"WebSite","name":"DeskTools","url":"https://desktools.dev"},"publisher":{"@type":"Organization","name":"CreatifTools","url":"https://creatif.tools"}}</script>
 </head>
 <body>
-<a href="/" class="back-link">&#x2190; Back to tools</a>
-<div class="page-wrap">
-  <div class="page-head">
-    <span class="pro-badge">Pro Tools</span>
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-mark">ct</span>
+    <span>DeskTools</span>
+  </a>
+  <div class="nav-links">
+    <a href="/pro-tools/">Pro Tools</a>
+    <a href="/tools/">Free Tools</a>
+    <a href="https://creatif.tools/blog/">Blog</a>
+    <a href="https://creatif.tools">Creatif Tools ↗</a>
+  </div>
+</nav>
+
+<a href="/" class="back-link">← Home</a>
+
+<div class="container">
+  <div class="hero">
+    <div class="breadcrumb"><a href="/">Home</a> / <span>Pro Tools</span></div>
     <h1>Pro Tools for Service Businesses &amp; Resellers</h1>
-    <p>Pro-grade, single-file HTML apps for solo operators, small service businesses, and resellers. Pick a niche below to see what's available, try the live demo in your browser, then buy the full version on Etsy. No account, no subscription, all data stays local.</p>
+    <p class="lead">Pro-grade, single-file HTML apps for solo operators, small service businesses, and resellers. Pick a niche below to see what's available, try the live demo in your browser, then buy the full version on Etsy. No account, no subscription, all data stays local.</p>
   </div>
 
-  <div class="niche-grid">
-
+  <div class="section">
+    <div class="section-title">Browse by niche</div>
+    <div class="niche-grid">
     <a class="niche-card" href="/pro-tools/cleaning" style="--niche-color: #2C4A7C;">
       <div class="niche-card-head">
         <div class="niche-icon">C</div>
@@ -178,7 +113,6 @@
         <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
     <a class="niche-card" href="/pro-tools/lawn-care" style="--niche-color: #2D6A3E;">
       <div class="niche-card-head">
         <div class="niche-icon">L</div>
@@ -193,7 +127,6 @@
         <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
     <a class="niche-card" href="/pro-tools/reselling" style="--niche-color: #1E5C3A;">
       <div class="niche-card-head">
         <div class="niche-icon">R</div>
@@ -204,11 +137,10 @@
       </div>
       <div class="niche-desc">Inventory and profit trackers for eBay, Etsy, Poshmark, and Mercari resellers. Calculate per-item profit after fees and shipping.</div>
       <div class="niche-foot">
-        <div class="niche-count"><strong>6</strong>apps available</div>
+        <div class="niche-count"><strong>7</strong>apps available</div>
         <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
     <a class="niche-card" href="/pro-tools/budgeting" style="--niche-color: #0EA5E9;">
       <div class="niche-card-head">
         <div class="niche-icon">CB</div>
@@ -223,7 +155,6 @@
         <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
     <a class="niche-card" href="/pro-tools/food-business" style="--niche-color: #DC2626;">
       <div class="niche-card-head">
         <div class="niche-icon">F</div>
@@ -238,7 +169,132 @@
         <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
+    <a class="niche-card" href="/pro-tools/personal-finance" style="--niche-color: #047857;">
+      <div class="niche-card-head">
+        <div class="niche-icon">$</div>
+        <div>
+          <h2 class="niche-name">Personal Finance</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Debt payoff, net worth, and precious metals trackers for managing your money.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>3</strong>apps available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/personal-habits" style="--niche-color: #A21CAF;">
+      <div class="niche-card-head">
+        <div class="niche-icon">LW</div>
+        <div>
+          <h2 class="niche-name">Personal Habits</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Habit trackers, life balance wheels, and 75 Hard challenge journals.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>2</strong>apps available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/pets" style="--niche-color: #65A30D;">
+      <div class="niche-card-head">
+        <div class="niche-icon">P</div>
+        <div>
+          <h2 class="niche-name">Pets</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Dog meal formula calculators and pet medication trackers.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>2</strong>apps available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/health" style="--niche-color: #0891B2;">
+      <div class="niche-card-head">
+        <div class="niche-icon">H</div>
+        <div>
+          <h2 class="niche-name">Health</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Lab results journal and medical health trackers.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>1</strong>app available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/home-services" style="--niche-color: #B45309;">
+      <div class="niche-card-head">
+        <div class="niche-icon">HS</div>
+        <div>
+          <h2 class="niche-name">Home Services</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Quote builders for handyman, junk removal, and other home service businesses.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>2</strong>apps available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/nursing" style="--niche-color: #DC2626;">
+      <div class="niche-card-head">
+        <div class="niche-icon">N</div>
+        <div>
+          <h2 class="niche-name">Nursing</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Charting apps for ER, ICU, and Med-Surg nurses. Patient tracking, vitals, handoff templates, 30+ forms.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>3</strong>apps available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/wedding" style="--niche-color: #BE185D;">
+      <div class="niche-card-head">
+        <div class="niche-icon">V&P</div>
+        <div>
+          <h2 class="niche-name">Wedding</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Drag-and-drop seating, multi-vendor budget tracking, and PDF printables for couples planning their wedding.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>1</strong>app available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/legal" style="--niche-color: #1E3A5F;">
+      <div class="niche-card-head">
+        <div class="niche-icon">B</div>
+        <div>
+          <h2 class="niche-name">Legal</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">State-aware bill of sale generator for vehicle sales — car, motorcycle, trailer, boat, RV, horse, and equipment.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>1</strong>app available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
+    <a class="niche-card" href="/pro-tools/pool-service" style="--niche-color: #0896B8;">
+      <div class="niche-card-head">
+        <div class="niche-icon">P</div>
+        <div>
+          <h2 class="niche-name">Pool Service</h2>
+          <div class="niche-meta">Available now</div>
+        </div>
+      </div>
+      <div class="niche-desc">Pool service estimating, proposals, invoices, and account management for pool service businesses.</div>
+      <div class="niche-foot">
+        <div class="niche-count"><strong>1</strong>app available</div>
+        <span class="niche-cta">Browse <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+      </div>
+    </a>
     <a class="niche-card" href="/pro-tools/car-wash" style="--niche-color: #3B82F6;">
       <div class="niche-card-head">
         <div class="niche-icon">CW</div>
@@ -253,7 +309,6 @@
         <span class="niche-cta coming">Notify me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
       </div>
     </a>
-
     <a class="niche-card" href="/pro-tools/pest-control" style="--niche-color: #B91C1C;">
       <div class="niche-card-head">
         <div class="niche-icon">PE</div>
@@ -269,36 +324,18 @@
       </div>
     </a>
 
-    <a class="niche-card" href="/pro-tools/pool-cleaning" style="--niche-color: #0891B2;">
-      <div class="niche-card-head">
-        <div class="niche-icon">PL</div>
-        <div>
-          <h2 class="niche-name">Pool Cleaning</h2>
-          <div class="niche-meta">Coming soon</div>
-        </div>
-      </div>
-      <div class="niche-desc">Estimators and service tools for pool cleaning and maintenance businesses.</div>
-      <div class="niche-foot">
-        <div class="niche-count"><strong>1</strong>app in development</div>
-        <span class="niche-cta coming">Notify me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-      </div>
-    </a>
-
+    </div>
   </div>
 
-  <div class="pro-cta-banner">
-    <h3>How demos work</h3>
-    <p>Click any app card to open the live demo in your browser. No install, no signup. After 90 seconds, you'll get a taste-it-then-buy-it prompt — buy the full version on Etsy and own it forever, with no subscription.</p>
-    <a href="https://creatif.tools/#apps">
-      Browse all apps on CreatifTools
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-    </a>
+  <div class="cta">
+    <h2>From the Creatif Tools blog</h2>
+    <p>Step-by-step guides for service business owners, resellers, and personal users. Pricing, marketing, scaling — and more.</p>
+    <a href="https://creatif.tools/blog/" class="btn">Read the blog →</a>
   </div>
-
 </div>
 
-<footer>DeskTools &mdash; built for people who ship. &nbsp;&middot;&nbsp; <a href="/pro-tools">Pro Tools</a> &nbsp;&middot;&nbsp; <a href="https://creatif.tools">CreatifTools</a></footer>
-
-<script src="/shared.js"></script>
+<footer>
+  DeskTools — built for people who ship. &nbsp;·&nbsp; <a href="/pro-tools/">Pro Tools</a> &nbsp;·&nbsp; <a href="https://creatif.tools/blog/">Blog</a> &nbsp;·&nbsp; <a href="https://creatif.tools">Creatif Tools</a>
+</footer>
 </body>
 </html>

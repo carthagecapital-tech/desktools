@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pool Service Apps for Pros | PoolPro Manager | DeskTools</title>
+<meta name="description" content="Pool service apps for pool cleaning and maintenance businesses. PoolPro Manager handles estimates, service agreements, invoices, and customer accounts — single-file, offline-capable, no subscription."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://desktools.dev/pro-tools/pool-service"/>
+<meta name="keywords" content="pool service apps, pool service business, single file html app, local-first"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Pool Service Apps for Pros — PoolPro Manager | DeskTools"/>
+<meta property="og:description" content="Apps for pool service businesses. PoolPro Manager handles estimates, service agreements, invoices, and customer accounts."/>
+<meta property="og:url" content="https://desktools.dev/pro-tools/pool-service"/>
+<meta property="og:image" content="https://desktools.dev/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:site_name" content="DeskTools"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<script async src="https://plausible.io/js/pa-AjVqr2icdV_VPRQDlx4SD.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg: #0a0a0f; --bg2: #0f0f16; --bg3: #14141e; --border: rgba(255,255,255,0.07); --border-hover: rgba(0,212,170,0.3); --accent: #00d4aa; --accent2: #00b894; --text: #e8e8f0; --muted: #6b6b80; --card-bg: #111118; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; }
+a { color: var(--accent); text-decoration: none; } a:hover { color: var(--accent2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.nav-logo-mark { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0a0a0f; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 0.85rem 2rem 0; transition: color .2s; }
+.back-link:hover { color: var(--accent); }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2rem 4rem; }
+.hero { padding: 2.5rem 0 2rem; }
+.breadcrumb { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.85rem; }
+.breadcrumb a { color: var(--muted); } .breadcrumb a:hover { color: var(--accent); }
+.niche-badge { display: inline-block; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 0.85rem; }
+.lead { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin: 0; }
+.section { margin-bottom: 3rem; }
+.section-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+.pro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1rem; }
+.pro-card { --app-color: var(--accent); background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.7rem; transition: border-color .2s, transform .15s, background .2s; position: relative; overflow: hidden; }
+.pro-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--app-color); opacity: 0.5; }
+.pro-card:hover { border-color: var(--app-color); transform: translateY(-2px); background: #13131c; }
+.pro-card-head { display: flex; align-items: center; gap: 0.75rem; }
+.pro-icon { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; font-weight: 700; font-size: 0.85rem; color: #fff; background: var(--app-color); flex-shrink: 0; }
+.pro-title-block { flex: 1; min-width: 0; }
+.pro-name { font-weight: 700; font-size: 0.98rem; line-height: 1.2; margin-bottom: 2px; }
+.pro-tag { font-size: 0.78rem; color: var(--muted); }
+.pro-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; flex: 1; }
+.pro-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+.pro-price { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.pro-price-suffix { font-weight: 500; color: var(--muted); font-size: 0.75rem; margin-left: 0.25rem; }
+.pro-cta { color: var(--accent); font-size: 0.82rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; }
+.pro-cta svg { width: 12px; height: 12px; }
+.coming-soon-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-align: center; max-width: 600px; margin: 0 auto; }
+.cs-badge { display: inline-block; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+.coming-soon-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.coming-soon-card p { color: var(--muted); margin-bottom: 1.25rem; }
+.cs-cta { display: inline-block; background: var(--accent); color: #0a0a0f; padding: 0.7rem 1.4rem; border-radius: 8px; font-weight: 600; }
+.related { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.related h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+.related-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.related-pill { padding: 0.5rem 0.9rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 100px; font-size: 0.85rem; text-decoration: none; color: var(--text); transition: border-color .2s, color .2s; }
+.related-pill:hover { border-color: var(--accent); color: var(--accent); }
+footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); margin-top: 3rem; }
+footer a { color: var(--accent); }
+@media (max-width: 600px) { .container { padding: 0 1.25rem 3rem; } .pro-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-mark">ct</span>
+    <span>DeskTools</span>
+  </a>
+  <div class="nav-links">
+    <a href="/pro-tools/">Pro Tools</a>
+    <a href="/tools/">Free Tools</a>
+    <a href="https://creatif.tools/blog/">Blog</a>
+    <a href="https://creatif.tools">Creatif Tools ↗</a>
+  </div>
+</nav>
+
+<a href="/pro-tools/" class="back-link">← All niches</a>
+
+<div class="container">
+  <div class="hero">
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/pro-tools/">Pro Tools</a> / <span>Pool Service</span></div>
+    <span class="niche-badge">Pool Service · Available now</span>
+    <h1>Pool Service apps</h1>
+    <p class="lead">Apps for pool service businesses. Estimating, proposals, invoices, and customer account management — single-file, offline-capable, no subscription.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Apps in this niche</div>
+    <div class="pro-grid">
+      <a class="pro-card" href="https://creatif.tools/poolpro-manager/" style="--app-color: #0896B8;">
+        <div class="pro-card-head">
+          <div class="pro-icon" style="background: #0896B8;">P</div>
+          <div class="pro-title-block">
+            <div class="pro-name">PoolPro Manager</div>
+            <div class="pro-tag">Pool Service Estimator, Proposal &amp; Invoice Suite</div>
+          </div>
+        </div>
+        <div class="pro-desc">Build estimates, generate proposals, send invoices, and manage customer accounts — single-file, offline-capable, no subscription.</div>
+        <div class="pro-foot">
+          <div class="pro-price">$39 <span class="pro-price-suffix">one-time</span></div>
+          <span class="pro-cta">Try demo → <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="related">
+    <h2>Explore other niches</h2>
+    <div class="related-grid">
+      <a href="/pro-tools/cleaning" class="related-pill">Cleaning</a>
+      <a href="/pro-tools/lawn-care" class="related-pill">Lawn Care</a>
+      <a href="/pro-tools/reselling" class="related-pill">Reselling</a>
+      <a href="/pro-tools/personal-finance" class="related-pill">Personal Finance</a>
+      <a href="/pro-tools/nursing" class="related-pill">Nursing</a>
+      <a href="/pro-tools/pets" class="related-pill">Pets</a>
+      <a href="/pro-tools/health" class="related-pill">Health</a>
+      <a href="/pro-tools/home-services" class="related-pill">Home Services</a>
+      <a href="/pro-tools/personal-habits" class="related-pill">Personal Habits</a>
+      <a href="/pro-tools/food-business" class="related-pill">Food Business</a>
+      <a href="/pro-tools/budgeting" class="related-pill">Budgeting</a>
+      <a href="/pro-tools/wedding" class="related-pill">Wedding</a>
+      <a href="/pro-tools/legal" class="related-pill">Legal</a>
+      <a href="/pro-tools/car-wash" class="related-pill">Car Wash</a>
+      <a href="/pro-tools/pest-control" class="related-pill">Pest Control</a>
+      <a href="/pro-tools/pool-service" class="related-pill current">Pool Service</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  DeskTools — built for people who ship. &nbsp;·&nbsp; <a href="/pro-tools/pool-service">Pool Service</a> &nbsp;·&nbsp; <a href="https://creatif.tools">Creatif Tools</a>
+</footer>
+</body>
+</html>
